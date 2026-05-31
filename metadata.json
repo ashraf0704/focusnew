@@ -1,0 +1,6 @@
+{
+  "name": "Focus Buddy",
+  "description": "An intelligent, high-performance study environment and Pomodoro focus timer designed to reduce cognitive load and enhance concentration.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
