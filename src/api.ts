@@ -42,6 +42,8 @@ export const api = {
     request<{jwt: string; profile: UserProfile}>('/api/auth/signup', {method: 'POST', body: JSON.stringify(body), auth: false}),
   signIn: (body: {email: string; password: string}) =>
     request<{jwt: string; profile: UserProfile}>('/api/auth/signin', {method: 'POST', body: JSON.stringify(body), auth: false}),
+  guestSignIn: () =>
+    request<{jwt: string; profile: UserProfile}>('/api/auth/guest', {method: 'POST', auth: false}),
   signOut: () => request<void>('/api/auth/signout', {method: 'POST'}),
   resetPassword: (email: string) =>
     request<{ok: true}>('/api/auth/reset-password', {method: 'POST', body: JSON.stringify({email}), auth: false}),

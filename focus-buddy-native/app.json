@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "Focus Buddy",
+    "slug": "focus-buddy-native",
+    "scheme": "focusbuddy",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "app.focusbuddy.native",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Focus Buddy uses the camera for the KameraShield focus monitor.",
+        "NSMicrophoneUsageDescription": "Focus Buddy uses the microphone for voice input in the AI doubt solver."
+      }
+    },
+    "android": {
+      "package": "app.focusbuddy.native",
+      "minSdkVersion": 26,
+      "permissions": ["CAMERA", "RECORD_AUDIO", "VIBRATE", "WAKE_LOCK", "POST_NOTIFICATIONS"]
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-notifications",
+      "expo-camera",
+      "expo-document-picker",
+      "expo-screen-orientation",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#FEFAE0"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -114,10 +114,12 @@ export default function App() {
   };
 
   // Welcome authenticated sign-in / signup helper
-  const handleSignIn = async (fullName: string, email: string, dailyGoal: number, password: string, mode: 'signin' | 'signup') => {
-    const result = mode === 'signup'
-      ? await api.signUp({ fullName, email, password, dailyGoal })
-      : await api.signIn({ email, password });
+  const handleSignIn = async (fullName: string, email: string, dailyGoal: number, password: string, mode: 'signin' | 'signup' | 'guest') => {
+    const result = mode === 'guest'
+      ? await api.guestSignIn()
+      : mode === 'signup'
+        ? await api.signUp({ fullName, email, password, dailyGoal })
+        : await api.signIn({ email, password });
     setJwt(result.jwt);
     await hydrateApp();
     return { ok: true };

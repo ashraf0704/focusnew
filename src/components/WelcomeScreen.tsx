@@ -8,7 +8,7 @@ interface WelcomeScreenProps {
     email: string,
     dailyGoal: number,
     password: string,
-    mode: 'signin' | 'signup'
+    mode: 'signin' | 'signup' | 'guest'
   ) => Promise<{ok: boolean}>;
 }
 
@@ -29,6 +29,7 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const [dailyGoal, setDailyGoal] = useState(25); // minutes
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [isGuestLoading, setIsGuestLoading] = useState(false);
 
   // SSO selection states
   const [activeSSOProvider, setActiveSSOProvider] = useState<'google' | 'apple' | 'github' | 'microsoft' | null>(null);
@@ -83,6 +84,18 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
         setErrorMsg(error instanceof Error ? error.message : 'Authentication failed.');
       });
     }, 1000);
+  };
+
+  const handleGuestSignIn = async () => {
+    setIsGuestLoading(true);
+    setErrorMsg('');
+    try {
+      await onSignIn('Guest Student', 'guest@focusbuddy.local', dailyGoal, '', 'guest');
+    } catch (error) {
+      setErrorMsg(error instanceof Error ? error.message : 'Guest sign in failed.');
+    } finally {
+      setIsGuestLoading(false);
+    }
   };
 
   const handleAddNewCustomAccount = (e: React.FormEvent) => {
@@ -280,6 +293,15 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
             id="auth-submit-button"
           >
             {isSignUp ? 'Create Account' : 'Sign In'}
+          </button>
+          <button
+            type="button"
+            onClick={handleGuestSignIn}
+            disabled={isGuestLoading}
+            className="w-full py-3.5 rounded-xl border border-brand-soft-border bg-white text-brand-primary font-semibold text-[14px] shadow-sm hover:bg-brand-bg active:scale-[0.98] transition-all duration-300 pointer-events-auto disabled:opacity-60"
+            id="guest-signin-button"
+          >
+            {isGuestLoading ? 'Starting Guest Session...' : 'Continue as Guest'}
           </button>
         </motion.form>
 
