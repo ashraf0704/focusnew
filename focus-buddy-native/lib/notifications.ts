@@ -1,5 +1,6 @@
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
+import ExpoConstants from 'expo-constants';
 import {Platform} from 'react-native';
 
 Notifications.setNotificationHandler({
@@ -26,5 +27,7 @@ export async function registerForPushNotifications(): Promise<string | null> {
       importance: Notifications.AndroidImportance.MAX,
     });
   }
-  return (await Notifications.getExpoPushTokenAsync()).data;
+  
+  const projectId = ExpoConstants.expoConfig?.extra?.eas?.projectId ?? ExpoConstants.easConfig?.projectId;
+  return (await Notifications.getExpoPushTokenAsync({projectId})).data;
 }

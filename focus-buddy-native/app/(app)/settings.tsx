@@ -8,6 +8,7 @@ import {SoundSettings} from '@/components/settings/SoundSettings';
 import {Colors} from '@/constants/colors';
 import {useUpdateProfile} from '@/hooks/useProfile';
 import {endpoints} from '@/lib/apiClient';
+import {takeScreenshot} from '@/app/utils/screenshot';
 import {registerForPushNotifications} from '@/lib/notifications';
 import {useAuthStore} from '@/store/authStore';
 
@@ -45,6 +46,14 @@ export default function SettingsScreen() {
       <Card><View style={styles.row}><Text style={styles.section}>Notifications</Text><Switch value={profile.notificationsEnabled} onValueChange={setNotifications} /></View></Card>
       <Button onPress={() => router.push('/ai-focus-monitor')}>Open KameraShield AI Monitor</Button>
       <Button variant="danger" onPress={signOut}>Sign Out</Button>
+        <Button onPress={async () => {
+          try {
+            const uri = await takeScreenshot();
+            Alert.alert('Screenshot saved', uri);
+          } catch (e) {
+            Alert.alert('Error', e instanceof Error ? e.message : 'Failed');
+          }
+        }}>Take Screenshot</Button>
     </ScrollView>
   );
 }

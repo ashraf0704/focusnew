@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {Alert, KeyboardAvoidingView, Platform, StyleSheet, Text, TextInput, View} from 'react-native';
 import {router} from 'expo-router';
 import {LinearGradient} from 'expo-linear-gradient';
@@ -19,7 +19,10 @@ export default function WelcomeScreen() {
   const setJwt = useAuthStore(state => state.setJwt);
   const setProfile = useAuthStore(state => state.setProfile);
 
-  scale.value = withRepeat(withTiming(1.1, {duration: 900}), -1, true);
+  useEffect(() => {
+    scale.value = withRepeat(withTiming(1.1, {duration: 900}), -1, true);
+  }, []);
+
   const pulse = useAnimatedStyle(() => ({transform: [{scale: scale.value}]}));
 
   async function submit() {

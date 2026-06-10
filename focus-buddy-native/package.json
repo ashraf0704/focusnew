@@ -5,8 +5,8 @@
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "lint": "tsc --noEmit"
   },
@@ -25,16 +25,20 @@
     "expo-device": "~6.0.2",
     "expo-document-picker": "~12.0.2",
     "expo-file-system": "~17.0.1",
+    "expo-font": "~12.0.10",
     "expo-haptics": "~13.0.1",
     "expo-keep-awake": "~13.0.2",
     "expo-linear-gradient": "~13.0.2",
     "expo-linking": "~6.3.1",
+    "expo-media-library": "~16.0.5",
     "expo-notifications": "~0.28.19",
     "expo-router": "~3.5.24",
+    "expo-screen-capture": "~6.0.1",
     "expo-screen-orientation": "~7.0.5",
     "expo-secure-store": "~13.0.2",
     "expo-speech": "~12.0.2",
     "expo-splash-screen": "~0.27.7",
+    "expo-status-bar": "~1.12.1",
     "moti": "^0.29.0",
     "react": "18.2.0",
     "react-native": "0.74.5",
@@ -51,6 +55,7 @@
   },
   "devDependencies": {
     "@types/react": "~18.2.79",
+    "expo-modules-autolinking": "^56.0.15",
     "typescript": "~5.3.3"
   }
 }

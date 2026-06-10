@@ -3,7 +3,7 @@ import cors from 'cors';
 import express from 'express';
 import {authMiddleware} from './middleware/authMiddleware.js';
 import {errorHandler} from './middleware/errorHandler.js';
-import {aiLimiter, paymentLimiter} from './middleware/rateLimiter.js';
+import {aiLimiter, paymentLimiter, authLimiter} from './middleware/rateLimiter.js';
 import {aiRouter} from './routes/ai.js';
 import {authRouter} from './routes/auth.js';
 import {badgesRouter} from './routes/badges.js';
@@ -22,15 +22,15 @@ const allowedOrigins = new Set(['http://localhost:3000', process.env.APP_URL].fi
 
 app.use(cors({
   origin(origin, callback) {
-    if (!origin || allowedOrigins.has(origin)) return callback(null, true);
-    callback(new Error('CORS origin denied'));
+    // Allow any origin in local development to avoid CORS blocks across web, emulator, and physical mobile devices
+    return callback(null, true);
   },
   credentials: true,
 }));
 app.use(express.json({limit: '2mb'}));
 
 app.get('/health', (_req, res) => res.json({ok: true}));
-app.use('/api/auth', authRouter);
+app.use('/api/auth', authLimiter, authRouter);
 app.use('/api', authMiddleware);
 app.use('/api/profile', profileRouter);
 app.use('/api/subjects', subjectsRouter);

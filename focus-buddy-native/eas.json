@@ -8,11 +8,18 @@
       "distribution": "internal",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://poor-peas-crash.loca.lt",
+        "EXPO_PUBLIC_SUPABASE_URL": "https://esnwlxnwyohghbmavnlo.supabase.co",
+        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVzbndseG53eW9oZ2hibWF2bmxvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAyMjA2NDgsImV4cCI6MjA5NTc5NjY0OH0.RSTbckVsLxjx3miI5g5mczOphfAthwpgf8KEuTZHZLc",
+        "EXPO_PUBLIC_RAZORPAY_KEY_ID": "rzp_test_Svy7heJ9nDMJ9I",
+        "EXPO_PUBLIC_VAPID_PUBLIC_KEY": "BK-HxPmKNbeK7cy_Xosf8oSW-VdUYhc4HzKxVwf7Smy0QarlFCPRENcTEhDsqsPhUaZcjlcb8sv5UUFrsO_Yzxw"
       }
     },
     "production": {
       "android": {
-        "buildType": "aab"
+        "buildType": "app-bundle"
       },
       "ios": {
         "simulator": false

@@ -119,20 +119,32 @@ authRouter.post('/guest', async (_req, res, next) => {
     const password = process.env.GUEST_PASSWORD || 'focusbuddy-guest-password';
     const fullName = 'Guest Student';
 
-    const existing = await findAuthUserByEmail(email);
-    if (existing) {
-      const {error} = await supabaseAdmin.auth.admin.updateUserById(existing.id, {
-        password,
-        email_confirm: true,
-        user_metadata: {full_name: fullName},
-      });
-      if (error) throw new HttpError(500, 'Could not prepare guest account', 'GUEST_UPDATE_FAILED');
-    } else {
+    let session = await signInWithPassword(email, password);
+
+    if (!session) {
       const user = await createConfirmedUser(email, password, fullName);
-      if (!user) throw new HttpError(500, 'Could not create guest account', 'GUEST_CREATE_FAILED');
+      if (user) {
+        session = await signInWithPassword(email, password);
+      } else {
+        let existing: User | null = null;
+        try {
+          existing = await findAuthUserByEmail(email);
+        } catch (error) {
+          if (!(error instanceof HttpError && error.code === 'AUTH_LOOKUP_FAILED')) throw error;
+          console.warn('Could not inspect auth users while preparing guest account.');
+        }
+        if (existing) {
+          const {error} = await supabaseAdmin.auth.admin.updateUserById(existing.id, {
+            password,
+            email_confirm: true,
+            user_metadata: {full_name: fullName},
+          });
+          if (error) throw new HttpError(500, 'Could not prepare guest account', 'GUEST_UPDATE_FAILED');
+          session = await signInWithPassword(email, password);
+        }
+      }
     }
 
-    const session = await signInWithPassword(email, password);
     if (!session) throw new HttpError(500, 'Could not start guest session', 'GUEST_SIGNIN_FAILED');
 
     const profile = await upsertProfile(session.user.id, email, fullName, 25);

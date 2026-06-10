@@ -70,9 +70,17 @@ export default function App() {
       }
       try {
         await hydrateApp();
-      } catch {
-        clearJwt();
-        setProfile(null);
+      } catch (err) {
+        // Only clear JWT if the error is specifically an auth error (e.g., token expired)
+        // Don't clear for network errors – keep the user logged in in offline/simulated mode
+        const msg = err instanceof Error ? err.message : '';
+        if (msg.toLowerCase().includes('invalid') || msg.toLowerCase().includes('expired') || msg.toLowerCase().includes('auth')) {
+          clearJwt();
+          setProfile(null);
+        } else {
+          // Server is down – boot in simulated mode using cached JWT
+          try { await hydrateApp(); } catch { /* ignore */ }
+        }
       } finally {
         setIsBooting(false);
       }
@@ -437,6 +445,20 @@ export default function App() {
         {isOffline && (
           <div className="mb-4 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs font-bold text-amber-800">
             You are offline. Cached screens remain available, and session/task writes will replay when the network returns.
+          </div>
+        )}
+        {localStorage.getItem('focus_buddy_is_simulated') === 'true' && (
+          <div className="mb-6 rounded-2xl border border-[#D4A373]/30 bg-[#FAEDCD]/40 backdrop-blur-md px-5 py-3.5 text-xs text-[#5A5A40] flex items-center justify-between shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <div className="relative flex h-2 w-2 shrink-0">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4A373] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4A373]"></span>
+              </div>
+              <span className="font-sans leading-relaxed">
+                <strong className="font-extrabold uppercase tracking-wider mr-1 text-[#B87D4B]">Offline Simulation Active</strong> 
+                The database server is offline. Focus Buddy is running locally, storing all tasks, decks, and achievements securely in this browser.
+              </span>
+            </div>
           </div>
         )}
         <AnimatePresence mode="wait">

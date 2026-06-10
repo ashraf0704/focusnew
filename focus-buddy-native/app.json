@@ -4,21 +4,35 @@
     "slug": "focus-buddy-native",
     "scheme": "focusbuddy",
     "version": "0.1.0",
+    "icon": "./assets/icons/icon.jpg",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "app.focusbuddy.native",
+      "bundleIdentifier": "app.focusbuddy.mobile",
       "infoPlist": {
         "NSCameraUsageDescription": "Focus Buddy uses the camera for the KameraShield focus monitor.",
         "NSMicrophoneUsageDescription": "Focus Buddy uses the microphone for voice input in the AI doubt solver."
       }
     },
     "android": {
-      "package": "app.focusbuddy.native",
-      "minSdkVersion": 26,
-      "permissions": ["CAMERA", "RECORD_AUDIO", "VIBRATE", "WAKE_LOCK", "POST_NOTIFICATIONS"]
+      "package": "app.focusbuddy.mobile",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icons/adaptive-icon.jpg",
+        "backgroundColor": "#FEFAE0"
+      },
+      "permissions": [
+        "CAMERA",
+        "RECORD_AUDIO",
+        "VIBRATE",
+        "WAKE_LOCK",
+        "POST_NOTIFICATIONS",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "plugins": [
       "expo-router",
@@ -32,10 +46,19 @@
         {
           "backgroundColor": "#FEFAE0"
         }
-      ]
+      ],
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1585735b-981c-44fd-bf93-dee0bc39f5f9"
+      }
     }
   }
 }

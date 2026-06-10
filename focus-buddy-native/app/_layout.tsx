@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
-import {Stack, router} from 'expo-router';
+import {Stack, router, useRootNavigationState} from 'expo-router';
 import * as SecureStore from 'expo-secure-store';
 import * as SplashScreen from 'expo-splash-screen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
@@ -23,8 +23,11 @@ export default function RootLayout() {
   const [ready, setReady] = useState(false);
   const setProfile = useAuthStore(state => state.setProfile);
   const hydrate = useAppStore(state => state.hydrate);
+  const rootNavigationState = useRootNavigationState();
 
   useEffect(() => {
+    if (!rootNavigationState?.key) return;
+
     async function boot() {
       const jwt = await SecureStore.getItemAsync(JWT_KEY);
       if (!jwt) {
@@ -47,16 +50,7 @@ export default function RootLayout() {
       }
     }
     boot();
-  }, [hydrate, setProfile]);
-
-  if (!ready) {
-    return (
-      <View style={styles.splash}>
-        <ActivityIndicator color={Colors.vibrant} />
-        <Text style={styles.logo}>Focus Buddy</Text>
-      </View>
-    );
-  }
+  }, [rootNavigationState?.key, hydrate, setProfile]);
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -69,6 +63,12 @@ export default function RootLayout() {
             <Stack.Screen name="ai-doubt-solver" options={{presentation: 'modal'}} />
             <Stack.Screen name="ai-focus-monitor" options={{presentation: 'modal'}} />
           </Stack>
+          {!ready && (
+            <View style={[StyleSheet.absoluteFill, styles.splash]}>
+              <ActivityIndicator color={Colors.vibrant} size="large" />
+              <Text style={styles.logo}>Focus Buddy</Text>
+            </View>
+          )}
         </PaperProvider>
       </QueryClientProvider>
     </GestureHandlerRootView>

@@ -2,14 +2,14 @@ import {Pressable, StyleSheet, Text, View} from 'react-native';
 import {Colors} from '@/constants/colors';
 import {Persona} from '@/hooks/useAIChat';
 
-const personas: Persona[] = ['chatgpt', 'gemini', 'perplexity', 'claude'];
+const personas: Persona[] = ['groq'];
 
 export function PersonaSelector({value, onChange}: {value: Persona; onChange: (persona: Persona) => void}) {
   return (
     <View style={styles.row}>
       {personas.map(persona => (
         <Pressable key={persona} onPress={() => onChange(persona)} style={[styles.tab, value === persona && styles.active]}>
-          <Text style={[styles.text, value === persona && styles.activeText]}>{persona}</Text>
+          <Text style={[styles.text, value === persona && styles.activeText]}>Groq Llama 70B</Text>
         </Pressable>
       ))}
     </View>

@@ -1,21 +1,31 @@
 import {Router} from 'express';
 import {HttpError} from '../middleware/errorHandler.js';
 import {gemini} from '../services/geminiClient.js';
+import {GROQ_MODEL, streamGroqChat} from '../services/groqClient.js';
 
 export const aiRouter = Router();
 
-const prompts = {
-  chatgpt: 'You are ChatGPT, an academic study assistant. Structure answers as clear numbered bullet points with code examples where relevant. Use markdown.',
-  gemini: 'You are Gemini AI, a deep-reasoning academic tutor. Provide analytical breakdowns with logical steps, headers, and edge cases. Use markdown.',
-  perplexity: 'You are Perplexity AI. Always cite academic sources like [Source 1: Stanford CS229]. Synthesize research into student-friendly summaries.',
-  claude: 'You are Claude, an empathetic tutor. Use analogies, Socratic questioning, plain-English explanations, and a warm encouraging tone.',
-};
+const groqTutorPrompt = `You are Focus Buddy's single AI study mentor powered by Groq ${GROQ_MODEL}.
+Help students with doubts, notes, code, math, exam prep, and attached study context.
+Be clear, accurate, warm, and concise. Use markdown headings, numbered steps, small examples,
+and ask one useful follow-up question when it helps. If the user asks for sources, explain what
+should be verified and avoid inventing citations.`;
+
+function normalizeHistory(conversationHistory: unknown[]) {
+  return conversationHistory
+    .slice(-10)
+    .map((item: any) => {
+      const role = item?.role === 'user' ? 'user' : 'assistant';
+      const content = item?.content || item?.parts?.[0]?.text || '';
+      return content ? {role, content} as const : null;
+    })
+    .filter(Boolean) as Array<{role: 'user' | 'assistant'; content: string}>;
+}
 
 aiRouter.post('/chat', async (req, res, next) => {
   try {
-    const {query, persona = 'chatgpt', subjectName, attachmentContent, vaultContext, conversationHistory = []} = req.body || {};
+    const {query, subjectName, attachmentContent, vaultContext, conversationHistory = []} = req.body || {};
     if (!query && !attachmentContent && !vaultContext) throw new HttpError(400, 'Query is required', 'VALIDATION_ERROR');
-    const personaKey = persona in prompts ? persona as keyof typeof prompts : 'chatgpt';
     const context = attachmentContent || vaultContext
       ? `The student attached this document for context:\n\n${attachmentContent || vaultContext}\n\nAnswer with this in mind.\n\n`
       : '';
@@ -26,18 +36,17 @@ aiRouter.post('/chat', async (req, res, next) => {
       Connection: 'keep-alive',
     });
 
-    const stream = await gemini.models.generateContentStream({
-      model: 'gemini-2.0-flash',
-      contents: [
-        ...conversationHistory,
-        {role: 'user', parts: [{text: `${context}Subject: ${subjectName || 'General Studies'}\n\n${query || 'Please analyze the attached context.'}`}]},
-      ],
-      config: {systemInstruction: prompts[personaKey]},
-    });
+    const stream = streamGroqChat([
+      {role: 'system', content: groqTutorPrompt},
+      ...normalizeHistory(conversationHistory),
+      {
+        role: 'user',
+        content: `${context}Subject: ${subjectName || 'General Studies'}\n\n${query || 'Please analyze the attached context.'}`,
+      },
+    ]);
 
-    for await (const chunk of stream) {
-      const text = chunk.text || '';
-      if (text) res.write(`data: ${JSON.stringify({token: text})}\n\n`);
+    for await (const token of stream) {
+      res.write(`data: ${JSON.stringify({token})}\n\n`);
     }
     res.write('data: [DONE]\n\n');
     res.end();

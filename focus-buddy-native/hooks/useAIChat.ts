@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {streamAIChat} from '@/lib/apiClient';
 
-export type Persona = 'chatgpt' | 'gemini' | 'perplexity' | 'claude';
+export type Persona = 'groq';
 export interface ChatMessage {
   id: string;
   sender: 'user' | 'ai';
@@ -11,10 +11,7 @@ export interface ChatMessage {
 
 export function useAIChat() {
   const [messages, setMessages] = useState<Record<Persona, ChatMessage[]>>({
-    chatgpt: [],
-    gemini: [],
-    perplexity: [],
-    claude: [],
+    groq: [],
   });
   const [isStreaming, setIsStreaming] = useState(false);
 
