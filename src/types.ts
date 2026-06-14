@@ -65,6 +65,7 @@ export interface UserProfile {
   alarmTone?: string;
   soundVolume?: number;
   notificationsEnabled?: boolean;
+  language?: string;
 }
 
 export interface VaultFolder {

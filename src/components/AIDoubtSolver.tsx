@@ -20,8 +20,11 @@ interface Message {
   attachmentType?: string;
 }
 
+type AIModel = 'groq-llama' | 'gemini' | 'deepseek-coder' | 'qwen-coder' | 'gemini-coder' | 'frontend-expert' | 'database-guru' | 'funny-buddy';
+
 export default function AIDoubtSolver({subjects, activeSubjectId, presetContext, onClearPresetContext}: AIDoubtSolverProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedModel, setSelectedModel] = useState<AIModel>('groq-llama');
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
@@ -33,9 +36,9 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
   } | null>(null);
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: 'groq-welcome',
+      id: 'welcome-msg',
       sender: 'ai',
-      text: "Hi, I am Focus Buddy's Groq Llama 70B study mentor. Ask a doubt, attach notes, or snap a question and I will break it down clearly.",
+      text: "Hi, I am your general Llama ChatGPT study assistant. Ask a doubt, attach study notes, or snap a question to get started.",
       timestamp: new Date(),
     },
   ]);
@@ -43,6 +46,40 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
   const activeSubject = subjects.find(subject => subject.id === activeSubjectId) || subjects[0] || {name: 'General Studies'};
   const chatEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  // Print system switch notice on model change
+  useEffect(() => {
+    let welcomeText = '';
+    if (selectedModel === 'deepseek-coder') {
+      welcomeText = "Hello! I am your Coding & Computer Science mentor. Send me programming questions, code files, or algorithm doubts and I'll write clean, efficient, and well-documented solutions.";
+    } else if (selectedModel === 'qwen-coder') {
+      welcomeText = "Greetings! I am Qwen3 Coder, a specialized multi-lingual syntax and code efficiency expert. Ask me to translate code, explain syntax, or optimize performance!";
+    } else if (selectedModel === 'gemini-coder') {
+      welcomeText = "Welcome! I am your Gemini Code Architect. I specialize in system design, software architecture patterns, refactoring, and code review. Let's design something robust.";
+    } else if (selectedModel === 'frontend-expert') {
+      welcomeText = "Hey there! I am your Frontend & UI Specialist. Ask me anything about React 19, TypeScript, CSS layout, Vite configurations, or performance tuning!";
+    } else if (selectedModel === 'database-guru') {
+      welcomeText = "Hello! I am your Database & SQL Guru. I can help you design database schemas, write optimized SQL queries, handle database normalizations, or advise on storage strategies.";
+    } else if (selectedModel === 'funny-buddy') {
+      welcomeText = "Yo! 🤡 I am your Sarcastic Meme-Lord Study Buddy. Ask me anything, but expect a light roasting, bad memes, and absolute exhaustion. Let's fail together! 🚀";
+    } else if (selectedModel === 'gemini') {
+      welcomeText = "Hi, I am Gemini 2.0 Flash. I can help with multimodal reasoning, detailed structural breakdowns, and explain complex academic topics in a clear, organized format.";
+    } else {
+      welcomeText = "Hi, I am your general Llama ChatGPT study assistant. Ask a doubt, attach study notes, or snap a question to get started.";
+    }
+    // Prevent adding duplicate welcome message during initialization
+    if (messages.length > 1 || messages[0]?.text !== welcomeText) {
+      setMessages(prev => [
+        ...prev,
+        {
+          id: `sys-switch-${Date.now()}`,
+          sender: 'ai',
+          text: welcomeText,
+          timestamp: new Date(),
+        }
+      ]);
+    }
+  }, [selectedModel]);
 
   useEffect(() => {
     if (!presetContext) return;
@@ -85,12 +122,68 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
     setRecognition(rec);
   }, []);
 
-  const suggestions = [
-    `Summarize the key facts about ${activeSubject.name}`,
-    `Explain ${activeSubject.name} like I am new to it`,
-    'Create 3 flashcard questions from this topic',
-    'Show me a step-by-step coding solution',
-  ];
+  const getSuggestions = () => {
+    if (selectedModel === 'deepseek-coder') {
+      return [
+        'Write a quicksort code snippet',
+        'Explain Big-O time/space complexity',
+        'Help me debug a syntax/runtime error',
+        'Optimize this algorithm for memory usage',
+      ];
+    }
+    if (selectedModel === 'qwen-coder') {
+      return [
+        'Translate code from Python to TypeScript',
+        'Explain the dynamic imports feature in ES15',
+        'Write a thread-safe singleton in Java',
+        'Review this code for runtime syntax bugs',
+      ];
+    }
+    if (selectedModel === 'gemini-coder') {
+      return [
+        'What is MVC vs Clean Architecture?',
+        'How to apply SOLID principles to a project',
+        'Draw a system design for a chat application',
+        'Design a robust error handling middleware',
+      ];
+    }
+    if (selectedModel === 'frontend-expert') {
+      return [
+        'Build a responsive glassmorphism navbar in CSS',
+        'Explain React 19 useActionState hook',
+        'Optimize my webpack/vite config file',
+        'Create a service worker caching strategy',
+      ];
+    }
+    if (selectedModel === 'database-guru') {
+      return [
+        'Design a schema for a student enrollment DB',
+        'Write a SQL query with window functions',
+        'How does indexing work in PostgreSQL?',
+        'When to use MongoDB vs PostgreSQL',
+      ];
+    }
+    if (selectedModel === 'funny-buddy') {
+      return [
+        'Give me a terrible programming joke',
+        'Roast my study schedule',
+        'Help me study while procrastinating',
+        'Explain recursion using memes',
+      ];
+    }
+    if (selectedModel === 'gemini') {
+      return [
+        `Structural breakdown of ${activeSubject.name}`,
+        'Solve a mock practice question step-by-step',
+        'Summarize this subject into core bullet points',
+      ];
+    }
+    return [
+      `Summarize the key facts about ${activeSubject.name}`,
+      `Explain ${activeSubject.name} like I am new to it`,
+      'Create 3 flashcard questions from this topic',
+    ];
+  };
 
   const handleToggleVoice = () => {
     if (!recognition) return;
@@ -160,6 +253,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
           subjectName: activeSubject.name,
           attachmentContent: attachment?.content || null,
           vaultContext: null,
+          model: selectedModel,
           conversationHistory: historyBeforeSend.slice(-10).map(message => ({
             role: message.sender === 'user' ? 'user' : 'assistant',
             content: message.text,
@@ -181,7 +275,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
         setMessages(prev => [...prev, {
           id: aiMessageId,
           sender: 'ai',
-          text: 'The Groq stream completed without text. Try again with a little more context.',
+          text: 'The AI stream completed without text. Try again with a little more context.',
           timestamp: new Date(),
         }]);
       }
@@ -189,7 +283,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
       setMessages(prev => [...prev, {
         id: `ai-error-${Date.now()}`,
         sender: 'ai',
-        text: error instanceof Error ? error.message : 'Groq request failed. Please try again.',
+        text: error instanceof Error ? error.message : 'AI request failed. Please try again.',
         timestamp: new Date(),
       }]);
     } finally {
@@ -209,7 +303,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
               className="bg-brand-primary p-3 rounded-2xl shadow-xl border border-white/10 text-white flex items-center gap-3 select-none text-xs max-w-[280px]"
             >
               <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-              <p className="font-semibold leading-snug">Ask <strong className="text-brand-vibrant">Groq Llama 70B</strong> here.</p>
+              <p className="font-semibold leading-snug">Ask <strong className="text-brand-vibrant">Focus Buddy AI</strong> here.</p>
             </motion.div>
           )}
         </AnimatePresence>
@@ -219,7 +313,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
           type="button"
           className="w-14 h-14 rounded-full bg-brand-primary text-white shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300 relative pointer-events-auto cursor-pointer"
           id="ai-floating-assistant-hub-trigger"
-          title="Clarify doubts with Groq Llama 70B"
+          title="Clarify doubts with multi-agent AI"
         >
           {isOpen ? <X size={24} /> : (
             <div className="relative">
@@ -246,8 +340,40 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                 <div className="flex items-center gap-2">
                   <div className="p-1.5 bg-white/10 rounded-lg"><Sparkles size={16} className="text-brand-vibrant" /></div>
                   <div>
-                    <h4 className="font-sans font-black text-sm uppercase tracking-wide">Groq Llama 70B Study Chatbot</h4>
-                    <p className="text-[10px] text-brand-bg/75">llama-3.3-70b-versatile with files, voice, and photo prompts</p>
+                    <h4 className="font-sans font-black text-sm uppercase tracking-wide">
+                      {selectedModel === 'deepseek-coder' 
+                        ? 'DeepSeek Coder (CS/Algorithms)' 
+                        : selectedModel === 'qwen-coder'
+                          ? 'Qwen3 Coder (Languages)'
+                          : selectedModel === 'gemini-coder'
+                            ? 'Gemini Code Architect'
+                            : selectedModel === 'frontend-expert'
+                              ? 'Frontend Specialist'
+                              : selectedModel === 'database-guru'
+                                ? 'Database & SQL Guru'
+                                : selectedModel === 'funny-buddy'
+                                  ? 'Sarcastic Meme-Lord'
+                                  : selectedModel === 'gemini' 
+                                    ? 'Gemini 2.0 Flash AI' 
+                                    : 'Llama 3.3 ChatGPT Assistant'}
+                    </h4>
+                    <p className="text-[10px] text-brand-bg/75">
+                      {selectedModel === 'deepseek-coder' 
+                        ? 'Specialized software engineering & algorithm mentor' 
+                        : selectedModel === 'qwen-coder'
+                          ? 'Boilerplate-free syntax and multi-lingual expert'
+                          : selectedModel === 'gemini-coder'
+                            ? 'System design patterns and clean architecture architect'
+                            : selectedModel === 'frontend-expert'
+                              ? 'React 19, TypeScript, CSS, and performance specialist'
+                              : selectedModel === 'database-guru'
+                                ? 'Relational design, indexing, and SQL optimization guru'
+                                : selectedModel === 'funny-buddy'
+                                  ? 'Study companion that roasts you and tells jokes'
+                                  : selectedModel === 'gemini' 
+                                    ? 'Google intelligent reasoning and multimodal chatbot' 
+                                    : 'High-speed general purpose conversational assistant'}
+                    </p>
                   </div>
                 </div>
                 <button onClick={() => setIsOpen(false)} className="py-1.5 px-3 bg-white/10 hover:bg-white/20 text-brand-bg/90 hover:text-white rounded-xl text-xs font-bold transition flex items-center gap-1.5">
@@ -257,7 +383,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
               </div>
 
               <div className="px-4 py-2 bg-brand-bg border-b border-brand-outline flex items-center justify-between text-[11px] text-brand-muted shrink-0 select-none">
-                <span><strong className="text-brand-dark">Current Solver:</strong> Groq Llama 70B</span>
+                <div className="flex items-center gap-1.5">
+                  <strong className="text-brand-dark">Active AI:</strong>
+                  <select 
+                    value={selectedModel} 
+                    onChange={e => setSelectedModel(e.target.value as AIModel)}
+                    className="bg-white border border-brand-outline rounded-lg px-2 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-[10px] cursor-pointer max-w-[220px]"
+                  >
+                    <option value="groq-llama">💬 ChatGPT Mode (Llama 3.3)</option>
+                    <option value="gemini">✨ Gemini AI Mode (Gemini 2.0)</option>
+                    <option value="deepseek-coder">💻 DeepSeek CS/Algorithms</option>
+                    <option value="qwen-coder">🚀 Qwen3 Syntax Coder</option>
+                    <option value="gemini-coder">📐 Gemini Code Architect</option>
+                    <option value="frontend-expert">🎨 Frontend & UI Specialist</option>
+                    <option value="database-guru">🗄️ Database & SQL Guru</option>
+                    <option value="funny-buddy">🤡 Sarcastic Meme-Lord</option>
+                  </select>
+                </div>
                 <span className="flex items-center gap-1 text-brand-primary bg-[#E9EDC9]/30 px-2 py-0.5 rounded-full font-bold truncate">
                   <BookOpen size={10} />
                   {activeSubject.name}
@@ -292,7 +434,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   <div className="flex gap-2.5 items-start max-w-[85%] mr-auto">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0 border shadow-xs border-brand-primary bg-[#E9EDC9]/60">🧠</div>
                     <div className="bg-white border border-brand-outline text-brand-dark rounded-2xl rounded-tl-none p-3.5 text-xs shadow-xxs">
-                      <span className="text-[10px] text-brand-muted italic">Groq Llama 70B is thinking...</span>
+                      <span className="text-[10px] text-brand-muted italic">
+                        {selectedModel === 'deepseek-coder' 
+                          ? 'Coding AI is writing code...' 
+                          : selectedModel === 'qwen-coder'
+                            ? 'Qwen3 Coder is typing syntax...'
+                            : selectedModel === 'gemini-coder'
+                              ? 'Gemini Architect is refactoring...'
+                              : selectedModel === 'frontend-expert'
+                                ? 'Frontend Specialist is designing UI...'
+                                : selectedModel === 'database-guru'
+                                  ? 'Database Guru is querying schemas...'
+                                  : selectedModel === 'funny-buddy'
+                                    ? 'Sarcastic Buddy is crying in emojis...'
+                                    : selectedModel === 'gemini' 
+                                      ? 'Gemini AI is analyzing...' 
+                                      : 'Llama ChatGPT is responding...'}
+                      </span>
                     </div>
                   </div>
                 )}
@@ -313,7 +471,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
 
               <div className="px-4 py-2 border-t border-brand-outline/85 bg-brand-bg/50 shrink-0 select-none">
                 <div className="flex flex-wrap gap-1.5">
-                  {suggestions.map(suggestion => (
+                  {getSuggestions().map(suggestion => (
                     <button key={suggestion} onClick={() => setInputMessage(suggestion)} type="button" className="text-[10px] bg-white border border-brand-outline rounded-xl px-2.5 py-1 text-brand-dark hover:border-brand-primary hover:bg-brand-primary/5 transition font-medium cursor-pointer">
                       {suggestion}
                     </button>
@@ -333,7 +491,30 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   <button type="button" onClick={handleToggleVoice} className={`p-2.5 rounded-xl border transition ${isRecording ? 'bg-rose-100 border-rose-300 text-rose-600' : 'border-brand-outline hover:bg-slate-50 text-brand-muted hover:text-brand-dark'}`} title="Speak to type">
                     {isRecording ? <MicOff size={14} /> : <Mic size={14} />}
                   </button>
-                  <input value={inputMessage} onChange={event => setInputMessage(event.target.value)} placeholder={isRecording ? 'Listening...' : 'Ask Groq Llama 70B...'} className="flex-1 border border-brand-outline text-xs px-4 py-2.5 rounded-2xl focus:outline-none focus:ring-1 focus:ring-brand-primary placeholder:text-brand-muted/75 bg-slate-50/50" />
+                  <input 
+                    value={inputMessage} 
+                    onChange={event => setInputMessage(event.target.value)} 
+                    placeholder={
+                      isRecording 
+                        ? 'Listening...' 
+                        : selectedModel === 'deepseek-coder' 
+                          ? 'Ask DeepSeek Coding AI...' 
+                          : selectedModel === 'qwen-coder'
+                            ? 'Ask Qwen3 Coder AI...'
+                            : selectedModel === 'gemini-coder'
+                              ? 'Ask Gemini Code Architect...'
+                              : selectedModel === 'frontend-expert'
+                                ? 'Ask Frontend Specialist...'
+                                : selectedModel === 'database-guru'
+                                  ? 'Ask Database Guru...'
+                                  : selectedModel === 'funny-buddy'
+                                    ? 'Distract the Meme-Lord AI...'
+                                    : selectedModel === 'gemini' 
+                                      ? 'Ask Gemini AI...' 
+                                      : 'Ask Llama ChatGPT...'
+                    } 
+                    className="flex-1 border border-brand-outline text-xs px-4 py-2.5 rounded-2xl focus:outline-none focus:ring-1 focus:ring-brand-primary placeholder:text-brand-muted/75 bg-slate-50/50" 
+                  />
                   <button type="submit" disabled={(!inputMessage.trim() && !attachedAttachment) || isTyping} className={`p-2.5 rounded-2xl transition duration-150 flex items-center justify-center ${(inputMessage.trim() || attachedAttachment) && !isTyping ? 'bg-brand-primary hover:bg-[#4A4A3A] text-white' : 'bg-slate-100 text-slate-300 border border-slate-200 cursor-not-allowed'}`}>
                     <Send size={15} />
                   </button>

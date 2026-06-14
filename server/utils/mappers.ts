@@ -14,6 +14,7 @@ export function profileFromRow(row: any): UserProfile {
     alarmTone: row.alarm_tone || 'singing-bowl',
     soundVolume: row.sound_volume ?? 75,
     notificationsEnabled: row.notifications_enabled ?? true,
+    language: row.language || 'en',
   };
 }
 

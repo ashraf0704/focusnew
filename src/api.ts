@@ -219,6 +219,13 @@ async function handleSimulatedOfflineRequest<T>(path: string, options: ApiOption
     setLocalItem(STORAGE_KEYS.SUBJECTS, subjects);
     return newSubject as unknown as T;
   }
+  if (path.startsWith('/api/subjects/') && method === 'DELETE') {
+    const subjectId = path.split('/')[3];
+    const subjects = getLocalItem<Subject[]>(STORAGE_KEYS.SUBJECTS, INITIAL_SUBJECTS);
+    const filtered = subjects.filter(s => s.id !== subjectId);
+    setLocalItem(STORAGE_KEYS.SUBJECTS, filtered);
+    return {} as T;
+  }
 
   // Decks
   if (path === '/api/decks' && method === 'POST') {
@@ -462,6 +469,8 @@ export const api = {
   deleteTask: (id: string) => request<void>(`/api/tasks/${id}`, {method: 'DELETE'}),
   addSubject: (body: {name: string; color: string; accentColor: string; iconName: string}) =>
     request<Subject>('/api/subjects', {method: 'POST', body: JSON.stringify(body)}),
+  deleteSubject: (id: string) =>
+    request<void>(`/api/subjects/${id}`, {method: 'DELETE'}),
   addDeck: (deck: FlashcardDeck) => request<FlashcardDeck>('/api/decks', {method: 'POST', body: JSON.stringify(deck)}),
   updateCardDifficulty: (deckId: string, cardId: string, difficultyRating: string) =>
     request(`/api/decks/${deckId}/cards/${cardId}`, {method: 'PATCH', body: JSON.stringify({difficultyRating})}),

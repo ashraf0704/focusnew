@@ -23,7 +23,7 @@ function getGroqApiKey() {
   return apiKey;
 }
 
-export async function* streamGroqChat(messages: GroqMessage[]) {
+export async function* streamGroqChat(messages: GroqMessage[], modelName: string = GROQ_MODEL) {
   const response = await fetch(GROQ_CHAT_URL, {
     method: 'POST',
     headers: {
@@ -31,7 +31,7 @@ export async function* streamGroqChat(messages: GroqMessage[]) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      model: GROQ_MODEL,
+      model: modelName,
       messages,
       temperature: 0.45,
       max_tokens: 1400,

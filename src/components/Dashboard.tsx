@@ -27,6 +27,59 @@ interface DashboardProps {
   onTriggerQuickFocus: (subjectId: string) => void;
 }
 
+const YOUTUBE_RESOURCES: Record<string, Array<{title: string; url: string}>> = {
+  all: [
+    { title: "The Feynman Technique – Learn Anything Fast", url: "https://www.youtube.com/watch?v=_f-qkGJBPts" },
+    { title: "How to Study Effectively with Spaced Repetition", url: "https://www.youtube.com/watch?v=Z-zNHHpXoMM" },
+    { title: "How to Focus – Tips for Deep Work", url: "https://www.youtube.com/watch?v=Hu4Yvq-g7_Y" }
+  ],
+  'subj-math': [
+    { title: "Essence of Calculus – 3Blue1Brown", url: "https://www.youtube.com/watch?v=WUvTyaaNkzM" },
+    { title: "Algebra Full Course – Khan Academy Style", url: "https://www.youtube.com/watch?v=LwCRRUa8yTU" },
+    { title: "How to Learn Math Fast (Effective Methods)", url: "https://www.youtube.com/watch?v=7SoFHkFO9k8" }
+  ],
+  'subj-cs': [
+    { title: "CS50x – Harvard's Intro to Computer Science", url: "https://www.youtube.com/watch?v=8mAITcNt710" },
+    { title: "Python Full Course for Beginners (2024)", url: "https://www.youtube.com/watch?v=ix9cRaBkVe0" },
+    { title: "How the Internet Works in 5 Minutes", url: "https://www.youtube.com/watch?v=7_LPdttKXPc" }
+  ],
+  'subj-design': [
+    { title: "UI/UX Design Principles Every Designer Must Know", url: "https://www.youtube.com/watch?v=YiLUYf4HDh4" },
+    { title: "Figma Tutorial for Beginners (2024)", url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8" },
+    { title: "The Fundamentals of Design – Full Course", url: "https://www.youtube.com/watch?v=_Hp_dI0__qE" }
+  ],
+  'subj-writing': [
+    { title: "How to Write an Essay: 7 Steps", url: "https://www.youtube.com/watch?v=qmSCH4gPfdE" },
+    { title: "Academic Writing – Structure & Style Tips", url: "https://www.youtube.com/watch?v=3bHNHAQ4nCk" },
+    { title: "How to Write a Research Paper (Step by Step)", url: "https://www.youtube.com/watch?v=HEZAHmg0bYA" }
+  ],
+  'subj-science': [
+    { title: "The Map of Physics – Domain Overview", url: "https://www.youtube.com/watch?v=ZihywtixUYo" },
+    { title: "Biology Full Course – Crash Course", url: "https://www.youtube.com/watch?v=ea3BsRSCKV8" },
+    { title: "Chemistry Fundamentals – Atom to Molecule", url: "https://www.youtube.com/watch?v=FSyAehMdpyI" }
+  ],
+  'subj-history': [
+    { title: "World History – Crash Course (Complete)", url: "https://www.youtube.com/watch?v=Yocja_N5s1I" },
+    { title: "Modern History of India – Quick Overview", url: "https://www.youtube.com/watch?v=7VT3ySE6-aI" },
+    { title: "How Empires Formed and Fell – Explained", url: "https://www.youtube.com/watch?v=xuCn8ux2gbs" }
+  ],
+  'subj-english': [
+    { title: "English Grammar Masterclass – Full Lecture", url: "https://www.youtube.com/watch?v=6vcIPMbKHVo" },
+    { title: "How to Improve Your English Vocabulary Fast", url: "https://www.youtube.com/watch?v=5uSqKkbgCX4" },
+    { title: "IELTS / TOEFL Speaking Tips That Actually Work", url: "https://www.youtube.com/watch?v=9hHMiR7ZUoY" }
+  ],
+  'subj-economics': [
+    { title: "Economics in One Lesson – Animated Summary", url: "https://www.youtube.com/watch?v=EMEqpuJNhME" },
+    { title: "Microeconomics – Full Course (Crash Course)", url: "https://www.youtube.com/watch?v=aO9-8zjQ7Rk" },
+    { title: "How Stock Markets Work – Explained Simply", url: "https://www.youtube.com/watch?v=p7HKvqRI_Bo" }
+  ],
+  'subj-general': [
+    { title: "How to Stop Procrastinating – Practical Tips", url: "https://www.youtube.com/watch?v=4aYVLpY5LkA" },
+    { title: "Best Study Techniques Backed by Science", url: "https://www.youtube.com/watch?v=CPxSzxylRCI" },
+    { title: "How to Build Good Study Habits for Life", url: "https://www.youtube.com/watch?v=eVlvxHJdql8" }
+  ]
+};
+
 export default function Dashboard({
   subjects,
   tasks,
@@ -568,6 +621,33 @@ export default function Dashboard({
         <div className="space-y-6">
           {/* CAMERA FOCUS MONITOR */}
           <AIFocusMonitor />
+
+          {/* YouTube Study Resources */}
+          <div className="p-6 bg-white border border-brand-outline rounded-3xl space-y-3 shadow-none">
+            <div className="flex items-center gap-2 text-rose-600 font-sans font-black text-xs uppercase tracking-wider">
+              <span className="w-2.5 h-2.5 bg-rose-600 rounded-full animate-pulse shrink-0" />
+              <span>YouTube Tutorials</span>
+            </div>
+            <p className="text-[11px] text-brand-muted leading-relaxed">
+              Direct lectures and study guides matching your active folder selection.
+            </p>
+            <div className="space-y-2.5 pt-1.5">
+              {(YOUTUBE_RESOURCES[subjectFilter] || YOUTUBE_RESOURCES['all']).map((video, idx) => (
+                <a
+                  key={idx}
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-rose-50/25 hover:bg-rose-50/60 border border-rose-100/50 hover:border-rose-200 rounded-2xl flex items-center justify-between text-xs font-semibold text-brand-dark group transition-all duration-300 pointer-events-auto cursor-pointer"
+                >
+                  <span className="truncate pr-2 leading-snug group-hover:text-rose-700">{video.title}</span>
+                  <span className="text-[10px] text-rose-600 font-extrabold uppercase shrink-0 flex items-center gap-1">
+                    Play ▶
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
 
           {/* Quick study metrics tracker widget */}
           <div className="p-6 bg-gradient-to-tr from-brand-primary to-brand-muted text-white rounded-3xl shadow-sm space-y-4">

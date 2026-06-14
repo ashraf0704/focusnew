@@ -9,14 +9,15 @@ import Insights from './components/Insights';
 import AIDoubtSolver from './components/AIDoubtSolver';
 import VaultHub from './components/VaultHub';
 import Settings from './components/Settings';
+import SubjectOnboardingModal from './components/SubjectOnboardingModal';
 
 import { Subject, Task, FlashcardDeck, Badge, UserProfile, StudySessionLog, Priority } from './types';
 import { INITIAL_SUBJECTS, INITIAL_TASKS, INITIAL_DECKS, INITIAL_BADGES } from './data';
 import { api, clearJwt, getJwt, setJwt } from './api';
 import { 
   LayoutGrid, Clock, BookOpen, Award, 
-  LogOut, UserCircle, Flame, Sparkles, 
-  HelpCircle, Eye, ShieldCheck, FolderOpen, Settings as SettingsIcon
+  LogOut, Flame, Sparkles, BookMarked,
+  Eye, ShieldCheck, FolderOpen, Settings as SettingsIcon
 } from 'lucide-react';
 
 export default function App() {
@@ -39,6 +40,9 @@ export default function App() {
   const [installPrompt, setInstallPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const installPromptRef = useRef<BeforeInstallPromptEvent | null>(null);
 
+  // Subject onboarding modal: shown for new users or on demand
+  const [showSubjectOnboarding, setShowSubjectOnboarding] = useState(false);
+
   // Selection defaults
   const [selectedSubjectId, setSelectedSubjectId] = useState<string>(INITIAL_SUBJECTS[0].id);
 
@@ -50,16 +54,21 @@ export default function App() {
     mode: 'pomodoro' | 'short_break' | 'long_break' | 'custom';
   } | null>(null);
 
-  const hydrateApp = async () => {
+  const hydrateApp = async (showOnboardingIfNew = false) => {
     const payload = await api.boot();
     setProfile(payload.profile);
-    setSubjects(payload.subjects.length ? payload.subjects : INITIAL_SUBJECTS);
+    const loadedSubjects = payload.subjects.length ? payload.subjects : INITIAL_SUBJECTS;
+    setSubjects(loadedSubjects);
     setTasks(payload.tasks);
     setDecks(payload.decks);
     setBadges(payload.badges.length ? payload.badges : INITIAL_BADGES);
     setSessionLogs(payload.sessionLogs);
-    setSelectedSubjectId(payload.subjects[0]?.id || INITIAL_SUBJECTS[0].id);
+    setSelectedSubjectId(loadedSubjects[0]?.id || INITIAL_SUBJECTS[0].id);
     setActiveTab('dashboard');
+    // Show onboarding modal for genuinely new accounts (no subjects yet)
+    if (showOnboardingIfNew && payload.subjects.length === 0) {
+      setShowSubjectOnboarding(true);
+    }
   };
 
   useEffect(() => {
@@ -129,8 +138,32 @@ export default function App() {
         ? await api.signUp({ fullName, email, password, dailyGoal })
         : await api.signIn({ email, password });
     setJwt(result.jwt);
-    await hydrateApp();
+    // Pass true so new users see the subject picker after signing up
+    await hydrateApp(true);
     return { ok: true };
+  };
+
+  // Save subjects chosen in the onboarding modal (or the edit modal)
+  const handleSaveOnboardingSubjects = async (
+    selectedNames: Array<{ name: string; color: string; accentColor: string; iconName: string }>
+  ) => {
+    // Add each chosen subject via the API
+    const added: Subject[] = [];
+    for (const s of selectedNames) {
+      try {
+        const newSub = await api.addSubject(s);
+        added.push(newSub);
+      } catch { /* ignore duplicate errors */ }
+    }
+    if (added.length > 0) {
+      setSubjects(prev => {
+        // Keep existing non-default subjects plus new ones
+        const nonDefault = prev.filter(s => !INITIAL_SUBJECTS.find(d => d.id === s.id));
+        return [...nonDefault, ...added];
+      });
+      setSelectedSubjectId(added[0].id);
+    }
+    setShowSubjectOnboarding(false);
   };
 
   // Profile Log Out helper
@@ -399,6 +432,16 @@ export default function App() {
             </button>
           )}
 
+          {/* Change Subjects shortcut */}
+          <button
+            onClick={() => setShowSubjectOnboarding(true)}
+            className="w-full py-3 px-4 border border-brand-vibrant/40 hover:bg-brand-vibrant/10 text-brand-vibrant rounded-xl text-xs font-black flex items-center gap-3 transition pointer-events-auto"
+            id="desktop-change-subjects-button"
+          >
+            <BookMarked size={15} />
+            Change Subjects
+          </button>
+
           <button
             onClick={handleLogOut}
             className="w-full py-3 px-4 border border-white/10 hover:bg-rose-500/15 hover:text-rose-100 hover:border-transparent rounded-xl text-xs font-bold text-brand-bg/70 flex items-center gap-3 transition pointer-events-auto"
@@ -485,6 +528,7 @@ export default function App() {
                 onDeleteTask={handleDeleteTask}
                 onAddSubject={handleAddSubject}
                 onTriggerQuickFocus={handleTriggerQuickFocus}
+                onOpenSubjectModal={() => setShowSubjectOnboarding(true)}
               />
             )}
 
@@ -539,6 +583,8 @@ export default function App() {
                 }}
                 subjectsCount={subjects.length}
                 tasksCount={tasks.filter(t => !t.completed).length}
+                installPrompt={installPrompt}
+                onInstallApp={handleInstallApp}
               />
             )}
           </motion.div>
@@ -646,6 +692,14 @@ export default function App() {
         activeSubjectId={selectedSubjectId} 
         presetContext={presetAIFile}
         onClearPresetContext={() => setPresetAIFile(null)}
+      />
+
+      {/* Subject Onboarding / Edit Modal */}
+      <SubjectOnboardingModal
+        isOpen={showSubjectOnboarding}
+        existingSubjects={subjects}
+        onClose={() => setShowSubjectOnboarding(false)}
+        onSaveSubjects={handleSaveOnboardingSubjects}
       />
     </div>
   );

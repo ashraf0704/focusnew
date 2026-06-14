@@ -67,6 +67,7 @@ export interface UserProfile {
   soundVolume?: number;
   notificationsEnabled?: boolean;
   subscriptionPlan?: 'free' | 'pro' | 'guru';
+  language?: string;
 }
 
 export interface VaultFolder {

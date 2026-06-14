@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   User, Bell, Sparkles, Sliders, Volume2, Save, RotateCcw, 
-  HelpCircle, Check, CircleAlert, Smartphone, Trophy
+  HelpCircle, Check, CircleAlert, Smartphone, Trophy, Globe,
+  Download, Laptop
 } from 'lucide-react';
 import { UserProfile } from '../types';
 import { api, urlBase64ToUint8Array } from '../api';
@@ -12,13 +13,17 @@ interface SettingsProps {
   onUpdateProfile: (updated: Partial<UserProfile>) => void;
   subjectsCount: number;
   tasksCount: number;
+  installPrompt?: any;
+  onInstallApp?: () => Promise<void>;
 }
 
 export default function Settings({ 
   profile, 
   onUpdateProfile,
   subjectsCount,
-  tasksCount
+  tasksCount,
+  installPrompt,
+  onInstallApp
 }: SettingsProps) {
   // Local state for forms initialized with current loaded profile
   const [fullName, setFullName] = useState(profile.fullName);
@@ -30,6 +35,7 @@ export default function Settings({
   const [alarmTone, setAlarmTone] = useState(profile.alarmTone || 'singing-bowl');
   const [soundVolume, setSoundVolume] = useState(profile.soundVolume ?? 75);
   const [notificationsEnabled, setNotificationsEnabled] = useState(profile.notificationsEnabled ?? true);
+  const [language, setLanguage] = useState(profile.language || 'en');
 
   // Success indicator state
   const [isSaved, setIsSaved] = useState(false);
@@ -89,8 +95,10 @@ export default function Settings({
         buddySpecies,
         alarmTone,
         soundVolume,
-        notificationsEnabled
+        notificationsEnabled,
+        language
       });
+      localStorage.setItem('focus_buddy_language', language);
       onUpdateProfile(updated);
       setIsSaved(true);
       setTimeout(() => {
@@ -112,13 +120,16 @@ export default function Settings({
       setAlarmTone('singing-bowl');
       setSoundVolume(75);
       setNotificationsEnabled(true);
+      setLanguage('en');
+      localStorage.setItem('focus_buddy_language', 'en');
       
       api.updateProfile({
         dailyGoalMinutes: 25,
         buddySpecies: 'fox',
         alarmTone: 'singing-bowl',
         soundVolume: 75,
-        notificationsEnabled: true
+        notificationsEnabled: true,
+        language: 'en'
       }).then(onUpdateProfile).catch(error => {
         setSettingsError(error instanceof Error ? error.message : 'Could not reset settings.');
       });
@@ -474,6 +485,113 @@ export default function Settings({
                     <span className="font-black text-brand-dark block">Offline Local Isolation</span>
                     No analytics metrics or personal schedule information leaves this browser window. Your private focus space remains fully contained.
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* 5. App Interface Language Customization */}
+            <div className="p-6 bg-white border border-brand-outline rounded-3xl shadow-xs">
+              <h3 className="font-sans font-bold text-[#4A4A3A] mb-1 flex items-center gap-2 text-md">
+                <Globe size={16} className="text-brand-vibrant" />
+                5. Interface Language
+              </h3>
+              <p className="text-xs text-brand-muted mb-4">
+                Customize the language of Focus Buddy to stay comfortable.
+              </p>
+
+              <div className="space-y-3">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold uppercase tracking-wider text-brand-dark/80 block">
+                    Select Language
+                  </label>
+                  <select
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                    className="w-full bg-slate-50 border border-brand-outline rounded-xl py-2.5 px-3 text-xs text-brand-dark font-semibold focus:outline-none focus:ring-1 focus:ring-brand-primary focus:bg-white transition animate-none cursor-pointer"
+                  >
+                    <option value="en">English (English)</option>
+                    <option value="es">Español (Spanish)</option>
+                    <option value="hi">हिन्दी (Hindi)</option>
+                    <option value="fr">Français (French)</option>
+                    <option value="de">Deutsch (German)</option>
+                    <option value="ar">العربية (Arabic)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            {/* 6. Mobile & Desktop App Center */}
+            <div className="p-6 bg-white border border-brand-outline rounded-3xl shadow-xs space-y-4">
+              <h3 className="font-sans font-bold text-[#4A4A3A] mb-1 flex items-center gap-2 text-md">
+                <Laptop size={16} className="text-brand-vibrant" />
+                6. App Download & Installation Center
+              </h3>
+              <p className="text-xs text-brand-muted">
+                Run Focus Buddy as a standalone app on your laptop or download it directly onto your mobile device.
+              </p>
+
+              <div className="space-y-3 pt-1">
+                {/* 1. Progressive Web App (PWA) Install Trigger */}
+                <div className="p-4 bg-slate-50 border border-brand-outline rounded-2xl space-y-3">
+                  <div className="flex items-start gap-2.5">
+                    <Laptop className="text-brand-primary shrink-0 mt-0.5" size={16} />
+                    <div className="text-left">
+                      <span className="text-[11px] font-black text-brand-dark block">
+                        Desktop & Laptop (PWA)
+                      </span>
+                      <span className="text-[10px] text-brand-muted leading-relaxed block mt-0.5">
+                        Installs instantly on Windows, macOS, Linux, and Chromebooks. Running as a PWA gives you a clean borderless window, quick launch icon, and optimal offline performance.
+                      </span>
+                    </div>
+                  </div>
+
+                  {installPrompt ? (
+                    <button
+                      type="button"
+                      onClick={onInstallApp}
+                      className="w-full py-2.5 px-4 bg-brand-vibrant hover:opacity-95 text-white rounded-xl text-xs font-black flex items-center justify-center gap-2 transition cursor-pointer active:scale-98 shadow-xs"
+                    >
+                      <Sparkles size={13} />
+                      Install Standalone Web App (PWA)
+                    </button>
+                  ) : (
+                    <div className="text-[10px] bg-slate-100 border border-slate-200 text-slate-500 rounded-xl p-2.5 text-center font-bold">
+                      💡 Installed! (Or access via your browser's address bar + icon to launch anytime)
+                    </div>
+                  )}
+                </div>
+
+                {/* 2. Direct Android APK Download Trigger */}
+                <div className="p-4 bg-rose-50/30 border border-rose-100/60 rounded-2xl space-y-3">
+                  <div className="flex items-start gap-2.5">
+                    <Smartphone className="text-rose-600 shrink-0 mt-0.5" size={16} />
+                    <div className="text-left">
+                      <span className="text-[11px] font-black text-brand-dark block">
+                        Native Android Mobile App
+                      </span>
+                      <span className="text-[10px] text-brand-muted leading-relaxed block mt-0.5">
+                        Download the direct Android APK package to share with your friends or load onto your physical phone. Or scan QR using Expo Go to live-test developer runs.
+                      </span>
+                    </div>
+                  </div>
+
+                  <a
+                    href="/focus-buddy.apk"
+                    download="focus-buddy.apk"
+                    className="w-full py-2.5 px-4 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-black flex items-center justify-center gap-2 transition cursor-pointer active:scale-98 text-center text-white"
+                  >
+                    <Download size={13} />
+                    Download Android APK Package (Direct)
+                  </a>
+                </div>
+
+                {/* Developer / Sharing Instructions */}
+                <div className="p-3 bg-brand-bg/50 border border-brand-outline rounded-xl text-[10px] text-brand-muted leading-relaxed">
+                  <div className="font-extrabold text-brand-dark mb-1">🚀 Sharing and Custom Builds</div>
+                  <ul className="list-disc pl-4 space-y-1">
+                    <li>To test local native features instantly on any phone, run <code className="bg-slate-100 text-brand-primary px-1 rounded">npx expo start</code> in the mobile folder and scan QR with Expo Go.</li>
+                    <li>To generate a fresh custom APK build remotely, execute <code className="bg-slate-100 text-brand-primary px-1 rounded">npx eas build -p android --profile preview</code> in your console.</li>
+                  </ul>
                 </div>
               </div>
             </div>
