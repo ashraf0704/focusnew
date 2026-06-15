@@ -24,61 +24,139 @@ interface DashboardProps {
   onToggleTask: (id: string) => void;
   onDeleteTask: (id: string) => void;
   onAddSubject: (name: string, color: string, iconName: string) => void;
+  onDeleteSubject?: (id: string) => void;
+  deletedSubjectsHistory?: Subject[];
+  onRestoreSubject?: (sub: Subject) => void;
+  onClearDeletedSubjectsHistory?: () => void;
   onTriggerQuickFocus: (subjectId: string) => void;
+  onOpenSubjectModal?: () => void;
 }
 
-const YOUTUBE_RESOURCES: Record<string, Array<{title: string; url: string}>> = {
-  all: [
-    { title: "The Feynman Technique – Learn Anything Fast", url: "https://www.youtube.com/watch?v=_f-qkGJBPts" },
-    { title: "How to Study Effectively with Spaced Repetition", url: "https://www.youtube.com/watch?v=Z-zNHHpXoMM" },
-    { title: "How to Focus – Tips for Deep Work", url: "https://www.youtube.com/watch?v=Hu4Yvq-g7_Y" }
-  ],
-  'subj-math': [
-    { title: "Essence of Calculus – 3Blue1Brown", url: "https://www.youtube.com/watch?v=WUvTyaaNkzM" },
-    { title: "Algebra Full Course – Khan Academy Style", url: "https://www.youtube.com/watch?v=LwCRRUa8yTU" },
-    { title: "How to Learn Math Fast (Effective Methods)", url: "https://www.youtube.com/watch?v=7SoFHkFO9k8" }
-  ],
-  'subj-cs': [
-    { title: "CS50x – Harvard's Intro to Computer Science", url: "https://www.youtube.com/watch?v=8mAITcNt710" },
-    { title: "Python Full Course for Beginners (2024)", url: "https://www.youtube.com/watch?v=ix9cRaBkVe0" },
-    { title: "How the Internet Works in 5 Minutes", url: "https://www.youtube.com/watch?v=7_LPdttKXPc" }
-  ],
-  'subj-design': [
-    { title: "UI/UX Design Principles Every Designer Must Know", url: "https://www.youtube.com/watch?v=YiLUYf4HDh4" },
-    { title: "Figma Tutorial for Beginners (2024)", url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8" },
-    { title: "The Fundamentals of Design – Full Course", url: "https://www.youtube.com/watch?v=_Hp_dI0__qE" }
-  ],
-  'subj-writing': [
-    { title: "How to Write an Essay: 7 Steps", url: "https://www.youtube.com/watch?v=qmSCH4gPfdE" },
-    { title: "Academic Writing – Structure & Style Tips", url: "https://www.youtube.com/watch?v=3bHNHAQ4nCk" },
-    { title: "How to Write a Research Paper (Step by Step)", url: "https://www.youtube.com/watch?v=HEZAHmg0bYA" }
-  ],
-  'subj-science': [
-    { title: "The Map of Physics – Domain Overview", url: "https://www.youtube.com/watch?v=ZihywtixUYo" },
-    { title: "Biology Full Course – Crash Course", url: "https://www.youtube.com/watch?v=ea3BsRSCKV8" },
-    { title: "Chemistry Fundamentals – Atom to Molecule", url: "https://www.youtube.com/watch?v=FSyAehMdpyI" }
-  ],
-  'subj-history': [
-    { title: "World History – Crash Course (Complete)", url: "https://www.youtube.com/watch?v=Yocja_N5s1I" },
-    { title: "Modern History of India – Quick Overview", url: "https://www.youtube.com/watch?v=7VT3ySE6-aI" },
-    { title: "How Empires Formed and Fell – Explained", url: "https://www.youtube.com/watch?v=xuCn8ux2gbs" }
-  ],
-  'subj-english': [
-    { title: "English Grammar Masterclass – Full Lecture", url: "https://www.youtube.com/watch?v=6vcIPMbKHVo" },
-    { title: "How to Improve Your English Vocabulary Fast", url: "https://www.youtube.com/watch?v=5uSqKkbgCX4" },
-    { title: "IELTS / TOEFL Speaking Tips That Actually Work", url: "https://www.youtube.com/watch?v=9hHMiR7ZUoY" }
-  ],
-  'subj-economics': [
-    { title: "Economics in One Lesson – Animated Summary", url: "https://www.youtube.com/watch?v=EMEqpuJNhME" },
-    { title: "Microeconomics – Full Course (Crash Course)", url: "https://www.youtube.com/watch?v=aO9-8zjQ7Rk" },
-    { title: "How Stock Markets Work – Explained Simply", url: "https://www.youtube.com/watch?v=p7HKvqRI_Bo" }
-  ],
-  'subj-general': [
-    { title: "How to Stop Procrastinating – Practical Tips", url: "https://www.youtube.com/watch?v=4aYVLpY5LkA" },
-    { title: "Best Study Techniques Backed by Science", url: "https://www.youtube.com/watch?v=CPxSzxylRCI" },
-    { title: "How to Build Good Study Habits for Life", url: "https://www.youtube.com/watch?v=eVlvxHJdql8" }
-  ]
-};
+// Keyword → YouTube video map. Matched by checking if the subject name contains any keyword.
+const YOUTUBE_KEYWORD_MAP: Array<{ keywords: string[]; videos: Array<{title: string; url: string}> }> = [
+  {
+    keywords: ['math', 'calculus', 'algebra', 'geometry', 'statistics', 'trigonometry', 'arithmetic', 'probability'],
+    videos: [
+      { title: "Essence of Calculus – 3Blue1Brown", url: "https://www.youtube.com/watch?v=WUvTyaaNkzM" },
+      { title: "Algebra Full Course – Khan Academy", url: "https://www.youtube.com/watch?v=LwCRRUa8yTU" },
+      { title: "Statistics – Full Crash Course", url: "https://www.youtube.com/watch?v=xxpc-HPKN28" },
+    ]
+  },
+  {
+    keywords: ['computer', 'programming', 'code', 'software', 'algorithm', 'data structure', 'cs', 'python', 'java', 'web'],
+    videos: [
+      { title: "CS50 – Harvard Intro to Computer Science", url: "https://www.youtube.com/watch?v=8mAITcNt710" },
+      { title: "Python Full Course for Beginners (2024)", url: "https://www.youtube.com/watch?v=ix9cRaBkVe0" },
+      { title: "How the Internet Works in 5 Minutes", url: "https://www.youtube.com/watch?v=7_LPdttKXPc" },
+    ]
+  },
+  {
+    keywords: ['physics', 'mechanics', 'thermodynamics', 'quantum', 'electromagnetism', 'optics', 'relativity'],
+    videos: [
+      { title: "Map of Physics – Domain Overview", url: "https://www.youtube.com/watch?v=ZihywtixUYo" },
+      { title: "Physics Full Course – Crash Course", url: "https://www.youtube.com/watch?v=b1t41Q3xRM8" },
+      { title: "Understanding Quantum Mechanics", url: "https://www.youtube.com/watch?v=p7bzE1E5PMY" },
+    ]
+  },
+  {
+    keywords: ['chemistry', 'organic', 'inorganic', 'biochemistry', 'periodic', 'molecule', 'reaction', 'acid', 'base'],
+    videos: [
+      { title: "Chemistry Fundamentals – Atom to Molecule", url: "https://www.youtube.com/watch?v=FSyAehMdpyI" },
+      { title: "Organic Chemistry Full Course", url: "https://www.youtube.com/watch?v=bSMx0NS0XfY" },
+      { title: "Crash Course Chemistry (Complete)", url: "https://www.youtube.com/watch?v=uVFCOfSuPTo" },
+    ]
+  },
+  {
+    keywords: ['biology', 'genetics', 'cell', 'evolution', 'ecology', 'anatomy', 'microbiology', 'botany', 'zoology'],
+    videos: [
+      { title: "Biology Full Course – Crash Course", url: "https://www.youtube.com/watch?v=ea3BsRSCKV8" },
+      { title: "DNA & Genetics Explained Simply", url: "https://www.youtube.com/watch?v=zwibgNGe4aY" },
+      { title: "Human Anatomy – Organ Systems Overview", url: "https://www.youtube.com/watch?v=Ae4MadKPJhg" },
+    ]
+  },
+  {
+    keywords: ['history', 'civilization', 'world war', 'empire', 'ancient', 'modern history', 'revolution', 'colonial'],
+    videos: [
+      { title: "World History – Crash Course (Complete)", url: "https://www.youtube.com/watch?v=Yocja_N5s1I" },
+      { title: "Modern History of India – Overview", url: "https://www.youtube.com/watch?v=7VT3ySE6-aI" },
+      { title: "How Empires Formed and Fell – Explained", url: "https://www.youtube.com/watch?v=xuCn8ux2gbs" },
+    ]
+  },
+  {
+    keywords: ['economics', 'macro', 'micro', 'finance', 'market', 'stock', 'gdp', 'trade', 'monetary', 'fiscal'],
+    videos: [
+      { title: "Economics in One Lesson – Animated", url: "https://www.youtube.com/watch?v=EMEqpuJNhME" },
+      { title: "Microeconomics Full Course – Crash Course", url: "https://www.youtube.com/watch?v=aO9-8zjQ7Rk" },
+      { title: "How Stock Markets Work – Simply Explained", url: "https://www.youtube.com/watch?v=p7HKvqRI_Bo" },
+    ]
+  },
+  {
+    keywords: ['english', 'grammar', 'literature', 'writing', 'essay', 'vocabulary', 'language', 'ielts', 'toefl', 'reading'],
+    videos: [
+      { title: "English Grammar Masterclass", url: "https://www.youtube.com/watch?v=6vcIPMbKHVo" },
+      { title: "How to Write an Essay – 7 Steps", url: "https://www.youtube.com/watch?v=qmSCH4gPfdE" },
+      { title: "IELTS / TOEFL Speaking Tips That Work", url: "https://www.youtube.com/watch?v=9hHMiR7ZUoY" },
+    ]
+  },
+  {
+    keywords: ['design', 'ui', 'ux', 'graphic', 'figma', 'illustration', 'typography', 'color', 'visual', 'interface'],
+    videos: [
+      { title: "UI/UX Design Principles Every Designer Needs", url: "https://www.youtube.com/watch?v=YiLUYf4HDh4" },
+      { title: "Figma Tutorial for Beginners (2024)", url: "https://www.youtube.com/watch?v=FTFaQWZBqQ8" },
+      { title: "Fundamentals of Design – Full Course", url: "https://www.youtube.com/watch?v=_Hp_dI0__qE" },
+    ]
+  },
+  {
+    keywords: ['geography', 'map', 'climate', 'environment', 'earth', 'continent', 'ocean', 'population', 'urban'],
+    videos: [
+      { title: "Geography Now! – World Overview", url: "https://www.youtube.com/watch?v=Ph5a9MBubVM" },
+      { title: "Climate Change Explained Visually", url: "https://www.youtube.com/watch?v=G4H1N_yXBiA" },
+      { title: "Physical Geography Full Course", url: "https://www.youtube.com/watch?v=ZyNZNJFPVR8" },
+    ]
+  },
+  {
+    keywords: ['law', 'legal', 'constitution', 'rights', 'court', 'criminal', 'civil', 'justice', 'contract', 'tort'],
+    videos: [
+      { title: "Introduction to Law – Full Course", url: "https://www.youtube.com/watch?v=qmSCH4gPfdE" },
+      { title: "Constitutional Law – Key Concepts", url: "https://www.youtube.com/watch?v=3bHNHAQ4nCk" },
+      { title: "How the Legal System Works", url: "https://www.youtube.com/watch?v=HEZAHmg0bYA" },
+    ]
+  },
+  {
+    keywords: ['psychology', 'mental', 'behavior', 'cognitive', 'neuroscience', 'therapy', 'social', 'personality'],
+    videos: [
+      { title: "Intro to Psychology – Crash Course", url: "https://www.youtube.com/watch?v=vo4pMVb0R6M" },
+      { title: "The Science of Well-Being – Yale", url: "https://www.youtube.com/watch?v=ZizdB0TgAVM" },
+      { title: "Cognitive Psychology – Memory & Attention", url: "https://www.youtube.com/watch?v=R-sVnmmw6WY" },
+    ]
+  },
+  {
+    keywords: ['music', 'theory', 'instrument', 'harmony', 'composition', 'audio', 'sound', 'rhythm', 'notation'],
+    videos: [
+      { title: "Music Theory Complete – Beginner to Advanced", url: "https://www.youtube.com/watch?v=rgaTLrZGlk0" },
+      { title: "How Music Works – Howard Goodall", url: "https://www.youtube.com/watch?v=LTkCQBhSGTk" },
+      { title: "Learn Piano – Beginner Full Course", url: "https://www.youtube.com/watch?v=827ygD_rUFM" },
+    ]
+  },
+];
+
+// Get YouTube videos for a subject based on keyword matching its name
+function getYouTubeVideosForSubject(subjectName: string): Array<{title: string; url: string}> {
+  if (!subjectName || subjectName === 'all') return YOUTUBE_GENERAL;
+  const lower = subjectName.toLowerCase();
+  for (const entry of YOUTUBE_KEYWORD_MAP) {
+    if (entry.keywords.some(k => lower.includes(k))) {
+      return entry.videos;
+    }
+  }
+  return YOUTUBE_GENERAL;
+}
+
+const YOUTUBE_GENERAL: Array<{title: string; url: string}> = [
+  { title: "The Feynman Technique – Learn Anything Fast", url: "https://www.youtube.com/watch?v=_f-qkGJBPts" },
+  { title: "How to Study Effectively with Spaced Repetition", url: "https://www.youtube.com/watch?v=Z-zNHHpXoMM" },
+  { title: "How to Focus – Tips for Deep Work", url: "https://www.youtube.com/watch?v=Hu4Yvq-g7_Y" }
+];
 
 export default function Dashboard({
   subjects,
@@ -94,11 +172,20 @@ export default function Dashboard({
   onToggleTask,
   onDeleteTask,
   onAddSubject,
+  onDeleteSubject,
+  deletedSubjectsHistory,
+  onRestoreSubject,
+  onClearDeletedSubjectsHistory,
   onTriggerQuickFocus,
+  onOpenSubjectModal,
 }: DashboardProps) {
   // Filtering states
   const [taskFilter, setTaskFilter] = useState<'all' | 'active' | 'completed'>('all');
   const [subjectFilter, setSubjectFilter] = useState<string>('all');
+
+  // Get YouTube videos matching selected subject's name
+  const activeSubjectObj = subjects.find(s => s.id === subjectFilter);
+  const activeVideos = getYouTubeVideosForSubject(activeSubjectObj ? activeSubjectObj.name : 'all');
 
   // Input forms states
   const [showTaskAdd, setShowTaskAdd] = useState(false);
@@ -292,14 +379,27 @@ export default function Dashboard({
             <p className="text-xs text-brand-muted mt-0.5">Click any subject to quickly start a custom study timer</p>
           </div>
 
-          <button
-            onClick={() => setShowSubjectAdd(true)}
-            className="p-2.5 border border-brand-outline bg-white hover:bg-brand-bg text-brand-primary rounded-xl text-xs font-bold flex items-center gap-1.5 transition select-none pointer-events-auto"
-            id="add-subject-panel-toggle"
-          >
-            <Plus size={14} />
-            Add Folder
-          </button>
+          <div className="flex items-center gap-2">
+            {onOpenSubjectModal && (
+              <button
+                type="button"
+                onClick={onOpenSubjectModal}
+                className="p-2.5 border border-brand-outline bg-brand-bg/50 hover:bg-brand-bg text-brand-primary rounded-xl text-xs font-bold flex items-center gap-1.5 transition select-none pointer-events-auto"
+                id="change-subjects-modal-toggle"
+              >
+                <Sparkles size={14} className="text-brand-vibrant animate-pulse" />
+                Change Subjects
+              </button>
+            )}
+            <button
+              onClick={() => setShowSubjectAdd(true)}
+              className="p-2.5 border border-brand-outline bg-white hover:bg-brand-bg text-brand-primary rounded-xl text-xs font-bold flex items-center gap-1.5 transition select-none pointer-events-auto"
+              id="add-subject-panel-toggle"
+            >
+              <Plus size={14} />
+              Add Folder
+            </button>
+          </div>
         </div>
 
         {/* Add custom Subject Course floating popup */}
@@ -370,11 +470,23 @@ export default function Dashboard({
                     <div className={`w-8 h-8 rounded-lg flex items-center justify-center text-xs ${sub.color}`}>
                       <Bookmark size={15} />
                     </div>
-                    {activeCount > 0 && (
-                      <span className="text-[9px] font-black text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full truncate">
-                        {activeCount} active task{activeCount > 1 ? 's' : ''}
-                      </span>
-                    )}
+                    <div className="flex items-center gap-1.5">
+                      {activeCount > 0 && (
+                        <span className="text-[9px] font-black text-rose-700 bg-rose-50 px-2 py-0.5 rounded-full truncate">
+                          {activeCount} active task{activeCount > 1 ? 's' : ''}
+                        </span>
+                      )}
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onDeleteSubject?.(sub.id);
+                        }}
+                        className="p-1 text-slate-400 hover:text-rose-500 rounded-lg hover:bg-rose-50 transition cursor-pointer"
+                        title="Remove Subject"
+                      >
+                        <Trash size={12} />
+                      </button>
+                    </div>
                   </div>
 
                   <div>
@@ -398,6 +510,43 @@ export default function Dashboard({
             );
           })}
         </div>
+
+        {/* Render recently deleted subjects to restore them */}
+        {deletedSubjectsHistory && deletedSubjectsHistory.length > 0 && (
+          <div className="p-4 bg-slate-50 border border-brand-outline rounded-3xl space-y-2 mt-4 select-none">
+            <div className="flex items-center justify-between">
+              <span className="text-[10px] uppercase font-black tracking-wider text-brand-muted">Recently Removed Subjects History</span>
+              <button 
+                onClick={() => {
+                  if (window.confirm("Clear all subject deletion history?")) {
+                    onClearDeletedSubjectsHistory?.();
+                  }
+                }}
+                className="text-[10px] font-black text-rose-600 hover:text-rose-800 transition cursor-pointer"
+              >
+                Clear History
+              </button>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {deletedSubjectsHistory.map((sub) => (
+                <div 
+                  key={sub.id} 
+                  className="px-3 py-1.5 bg-white border border-brand-outline rounded-2xl text-[11px] flex items-center gap-2.5 shadow-2xs"
+                >
+                  <span className="text-brand-dark font-bold">{sub.name}</span>
+                  <button
+                    type="button"
+                    onClick={() => onRestoreSubject?.(sub)}
+                    className="px-2.5 py-1 bg-brand-primary text-white hover:bg-brand-primary/90 text-[10px] font-black uppercase tracking-wider rounded-lg transition cursor-pointer shadow-xs active:scale-95"
+                    title={`Restore "${sub.name}"`}
+                  >
+                    Restore
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 4. Active Tasks Workspace segment (Filters, Inputs, List tables) */}
@@ -632,7 +781,7 @@ export default function Dashboard({
               Direct lectures and study guides matching your active folder selection.
             </p>
             <div className="space-y-2.5 pt-1.5">
-              {(YOUTUBE_RESOURCES[subjectFilter] || YOUTUBE_RESOURCES['all']).map((video, idx) => (
+              {activeVideos.map((video, idx) => (
                 <a
                   key={idx}
                   href={video.url}

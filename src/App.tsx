@@ -31,6 +31,7 @@ export default function App() {
 
   // Core Data models state
   const [subjects, setSubjects] = useState<Subject[]>(INITIAL_SUBJECTS);
+  const [deletedSubjectsHistory, setDeletedSubjectsHistory] = useState<Subject[]>([]);
   const [tasks, setTasks] = useState<Task[]>(INITIAL_TASKS);
   const [decks, setDecks] = useState<FlashcardDeck[]>(INITIAL_DECKS);
   const [badges, setBadges] = useState<Badge[]>(INITIAL_BADGES);
@@ -73,6 +74,16 @@ export default function App() {
 
   useEffect(() => {
     const boot = async () => {
+      // Load deleted subjects history
+      const cached = localStorage.getItem('focus_buddy_deleted_subjects_history');
+      if (cached) {
+        try {
+          setDeletedSubjectsHistory(JSON.parse(cached));
+        } catch (e) {
+          console.warn("Failed to parse cached deleted subjects history", e);
+        }
+      }
+
       if (!getJwt()) {
         setIsBooting(false);
         return;
@@ -147,23 +158,49 @@ export default function App() {
   const handleSaveOnboardingSubjects = async (
     selectedNames: Array<{ name: string; color: string; accentColor: string; iconName: string }>
   ) => {
-    // Add each chosen subject via the API
-    const added: Subject[] = [];
-    for (const s of selectedNames) {
-      try {
-        const newSub = await api.addSubject(s);
-        added.push(newSub);
-      } catch { /* ignore duplicate errors */ }
+    try {
+      const existing = [...subjects];
+      const selectedLower = selectedNames.map(s => s.name.toLowerCase());
+
+      // 1. Delete subjects that are no longer selected
+      for (const sub of existing) {
+        if (!selectedLower.includes(sub.name.toLowerCase())) {
+          try {
+            await api.deleteSubject(sub.id);
+          } catch (err) {
+            console.warn(`Failed to delete subject ${sub.name}:`, err);
+          }
+        }
+      }
+
+      // 2. Add subjects that are new or preserve existing matches
+      const finalSubjects: Subject[] = [];
+      for (const s of selectedNames) {
+        const match = existing.find(sub => sub.name.toLowerCase() === s.name.toLowerCase());
+        if (match) {
+          finalSubjects.push(match);
+        } else {
+          try {
+            const addedSub = await api.addSubject(s);
+            finalSubjects.push(addedSub);
+          } catch (err) {
+            console.warn(`Failed to add subject ${s.name}:`, err);
+          }
+        }
+      }
+
+      // 3. Update state
+      if (finalSubjects.length > 0) {
+        setSubjects(finalSubjects);
+        if (!finalSubjects.some(s => s.id === selectedSubjectId)) {
+          setSelectedSubjectId(finalSubjects[0].id);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to save onboarding subjects:", error);
+    } finally {
+      setShowSubjectOnboarding(false);
     }
-    if (added.length > 0) {
-      setSubjects(prev => {
-        // Keep existing non-default subjects plus new ones
-        const nonDefault = prev.filter(s => !INITIAL_SUBJECTS.find(d => d.id === s.id));
-        return [...nonDefault, ...added];
-      });
-      setSelectedSubjectId(added[0].id);
-    }
-    setShowSubjectOnboarding(false);
   };
 
   // Profile Log Out helper
@@ -203,6 +240,61 @@ export default function App() {
     const newSub = await api.addSubject({ name, color, accentColor, iconName });
     setSubjects(prev => [...prev, newSub]);
     setSelectedSubjectId(newSub.id);
+  };
+
+  const handleDeleteSubject = async (id: string) => {
+    try {
+      const targetSub = subjects.find(s => s.id === id);
+      if (targetSub) {
+        setDeletedSubjectsHistory(prev => {
+          // Limit history to 10 items
+          const filtered = prev.filter(s => s.name.toLowerCase() !== targetSub.name.toLowerCase());
+          const nextHistory = [targetSub, ...filtered].slice(0, 10);
+          localStorage.setItem('focus_buddy_deleted_subjects_history', JSON.stringify(nextHistory));
+          return nextHistory;
+        });
+      }
+      await api.deleteSubject(id);
+      setSubjects(prev => prev.filter(s => s.id !== id));
+      // Remove tasks associated with this subject
+      setTasks(prev => prev.filter(t => t.subjectId !== id));
+      if (selectedSubjectId === id) {
+        const remaining = subjects.filter(s => s.id !== id);
+        if (remaining.length > 0) {
+          setSelectedSubjectId(remaining[0].id);
+        } else {
+          setSelectedSubjectId('');
+        }
+      }
+    } catch (error) {
+      console.error("Failed to delete subject:", error);
+    }
+  };
+
+  const handleRestoreSubject = async (restoredSub: Subject) => {
+    try {
+      // Re-create the subject using backend API
+      const newSub = await api.addSubject({
+        name: restoredSub.name,
+        color: restoredSub.color || 'bg-indigo-50 border-indigo-200 text-indigo-700',
+        accentColor: restoredSub.accentColor || '#64748b',
+        iconName: restoredSub.iconName || 'Bookmark',
+      });
+      setSubjects(prev => [...prev, newSub]);
+      setDeletedSubjectsHistory(prev => {
+        const nextHistory = prev.filter(s => s.name.toLowerCase() !== restoredSub.name.toLowerCase());
+        localStorage.setItem('focus_buddy_deleted_subjects_history', JSON.stringify(nextHistory));
+        return nextHistory;
+      });
+      setSelectedSubjectId(newSub.id);
+    } catch (error) {
+      console.error("Failed to restore subject:", error);
+    }
+  };
+
+  const handleClearDeletedSubjectsHistory = () => {
+    setDeletedSubjectsHistory([]);
+    localStorage.removeItem('focus_buddy_deleted_subjects_history');
   };
 
   // Deck directory additions
@@ -527,6 +619,10 @@ export default function App() {
                 onToggleTask={handleToggleTask}
                 onDeleteTask={handleDeleteTask}
                 onAddSubject={handleAddSubject}
+                onDeleteSubject={handleDeleteSubject}
+                deletedSubjectsHistory={deletedSubjectsHistory}
+                onRestoreSubject={handleRestoreSubject}
+                onClearDeletedSubjectsHistory={handleClearDeletedSubjectsHistory}
                 onTriggerQuickFocus={handleTriggerQuickFocus}
                 onOpenSubjectModal={() => setShowSubjectOnboarding(true)}
               />

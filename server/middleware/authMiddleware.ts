@@ -9,11 +9,8 @@ export async function authMiddleware(req: Request, res: Response, next: NextFunc
     return res.status(401).json({error: 'Authentication required', code: 'AUTH_REQUIRED'});
   }
 
-  // Gracefully handle simulated offline guest/user mode in local development
-  if (token === 'simulated-offline-jwt-token' || token.startsWith('simulated-')) {
-    req.user = { id: 'simulated-user-id', email: 'guest@focusbuddy.local' };
-    return next();
-  }
+  // Let simulated tokens flow through the normal getUser path below,
+  // which is proxied to mockAuth.getUser() in offline mode to resolve the real user.
 
   try {
     const {data, error} = await supabase.auth.getUser(token);

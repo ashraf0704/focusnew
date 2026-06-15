@@ -16,6 +16,12 @@ import {subjectsRouter} from './routes/subjects.js';
 import {tasksRouter} from './routes/tasks.js';
 import {vaultRouter} from './routes/vault.js';
 
+import path from 'path';
+import {fileURLToPath} from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express();
 const port = Number(process.env.PORT || 4000);
 const allowedOrigins = new Set(['http://localhost:3000', process.env.APP_URL].filter(Boolean) as string[]);
@@ -28,6 +34,11 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.json({limit: '2mb'}));
+
+app.get('/download', (_req, res) => {
+  const apkPath = path.resolve(__dirname, '../public/focus-buddy.apk');
+  res.download(apkPath, 'focus-buddy.apk');
+});
 
 app.get('/health', (_req, res) => res.json({ok: true}));
 app.use('/api/auth', authLimiter, authRouter);

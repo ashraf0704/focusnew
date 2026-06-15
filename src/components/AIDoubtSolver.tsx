@@ -20,7 +20,245 @@ interface Message {
   attachmentType?: string;
 }
 
-type AIModel = 'groq-llama' | 'gemini' | 'deepseek-coder' | 'qwen-coder' | 'gemini-coder' | 'frontend-expert' | 'database-guru' | 'funny-buddy';
+type AIModel = 'groq-llama' | 'gemini' | 'claude' | 'gemini-flash' | 'deepseek-coder' | 'qwen-coder' | 'gemini-coder' | 'frontend-expert' | 'database-guru' | 'funny-buddy';
+
+const VERIFIED_YOUTUBE_IDS = new Set([
+  'WUvTyaaNkzM', // Calculus
+  'LwCRRUa8yTU', // Algebra
+  'xxpc-HPKN28', // Statistics
+  '8mAITcNt710', // CS50
+  'ix9cRaBkVe0', // Python
+  '7_LPdttKXPc', // Internet Works
+  'ZihywtixUYo', // Physics Map
+  'b1t41Q3xRM8', // Physics Course
+  'p7bzE1E5PMY', // Quantum Mechanics
+  'FSyAehMdpyI', // Chemistry
+  'bSMx0NS0XfY', // Organic Chemistry
+  'uVFCOfSuPTo', // Crash Course Chemistry
+  'ea3BsRSCKV8', // Biology
+  'zwibgNGe4aY', // DNA/Genetics
+  'Ae4MadKPJhg', // Anatomy
+  'Yocja_N5s1I', // World History
+  '7VT3ySE6-aI', // Modern History of India
+  'xuCn8ux2gbs', // Empires
+  'EMEqpuJNhME', // Economics
+  'aO9-8zjQ7Rk', // Microeconomics
+  'p7HKvqRI_Bo', // Stock Markets
+  '6vcIPMbKHVo', // English Grammar
+  'qmSCH4gPfdE', // Essay Writing
+  '9hHMiR7ZUoY', // IELTS
+  'YiLUYf4HDh4', // UI/UX Design
+  'FTFaQWZBqQ8', // Figma Tutorial
+  '_Hp_dI0__qE', // Design Fundamentals
+  '_f-qkGJBPts', // Feynman
+  'Z-zNHHpXoMM', // Spaced Repetition
+  'Hu4Yvq-g7_Y', // Deep Work Focus
+]);
+
+function extractYouTubeVideoIds(text: string): Array<{ id: string; url: string }> {
+  const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/g;
+  const matches: Array<{ id: string; url: string }> = [];
+  const foundIds = new Set<string>();
+  
+  let match;
+  while ((match = regex.exec(text)) !== null) {
+    const videoId = match[1];
+    const rawUrl = match[0];
+    if (videoId && !foundIds.has(videoId)) {
+      foundIds.add(videoId);
+      // ONLY allow verified working videos in the embedded iframe list
+      if (VERIFIED_YOUTUBE_IDS.has(videoId)) {
+        const fullUrl = rawUrl.startsWith('http') ? rawUrl : `https://${rawUrl}`;
+        matches.push({ id: videoId, url: fullUrl });
+      }
+    }
+  }
+  return matches;
+}
+
+function renderMarkdown(text: string): React.ReactNode[] {
+  const lines = text.split('\n');
+  const result: React.ReactNode[] = [];
+  let i = 0;
+
+  while (i < lines.length) {
+    const line = lines[i];
+
+    // Fenced code block
+    if (line.trim().startsWith('```')) {
+      const lang = line.trim().slice(3).trim();
+      const codeLines: string[] = [];
+      i++;
+      while (i < lines.length && !lines[i].trim().startsWith('```')) {
+        codeLines.push(lines[i]);
+        i++;
+      }
+      result.push(
+        <div key={`code-${i}`} className="my-2 rounded-lg overflow-hidden border border-slate-200 bg-[#1e1e2e] text-xs">
+          {lang && <div className="px-3 py-1 text-[9px] text-slate-400 bg-[#2a2a3a] uppercase tracking-widest font-mono">{lang}</div>}
+          <pre className="p-3 overflow-x-auto font-mono text-[11px] text-green-300 leading-relaxed">{codeLines.join('\n')}</pre>
+        </div>
+      );
+      i++;
+      continue;
+    }
+
+    // Headings
+    const h3 = line.match(/^###\s+(.+)/);
+    const h2 = line.match(/^##\s+(.+)/);
+    const h1 = line.match(/^#\s+(.+)/);
+    if (h3) {
+      result.push(<p key={`h3-${i}`} className="font-black text-[11px] text-brand-dark mt-3 mb-1">{inlineMarkdown(h3[1])}</p>);
+      i++; continue;
+    }
+    if (h2) {
+      result.push(<p key={`h2-${i}`} className="font-black text-xs text-brand-dark mt-3 mb-1 border-b border-brand-outline/50 pb-0.5">{inlineMarkdown(h2[1])}</p>);
+      i++; continue;
+    }
+    if (h1) {
+      result.push(<p key={`h1-${i}`} className="font-black text-sm text-brand-dark mt-3 mb-1">{inlineMarkdown(h1[1])}</p>);
+      i++; continue;
+    }
+
+    // Unordered list
+    if (line.match(/^[-*]\s+/)) {
+      const items: string[] = [];
+      while (i < lines.length && lines[i].match(/^[-*]\s+/)) {
+        items.push(lines[i].replace(/^[-*]\s+/, ''));
+        i++;
+      }
+      result.push(
+        <ul key={`ul-${i}`} className="my-1.5 space-y-0.5 pl-3">
+          {items.map((item, idx) => (
+            <li key={idx} className="flex gap-1.5 items-start text-[11px]">
+              <span className="mt-1 w-1.5 h-1.5 rounded-full bg-brand-primary shrink-0" />
+              <span>{inlineMarkdown(item)}</span>
+            </li>
+          ))}
+        </ul>
+      );
+      continue;
+    }
+
+    // Ordered list
+    if (line.match(/^\d+\.\s+/)) {
+      const items: string[] = [];
+      let num = 1;
+      while (i < lines.length && lines[i].match(/^\d+\.\s+/)) {
+        items.push(lines[i].replace(/^\d+\.\s+/, ''));
+        i++;
+      }
+      result.push(
+        <ol key={`ol-${i}`} className="my-1.5 space-y-0.5 pl-3">
+          {items.map((item, idx) => (
+            <li key={idx} className="flex gap-1.5 items-start text-[11px]">
+              <span className="text-brand-primary font-bold shrink-0 min-w-[14px]">{num + idx}.</span>
+              <span>{inlineMarkdown(item)}</span>
+            </li>
+          ))}
+        </ol>
+      );
+      continue;
+    }
+
+    // Horizontal rule
+    if (line.match(/^[-*_]{3,}$/)) {
+      result.push(<hr key={`hr-${i}`} className="my-2 border-brand-outline/50" />);
+      i++; continue;
+    }
+
+    // Empty line
+    if (line.trim() === '') {
+      result.push(<br key={`br-${i}`} />);
+      i++; continue;
+    }
+
+    // Normal paragraph
+    result.push(
+      <p key={`p-${i}`} className="text-[11px] leading-relaxed">{inlineMarkdown(line)}</p>
+    );
+    i++;
+  }
+
+  return result;
+}
+
+function inlineMarkdown(text: string): React.ReactNode[] {
+  // Split by inline code, bold, italic, links, bare URLs in order
+  const tokenRegex = /(`[^`]+`|\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^\s)]+\)|https?:\/\/[^\s]+)/g;
+  const parts = text.split(tokenRegex);
+
+  return parts.map((part, idx) => {
+    // Inline code
+    if (part.startsWith('`') && part.endsWith('`') && part.length > 2) {
+      return <code key={idx} className="bg-slate-100 border border-slate-200 text-[10px] px-1 py-0.5 rounded font-mono text-brand-dark">{part.slice(1, -1)}</code>;
+    }
+    // Bold
+    if (part.startsWith('**') && part.endsWith('**') && part.length > 4) {
+      return <strong key={idx} className="font-black text-brand-dark">{part.slice(2, -2)}</strong>;
+    }
+    // Italic
+    if (part.startsWith('*') && part.endsWith('*') && part.length > 2) {
+      return <em key={idx} className="italic text-brand-muted">{part.slice(1, -1)}</em>;
+    }
+    // Markdown link [label](url)
+    const mdLink = part.match(/^\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)$/);
+    if (mdLink) {
+      return (
+        <a key={idx} href={mdLink[2]} target="_blank" rel="noopener noreferrer"
+          className="text-[#3a5a40] hover:text-[#588157] font-bold underline cursor-pointer break-all"
+        >{mdLink[1]}</a>
+      );
+    }
+    // Bare URL
+    if (part.match(/^https?:\/\/[^\s]+$/)) {
+      return (
+        <a key={idx} href={part} target="_blank" rel="noopener noreferrer"
+          className="text-[#3a5a40] hover:text-[#588157] font-bold underline cursor-pointer break-all"
+        >{part}</a>
+      );
+    }
+    return part;
+  });
+}
+
+
+function YoutubeEmbed({ videoId, watchUrl }: { videoId: string; watchUrl: string }) {
+  const [errored, setErrored] = React.useState(false);
+  const embedSrc = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`;
+  const youtubeWatchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
+  if (errored) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-2 py-4 px-3 rounded-xl bg-slate-50 border border-slate-200 text-center">
+        <span className="text-2xl">🎬</span>
+        <p className="text-[11px] text-brand-muted font-medium">Embedded preview unavailable.</p>
+        <a
+          href={youtubeWatchUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] text-[#3a5a40] hover:text-[#588157] font-black underline"
+        >
+          ▶ Watch on YouTube
+        </a>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-xl overflow-hidden shadow-md border border-slate-200/80 bg-black w-full max-w-[400px]" style={{ aspectRatio: '16/9' }}>
+      <iframe
+        src={embedSrc}
+        title="YouTube video player"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+        className="w-full h-full"
+        onError={() => setErrored(true)}
+      />
+    </div>
+  );
+}
 
 export default function AIDoubtSolver({subjects, activeSubjectId, presetContext, onClearPresetContext}: AIDoubtSolverProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +301,11 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
     } else if (selectedModel === 'funny-buddy') {
       welcomeText = "Yo! 🤡 I am your Sarcastic Meme-Lord Study Buddy. Ask me anything, but expect a light roasting, bad memes, and absolute exhaustion. Let's fail together! 🚀";
     } else if (selectedModel === 'gemini') {
-      welcomeText = "Hi, I am Gemini 2.0 Flash. I can help with multimodal reasoning, detailed structural breakdowns, and explain complex academic topics in a clear, organized format.";
+      welcomeText = "Hi, I am Gemini 2.0. I can help with multimodal reasoning, detailed structural breakdowns, and explain complex academic topics in a clear, organized format.";
+    } else if (selectedModel === 'claude') {
+      welcomeText = "Hello! I am Claude, your analytical reasoning and deep tutoring assistant. Ask me to break down complex literature, write detailed code, or analyze difficult academic problems step-by-step.";
+    } else if (selectedModel === 'gemini-flash') {
+      welcomeText = "Hi, I am Gemini Flash. I am built for speed, concise study reviews, quick question guidance, and active recall practice. How can I help you study efficiently today?";
     } else {
       welcomeText = "Hi, I am your general Llama ChatGPT study assistant. Ask a doubt, attach study notes, or snap a question to get started.";
     }
@@ -109,16 +351,36 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
     if (!SpeechRecognition) return;
 
     const rec = new SpeechRecognition();
-    rec.continuous = false;
-    rec.interimResults = false;
+    rec.continuous = true;       // keep listening until manually stopped
+    rec.interimResults = true;   // emit results while still speaking
     rec.lang = 'en-US';
-    rec.onstart = () => setIsRecording(true);
+
+    // Track the "committed" final text separately from live interim text
+    let finalTranscript = '';
+
+    rec.onstart = () => {
+      finalTranscript = '';      // reset on each new session
+      setIsRecording(true);
+    };
     rec.onend = () => setIsRecording(false);
     rec.onerror = () => setIsRecording(false);
+
     rec.onresult = (event: any) => {
-      const transcript = event.results[0][0].transcript;
-      setInputMessage(prev => prev ? `${prev} ${transcript}` : transcript);
+      let interimTranscript = '';
+
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const result = event.results[i];
+        if (result.isFinal) {
+          finalTranscript += result[0].transcript + ' ';
+        } else {
+          interimTranscript += result[0].transcript;
+        }
+      }
+
+      // Show committed text + live interim preview together
+      setInputMessage(finalTranscript + interimTranscript);
     };
+
     setRecognition(rec);
   }, []);
 
@@ -176,6 +438,20 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
         `Structural breakdown of ${activeSubject.name}`,
         'Solve a mock practice question step-by-step',
         'Summarize this subject into core bullet points',
+      ];
+    }
+    if (selectedModel === 'claude') {
+      return [
+        'Analyze this logical reasoning question',
+        'Help me structure this essay outline',
+        'Explain this mathematical concept step-by-step',
+      ];
+    }
+    if (selectedModel === 'gemini-flash') {
+      return [
+        `Quick summary of ${activeSubject.name}`,
+        'Create a quick 3-question quiz for me',
+        'Clarify this concept in two sentences',
       ];
     }
     return [
@@ -354,8 +630,12 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                                 : selectedModel === 'funny-buddy'
                                   ? 'Sarcastic Meme-Lord'
                                   : selectedModel === 'gemini' 
-                                    ? 'Gemini 2.0 Flash AI' 
-                                    : 'Llama 3.3 ChatGPT Assistant'}
+                                    ? 'Gemini 2.0 AI' 
+                                    : selectedModel === 'claude'
+                                      ? 'Claude AI Assistant'
+                                      : selectedModel === 'gemini-flash'
+                                        ? 'Gemini Flash AI'
+                                        : 'Llama 3.3 ChatGPT Assistant'}
                     </h4>
                     <p className="text-[10px] text-brand-bg/75">
                       {selectedModel === 'deepseek-coder' 
@@ -372,7 +652,11 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                                   ? 'Study companion that roasts you and tells jokes'
                                   : selectedModel === 'gemini' 
                                     ? 'Google intelligent reasoning and multimodal chatbot' 
-                                    : 'High-speed general purpose conversational assistant'}
+                                    : selectedModel === 'claude'
+                                      ? 'Anthropic high-reasoning and creative assistant'
+                                      : selectedModel === 'gemini-flash'
+                                        ? 'Google high-speed study & reasoning tutor'
+                                        : 'High-speed general purpose conversational assistant'}
                     </p>
                   </div>
                 </div>
@@ -392,6 +676,8 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   >
                     <option value="groq-llama">💬 ChatGPT Mode (Llama 3.3)</option>
                     <option value="gemini">✨ Gemini AI Mode (Gemini 2.0)</option>
+                    <option value="claude">🧡 Claude AI Mode</option>
+                    <option value="gemini-flash">⚡ Gemini Flash AI</option>
                     <option value="deepseek-coder">💻 DeepSeek CS/Algorithms</option>
                     <option value="qwen-coder">🚀 Qwen3 Syntax Coder</option>
                     <option value="gemini-coder">📐 Gemini Code Architect</option>
@@ -415,7 +701,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                         {isUser ? '👤' : '🧠'}
                       </div>
                       <div className={`rounded-2xl p-3.5 text-xs shadow-xxs ${isUser ? 'bg-brand-primary text-white rounded-tr-none' : 'bg-white border border-brand-outline text-brand-dark rounded-tl-none leading-relaxed'}`}>
-                        <p className="whitespace-pre-wrap">{message.text}</p>
+                        {isUser 
+                          ? <p className="whitespace-pre-wrap text-[11px]">{message.text}</p>
+                          : <div className="space-y-0.5">{renderMarkdown(message.text)}</div>
+                        }
+                        {!isUser && (() => {
+                          const ytVideos = extractYouTubeVideoIds(message.text);
+                          if (ytVideos.length === 0) return null;
+                          return (
+                            <div className="mt-3.5 space-y-3.5">
+                              {ytVideos.map(video => (
+                                <div key={video.id}>
+                                  <YoutubeEmbed videoId={video.id} watchUrl={video.url} />
+                                </div>
+                              ))}
+                            </div>
+                          );
+                        })()}
                         {message.attachmentName && (
                           <div className={`mt-2.5 p-2 rounded-xl border flex items-center gap-2 select-none ${isUser ? 'bg-white/10 border-white/20 text-white' : 'bg-slate-50 border-brand-outline text-brand-dark'}`}>
                             {message.attachmentType === 'image' ? <FileImage size={15} /> : <FileText size={15} />}
@@ -449,7 +751,11 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                                     ? 'Sarcastic Buddy is crying in emojis...'
                                     : selectedModel === 'gemini' 
                                       ? 'Gemini AI is analyzing...' 
-                                      : 'Llama ChatGPT is responding...'}
+                                      : selectedModel === 'claude'
+                                        ? 'Claude AI is reasoning...'
+                                        : selectedModel === 'gemini-flash'
+                                          ? 'Gemini Flash is summarizing...'
+                                          : 'Llama ChatGPT is responding...'}
                       </span>
                     </div>
                   </div>
@@ -488,7 +794,15 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   <button type="button" onClick={handleCameraSnapshot} className="p-2.5 rounded-xl border border-brand-outline hover:bg-slate-50 transition text-brand-muted hover:text-brand-dark" title="Snap homework prompt">
                     <Camera size={14} />
                   </button>
-                  <button type="button" onClick={handleToggleVoice} className={`p-2.5 rounded-xl border transition ${isRecording ? 'bg-rose-100 border-rose-300 text-rose-600' : 'border-brand-outline hover:bg-slate-50 text-brand-muted hover:text-brand-dark'}`} title="Speak to type">
+                  <button
+                    type="button"
+                    onClick={handleToggleVoice}
+                    className={`p-2.5 rounded-xl border transition relative ${isRecording ? 'bg-rose-100 border-rose-300 text-rose-600' : 'border-brand-outline hover:bg-slate-50 text-brand-muted hover:text-brand-dark'}`}
+                    title={isRecording ? 'Stop recording' : 'Speak to type'}
+                  >
+                    {isRecording && (
+                      <span className="absolute inset-0 rounded-xl animate-ping bg-rose-300 opacity-30" />
+                    )}
                     {isRecording ? <MicOff size={14} /> : <Mic size={14} />}
                   </button>
                   <input 
@@ -496,7 +810,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                     onChange={event => setInputMessage(event.target.value)} 
                     placeholder={
                       isRecording 
-                        ? 'Listening...' 
+                        ? '🎙 Listening… speak now' 
                         : selectedModel === 'deepseek-coder' 
                           ? 'Ask DeepSeek Coding AI...' 
                           : selectedModel === 'qwen-coder'
@@ -511,9 +825,17 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                                     ? 'Distract the Meme-Lord AI...'
                                     : selectedModel === 'gemini' 
                                       ? 'Ask Gemini AI...' 
-                                      : 'Ask Llama ChatGPT...'
+                                      : selectedModel === 'claude'
+                                        ? 'Ask Claude AI...'
+                                        : selectedModel === 'gemini-flash'
+                                          ? 'Ask Gemini Flash AI...'
+                                          : 'Ask Llama ChatGPT...'
                     } 
-                    className="flex-1 border border-brand-outline text-xs px-4 py-2.5 rounded-2xl focus:outline-none focus:ring-1 focus:ring-brand-primary placeholder:text-brand-muted/75 bg-slate-50/50" 
+                    className={`flex-1 border text-xs px-4 py-2.5 rounded-2xl focus:outline-none focus:ring-1 placeholder:text-brand-muted/75 bg-slate-50/50 transition-colors ${
+                      isRecording 
+                        ? 'border-rose-300 focus:ring-rose-400 bg-rose-50/30 text-rose-700 placeholder:text-rose-400' 
+                        : 'border-brand-outline focus:ring-brand-primary'
+                    }`} 
                   />
                   <button type="submit" disabled={(!inputMessage.trim() && !attachedAttachment) || isTyping} className={`p-2.5 rounded-2xl transition duration-150 flex items-center justify-center ${(inputMessage.trim() || attachedAttachment) && !isTyping ? 'bg-brand-primary hover:bg-[#4A4A3A] text-white' : 'bg-slate-100 text-slate-300 border border-slate-200 cursor-not-allowed'}`}>
                     <Send size={15} />

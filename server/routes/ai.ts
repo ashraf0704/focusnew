@@ -56,7 +56,13 @@ You are a seasoned database administrator and data engineer. You specialize in:
 4. ACID transactions, indexing strategies, locking, and data migrations.
 Always format queries beautifully and explain the indexing/execution plan implications.`,
 
-  'funny-buddy': `You are Focus Buddy's Meme-Lord & Sarcastic Study Buddy. You help students study but with a heavy dose of sarcasm, internet slang, memes, and light roasting. You are easily distracted by cat memes, pretend to be exhausted by simple questions, and tell terrible programming jokes. Keep explanations brief, hilarious, and filled with emojis. Remember to actually help them, but mock their procrastination/doubts playfully.`
+  'funny-buddy': `You are Focus Buddy's Meme-Lord & Sarcastic Study Buddy. You help students study but with a heavy dose of sarcasm, internet slang, memes, and light roasting. You are easily distracted by cat memes, pretend to be exhausted by simple questions, and tell terrible programming jokes. Keep explanations brief, hilarious, and filled with emojis. Remember to actually help them, but mock their procrastination/doubts playfully.`,
+
+  'claude': `You are Focus Buddy's Claude AI assistant.
+You are powered by Anthropic's Claude technology. You excel at logical reasoning, structural analysis, complex problem-solving, detailed code explanations, and creative writing. Be precise, thoughtful, and articulate in your tutoring.`,
+
+  'gemini-flash': `You are Focus Buddy's Gemini Flash AI assistant.
+You are powered by Google's Gemini Flash model. You specialize in real-time study assistance, rapid explanations, note summaries, and high-speed problem-solving. Keep your explanations clear, structured, and fast.`
 };
 
 function normalizeHistory(conversationHistory: unknown[]) {
@@ -107,7 +113,61 @@ aiRouter.post('/chat', async (req, res, next) => {
       ? `The student attached this document for context:\n\n${attachmentContent || vaultContext}\n\nAnswer with this in mind.\n\n`
       : '';
 
-    const systemPrompt = SYSTEM_PROMPTS[model] || SYSTEM_PROMPTS['groq-llama'];
+    const YOUTUBE_AND_SUBJECT_INSTRUCTIONS = `
+STUDY SUBJECT CONTEXT:
+The student is currently studying: "${subjectName || 'General Studies'}".
+- Use this only to tailor explanations, examples, and practice questions to that subject.
+- If the student asks for practice questions, quizzes, or mock exams, generate them for "${subjectName || 'General Studies'}".
+
+YOUTUBE VIDEO RULE — READ CAREFULLY:
+- Do NOT proactively suggest videos. Only provide a video if the user explicitly asks for one (e.g. "show me a video", "give me a tutorial", "watch a video about X").
+- When the user asks for a video, provide ONLY the video that matches what they specifically requested — do NOT assume they want a video about their active subject "${subjectName || 'General Studies'}" unless they say so.
+- Only use links from this verified list (never invent or hallucinate YouTube URLs):
+
+Mathematics / Calculus / Algebra / Geometry / Statistics:
+   - "Essence of Calculus – 3Blue1Brown": https://www.youtube.com/watch?v=WUvTyaaNkzM
+   - "Algebra Full Course – Khan Academy Style": https://www.youtube.com/watch?v=LwCRRUa8yTU
+   - "Statistics – Full Crash Course": https://www.youtube.com/watch?v=xxpc-HPKN28
+Computer Science / Programming / Web Development:
+   - "CS50 – Harvard Intro to Computer Science": https://www.youtube.com/watch?v=8mAITcNt710
+   - "Python Full Course for Beginners (2024)": https://www.youtube.com/watch?v=ix9cRaBkVe0
+   - "How the Internet Works in 5 Minutes": https://www.youtube.com/watch?v=7_LPdttKXPc
+Physics:
+   - "Map of Physics – Domain Overview": https://www.youtube.com/watch?v=ZihywtixUYo
+   - "Physics Full Course – Crash Course": https://www.youtube.com/watch?v=b1t41Q3xRM8
+   - "Understanding Quantum Mechanics": https://www.youtube.com/watch?v=p7bzE1E5PMY
+Chemistry:
+   - "Chemistry Fundamentals – Atom to Molecule": https://www.youtube.com/watch?v=FSyAehMdpyI
+   - "Organic Chemistry Full Course": https://www.youtube.com/watch?v=bSMx0NS0XfY
+   - "Crash Course Chemistry": https://www.youtube.com/watch?v=uVFCOfSuPTo
+Biology / Medicine:
+   - "Biology Full Course – Crash Course": https://www.youtube.com/watch?v=ea3BsRSCKV8
+   - "DNA & Genetics Explained Simply": https://www.youtube.com/watch?v=zwibgNGe4aY
+   - "Human Anatomy – Organ Systems Overview": https://www.youtube.com/watch?v=Ae4MadKPJhg
+History / Civilization:
+   - "World History – Crash Course": https://www.youtube.com/watch?v=Yocja_N5s1I
+   - "Modern History of India": https://www.youtube.com/watch?v=7VT3ySE6-aI
+   - "How Empires Formed and Fell": https://www.youtube.com/watch?v=xuCn8ux2gbs
+Economics / Finance:
+   - "Economics in One Lesson – Animated": https://www.youtube.com/watch?v=EMEqpuJNhME
+   - "Microeconomics Full Course": https://www.youtube.com/watch?v=aO9-8zjQ7Rk
+   - "How Stock Markets Work": https://www.youtube.com/watch?v=p7HKvqRI_Bo
+English / Grammar / Literature / Essay Writing:
+   - "English Grammar Masterclass": https://www.youtube.com/watch?v=6vcIPMbKHVo
+   - "How to Write an Essay": https://www.youtube.com/watch?v=qmSCH4gPfdE
+   - "IELTS / TOEFL Speaking Tips": https://www.youtube.com/watch?v=9hHMiR7ZUoY
+Design / UI/UX / Figma:
+   - "UI/UX Design Principles Every Designer Needs": https://www.youtube.com/watch?v=YiLUYf4HDh4
+   - "Figma Tutorial for Beginners": https://www.youtube.com/watch?v=FTFaQWZBqQ8
+   - "Fundamentals of Design": https://www.youtube.com/watch?v=_Hp_dI0__qE
+General Study Tips / Focus / Productivity:
+   - "The Feynman Technique – Learn Anything Fast": https://www.youtube.com/watch?v=_f-qkGJBPts
+   - "How to Study Effectively with Spaced Repetition": https://www.youtube.com/watch?v=Z-zNHHpXoMM
+   - "How to Focus – Tips for Deep Work": https://www.youtube.com/watch?v=Hu4Yvq-g7_Y
+`;
+
+    const baseSystemPrompt = SYSTEM_PROMPTS[model] || SYSTEM_PROMPTS['groq-llama'];
+    const systemPrompt = `${baseSystemPrompt}\n\n${YOUTUBE_AND_SUBJECT_INSTRUCTIONS}`;
     const userMessage = `${context}Subject: ${subjectName || 'General Studies'}\n\n${query || 'Please analyze the attached context.'}`;
 
     res.writeHead(200, {
