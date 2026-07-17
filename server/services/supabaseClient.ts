@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { LocalDbQueryBuilder, mockAuth } from './localDb.js';
+import ws from 'ws';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -44,10 +45,16 @@ if (!supabaseUrl || !anonKey) {
 
 const realSupabase = createClient(supabaseUrl || 'https://placeholder.supabase.co', anonKey || 'placeholder', {
   auth: {persistSession: false, autoRefreshToken: false},
+  realtime: {
+    transport: ws as any
+  }
 });
 
 const realSupabaseAdmin = createClient(supabaseUrl || 'https://placeholder.supabase.co', serviceRoleKey || 'placeholder', {
   auth: {persistSession: false, autoRefreshToken: false},
+  realtime: {
+    transport: ws as any
+  }
 });
 
 // Mock Storage simulation layer
