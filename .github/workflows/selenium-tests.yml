@@ -45,7 +45,7 @@ jobs:
     - name: Start Expo App (Web Portal)
       run: |
         cd focus-buddy-native
-        npm run web &
+        npx expo start --web --port 8081 --non-interactive &
       env:
         CI: true
 
