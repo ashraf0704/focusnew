@@ -1,4 +1,4 @@
-import * as FileSystem from 'expo-file-system';
+import { Paths, File as FSFile } from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
 import { Platform } from 'react-native';
 
@@ -16,13 +16,14 @@ export async function takeScreenshot(): Promise<string> {
   }
 
   // Simulate screenshot by downloading a clean study companion placeholder image
-  const localUri = (FileSystem.documentDirectory || '') + 'focus-buddy-screenshot.jpg';
-  
+  let localUri: string;
+
   try {
-    await FileSystem.downloadAsync(
+    const screenshotFile = await FSFile.downloadFileAsync(
       'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600',
-      localUri
+      Paths.cache
     );
+    localUri = screenshotFile.uri;
   } catch (err) {
     throw new Error('Failed to capture screen: network or storage error');
   }

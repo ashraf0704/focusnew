@@ -8,3 +8,16 @@ expo-env.d.ts
 
 android/
 ios/
+
+# Build output
+dist/
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+
+# Environment
+.env*
+!.env.example

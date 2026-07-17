@@ -1,0 +1,58 @@
+name: Selenium E2E Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Root Dependencies
+      run: npm install
+
+    - name: Install Native App Dependencies
+      run: |
+        cd focus-buddy-native
+        npm install
+
+    - name: Start Web App (Vite Server)
+      run: |
+        npm run dev &
+      env:
+        CI: true
+
+    - name: Wait for Web App to be Responsive
+      run: |
+        echo "Waiting for Vite server on port 3000..."
+        timeout 60s sh -c 'until curl --silent --fail http://localhost:3000; do sleep 1; done' || (echo "Vite server failed to start" && exit 1)
+
+    - name: Run Web Selenium E2E Tests
+      run: npm run test:selenium:web
+
+    - name: Start Expo App (Web Portal)
+      run: |
+        cd focus-buddy-native
+        npm run web &
+      env:
+        CI: true
+
+    - name: Wait for Expo App to be Responsive
+      run: |
+        echo "Waiting for Expo Metro server on port 8081..."
+        timeout 180s sh -c 'until curl --silent --fail http://localhost:8081; do sleep 2; done' || (echo "Expo server failed to start" && exit 1)
+
+    - name: Run Expo App Selenium E2E Tests
+      run: npm run test:selenium:app
