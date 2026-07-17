@@ -38,6 +38,8 @@ jobs:
         npm run test:selenium:web
       env:
         CI: true
+        RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+        RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
 
     - name: Start Expo App and Run App Tests
       run: |
@@ -49,3 +51,5 @@ jobs:
         npm run test:selenium:app
       env:
         CI: true
+        RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+        RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
