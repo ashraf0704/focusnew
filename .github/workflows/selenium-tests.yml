@@ -28,14 +28,16 @@ jobs:
         cd focus-buddy-native
         npm install
 
-    - name: Start Web App (Vite Server)
+    - name: Start Web App & API Server
       run: |
-        npm run dev &
+        npm run dev:full &
       env:
         CI: true
 
-    - name: Wait for Web App to be Responsive
+    - name: Wait for Web App & API Server to be Responsive
       run: |
+        echo "Waiting for API server on port 4000..."
+        timeout 60s sh -c 'until curl --silent --fail http://localhost:4000/health; do sleep 1; done' || (echo "API server failed to start" && exit 1)
         echo "Waiting for Vite server on port 3000..."
         timeout 60s sh -c 'until curl --silent --fail http://localhost:3000; do sleep 1; done' || (echo "Vite server failed to start" && exit 1)
 
