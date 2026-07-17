@@ -28,33 +28,24 @@ jobs:
         cd focus-buddy-native
         npm install
 
-    - name: Start Web App & API Server
+    - name: Start Web App & API Server and Run Web Tests
       run: |
         npm run dev:full &
-      env:
-        CI: true
-
-    - name: Wait for Web App & API Server to be Responsive
-      run: |
         echo "Waiting for API server on port 4000..."
         timeout 60s sh -c 'until curl --silent --fail http://localhost:4000/health; do sleep 1; done' || (echo "API server failed to start" && exit 1)
         echo "Waiting for Vite server on port 3000..."
         timeout 60s sh -c 'until curl --silent --fail http://localhost:3000; do sleep 1; done' || (echo "Vite server failed to start" && exit 1)
-
-    - name: Run Web Selenium E2E Tests
-      run: npm run test:selenium:web
-
-    - name: Start Expo App (Web Portal)
-      run: |
-        cd focus-buddy-native
-        npx expo start --web --port 8081 --non-interactive &
+        npm run test:selenium:web
       env:
         CI: true
 
-    - name: Wait for Expo App to be Responsive
+    - name: Start Expo App and Run App Tests
       run: |
+        cd focus-buddy-native
+        npx expo start --web --port 8081 --non-interactive &
         echo "Waiting for Expo Metro server on port 8081..."
         timeout 180s sh -c 'until curl --silent --fail http://localhost:8081; do sleep 2; done' || (echo "Expo server failed to start" && exit 1)
-
-    - name: Run Expo App Selenium E2E Tests
-      run: npm run test:selenium:app
+        cd ..
+        npm run test:selenium:app
+      env:
+        CI: true
