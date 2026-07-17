@@ -1,0 +1,104 @@
+name: Live E2E Deployment & Testing Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  deploy-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Install Root Dependencies
+      run: npm install
+
+    - name: Install Automation Dependencies
+      run: |
+        cd automation
+        npm install
+
+    - name: Build Web Application
+      run: |
+        # Set VITE_BASE_URL to repository name subdirectory to support sub-directory hosting on Pages
+        export VITE_BASE_URL="/${{ github.event.repository.name }}/"
+        npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist
+        branch: gh-pages
+        clean: true
+
+    - name: Verify Live Deployment Status
+      run: |
+        # Check HTTP status of GitHub Pages site
+        URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+        echo "Validating live deployed application at $URL..."
+        
+        # Wait up to 3 minutes for deployment sync
+        attempts=0
+        max_attempts=18
+        until $(curl --output /dev/null --silent --head --fail $URL); do
+          if [ ${attempts} -eq ${max_attempts} ];then
+            echo "Error: Deployed page failed to return HTTP 200 within 3 minutes."
+            exit 1
+          fi
+          echo "Waiting for deployment to sync..."
+          attempts=$((attempts+1))
+          sleep 10
+        done
+        echo "Live deployment verified. HTTP 200 Ok."
+
+    - name: Generate E2E Test Cases Database
+      run: |
+        cd automation
+        npm run generate-web-data
+
+    - name: Setup Headless Chrome for Selenium
+      uses: browser-actions/setup-chrome@latest
+      with:
+        chrome-version: stable
+
+    - name: Execute Live Selenium E2E Tests
+      run: |
+        cd automation
+        # Pass live URL to automation runner
+        export BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+        npm run test:web:live
+
+    - name: Publish Markdown Job Summary
+      if: always()
+      run: |
+        cat automation/reports/Summary/web-summary.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload Test Results Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: focus-buddy-live-web-reports
+        path: |
+          automation/reports/Excel/
+          automation/reports/HTML/
+          automation/reports/JSON/
+          automation/reports/screenshots/
+          automation/reports/logs/
+          automation/reports/Summary/
+        retention-days: 30

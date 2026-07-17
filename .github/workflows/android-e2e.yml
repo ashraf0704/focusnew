@@ -1,0 +1,147 @@
+name: Android Appium E2E Automation & CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * 0' # Weekly run at midnight on Sundays
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Setup Java Development Kit (JDK)
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Install Root Dependencies
+      run: npm install
+
+    - name: Install Native App Dependencies
+      run: |
+        cd focus-buddy-native
+        npm install
+
+    - name: Install Automation Dependencies
+      run: |
+        cd automation
+        npm install
+
+    - name: Generate 400+ E2E Test Cases Database
+      run: |
+        cd automation
+        npm run generate-data
+
+    - name: Prebuild Android Native Folder
+      run: |
+        cd focus-buddy-native
+        npx expo prebuild --platform android --non-interactive
+
+    - name: Build Android Debug APK
+      run: |
+        cd focus-buddy-native/android
+        chmod +x gradlew
+        ./gradlew assembleDebug
+
+    - name: Start Appium Server
+      run: |
+        npm install -g appium
+        appium driver install uiautomator2
+        appium --port 4723 --address 127.0.0.1 &
+        echo "Waiting for Appium server to start..."
+        timeout 30s sh -c 'until curl --silent http://127.0.0.1:4723/status; do sleep 1; done' || (echo "Appium failed to start" && exit 1)
+
+    - name: Start Android Emulator & Execute E2E Suite
+      uses: reactivecircus/android-emulator-runner@v2
+      with:
+        api-level: 34
+        target: google_apis
+        arch: x86_64
+        profile: Nexus 6
+        script: |
+          adb wait-for-device
+          echo "Emulator boot verification successful. Device ready."
+          adb install focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
+          cd automation
+          npm run test:e2e
+
+    - name: Publish Markdown Job Summary
+      if: always()
+      run: |
+        cat automation/reports/Summary/summary.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload Test Results Artifacts
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: focus-buddy-automation-reports
+        path: |
+          automation/reports/Excel/
+          automation/reports/HTML/
+          automation/reports/JSON/
+          automation/reports/screenshots/
+          automation/reports/logs/
+          automation/reports/Summary/
+        retention-days: 30
+
+    - name: Setup GitHub Pages Branch
+      if: always()
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Check out gh-pages branch or create if doesn't exist
+        git fetch origin gh-pages:gh-pages || true
+        git checkout gh-pages || git checkout --orphan gh-pages
+        
+        # Clean current gh-pages content except git database
+        git rm -rf . || true
+        
+        # Pull files from build-and-test job (they are persisted locally from checkout)
+        git checkout main -- automation/reports/
+        
+        # Create output layout
+        mkdir -p reports/latest
+        mkdir -p reports/history/build-${{ github.run_number }}
+        
+        # Copy to latest
+        cp -r automation/reports/HTML/* reports/latest/
+        cp -r automation/reports/Excel/* reports/latest/
+        cp -r automation/reports/JSON/* reports/latest/
+        cp -r automation/reports/Summary/* reports/latest/
+        
+        # Copy to history
+        cp -r automation/reports/HTML/* reports/history/build-${{ github.run_number }}/
+        cp -r automation/reports/Excel/* reports/history/build-${{ github.run_number }}/
+        cp -r automation/reports/JSON/* reports/history/build-${{ github.run_number }}/
+        cp -r automation/reports/Summary/* reports/history/build-${{ github.run_number }}/
+        
+        # Add index file to redirect to latest
+        echo '<html><head><meta http-equiv="refresh" content="0; url=reports/latest/execution-report.html" /></head></html>' > index.html
+        
+        git add .
+        git commit -m "Deploy E2E reports for build ${{ github.run_number }} to GitHub Pages" || true
+        git push origin gh-pages --force

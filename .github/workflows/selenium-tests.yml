@@ -28,13 +28,16 @@ jobs:
         cd focus-buddy-native
         npm install
 
-    - name: Start Web App & API Server and Run Web Tests
+    - name: Start Web App & API Server and Run Web & Load Tests
       run: |
         npm run dev:full &
         echo "Waiting for API server on port 4000..."
         timeout 60s sh -c 'until curl --silent --fail http://localhost:4000/health; do sleep 1; done' || (echo "API server failed to start" && exit 1)
         echo "Waiting for Vite server on port 3000..."
         timeout 60s sh -c 'until curl --silent --fail http://localhost:3000; do sleep 1; done' || (echo "Vite server failed to start" && exit 1)
+        echo "Running Baseline Load Test..."
+        npm run test:load
+        echo "Running Web E2E Selenium Tests..."
         npm run test:selenium:web
       env:
         CI: true
