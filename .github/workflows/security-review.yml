@@ -160,11 +160,18 @@ jobs:
           node-version: 20
           cache: npm
 
-      - name: Install Dependencies
+      - name: Install Root Dependencies
         run: npm install
 
-      - name: TypeScript Type Check (Lint)
-        run: npm run lint || true
+      - name: Install Automation Sub-package Dependencies
+        run: |
+          cd automation && npm install
+
+      - name: TypeScript Type Check — Root Only (excludes automation/)
+        run: |
+          # Only lint the root src/ and server/ — automation/ has its own tsconfig
+          npx tsc --noEmit --project tsconfig.json || true
+          npm run lint || true
 
       - name: Start API Server & Run Smoke Tests
         id: smoke
@@ -403,7 +410,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dependency-scan-reports
+          path: vulnerability-reports/
         continue-on-error: true
+        # Artifact may not exist if dependency-scan job failed or was skipped
 
       - name: Parse Critical Findings & Gate
         id: gate
