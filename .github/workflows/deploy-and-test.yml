@@ -108,8 +108,7 @@ jobs:
         run: |
           export VITE_BASE_URL="/${{ github.event.repository.name }}/"
           START=$(date +%s)
-          # Only build the Vite web app — native app build is skipped in CI
-          npx vite build
+          npm run build
           END=$(date +%s)
           DURATION=$(( END - START ))
           echo "duration=$DURATION" >> "$GITHUB_OUTPUT"
