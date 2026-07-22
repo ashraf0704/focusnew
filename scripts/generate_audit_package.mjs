@@ -400,7 +400,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Trivy
-        uses: aquasecurity/trivy-action@0.24.0
+        uses: aquasecurity/trivy-action@v0.28.0
         with:
           scan-type: fs
           scan-ref: .
@@ -427,7 +427,7 @@ jobs:
 
   generate-reports:
     name: Generate Security Reports
-    needs: [sast, dependency-scan, secret-detection]
+    needs: [detect-tech-stack, sast, dependency-scan, secret-detection]
     if: always()
     runs-on: ubuntu-latest
     env:
