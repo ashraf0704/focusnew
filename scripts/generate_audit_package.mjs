@@ -399,13 +399,15 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Trivy
-        uses: aquasecurity/trivy-action@v0.28.0
-        with:
-          scan-type: fs
-          scan-ref: .
-          format: table
-          output: trivy-results.txt
+      - name: Install Trivy Binary
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh \\
+            | sh -s -- -b /usr/local/bin v0.55.0
+          trivy --version
+      - name: Run Trivy Filesystem Scan
+        id: trivy
+        run: |
+          trivy fs --format table --output trivy-results.txt --severity CRITICAL,HIGH,MEDIUM --exit-code 0 . 2>&1 || true
         continue-on-error: true
       - name: Dependency Review
         if: github.event_name == 'pull_request'
