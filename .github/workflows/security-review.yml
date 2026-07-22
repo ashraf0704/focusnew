@@ -1,0 +1,140 @@
+name: Security Review - DevSecOps Pipeline
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  pull-requests: read
+
+jobs:
+  detect-tech-stack:
+    name: Detect Technology Stack
+    runs-on: ubuntu-latest
+    outputs:
+      framework: ${{ steps.detect.outputs.framework }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Detect backend framework
+        id: detect
+        run: |
+          framework=unknown
+          if [ -f package.json ] && grep -q '"express"' package.json; then framework=node-express; fi
+          echo "framework=$framework" >> "$GITHUB_OUTPUT"
+          echo "Detected backend framework: $framework" >> "$GITHUB_STEP_SUMMARY"
+
+  secret-detection:
+    name: Secret Detection - Gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+  sast:
+    name: SAST - Semgrep
+    needs: detect-tech-stack
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Unit and type checks
+        run: npm run lint
+      - name: Start API and run smoke tests
+        run: |
+          npm run dev:server &
+          timeout 60s bash -c 'until curl --silent --fail http://localhost:4000/health; do sleep 1; done'
+          curl --fail http://localhost:4000/health
+          curl --silent --output /tmp/profile.out --write-out "%{http_code}" http://localhost:4000/api/profile | grep -E '401|403'
+      - name: Semgrep
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: auto
+        continue-on-error: true
+
+  dependency-scan:
+    name: Dependency Vulnerability Scan
+    needs: detect-tech-stack
+    runs-on: ubuntu-latest
+    env:
+      REPORT_DIR: Vulnerability Test Results
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Trivy
+        uses: aquasecurity/trivy-action@0.24.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          format: table
+          output: trivy-results.txt
+        continue-on-error: true
+      - name: Dependency Review
+        if: github.event_name == 'pull_request'
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: critical
+        continue-on-error: true
+      - name: npm audit
+        run: |
+          mkdir -p "$REPORT_DIR"
+          npm audit --json > "$REPORT_DIR/npm-audit.json" || true
+      - name: Upload intermediate dependency reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-scan-reports
+          path: |
+            trivy-results.txt
+            Vulnerability Test Results/npm-audit.json
+
+  generate-reports:
+    name: Generate Security Reports
+    needs: [sast, dependency-scan, secret-detection]
+    if: always()
+    runs-on: ubuntu-latest
+    env:
+      REPORT_DIR: Vulnerability Test Results
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Download dependency reports
+        uses: actions/download-artifact@v4
+        with:
+          name: dependency-scan-reports
+        continue-on-error: true
+      - name: Publish summary and fail on critical npm audit findings
+        run: |
+          critical=$(node -e "const fs=require('fs');const p='$REPORT_DIR/npm-audit.json';let n=0;if(fs.existsSync(p)){const j=JSON.parse(fs.readFileSync(p));n=j.metadata?.vulnerabilities?.critical||0;}console.log(n)")
+          echo "## Backend Security Review" >> "$GITHUB_STEP_SUMMARY"
+          echo "Detected framework: ${{ needs.detect-tech-stack.outputs.framework }}" >> "$GITHUB_STEP_SUMMARY"
+          echo "npm audit critical count: $critical" >> "$GITHUB_STEP_SUMMARY"
+          [ "$critical" -eq 0 ]
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-security-review-reports
+          path: |
+            Vulnerability Test Results/
+            trivy-results.txt

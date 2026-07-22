@@ -27,5 +27,6 @@
     "dist",
     "node_modules",
     "focus-buddy-native"
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

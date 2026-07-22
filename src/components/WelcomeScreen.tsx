@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Eye, EyeOff, Sparkles, BookOpen, GraduationCap, Github, Apple, Grid, Loader2, Plus, LogIn, ArrowLeft } from 'lucide-react';
+import { Eye, EyeOff, Sparkles, GraduationCap, Github, Apple, Grid, Loader2, Plus, LogIn, ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 interface WelcomeScreenProps {
   onSignIn: (
@@ -29,6 +29,8 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const [dailyGoal, setDailyGoal] = useState(25); // minutes
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const [isGuestLoading, setIsGuestLoading] = useState(false);
 
   // SSO selection states
@@ -62,16 +64,38 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email || !password || (isSignUp && !fullName)) {
-      setErrorMsg('Please fill in all fields correctly.');
+      setErrorMsg('Please fill in all required fields.');
+      setSuccessMsg('');
       return;
     }
     setErrorMsg('');
+    setSuccessMsg('');
+    setIsLoading(true);
     // Derive name from email if not registering (e.g. "john.doe@gmail.com" -> "John")
     const derivedName = email.split('@')[0].split('.')[0].replace(/^\w/, (c) => c.toUpperCase());
     try {
       await onSignIn(isSignUp ? fullName : (fullName || derivedName || 'Student'), email, dailyGoal, password, isSignUp ? 'signup' : 'signin');
+      // Show success message briefly before navigation occurs
+      if (isSignUp) {
+        setSuccessMsg('🎉 Account created! Signing you in…');
+      } else {
+        setSuccessMsg('✅ Welcome back! Signing you in…');
+      }
     } catch (error) {
-      setErrorMsg(error instanceof Error ? error.message : 'Authentication failed.');
+      const rawMsg = error instanceof Error ? error.message : 'Authentication failed.';
+      // Make error messages user-friendly
+      const lowerMsg = rawMsg.toLowerCase();
+      if (lowerMsg.includes('invalid') || lowerMsg.includes('not found') || lowerMsg.includes('no user') || lowerMsg.includes('user not')) {
+        setErrorMsg('No account found with this email. Please check or sign up.');
+      } else if (lowerMsg.includes('password') || lowerMsg.includes('credentials') || lowerMsg.includes('incorrect') || lowerMsg.includes('wrong')) {
+        setErrorMsg('Incorrect password. Please try again.');
+      } else if (lowerMsg.includes('email') && (lowerMsg.includes('exist') || lowerMsg.includes('taken') || lowerMsg.includes('already'))) {
+        setErrorMsg('This email is already registered. Try signing in instead.');
+      } else {
+        setErrorMsg(rawMsg);
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -89,8 +113,10 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const handleGuestSignIn = async () => {
     setIsGuestLoading(true);
     setErrorMsg('');
+    setSuccessMsg('');
     try {
       await onSignIn('Guest Student', 'guest@focusbuddy.local', dailyGoal, '', 'guest');
+      setSuccessMsg('👋 Entering guest session…');
     } catch (error) {
       setErrorMsg(error instanceof Error ? error.message : 'Guest sign in failed.');
     } finally {
@@ -266,11 +292,40 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
             </div>
           </div>
 
-          {errorMsg && (
-            <p className="text-rose-600 text-xs font-medium pl-1 animate-shake" id="form-error-message">
-              {errorMsg}
-            </p>
-          )}
+          <AnimatePresence mode="wait">
+            {errorMsg && (
+              <motion.div
+                key="error"
+                initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-start gap-2.5 px-4 py-3 rounded-xl bg-red-50 border border-red-200 shadow-sm"
+                id="form-error-message"
+              >
+                <AlertCircle size={16} className="text-red-500 shrink-0 mt-0.5" />
+                <p className="text-red-600 text-xs font-semibold leading-relaxed">
+                  {errorMsg}
+                </p>
+              </motion.div>
+            )}
+            {successMsg && (
+              <motion.div
+                key="success"
+                initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -4, scale: 0.97 }}
+                transition={{ duration: 0.25 }}
+                className="flex items-start gap-2.5 px-4 py-3 rounded-xl bg-emerald-50 border border-emerald-200 shadow-sm"
+                id="form-success-message"
+              >
+                <CheckCircle2 size={16} className="text-emerald-500 shrink-0 mt-0.5" />
+                <p className="text-emerald-700 text-xs font-semibold leading-relaxed">
+                  {successMsg}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Helper Forgotten Anchor */}
           {!isSignUp && (
@@ -289,10 +344,15 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
           {/* Action Call Trigger */}
           <button
             type="submit"
-            className="w-full py-4 rounded-xl bg-brand-primary text-white font-semibold text-[15px] shadow-[0_4px_12px_rgba(90,90,64,0.15)] hover:opacity-95 active:scale-[0.98] transition-all duration-300 pointer-events-auto"
+            disabled={isLoading}
+            className="w-full py-4 rounded-xl bg-brand-primary text-white font-semibold text-[15px] shadow-[0_4px_12px_rgba(90,90,64,0.15)] hover:opacity-95 active:scale-[0.98] transition-all duration-300 pointer-events-auto disabled:opacity-60 flex items-center justify-center gap-2"
             id="auth-submit-button"
           >
-            {isSignUp ? 'Create Account' : 'Sign In'}
+            {isLoading ? (
+              <><Loader2 size={18} className="animate-spin" /> {isSignUp ? 'Creating Account…' : 'Signing In…'}</>
+            ) : (
+              isSignUp ? 'Create Account' : 'Sign In'
+            )}
           </button>
           <button
             type="button"
@@ -384,7 +444,7 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
             {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
           </span>
           <button
-            onClick={() => setIsSignUp(!isSignUp)}
+            onClick={() => { setIsSignUp(!isSignUp); setErrorMsg(''); setSuccessMsg(''); }}
             className="text-brand-vibrant hover:text-brand-primary font-bold transition-all ml-1 duration-200 focus:outline-none"
             id="auth-mode-toggle"
           >

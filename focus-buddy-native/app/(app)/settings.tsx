@@ -11,10 +11,11 @@ import {endpoints} from '@/lib/apiClient';
 import {takeScreenshot} from '@/app/utils/screenshot';
 import {registerForPushNotifications} from '@/lib/notifications';
 import {useAuthStore} from '@/store/authStore';
+import {useAuth} from '@/auth/AuthContext';
 
 export default function SettingsScreen() {
   const profile = useAuthStore(state => state.profile);
-  const clearAuth = useAuthStore(state => state.clearAuth);
+  const {logout} = useAuth();
   const update = useUpdateProfile();
   if (!profile) return null;
 
@@ -32,8 +33,7 @@ export default function SettingsScreen() {
   }
 
   async function signOut() {
-    await endpoints.signOut().catch(() => undefined);
-    await clearAuth();
+    await logout();
     router.replace('/(auth)/welcome');
   }
 

@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
-import RazorpayCheckout from 'react-native-razorpay';
 import {BadgeGrid} from '@/components/insights/BadgeGrid';
 import {SessionHistory} from '@/components/insights/SessionHistory';
 import {WeeklyChart} from '@/components/insights/WeeklyChart';
@@ -22,6 +21,7 @@ export default function InsightsScreen() {
     try {
       const order = await endpoints.createPaymentOrder({planId, billingCycle, applyPoints: true});
       if (order.profile) return setProfile(order.profile);
+      const {default: RazorpayCheckout} = await import('react-native-razorpay');
       const payment = await RazorpayCheckout.open({
         key: order.keyId || process.env.EXPO_PUBLIC_RAZORPAY_KEY_ID,
         amount: order.amount * 100,
