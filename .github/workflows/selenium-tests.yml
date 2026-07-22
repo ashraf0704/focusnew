@@ -173,7 +173,7 @@ jobs:
           RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
           RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
 
-      - name: Execute Baseline Load Test (100 VUs × 60s)
+      - name: Execute Baseline Load Test (350 VUs × 60s)
         id: loadtest
         run: |
           npm run test:load 2>&1 | tee /tmp/load-output.txt || true
@@ -208,7 +208,7 @@ jobs:
 
           | Parameter | Value |
           |---|---|
-          | Virtual Users | \`100\` |
+          | Virtual Users | `350` (range: 300–400) |
           | Duration | \`60 seconds\` |
           | Tool | Autocannon (Node.js, zero deps) |
           | Target | \`http://localhost:4000/health\` |

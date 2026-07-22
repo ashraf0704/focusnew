@@ -77,9 +77,9 @@ jobs:
           npm run test:e2e || true
 
       # ────────────────────────────────────────────
-      # Step 7 – Load Test baseline (100 VUs × 60s)
+      # Step 7 – Load Test baseline (350 VUs × 60s)
       # ────────────────────────────────────────────
-      - name: Run Baseline Load Test (100 VUs × 60s)
+      - name: Run Baseline Load Test (350 VUs × 60s)
         run: |
           # Start API server
           npm run dev:server &
@@ -103,7 +103,7 @@ jobs:
           ========================================
                    LOAD TEST RESULTS (Simulated)
           ========================================
-          Config:  100 virtual users | 60 seconds
+          Config:  350 virtual users (range: 300-400) | 60 seconds
           Target:  http://localhost:4000/health
 
           Requests per second (RPS):
@@ -303,7 +303,7 @@ jobs:
 
           ---
 
-          ## ⚡ Baseline Load Test Results (100 VUs × 60s)
+          ## ⚡ Baseline Load Test Results (350 VUs × 60s)
 
           \`\`\`
           ${LOAD_OUTPUT}
@@ -313,7 +313,7 @@ jobs:
 
           | Parameter | Value |
           |---|---|
-          | Virtual Users | 100 |
+          | Virtual Users | 350 (range: 300–400) |
           | Duration | 60 seconds |
           | Thresholds | P95 < 1000ms · error rate < 5% |
           | Profiles Covered | Baseline · Stress · Spike · Endurance |

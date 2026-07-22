@@ -3,12 +3,12 @@ import autocannon from 'autocannon';
 async function runLoadTest() {
   const url = process.env.API_URL || 'http://localhost:4000/health';
   console.log(`Starting baseline load test against ${url}...`);
-  console.log(`Config: 100 virtual users (connections) running for 60 seconds.`);
+  console.log(`Config: 350 virtual users (connections) running for 60 seconds. [Range: 300–400 VUs]`);
 
   try {
     const result = await autocannon({
       url,
-      connections: 100,
+      connections: 350,
       duration: 60,
     });
 

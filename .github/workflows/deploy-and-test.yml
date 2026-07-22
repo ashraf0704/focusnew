@@ -441,10 +441,10 @@ jobs:
           RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
           RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
 
-      - name: Execute Baseline Load Test (100 VUs × 60s)
+      - name: Execute Baseline Load Test (350 VUs × 60s)
         id: loadtest
         run: |
-          echo "⚡ Running baseline load test: 100 virtual users for 60 seconds..."
+          echo "⚡ Running baseline load test: 350 virtual users for 60 seconds (range: 300–400)..."
           API_URL=http://localhost:4000/health npm run test:load 2>&1 | tee /tmp/load-output.txt || true
 
           # Extract metrics from output
@@ -506,10 +506,10 @@ jobs:
 
           | Profile | Users | Duration | Purpose |
           |---|---|---|---|
-          | Baseline | 100 VUs | 1 minute | Normal load — RPS, latency |
+          | Baseline | 350 VUs (300–400 range) | 1 minute | Normal load — RPS, latency |
           | Stress | 200 / 500 / 1000 VUs | 3 min each | Failure point, throughput |
           | Spike | 50 → 500 VUs | 2 minutes | Recovery time, stability |
-          | Endurance | 100 VUs | 30 minutes | Memory leaks, degradation |
+          | Endurance | 350 VUs | 30 minutes | Memory leaks, degradation |
 
           <details>
           <summary>📋 Raw Load Test Output</summary>
