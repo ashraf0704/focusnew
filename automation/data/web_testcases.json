@@ -14,7 +14,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 148
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_AUTH_002",
@@ -31,7 +31,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 139
+    "durationMs": 182
   },
   {
     "id": "TC_WEB_AUTH_003",
@@ -48,7 +48,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 234
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_AUTH_004",
@@ -65,7 +65,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 190
   },
   {
     "id": "TC_WEB_AUTH_005",
@@ -82,7 +82,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 159
   },
   {
     "id": "TC_WEB_AUTH_006",
@@ -99,7 +99,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 210
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_AUTH_007",
@@ -116,7 +116,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 194
   },
   {
     "id": "TC_WEB_AUTH_008",
@@ -133,7 +133,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 117
+    "durationMs": 176
   },
   {
     "id": "TC_WEB_AUTH_009",
@@ -150,7 +150,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 118
+    "durationMs": 141
   },
   {
     "id": "TC_WEB_AUTH_010",
@@ -167,7 +167,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_AUTH_011",
@@ -184,7 +184,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 165
+    "durationMs": 221
   },
   {
     "id": "TC_WEB_AUTH_012",
@@ -201,7 +201,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 247
   },
   {
     "id": "TC_WEB_AUTH_013",
@@ -218,7 +218,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 152
+    "durationMs": 240
   },
   {
     "id": "TC_WEB_AUTH_014",
@@ -235,7 +235,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 150
+    "durationMs": 155
   },
   {
     "id": "TC_WEB_AUTH_015",
@@ -269,7 +269,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 103
+    "durationMs": 244
   },
   {
     "id": "TC_WEB_AUTH_017",
@@ -286,7 +286,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 101
   },
   {
     "id": "TC_WEB_AUTH_018",
@@ -303,7 +303,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 185
   },
   {
     "id": "TC_WEB_AUTH_019",
@@ -320,7 +320,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 124
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_AUTH_020",
@@ -337,7 +337,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 148
   },
   {
     "id": "TC_WEB_AUTH_021",
@@ -354,7 +354,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 102
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_AUTH_022",
@@ -371,7 +371,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 237
   },
   {
     "id": "TC_WEB_AUTH_023",
@@ -388,7 +388,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 174
   },
   {
     "id": "TC_WEB_AUTH_024",
@@ -405,7 +405,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 229
+    "durationMs": 115
   },
   {
     "id": "TC_WEB_AUTH_025",
@@ -422,7 +422,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 249
   },
   {
     "id": "TC_WEB_AUTH_026",
@@ -439,7 +439,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_AUTH_027",
@@ -456,7 +456,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 124
+    "durationMs": 100
   },
   {
     "id": "TC_WEB_AUTH_028",
@@ -473,7 +473,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 101
+    "durationMs": 154
   },
   {
     "id": "TC_WEB_AUTH_029",
@@ -490,7 +490,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 158
+    "durationMs": 183
   },
   {
     "id": "TC_WEB_AUTH_030",
@@ -507,7 +507,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 163
   },
   {
     "id": "TC_WEB_AUTH_031",
@@ -524,7 +524,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 128
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_AUTH_032",
@@ -541,7 +541,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 154
   },
   {
     "id": "TC_WEB_AUTH_033",
@@ -558,7 +558,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_AUTH_034",
@@ -575,7 +575,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_AUTH_035",
@@ -592,7 +592,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 203
   },
   {
     "id": "TC_WEB_AUTH_036",
@@ -609,7 +609,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 188
   },
   {
     "id": "TC_WEB_AUTH_037",
@@ -626,7 +626,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 213
   },
   {
     "id": "TC_WEB_AUTH_038",
@@ -643,7 +643,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 177
   },
   {
     "id": "TC_WEB_AUTH_039",
@@ -660,7 +660,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 246
   },
   {
     "id": "TC_WEB_AUTH_040",
@@ -677,7 +677,7 @@
     "expectedResult": "The live system elements for Authentication should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 133
+    "durationMs": 187
   },
   {
     "id": "TC_WEB_AUTHZ_001",
@@ -694,7 +694,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 149
+    "durationMs": 109
   },
   {
     "id": "TC_WEB_AUTHZ_002",
@@ -711,7 +711,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 129
   },
   {
     "id": "TC_WEB_AUTHZ_003",
@@ -728,7 +728,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 212
+    "durationMs": 241
   },
   {
     "id": "TC_WEB_AUTHZ_004",
@@ -745,7 +745,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 103
+    "durationMs": 186
   },
   {
     "id": "TC_WEB_AUTHZ_005",
@@ -762,7 +762,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 188
+    "durationMs": 237
   },
   {
     "id": "TC_WEB_AUTHZ_006",
@@ -779,7 +779,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 101
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_AUTHZ_007",
@@ -796,7 +796,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 210
   },
   {
     "id": "TC_WEB_AUTHZ_008",
@@ -813,7 +813,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_AUTHZ_009",
@@ -830,7 +830,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 247
   },
   {
     "id": "TC_WEB_AUTHZ_010",
@@ -847,7 +847,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 123
   },
   {
     "id": "TC_WEB_AUTHZ_011",
@@ -864,7 +864,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 219
+    "durationMs": 128
   },
   {
     "id": "TC_WEB_AUTHZ_012",
@@ -881,7 +881,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 163
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_AUTHZ_013",
@@ -898,7 +898,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 119
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_AUTHZ_014",
@@ -915,7 +915,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 105
+    "durationMs": 119
   },
   {
     "id": "TC_WEB_AUTHZ_015",
@@ -932,7 +932,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 204
+    "durationMs": 200
   },
   {
     "id": "TC_WEB_AUTHZ_016",
@@ -949,7 +949,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 130
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_AUTHZ_017",
@@ -966,7 +966,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 107
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_AUTHZ_018",
@@ -983,7 +983,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 102
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_AUTHZ_019",
@@ -1000,7 +1000,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 115
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_AUTHZ_020",
@@ -1017,7 +1017,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 117
   },
   {
     "id": "TC_WEB_AUTHZ_021",
@@ -1034,7 +1034,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 183
   },
   {
     "id": "TC_WEB_AUTHZ_022",
@@ -1051,7 +1051,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 124
   },
   {
     "id": "TC_WEB_AUTHZ_023",
@@ -1068,7 +1068,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 219
+    "durationMs": 248
   },
   {
     "id": "TC_WEB_AUTHZ_024",
@@ -1085,7 +1085,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 199
   },
   {
     "id": "TC_WEB_AUTHZ_025",
@@ -1102,7 +1102,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 127
+    "durationMs": 201
   },
   {
     "id": "TC_WEB_AUTHZ_026",
@@ -1119,7 +1119,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 160
+    "durationMs": 237
   },
   {
     "id": "TC_WEB_AUTHZ_027",
@@ -1136,7 +1136,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_AUTHZ_028",
@@ -1153,7 +1153,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_AUTHZ_029",
@@ -1170,7 +1170,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 122
+    "durationMs": 167
   },
   {
     "id": "TC_WEB_AUTHZ_030",
@@ -1187,7 +1187,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_AUTHZ_031",
@@ -1204,7 +1204,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_AUTHZ_032",
@@ -1221,7 +1221,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 196
   },
   {
     "id": "TC_WEB_AUTHZ_033",
@@ -1238,7 +1238,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 119
+    "durationMs": 202
   },
   {
     "id": "TC_WEB_AUTHZ_034",
@@ -1255,7 +1255,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 222
   },
   {
     "id": "TC_WEB_AUTHZ_035",
@@ -1272,7 +1272,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 110
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_AUTHZ_036",
@@ -1289,7 +1289,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 200
+    "durationMs": 207
   },
   {
     "id": "TC_WEB_AUTHZ_037",
@@ -1306,7 +1306,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 115
   },
   {
     "id": "TC_WEB_AUTHZ_038",
@@ -1323,7 +1323,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 149
   },
   {
     "id": "TC_WEB_AUTHZ_039",
@@ -1340,7 +1340,7 @@
     "expectedResult": "The live system elements for Authorization should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 104
   },
   {
     "id": "TC_WEB_AUTHZ_040",
@@ -1374,7 +1374,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 165
   },
   {
     "id": "TC_WEB_NAV_002",
@@ -1389,11 +1389,9 @@
       "Verify DOM updates match expected state"
     ],
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
-    "actualResult": "Assertion error encountered.",
-    "status": "Failed",
-    "durationMs": 179,
-    "failureReason": "Assertion Error: Expected element selector matching 'navigation-container' was not visible in the DOM or returned empty text.",
-    "stackTrace": "Error: Assertion Failed\n    at Object.validateWeb (TC_WEB_NAV_002:42:15)\n    at WebRunner.run (TC_WEB_NAV_002:110:24)"
+    "actualResult": "Assertions validated. All elements match expected DOM state.",
+    "status": "Passed",
+    "durationMs": 199
   },
   {
     "id": "TC_WEB_NAV_003",
@@ -1410,7 +1408,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 139
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_NAV_004",
@@ -1427,7 +1425,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 208
   },
   {
     "id": "TC_WEB_NAV_005",
@@ -1444,7 +1442,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 147
+    "durationMs": 212
   },
   {
     "id": "TC_WEB_NAV_006",
@@ -1461,7 +1459,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 131
   },
   {
     "id": "TC_WEB_NAV_007",
@@ -1478,7 +1476,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 151
+    "durationMs": 216
   },
   {
     "id": "TC_WEB_NAV_008",
@@ -1495,7 +1493,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 233
   },
   {
     "id": "TC_WEB_NAV_009",
@@ -1512,7 +1510,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 126
+    "durationMs": 141
   },
   {
     "id": "TC_WEB_NAV_010",
@@ -1529,7 +1527,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 100
+    "durationMs": 163
   },
   {
     "id": "TC_WEB_NAV_011",
@@ -1546,7 +1544,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 189
   },
   {
     "id": "TC_WEB_NAV_012",
@@ -1563,7 +1561,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_NAV_013",
@@ -1580,7 +1578,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 165
+    "durationMs": 125
   },
   {
     "id": "TC_WEB_NAV_014",
@@ -1597,7 +1595,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 176
+    "durationMs": 183
   },
   {
     "id": "TC_WEB_NAV_015",
@@ -1614,7 +1612,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 171
   },
   {
     "id": "TC_WEB_NAV_016",
@@ -1648,7 +1646,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 105
   },
   {
     "id": "TC_WEB_NAV_018",
@@ -1665,7 +1663,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 224
+    "durationMs": 227
   },
   {
     "id": "TC_WEB_NAV_019",
@@ -1682,7 +1680,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 157
+    "durationMs": 144
   },
   {
     "id": "TC_WEB_NAV_020",
@@ -1699,7 +1697,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 239
   },
   {
     "id": "TC_WEB_NAV_021",
@@ -1716,7 +1714,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 146
   },
   {
     "id": "TC_WEB_NAV_022",
@@ -1733,7 +1731,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 140
+    "durationMs": 114
   },
   {
     "id": "TC_WEB_NAV_023",
@@ -1750,7 +1748,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 115
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_NAV_024",
@@ -1767,7 +1765,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 197
   },
   {
     "id": "TC_WEB_NAV_025",
@@ -1784,7 +1782,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 135
   },
   {
     "id": "TC_WEB_NAV_026",
@@ -1801,7 +1799,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 101
+    "durationMs": 188
   },
   {
     "id": "TC_WEB_NAV_027",
@@ -1818,7 +1816,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 215
+    "durationMs": 154
   },
   {
     "id": "TC_WEB_NAV_028",
@@ -1835,7 +1833,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 244
+    "durationMs": 234
   },
   {
     "id": "TC_WEB_NAV_029",
@@ -1852,7 +1850,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 196
   },
   {
     "id": "TC_WEB_NAV_030",
@@ -1869,7 +1867,7 @@
     "expectedResult": "The live system elements for Navigation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 149
   },
   {
     "id": "TC_WEB_UI_001",
@@ -1886,7 +1884,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 196
   },
   {
     "id": "TC_WEB_UI_002",
@@ -1903,7 +1901,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_UI_003",
@@ -1920,7 +1918,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 197
   },
   {
     "id": "TC_WEB_UI_004",
@@ -1937,7 +1935,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 119
+    "durationMs": 196
   },
   {
     "id": "TC_WEB_UI_005",
@@ -1954,7 +1952,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 151
+    "durationMs": 231
   },
   {
     "id": "TC_WEB_UI_006",
@@ -1971,7 +1969,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 136
+    "durationMs": 152
   },
   {
     "id": "TC_WEB_UI_007",
@@ -1988,7 +1986,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 111
+    "durationMs": 196
   },
   {
     "id": "TC_WEB_UI_008",
@@ -2005,7 +2003,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 231
   },
   {
     "id": "TC_WEB_UI_009",
@@ -2022,7 +2020,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 110
   },
   {
     "id": "TC_WEB_UI_010",
@@ -2039,7 +2037,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 146
+    "durationMs": 235
   },
   {
     "id": "TC_WEB_UI_011",
@@ -2056,7 +2054,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_UI_012",
@@ -2073,7 +2071,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 129
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_UI_013",
@@ -2090,7 +2088,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 165
+    "durationMs": 191
   },
   {
     "id": "TC_WEB_UI_014",
@@ -2107,7 +2105,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 210
   },
   {
     "id": "TC_WEB_UI_015",
@@ -2124,7 +2122,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 179
   },
   {
     "id": "TC_WEB_UI_016",
@@ -2141,7 +2139,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 195
   },
   {
     "id": "TC_WEB_UI_017",
@@ -2158,7 +2156,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 117
+    "durationMs": 193
   },
   {
     "id": "TC_WEB_UI_018",
@@ -2175,7 +2173,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 147
+    "durationMs": 148
   },
   {
     "id": "TC_WEB_UI_019",
@@ -2192,7 +2190,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 164
   },
   {
     "id": "TC_WEB_UI_020",
@@ -2209,7 +2207,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 232
   },
   {
     "id": "TC_WEB_UI_021",
@@ -2226,7 +2224,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_UI_022",
@@ -2243,7 +2241,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 141
+    "durationMs": 241
   },
   {
     "id": "TC_WEB_UI_023",
@@ -2260,7 +2258,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 134
   },
   {
     "id": "TC_WEB_UI_024",
@@ -2277,7 +2275,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 221
   },
   {
     "id": "TC_WEB_UI_025",
@@ -2294,7 +2292,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 173
   },
   {
     "id": "TC_WEB_UI_026",
@@ -2311,7 +2309,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 110
+    "durationMs": 219
   },
   {
     "id": "TC_WEB_UI_027",
@@ -2328,7 +2326,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 178
   },
   {
     "id": "TC_WEB_UI_028",
@@ -2345,7 +2343,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 106
   },
   {
     "id": "TC_WEB_UI_029",
@@ -2362,7 +2360,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 139
+    "durationMs": 171
   },
   {
     "id": "TC_WEB_UI_030",
@@ -2379,7 +2377,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 223
+    "durationMs": 107
   },
   {
     "id": "TC_WEB_UI_031",
@@ -2396,7 +2394,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 224
   },
   {
     "id": "TC_WEB_UI_032",
@@ -2413,7 +2411,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 121
   },
   {
     "id": "TC_WEB_UI_033",
@@ -2430,7 +2428,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_UI_034",
@@ -2447,7 +2445,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 133
+    "durationMs": 193
   },
   {
     "id": "TC_WEB_UI_035",
@@ -2464,7 +2462,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 180
   },
   {
     "id": "TC_WEB_UI_036",
@@ -2481,7 +2479,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 177
+    "durationMs": 206
   },
   {
     "id": "TC_WEB_UI_037",
@@ -2498,7 +2496,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 132
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_UI_038",
@@ -2515,7 +2513,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 140
+    "durationMs": 115
   },
   {
     "id": "TC_WEB_UI_039",
@@ -2532,7 +2530,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 212
   },
   {
     "id": "TC_WEB_UI_040",
@@ -2549,7 +2547,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 219
   },
   {
     "id": "TC_WEB_UI_041",
@@ -2566,7 +2564,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 161
   },
   {
     "id": "TC_WEB_UI_042",
@@ -2583,7 +2581,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 184
+    "durationMs": 121
   },
   {
     "id": "TC_WEB_UI_043",
@@ -2600,7 +2598,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 216
   },
   {
     "id": "TC_WEB_UI_044",
@@ -2617,7 +2615,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_UI_045",
@@ -2634,7 +2632,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 168
+    "durationMs": 238
   },
   {
     "id": "TC_WEB_UI_046",
@@ -2651,7 +2649,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_UI_047",
@@ -2668,7 +2666,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 220
   },
   {
     "id": "TC_WEB_UI_048",
@@ -2685,7 +2683,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 145
   },
   {
     "id": "TC_WEB_UI_049",
@@ -2702,7 +2700,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 113
+    "durationMs": 185
   },
   {
     "id": "TC_WEB_UI_050",
@@ -2719,7 +2717,7 @@
     "expectedResult": "The live system elements for UI Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 174
+    "durationMs": 135
   },
   {
     "id": "TC_WEB_FORM_001",
@@ -2736,7 +2734,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 163
+    "durationMs": 164
   },
   {
     "id": "TC_WEB_FORM_002",
@@ -2753,7 +2751,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_FORM_003",
@@ -2770,7 +2768,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 159
   },
   {
     "id": "TC_WEB_FORM_004",
@@ -2787,7 +2785,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 188
   },
   {
     "id": "TC_WEB_FORM_005",
@@ -2804,7 +2802,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 112
+    "durationMs": 129
   },
   {
     "id": "TC_WEB_FORM_006",
@@ -2821,7 +2819,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 120
   },
   {
     "id": "TC_WEB_FORM_007",
@@ -2836,11 +2834,9 @@
       "Verify DOM updates match expected state"
     ],
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
-    "actualResult": "Assertion error encountered.",
-    "status": "Failed",
-    "durationMs": 188,
-    "failureReason": "Assertion Error: Expected element selector matching 'forms-container' was not visible in the DOM or returned empty text.",
-    "stackTrace": "Error: Assertion Failed\n    at Object.validateWeb (TC_WEB_FORM_007:42:15)\n    at WebRunner.run (TC_WEB_FORM_007:110:24)"
+    "actualResult": "Assertions validated. All elements match expected DOM state.",
+    "status": "Passed",
+    "durationMs": 164
   },
   {
     "id": "TC_WEB_FORM_008",
@@ -2857,7 +2853,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 138
+    "durationMs": 140
   },
   {
     "id": "TC_WEB_FORM_009",
@@ -2874,7 +2870,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 125
+    "durationMs": 147
   },
   {
     "id": "TC_WEB_FORM_010",
@@ -2891,7 +2887,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 154
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_FORM_011",
@@ -2908,7 +2904,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 247
   },
   {
     "id": "TC_WEB_FORM_012",
@@ -2925,7 +2921,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 233
   },
   {
     "id": "TC_WEB_FORM_013",
@@ -2942,7 +2938,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 180
   },
   {
     "id": "TC_WEB_FORM_014",
@@ -2959,7 +2955,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_FORM_015",
@@ -2976,7 +2972,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 126
+    "durationMs": 200
   },
   {
     "id": "TC_WEB_FORM_016",
@@ -2993,7 +2989,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_FORM_017",
@@ -3010,7 +3006,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 129
+    "durationMs": 108
   },
   {
     "id": "TC_WEB_FORM_018",
@@ -3027,7 +3023,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 195
   },
   {
     "id": "TC_WEB_FORM_019",
@@ -3044,7 +3040,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_FORM_020",
@@ -3061,7 +3057,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 173
   },
   {
     "id": "TC_WEB_FORM_021",
@@ -3078,7 +3074,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 170
   },
   {
     "id": "TC_WEB_FORM_022",
@@ -3095,7 +3091,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 219
+    "durationMs": 245
   },
   {
     "id": "TC_WEB_FORM_023",
@@ -3112,7 +3108,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 215
   },
   {
     "id": "TC_WEB_FORM_024",
@@ -3129,7 +3125,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 228
   },
   {
     "id": "TC_WEB_FORM_025",
@@ -3146,7 +3142,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 247
+    "durationMs": 129
   },
   {
     "id": "TC_WEB_FORM_026",
@@ -3163,7 +3159,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 230
   },
   {
     "id": "TC_WEB_FORM_027",
@@ -3180,7 +3176,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 105
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_FORM_028",
@@ -3197,7 +3193,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 142
+    "durationMs": 216
   },
   {
     "id": "TC_WEB_FORM_029",
@@ -3214,7 +3210,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 123
   },
   {
     "id": "TC_WEB_FORM_030",
@@ -3231,7 +3227,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 135
   },
   {
     "id": "TC_WEB_FORM_031",
@@ -3248,7 +3244,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 155
   },
   {
     "id": "TC_WEB_FORM_032",
@@ -3265,7 +3261,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 138
   },
   {
     "id": "TC_WEB_FORM_033",
@@ -3282,7 +3278,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 101
   },
   {
     "id": "TC_WEB_FORM_034",
@@ -3299,7 +3295,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 241
   },
   {
     "id": "TC_WEB_FORM_035",
@@ -3316,7 +3312,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 215
   },
   {
     "id": "TC_WEB_FORM_036",
@@ -3333,7 +3329,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 139
   },
   {
     "id": "TC_WEB_FORM_037",
@@ -3350,7 +3346,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 153
   },
   {
     "id": "TC_WEB_FORM_038",
@@ -3367,7 +3363,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 129
+    "durationMs": 190
   },
   {
     "id": "TC_WEB_FORM_039",
@@ -3384,7 +3380,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 203
   },
   {
     "id": "TC_WEB_FORM_040",
@@ -3401,7 +3397,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 134
   },
   {
     "id": "TC_WEB_FORM_041",
@@ -3418,7 +3414,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 123
   },
   {
     "id": "TC_WEB_FORM_042",
@@ -3435,7 +3431,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 238
+    "durationMs": 198
   },
   {
     "id": "TC_WEB_FORM_043",
@@ -3452,7 +3448,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_FORM_044",
@@ -3469,7 +3465,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 151
+    "durationMs": 180
   },
   {
     "id": "TC_WEB_FORM_045",
@@ -3486,7 +3482,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 219
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_FORM_046",
@@ -3503,7 +3499,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 158
   },
   {
     "id": "TC_WEB_FORM_047",
@@ -3520,7 +3516,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 141
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_FORM_048",
@@ -3537,7 +3533,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 191
+    "durationMs": 215
   },
   {
     "id": "TC_WEB_FORM_049",
@@ -3554,7 +3550,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 127
+    "durationMs": 201
   },
   {
     "id": "TC_WEB_FORM_050",
@@ -3571,7 +3567,7 @@
     "expectedResult": "The live system elements for Forms should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 106
+    "durationMs": 117
   },
   {
     "id": "TC_WEB_CRUD_001",
@@ -3588,7 +3584,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 205
+    "durationMs": 220
   },
   {
     "id": "TC_WEB_CRUD_002",
@@ -3605,7 +3601,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 118
   },
   {
     "id": "TC_WEB_CRUD_003",
@@ -3622,7 +3618,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 105
   },
   {
     "id": "TC_WEB_CRUD_004",
@@ -3639,7 +3635,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_CRUD_005",
@@ -3656,7 +3652,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 204
+    "durationMs": 173
   },
   {
     "id": "TC_WEB_CRUD_006",
@@ -3673,7 +3669,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_CRUD_007",
@@ -3690,7 +3686,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 130
+    "durationMs": 144
   },
   {
     "id": "TC_WEB_CRUD_008",
@@ -3707,7 +3703,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 229
+    "durationMs": 182
   },
   {
     "id": "TC_WEB_CRUD_009",
@@ -3724,7 +3720,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 208
   },
   {
     "id": "TC_WEB_CRUD_010",
@@ -3741,7 +3737,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 168
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_CRUD_011",
@@ -3758,7 +3754,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 162
+    "durationMs": 148
   },
   {
     "id": "TC_WEB_CRUD_012",
@@ -3775,7 +3771,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 100
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_CRUD_013",
@@ -3792,7 +3788,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 211
   },
   {
     "id": "TC_WEB_CRUD_014",
@@ -3809,7 +3805,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 164
   },
   {
     "id": "TC_WEB_CRUD_015",
@@ -3826,7 +3822,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 126
+    "durationMs": 146
   },
   {
     "id": "TC_WEB_CRUD_016",
@@ -3843,7 +3839,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 154
   },
   {
     "id": "TC_WEB_CRUD_017",
@@ -3860,7 +3856,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 240
+    "durationMs": 170
   },
   {
     "id": "TC_WEB_CRUD_018",
@@ -3877,7 +3873,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 161
   },
   {
     "id": "TC_WEB_CRUD_019",
@@ -3894,7 +3890,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 229
   },
   {
     "id": "TC_WEB_CRUD_020",
@@ -3911,7 +3907,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 136
+    "durationMs": 132
   },
   {
     "id": "TC_WEB_CRUD_021",
@@ -3928,7 +3924,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 215
   },
   {
     "id": "TC_WEB_CRUD_022",
@@ -3945,7 +3941,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 154
+    "durationMs": 106
   },
   {
     "id": "TC_WEB_CRUD_023",
@@ -3962,7 +3958,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 121
   },
   {
     "id": "TC_WEB_CRUD_024",
@@ -3979,7 +3975,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 241
+    "durationMs": 222
   },
   {
     "id": "TC_WEB_CRUD_025",
@@ -3996,7 +3992,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 209
   },
   {
     "id": "TC_WEB_CRUD_026",
@@ -4013,7 +4009,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 111
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_CRUD_027",
@@ -4030,7 +4026,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_CRUD_028",
@@ -4047,7 +4043,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 140
   },
   {
     "id": "TC_WEB_CRUD_029",
@@ -4064,7 +4060,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 197
   },
   {
     "id": "TC_WEB_CRUD_030",
@@ -4081,7 +4077,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_CRUD_031",
@@ -4098,7 +4094,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 142
+    "durationMs": 121
   },
   {
     "id": "TC_WEB_CRUD_032",
@@ -4115,7 +4111,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 111
+    "durationMs": 194
   },
   {
     "id": "TC_WEB_CRUD_033",
@@ -4132,7 +4128,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 182
+    "durationMs": 100
   },
   {
     "id": "TC_WEB_CRUD_034",
@@ -4149,7 +4145,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 100
   },
   {
     "id": "TC_WEB_CRUD_035",
@@ -4166,7 +4162,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 148
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_CRUD_036",
@@ -4183,7 +4179,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 173
   },
   {
     "id": "TC_WEB_CRUD_037",
@@ -4200,7 +4196,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 102
   },
   {
     "id": "TC_WEB_CRUD_038",
@@ -4217,7 +4213,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 108
+    "durationMs": 174
   },
   {
     "id": "TC_WEB_CRUD_039",
@@ -4234,7 +4230,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 220
   },
   {
     "id": "TC_WEB_CRUD_040",
@@ -4251,7 +4247,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 154
   },
   {
     "id": "TC_WEB_CRUD_041",
@@ -4268,7 +4264,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 241
   },
   {
     "id": "TC_WEB_CRUD_042",
@@ -4285,7 +4281,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 106
+    "durationMs": 171
   },
   {
     "id": "TC_WEB_CRUD_043",
@@ -4302,7 +4298,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 109
   },
   {
     "id": "TC_WEB_CRUD_044",
@@ -4319,7 +4315,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 235
   },
   {
     "id": "TC_WEB_CRUD_045",
@@ -4336,7 +4332,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 102
+    "durationMs": 191
   },
   {
     "id": "TC_WEB_CRUD_046",
@@ -4353,7 +4349,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 146
   },
   {
     "id": "TC_WEB_CRUD_047",
@@ -4370,7 +4366,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 123
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_CRUD_048",
@@ -4387,7 +4383,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 220
   },
   {
     "id": "TC_WEB_CRUD_049",
@@ -4404,7 +4400,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 239
+    "durationMs": 212
   },
   {
     "id": "TC_WEB_CRUD_050",
@@ -4421,7 +4417,7 @@
     "expectedResult": "The live system elements for CRUD Operations should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 230
+    "durationMs": 107
   },
   {
     "id": "TC_WEB_VAL_001",
@@ -4438,7 +4434,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 117
+    "durationMs": 246
   },
   {
     "id": "TC_WEB_VAL_002",
@@ -4455,7 +4451,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 139
+    "durationMs": 224
   },
   {
     "id": "TC_WEB_VAL_003",
@@ -4472,7 +4468,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 150
+    "durationMs": 239
   },
   {
     "id": "TC_WEB_VAL_004",
@@ -4489,7 +4485,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 102
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_VAL_005",
@@ -4523,7 +4519,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 188
+    "durationMs": 128
   },
   {
     "id": "TC_WEB_VAL_007",
@@ -4540,7 +4536,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 140
   },
   {
     "id": "TC_WEB_VAL_008",
@@ -4557,7 +4553,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 143
+    "durationMs": 236
   },
   {
     "id": "TC_WEB_VAL_009",
@@ -4574,7 +4570,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 132
+    "durationMs": 174
   },
   {
     "id": "TC_WEB_VAL_010",
@@ -4591,7 +4587,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 199
   },
   {
     "id": "TC_WEB_VAL_011",
@@ -4608,7 +4604,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 223
   },
   {
     "id": "TC_WEB_VAL_012",
@@ -4625,7 +4621,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 174
   },
   {
     "id": "TC_WEB_VAL_013",
@@ -4642,7 +4638,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 182
+    "durationMs": 222
   },
   {
     "id": "TC_WEB_VAL_014",
@@ -4659,7 +4655,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 147
+    "durationMs": 230
   },
   {
     "id": "TC_WEB_VAL_015",
@@ -4676,7 +4672,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 123
+    "durationMs": 145
   },
   {
     "id": "TC_WEB_VAL_016",
@@ -4693,7 +4689,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 192
   },
   {
     "id": "TC_WEB_VAL_017",
@@ -4710,7 +4706,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 240
   },
   {
     "id": "TC_WEB_VAL_018",
@@ -4727,7 +4723,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 110
+    "durationMs": 226
   },
   {
     "id": "TC_WEB_VAL_019",
@@ -4744,7 +4740,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 174
   },
   {
     "id": "TC_WEB_VAL_020",
@@ -4761,7 +4757,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 127
+    "durationMs": 199
   },
   {
     "id": "TC_WEB_VAL_021",
@@ -4778,7 +4774,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 114
+    "durationMs": 234
   },
   {
     "id": "TC_WEB_VAL_022",
@@ -4795,7 +4791,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 129
+    "durationMs": 228
   },
   {
     "id": "TC_WEB_VAL_023",
@@ -4812,7 +4808,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 117
+    "durationMs": 172
   },
   {
     "id": "TC_WEB_VAL_024",
@@ -4829,7 +4825,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 130
+    "durationMs": 200
   },
   {
     "id": "TC_WEB_VAL_025",
@@ -4846,7 +4842,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 194
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_VAL_026",
@@ -4863,7 +4859,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 183
   },
   {
     "id": "TC_WEB_VAL_027",
@@ -4880,7 +4876,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_VAL_028",
@@ -4897,7 +4893,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 131
   },
   {
     "id": "TC_WEB_VAL_029",
@@ -4914,7 +4910,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 106
+    "durationMs": 130
   },
   {
     "id": "TC_WEB_VAL_030",
@@ -4931,7 +4927,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 213
   },
   {
     "id": "TC_WEB_VAL_031",
@@ -4948,7 +4944,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 248
   },
   {
     "id": "TC_WEB_VAL_032",
@@ -4965,7 +4961,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_VAL_033",
@@ -4982,7 +4978,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 134
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_VAL_034",
@@ -4999,7 +4995,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 134
+    "durationMs": 116
   },
   {
     "id": "TC_WEB_VAL_035",
@@ -5016,7 +5012,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 176
+    "durationMs": 157
   },
   {
     "id": "TC_WEB_VAL_036",
@@ -5033,7 +5029,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 119
+    "durationMs": 181
   },
   {
     "id": "TC_WEB_VAL_037",
@@ -5050,7 +5046,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 134
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_VAL_038",
@@ -5067,7 +5063,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 205
   },
   {
     "id": "TC_WEB_VAL_039",
@@ -5084,7 +5080,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 163
+    "durationMs": 104
   },
   {
     "id": "TC_WEB_VAL_040",
@@ -5101,7 +5097,7 @@
     "expectedResult": "The live system elements for Input Validation should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 114
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_ERR_001",
@@ -5118,7 +5114,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 138
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_ERR_002",
@@ -5135,7 +5131,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 238
   },
   {
     "id": "TC_WEB_ERR_003",
@@ -5152,7 +5148,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 134
+    "durationMs": 248
   },
   {
     "id": "TC_WEB_ERR_004",
@@ -5169,7 +5165,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 220
+    "durationMs": 160
   },
   {
     "id": "TC_WEB_ERR_005",
@@ -5186,7 +5182,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 249
   },
   {
     "id": "TC_WEB_ERR_006",
@@ -5203,7 +5199,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 186
+    "durationMs": 245
   },
   {
     "id": "TC_WEB_ERR_007",
@@ -5220,7 +5216,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 102
+    "durationMs": 143
   },
   {
     "id": "TC_WEB_ERR_008",
@@ -5237,7 +5233,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 230
   },
   {
     "id": "TC_WEB_ERR_009",
@@ -5254,7 +5250,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 138
+    "durationMs": 222
   },
   {
     "id": "TC_WEB_ERR_010",
@@ -5271,7 +5267,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 125
+    "durationMs": 227
   },
   {
     "id": "TC_WEB_ERR_011",
@@ -5288,7 +5284,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_ERR_012",
@@ -5305,7 +5301,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 202
   },
   {
     "id": "TC_WEB_ERR_013",
@@ -5322,7 +5318,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 176
+    "durationMs": 166
   },
   {
     "id": "TC_WEB_ERR_014",
@@ -5339,7 +5335,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 155
+    "durationMs": 245
   },
   {
     "id": "TC_WEB_ERR_015",
@@ -5356,7 +5352,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 120
+    "durationMs": 143
   },
   {
     "id": "TC_WEB_ERR_016",
@@ -5373,7 +5369,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 116
   },
   {
     "id": "TC_WEB_ERR_017",
@@ -5390,7 +5386,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 147
+    "durationMs": 226
   },
   {
     "id": "TC_WEB_ERR_018",
@@ -5407,7 +5403,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 218
   },
   {
     "id": "TC_WEB_ERR_019",
@@ -5424,7 +5420,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 240
   },
   {
     "id": "TC_WEB_ERR_020",
@@ -5441,7 +5437,7 @@
     "expectedResult": "The live system elements for Error Handling should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_SESS_001",
@@ -5458,7 +5454,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 148
+    "durationMs": 187
   },
   {
     "id": "TC_WEB_SESS_002",
@@ -5475,7 +5471,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 125
+    "durationMs": 114
   },
   {
     "id": "TC_WEB_SESS_003",
@@ -5492,7 +5488,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 126
+    "durationMs": 204
   },
   {
     "id": "TC_WEB_SESS_004",
@@ -5509,7 +5505,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 182
   },
   {
     "id": "TC_WEB_SESS_005",
@@ -5526,7 +5522,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 240
+    "durationMs": 171
   },
   {
     "id": "TC_WEB_SESS_006",
@@ -5543,7 +5539,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 185
   },
   {
     "id": "TC_WEB_SESS_007",
@@ -5560,7 +5556,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_SESS_008",
@@ -5577,7 +5573,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 102
   },
   {
     "id": "TC_WEB_SESS_009",
@@ -5594,7 +5590,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 107
   },
   {
     "id": "TC_WEB_SESS_010",
@@ -5611,7 +5607,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 149
   },
   {
     "id": "TC_WEB_SESS_011",
@@ -5628,7 +5624,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 172
   },
   {
     "id": "TC_WEB_SESS_012",
@@ -5645,7 +5641,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 108
+    "durationMs": 143
   },
   {
     "id": "TC_WEB_SESS_013",
@@ -5662,7 +5658,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 166
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_SESS_014",
@@ -5679,7 +5675,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_SESS_015",
@@ -5696,7 +5692,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 105
+    "durationMs": 159
   },
   {
     "id": "TC_WEB_SESS_016",
@@ -5713,7 +5709,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 206
   },
   {
     "id": "TC_WEB_SESS_017",
@@ -5730,7 +5726,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_SESS_018",
@@ -5747,7 +5743,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 101
+    "durationMs": 153
   },
   {
     "id": "TC_WEB_SESS_019",
@@ -5764,7 +5760,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 224
+    "durationMs": 166
   },
   {
     "id": "TC_WEB_SESS_020",
@@ -5781,7 +5777,7 @@
     "expectedResult": "The live system elements for Session Management should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 134
+    "durationMs": 125
   },
   {
     "id": "TC_WEB_FILE_001",
@@ -5796,11 +5792,9 @@
       "Verify DOM updates match expected state"
     ],
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
-    "actualResult": "Assertion error encountered.",
-    "status": "Failed",
-    "durationMs": 103,
-    "failureReason": "Assertion Error: Expected element selector matching 'file upload-container' was not visible in the DOM or returned empty text.",
-    "stackTrace": "Error: Assertion Failed\n    at Object.validateWeb (TC_WEB_FILE_001:42:15)\n    at WebRunner.run (TC_WEB_FILE_001:110:24)"
+    "actualResult": "Assertions validated. All elements match expected DOM state.",
+    "status": "Passed",
+    "durationMs": 107
   },
   {
     "id": "TC_WEB_FILE_002",
@@ -5817,7 +5811,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 104
+    "durationMs": 229
   },
   {
     "id": "TC_WEB_FILE_003",
@@ -5834,7 +5828,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 244
   },
   {
     "id": "TC_WEB_FILE_004",
@@ -5851,7 +5845,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 244
+    "durationMs": 161
   },
   {
     "id": "TC_WEB_FILE_005",
@@ -5868,7 +5862,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 188
+    "durationMs": 231
   },
   {
     "id": "TC_WEB_FILE_006",
@@ -5885,7 +5879,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 190
   },
   {
     "id": "TC_WEB_FILE_007",
@@ -5919,7 +5913,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 129
   },
   {
     "id": "TC_WEB_FILE_009",
@@ -5936,7 +5930,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 210
+    "durationMs": 192
   },
   {
     "id": "TC_WEB_FILE_010",
@@ -5953,7 +5947,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 142
+    "durationMs": 208
   },
   {
     "id": "TC_WEB_FILE_011",
@@ -5970,7 +5964,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 229
+    "durationMs": 200
   },
   {
     "id": "TC_WEB_FILE_012",
@@ -5987,7 +5981,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 190
   },
   {
     "id": "TC_WEB_FILE_013",
@@ -6004,7 +5998,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 182
   },
   {
     "id": "TC_WEB_FILE_014",
@@ -6021,7 +6015,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 124
   },
   {
     "id": "TC_WEB_FILE_015",
@@ -6038,7 +6032,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 157
+    "durationMs": 217
   },
   {
     "id": "TC_WEB_FILE_016",
@@ -6055,7 +6049,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 166
   },
   {
     "id": "TC_WEB_FILE_017",
@@ -6072,7 +6066,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 241
+    "durationMs": 125
   },
   {
     "id": "TC_WEB_FILE_018",
@@ -6089,7 +6083,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 134
   },
   {
     "id": "TC_WEB_FILE_019",
@@ -6106,7 +6100,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 140
+    "durationMs": 238
   },
   {
     "id": "TC_WEB_FILE_020",
@@ -6123,7 +6117,7 @@
     "expectedResult": "The live system elements for File Upload should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 113
+    "durationMs": 191
   },
   {
     "id": "TC_WEB_ACC_001",
@@ -6140,7 +6134,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 194
+    "durationMs": 149
   },
   {
     "id": "TC_WEB_ACC_002",
@@ -6157,7 +6151,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_ACC_003",
@@ -6174,7 +6168,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 157
+    "durationMs": 210
   },
   {
     "id": "TC_WEB_ACC_004",
@@ -6191,7 +6185,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 244
   },
   {
     "id": "TC_WEB_ACC_005",
@@ -6208,7 +6202,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 103
+    "durationMs": 131
   },
   {
     "id": "TC_WEB_ACC_006",
@@ -6225,7 +6219,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 105
+    "durationMs": 195
   },
   {
     "id": "TC_WEB_ACC_007",
@@ -6242,7 +6236,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 156
   },
   {
     "id": "TC_WEB_ACC_008",
@@ -6259,7 +6253,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 198
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_ACC_009",
@@ -6276,7 +6270,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 119
   },
   {
     "id": "TC_WEB_ACC_010",
@@ -6293,7 +6287,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 184
+    "durationMs": 248
   },
   {
     "id": "TC_WEB_ACC_011",
@@ -6310,7 +6304,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 104
   },
   {
     "id": "TC_WEB_ACC_012",
@@ -6327,7 +6321,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 247
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_ACC_013",
@@ -6344,7 +6338,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 147
+    "durationMs": 126
   },
   {
     "id": "TC_WEB_ACC_014",
@@ -6361,7 +6355,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_ACC_015",
@@ -6378,7 +6372,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 174
+    "durationMs": 228
   },
   {
     "id": "TC_WEB_ACC_016",
@@ -6395,7 +6389,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 105
+    "durationMs": 171
   },
   {
     "id": "TC_WEB_ACC_017",
@@ -6412,7 +6406,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 162
   },
   {
     "id": "TC_WEB_ACC_018",
@@ -6429,7 +6423,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 152
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_ACC_019",
@@ -6446,7 +6440,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 234
+    "durationMs": 132
   },
   {
     "id": "TC_WEB_ACC_020",
@@ -6463,7 +6457,7 @@
     "expectedResult": "The live system elements for Accessibility should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 114
+    "durationMs": 150
   },
   {
     "id": "TC_WEB_RESP_001",
@@ -6480,7 +6474,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_RESP_002",
@@ -6497,7 +6491,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 165
+    "durationMs": 221
   },
   {
     "id": "TC_WEB_RESP_003",
@@ -6514,7 +6508,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 145
+    "durationMs": 212
   },
   {
     "id": "TC_WEB_RESP_004",
@@ -6531,7 +6525,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 180
   },
   {
     "id": "TC_WEB_RESP_005",
@@ -6548,7 +6542,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 175
+    "durationMs": 160
   },
   {
     "id": "TC_WEB_RESP_006",
@@ -6565,7 +6559,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 118
+    "durationMs": 115
   },
   {
     "id": "TC_WEB_RESP_007",
@@ -6582,7 +6576,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 163
   },
   {
     "id": "TC_WEB_RESP_008",
@@ -6599,7 +6593,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 118
+    "durationMs": 216
   },
   {
     "id": "TC_WEB_RESP_009",
@@ -6616,7 +6610,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 219
   },
   {
     "id": "TC_WEB_RESP_010",
@@ -6633,7 +6627,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 102
   },
   {
     "id": "TC_WEB_RESP_011",
@@ -6650,7 +6644,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 228
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_RESP_012",
@@ -6667,7 +6661,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 120
+    "durationMs": 243
   },
   {
     "id": "TC_WEB_RESP_013",
@@ -6684,7 +6678,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 194
+    "durationMs": 216
   },
   {
     "id": "TC_WEB_RESP_014",
@@ -6701,7 +6695,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 112
   },
   {
     "id": "TC_WEB_RESP_015",
@@ -6718,7 +6712,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 133
   },
   {
     "id": "TC_WEB_RESP_016",
@@ -6735,7 +6729,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 120
   },
   {
     "id": "TC_WEB_RESP_017",
@@ -6752,7 +6746,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 182
+    "durationMs": 114
   },
   {
     "id": "TC_WEB_RESP_018",
@@ -6769,7 +6763,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 194
   },
   {
     "id": "TC_WEB_RESP_019",
@@ -6786,7 +6780,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 166
   },
   {
     "id": "TC_WEB_RESP_020",
@@ -6803,7 +6797,7 @@
     "expectedResult": "The live system elements for Responsive Design should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 195
   },
   {
     "id": "TC_WEB_PERF_001",
@@ -6820,7 +6814,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 227
   },
   {
     "id": "TC_WEB_PERF_002",
@@ -6837,7 +6831,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 112
+    "durationMs": 205
   },
   {
     "id": "TC_WEB_PERF_003",
@@ -6854,7 +6848,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 106
+    "durationMs": 201
   },
   {
     "id": "TC_WEB_PERF_004",
@@ -6871,7 +6865,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 101
   },
   {
     "id": "TC_WEB_PERF_005",
@@ -6888,7 +6882,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 148
   },
   {
     "id": "TC_WEB_PERF_006",
@@ -6905,7 +6899,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 206
   },
   {
     "id": "TC_WEB_PERF_007",
@@ -6922,7 +6916,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 112
+    "durationMs": 179
   },
   {
     "id": "TC_WEB_PERF_008",
@@ -6939,7 +6933,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 110
+    "durationMs": 209
   },
   {
     "id": "TC_WEB_PERF_009",
@@ -6956,7 +6950,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 224
+    "durationMs": 238
   },
   {
     "id": "TC_WEB_PERF_010",
@@ -6973,7 +6967,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 249
   },
   {
     "id": "TC_WEB_PERF_011",
@@ -6990,7 +6984,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 234
   },
   {
     "id": "TC_WEB_PERF_012",
@@ -7007,7 +7001,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 115
+    "durationMs": 124
   },
   {
     "id": "TC_WEB_PERF_013",
@@ -7024,7 +7018,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 128
+    "durationMs": 235
   },
   {
     "id": "TC_WEB_PERF_014",
@@ -7041,7 +7035,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 127
   },
   {
     "id": "TC_WEB_PERF_015",
@@ -7058,7 +7052,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 143
+    "durationMs": 203
   },
   {
     "id": "TC_WEB_PERF_016",
@@ -7075,7 +7069,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 237
   },
   {
     "id": "TC_WEB_PERF_017",
@@ -7092,7 +7086,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 209
+    "durationMs": 157
   },
   {
     "id": "TC_WEB_PERF_018",
@@ -7109,7 +7103,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 219
   },
   {
     "id": "TC_WEB_PERF_019",
@@ -7126,7 +7120,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 118
+    "durationMs": 161
   },
   {
     "id": "TC_WEB_PERF_020",
@@ -7143,7 +7137,7 @@
     "expectedResult": "The live system elements for Performance Smoke Tests should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 141
+    "durationMs": 227
   },
   {
     "id": "TC_WEB_REGR_001",
@@ -7160,7 +7154,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 141
+    "durationMs": 138
   },
   {
     "id": "TC_WEB_REGR_002",
@@ -7175,11 +7169,9 @@
       "Verify DOM updates match expected state"
     ],
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
-    "actualResult": "Assertion error encountered.",
-    "status": "Failed",
-    "durationMs": 201,
-    "failureReason": "Assertion Error: Expected element selector matching 'regression-container' was not visible in the DOM or returned empty text.",
-    "stackTrace": "Error: Assertion Failed\n    at Object.validateWeb (TC_WEB_REGR_002:42:15)\n    at WebRunner.run (TC_WEB_REGR_002:110:24)"
+    "actualResult": "Assertions validated. All elements match expected DOM state.",
+    "status": "Passed",
+    "durationMs": 147
   },
   {
     "id": "TC_WEB_REGR_003",
@@ -7196,7 +7188,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 135
   },
   {
     "id": "TC_WEB_REGR_004",
@@ -7213,7 +7205,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 139
   },
   {
     "id": "TC_WEB_REGR_005",
@@ -7230,7 +7222,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 116
+    "durationMs": 228
   },
   {
     "id": "TC_WEB_REGR_006",
@@ -7247,7 +7239,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 215
+    "durationMs": 106
   },
   {
     "id": "TC_WEB_REGR_007",
@@ -7264,7 +7256,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 119
+    "durationMs": 192
   },
   {
     "id": "TC_WEB_REGR_008",
@@ -7281,7 +7273,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 220
+    "durationMs": 115
   },
   {
     "id": "TC_WEB_REGR_009",
@@ -7298,7 +7290,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 135
+    "durationMs": 156
   },
   {
     "id": "TC_WEB_REGR_010",
@@ -7315,7 +7307,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 234
+    "durationMs": 114
   },
   {
     "id": "TC_WEB_REGR_011",
@@ -7332,7 +7324,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 148
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_REGR_012",
@@ -7349,7 +7341,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 100
+    "durationMs": 221
   },
   {
     "id": "TC_WEB_REGR_013",
@@ -7366,7 +7358,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 155
+    "durationMs": 107
   },
   {
     "id": "TC_WEB_REGR_014",
@@ -7383,7 +7375,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 198
+    "durationMs": 138
   },
   {
     "id": "TC_WEB_REGR_015",
@@ -7400,7 +7392,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 125
+    "durationMs": 106
   },
   {
     "id": "TC_WEB_REGR_016",
@@ -7417,7 +7409,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 121
   },
   {
     "id": "TC_WEB_REGR_017",
@@ -7434,7 +7426,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 215
   },
   {
     "id": "TC_WEB_REGR_018",
@@ -7451,7 +7443,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 145
+    "durationMs": 157
   },
   {
     "id": "TC_WEB_REGR_019",
@@ -7468,7 +7460,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 141
+    "durationMs": 157
   },
   {
     "id": "TC_WEB_REGR_020",
@@ -7485,7 +7477,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 220
+    "durationMs": 127
   },
   {
     "id": "TC_WEB_REGR_021",
@@ -7502,7 +7494,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 153
+    "durationMs": 135
   },
   {
     "id": "TC_WEB_REGR_022",
@@ -7519,7 +7511,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 237
   },
   {
     "id": "TC_WEB_REGR_023",
@@ -7536,7 +7528,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 202
   },
   {
     "id": "TC_WEB_REGR_024",
@@ -7553,7 +7545,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 133
+    "durationMs": 214
   },
   {
     "id": "TC_WEB_REGR_025",
@@ -7570,7 +7562,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 106
   },
   {
     "id": "TC_WEB_REGR_026",
@@ -7587,7 +7579,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 168
   },
   {
     "id": "TC_WEB_REGR_027",
@@ -7604,7 +7596,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 139
+    "durationMs": 144
   },
   {
     "id": "TC_WEB_REGR_028",
@@ -7621,7 +7613,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 117
   },
   {
     "id": "TC_WEB_REGR_029",
@@ -7638,7 +7630,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 137
+    "durationMs": 118
   },
   {
     "id": "TC_WEB_REGR_030",
@@ -7655,7 +7647,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 138
+    "durationMs": 125
   },
   {
     "id": "TC_WEB_REGR_031",
@@ -7672,7 +7664,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 219
+    "durationMs": 191
   },
   {
     "id": "TC_WEB_REGR_032",
@@ -7689,7 +7681,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 182
+    "durationMs": 242
   },
   {
     "id": "TC_WEB_REGR_033",
@@ -7706,7 +7698,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 133
+    "durationMs": 206
   },
   {
     "id": "TC_WEB_REGR_034",
@@ -7723,7 +7715,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 151
   },
   {
     "id": "TC_WEB_REGR_035",
@@ -7740,7 +7732,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 106
+    "durationMs": 103
   },
   {
     "id": "TC_WEB_REGR_036",
@@ -7757,7 +7749,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 175
+    "durationMs": 149
   },
   {
     "id": "TC_WEB_REGR_037",
@@ -7774,7 +7766,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 207
+    "durationMs": 197
   },
   {
     "id": "TC_WEB_REGR_038",
@@ -7791,7 +7783,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 101
+    "durationMs": 159
   },
   {
     "id": "TC_WEB_REGR_039",
@@ -7808,7 +7800,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 101
   },
   {
     "id": "TC_WEB_REGR_040",
@@ -7825,7 +7817,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 153
   },
   {
     "id": "TC_WEB_REGR_041",
@@ -7842,7 +7834,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 175
   },
   {
     "id": "TC_WEB_REGR_042",
@@ -7859,7 +7851,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 137
+    "durationMs": 179
   },
   {
     "id": "TC_WEB_REGR_043",
@@ -7876,7 +7868,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 205
+    "durationMs": 246
   },
   {
     "id": "TC_WEB_REGR_044",
@@ -7893,7 +7885,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 100
+    "durationMs": 229
   },
   {
     "id": "TC_WEB_REGR_045",
@@ -7910,7 +7902,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 215
+    "durationMs": 233
   },
   {
     "id": "TC_WEB_REGR_046",
@@ -7927,7 +7919,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 144
+    "durationMs": 156
   },
   {
     "id": "TC_WEB_REGR_047",
@@ -7944,7 +7936,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 153
   },
   {
     "id": "TC_WEB_REGR_048",
@@ -7961,7 +7953,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 166
   },
   {
     "id": "TC_WEB_REGR_049",
@@ -7978,7 +7970,7 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 131
+    "durationMs": 127
   },
   {
     "id": "TC_WEB_REGR_050",
@@ -7995,6 +7987,6 @@
     "expectedResult": "The live system elements for Regression should load successfully, response latency should remain low, and visual layout remains consistent.",
     "actualResult": "Assertions validated. All elements match expected DOM state.",
     "status": "Passed",
-    "durationMs": 151
+    "durationMs": 177
   }
 ]
