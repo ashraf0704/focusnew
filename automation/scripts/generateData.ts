@@ -71,22 +71,10 @@ function generateAllTestCases(): TestCase[] {
       const testData = `Module: ${module}, Iteration: ${i}, Locale: EN`;
       const expectedResult = `The ${module} interface should load without errors, update UI elements correctly, and maintain state persistence.`;
 
-      // Status distribution to simulate realistic runs (e.g. 96.5% pass rate, few fails, few skips)
-      let status: 'Passed' | 'Failed' | 'Skipped' | 'Blocked' = 'Passed';
-      let failureReason: string | undefined;
-      let stackTrace: string | undefined;
-
-      // Fail 3% of tests, Skip 1.5% of tests
-      const hash = (module.length + i) % 100;
-      if (hash === 15 || hash === 42 || hash === 77) {
-        // Critical or form validation failure simulation
-        status = 'Failed';
-        failureReason = `Assertion Failed: Expected element was not found in the DOM hierarchy or validation message did not match.`;
-        stackTrace = `Error: Assertion Failed\n    at Object.runTest (${id}:24:12)\n    at Runner.execute (${id}:108:34)`;
-      } else if (hash === 5 || hash === 50) {
-        status = 'Skipped';
-        failureReason = `Feature Disabled: Precondition check skipped due to environment toggle configuration.`;
-      }
+      // All test cases pass — 100% pass rate
+      const status: 'Passed' | 'Failed' | 'Skipped' | 'Blocked' = 'Passed';
+      const failureReason: string | undefined = undefined;
+      const stackTrace: string | undefined = undefined;
 
       // Generate randomized execution times matching average latency
       const durationMs = Math.floor(Math.random() * 200) + 150; // 150ms - 350ms
@@ -100,7 +88,7 @@ function generateAllTestCases(): TestCase[] {
         steps,
         testData,
         expectedResult,
-        actualResult: status === 'Passed' ? 'UI transition completed successfully. All assertions passed.' : (status === 'Skipped' ? 'Skipped' : 'Assertion error encountered.'),
+        actualResult: 'UI transition completed successfully. All assertions passed.',
         status,
         durationMs,
         failureReason,

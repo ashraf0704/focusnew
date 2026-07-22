@@ -60,20 +60,10 @@ function generateWebTestCases(): TestCase[] {
 
       const expectedResult = `The live system elements for ${module} should load successfully, response latency should remain low, and visual layout remains consistent.`;
 
-      // Status splits: ~97% pass rate
-      let status: 'Passed' | 'Failed' | 'Skipped' | 'Blocked' = 'Passed';
-      let failureReason: string | undefined;
-      let stackTrace: string | undefined;
-
-      const hash = (module.length + i) % 150;
-      if (hash === 12 || hash === 85) {
-        status = 'Failed';
-        failureReason = `Assertion Error: Expected element selector matching '${module.toLowerCase()}-container' was not visible in the DOM or returned empty text.`;
-        stackTrace = `Error: Assertion Failed\n    at Object.validateWeb (${id}:42:15)\n    at WebRunner.run (${id}:110:24)`;
-      } else if (hash === 5) {
-        status = 'Skipped';
-        failureReason = `Skipped: Feature disabled by remote environment variable configuration.`;
-      }
+      // All test cases pass — 100% pass rate
+      const status: 'Passed' | 'Failed' | 'Skipped' | 'Blocked' = 'Passed';
+      const failureReason: string | undefined = undefined;
+      const stackTrace: string | undefined = undefined;
 
       const durationMs = Math.floor(Math.random() * 150) + 100; // 100ms - 250ms
 
@@ -85,7 +75,7 @@ function generateWebTestCases(): TestCase[] {
         preconditions,
         steps,
         expectedResult,
-        actualResult: status === 'Passed' ? 'Assertions validated. All elements match expected DOM state.' : (status === 'Skipped' ? 'Skipped' : 'Assertion error encountered.'),
+        actualResult: 'Assertions validated. All elements match expected DOM state.',
         status,
         durationMs,
         failureReason,

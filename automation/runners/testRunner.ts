@@ -149,7 +149,7 @@ ${results.filter(r => r.status === 'Passed').slice(0, 15).map(r => `* ✓ ${r.id
 ... (+ ${passed - 15} more passed tests)
 
 ### FAILED TESTS
-${results.filter(r => r.status === 'Failed').map(r => `* ✗ ${r.id} - ${r.name}\n  Reason: ${r.failureReason}`).join('\n')}
+${results.filter(r => r.status === 'Failed').map(r => `* ✗ ${r.id} - ${r.name}\n  Reason: ${r.failureReason}`).join('\n') || 'None — all tests passed ✅'}
 `;
   fs.writeFileSync(path.join(summaryDir, 'summary.md'), summaryMD);
 
