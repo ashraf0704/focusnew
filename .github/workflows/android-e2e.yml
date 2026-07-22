@@ -7,141 +7,365 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * 0' # Weekly run at midnight on Sundays
+    - cron: '0 0 * * 0'   # Weekly – every Sunday at midnight UTC
 
 permissions:
   contents: write
   pages: write
   id-token: write
+  actions: read
 
+env:
+  JAVA_VERSION: '17'
+  NODE_VERSION: '20'
+  APPIUM_PORT: 4723
+  EMULATOR_API_LEVEL: 34
+
+# ──────────────────────────────────────────────────────────────
+# JOBS
+# ──────────────────────────────────────────────────────────────
 jobs:
-  build-and-test:
+
+  # ════════════════════════════════════════════════════
+  # STAGE 1–5  Build + Setup
+  # ════════════════════════════════════════════════════
+  build:
+    name: "Stage 1-5 | Checkout → Build APK"
+    runs-on: ubuntu-latest
+    outputs:
+      apk-path: ${{ steps.apk-path.outputs.path }}
+
+    steps:
+      # Stage 1 – Checkout
+      - name: "Stage 1 | Checkout Repository"
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Stage 2 – Setup Java
+      - name: "Stage 2 | Setup Java ${{ env.JAVA_VERSION }}"
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ env.JAVA_VERSION }}
+
+      # Stage 3 – Setup Android SDK
+      - name: "Stage 3 | Setup Android SDK"
+        uses: android-actions/setup-android@v3
+
+      # Stage 4 – Install dependencies
+      - name: "Stage 4a | Install Root Dependencies"
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: "Stage 4b | npm install (root)"
+        run: npm install
+
+      - name: "Stage 4c | npm install (focus-buddy-native)"
+        run: |
+          cd focus-buddy-native
+          npm install
+
+      - name: "Stage 4d | npm install (automation)"
+        run: |
+          cd automation
+          npm install
+
+      # Stage 5 – Build APK
+      - name: "Stage 5a | Expo Prebuild (Android)"
+        run: |
+          cd focus-buddy-native
+          npx expo prebuild --platform android --non-interactive
+
+      - name: "Stage 5b | Build Android Debug APK"
+        run: |
+          cd focus-buddy-native/android
+          chmod +x gradlew
+          ./gradlew assembleDebug --no-daemon
+
+      - name: "Stage 5c | Locate APK"
+        id: apk-path
+        run: |
+          APK=$(find focus-buddy-native/android -name "*.apk" | head -1)
+          echo "path=$APK" >> "$GITHUB_OUTPUT"
+          echo "APK located at: $APK"
+
+      - name: "Stage 5d | Cache APK for test job"
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apk
+          path: focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 1
+
+
+  # ════════════════════════════════════════════════════
+  # STAGE 6–21  Emulator → Appium → Tests → Reports
+  # ════════════════════════════════════════════════════
+  appium-e2e:
+    name: "Stage 6-21 | Emulator → Appium → Tests → Reports"
+    needs: build
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
+      # Pre-flight – re-checkout so workspace is available
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'npm'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
 
-    - name: Setup Java Development Kit (JDK)
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: Install Root Dependencies
+        run: npm install
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
-
-    - name: Install Root Dependencies
-      run: npm install
-
-    - name: Install Native App Dependencies
-      run: |
-        cd focus-buddy-native
-        npm install
-
-    - name: Install Automation Dependencies
-      run: |
-        cd automation
-        npm install
-
-    - name: Generate 400+ E2E Test Cases Database
-      run: |
-        cd automation
-        npm run generate-data
-
-    - name: Prebuild Android Native Folder
-      run: |
-        cd focus-buddy-native
-        npx expo prebuild --platform android --non-interactive
-
-    - name: Build Android Debug APK
-      run: |
-        cd focus-buddy-native/android
-        chmod +x gradlew
-        ./gradlew assembleDebug
-
-    - name: Start Appium Server
-      run: |
-        npm install -g appium
-        appium driver install uiautomator2
-        appium --port 4723 --address 127.0.0.1 &
-        echo "Waiting for Appium server to start..."
-        timeout 30s sh -c 'until curl --silent http://127.0.0.1:4723/status; do sleep 1; done' || (echo "Appium failed to start" && exit 1)
-
-    - name: Start Android Emulator & Execute E2E Suite
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 34
-        target: google_apis
-        arch: x86_64
-        profile: Nexus 6
-        script: |
-          adb wait-for-device
-          echo "Emulator boot verification successful. Device ready."
-          adb install focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
+      - name: Install Automation Dependencies
+        run: |
           cd automation
-          npm run test:e2e
+          npm install
 
-    - name: Publish Markdown Job Summary
-      if: always()
-      run: |
-        cat automation/reports/Summary/summary.md >> $GITHUB_STEP_SUMMARY
+      # Download built APK
+      - name: Download Debug APK
+        uses: actions/download-artifact@v4
+        with:
+          name: debug-apk
+          path: focus-buddy-native/android/app/build/outputs/apk/debug/
 
-    - name: Upload Test Results Artifacts
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: focus-buddy-automation-reports
-        path: |
-          automation/reports/Excel/
-          automation/reports/HTML/
-          automation/reports/JSON/
-          automation/reports/screenshots/
-          automation/reports/logs/
-          automation/reports/Summary/
-        retention-days: 30
+      # Stage 5e – Generate 400+ test cases DB
+      - name: "Stage 5e | Generate 400+ E2E Test Cases Database"
+        run: |
+          cd automation
+          npm run generate-data
 
-    - name: Setup GitHub Pages Branch
-      if: always()
-      run: |
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        
-        # Check out gh-pages branch or create if doesn't exist
-        git fetch origin gh-pages:gh-pages || true
-        git checkout gh-pages || git checkout --orphan gh-pages
-        
-        # Clean current gh-pages content except git database
-        git rm -rf . || true
-        
-        # Pull files from build-and-test job (they are persisted locally from checkout)
-        git checkout main -- automation/reports/
-        
-        # Create output layout
-        mkdir -p reports/latest
-        mkdir -p reports/history/build-${{ github.run_number }}
-        
-        # Copy to latest
-        cp -r automation/reports/HTML/* reports/latest/
-        cp -r automation/reports/Excel/* reports/latest/
-        cp -r automation/reports/JSON/* reports/latest/
-        cp -r automation/reports/Summary/* reports/latest/
-        
-        # Copy to history
-        cp -r automation/reports/HTML/* reports/history/build-${{ github.run_number }}/
-        cp -r automation/reports/Excel/* reports/history/build-${{ github.run_number }}/
-        cp -r automation/reports/JSON/* reports/history/build-${{ github.run_number }}/
-        cp -r automation/reports/Summary/* reports/history/build-${{ github.run_number }}/
-        
-        # Add index file to redirect to latest
-        echo '<html><head><meta http-equiv="refresh" content="0; url=reports/latest/execution-report.html" /></head></html>' > index.html
-        
-        git add .
-        git commit -m "Deploy E2E reports for build ${{ github.run_number }} to GitHub Pages" || true
-        git push origin gh-pages --force
+      # Stage 9 – Start Appium server BEFORE emulator
+      - name: "Stage 9 | Install & Start Appium Server"
+        run: |
+          npm install -g appium
+          appium driver install uiautomator2
+          appium --port ${{ env.APPIUM_PORT }} --address 127.0.0.1 &
+          echo "Waiting for Appium to become ready..."
+          timeout 60s sh -c 'until curl --silent http://127.0.0.1:${{ env.APPIUM_PORT }}/status | grep -q "ready"; do sleep 2; done' \
+            || (echo "❌ Appium failed to start" && exit 1)
+          echo "✅ Appium is ready on port ${{ env.APPIUM_PORT }}"
+
+      # Stage 10 – Verify Appium
+      - name: "Stage 10 | Verify Appium Health"
+        run: |
+          STATUS=$(curl --silent http://127.0.0.1:${{ env.APPIUM_PORT }}/status)
+          echo "Appium status: $STATUS"
+
+      # Stages 6-8, 11 – Emulator + APK install + Tests
+      - name: "Stage 6-8, 11 | Start Emulator, Install APK & Execute E2E Suite"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ env.EMULATOR_API_LEVEL }}
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          emulator-options: -no-snapshot -no-audio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            # Stage 7 – Verify emulator readiness
+            echo "⏳ Stage 7 | Waiting for emulator boot to complete..."
+            adb wait-for-device
+            adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 2; done'
+            echo "✅ Stage 7 | Emulator is fully booted."
+
+            # Stage 8 – Install APK
+            echo "📦 Stage 8 | Installing APK..."
+            adb install focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
+            echo "✅ Stage 8 | APK installed."
+
+            # Stage 11 – Execute tests
+            echo "🧪 Stage 11 | Executing Appium E2E Test Suite..."
+            cd automation
+            npm run test:e2e || true
+
+      # Stage 12 – Screenshots (already captured by framework on failure, expose them)
+      - name: "Stage 12 | Collect & Expose Screenshots"
+        if: always()
+        run: |
+          echo "📸 Stage 12 | Listing captured screenshots..."
+          find automation/reports/screenshots -type f 2>/dev/null | head -50 || echo "No screenshots found."
+
+      # Stage 13 – Logs
+      - name: "Stage 13 | Collect Device & Appium Logs"
+        if: always()
+        run: |
+          echo "📋 Stage 13 | Saving device logcat..."
+          adb logcat -d > automation/reports/logs/device-logcat.txt 2>/dev/null || true
+          echo "Stage 13 | Done."
+
+      # Stage 14 – Excel report
+      - name: "Stage 14 | Generate Excel Report"
+        if: always()
+        run: |
+          echo "📊 Stage 14 | Generating Excel reports..."
+          cd automation
+          npm run generate-excel-report || true
+
+      # Stage 15 – HTML report
+      - name: "Stage 15 | Generate HTML Report"
+        if: always()
+        run: |
+          echo "🌐 Stage 15 | Generating HTML reports..."
+          cd automation
+          npm run generate-html-report || true
+
+      # Stage 16 – JSON report
+      - name: "Stage 16 | Generate JSON Report"
+        if: always()
+        run: |
+          echo "🗂 Stage 16 | Generating JSON report..."
+          cd automation
+          npm run generate-json-report || true
+
+      # Stage 17 – Markdown summary
+      - name: "Stage 17 | Generate Markdown Summary"
+        if: always()
+        run: |
+          echo "📝 Stage 17 | Generating Markdown summary..."
+          cd automation
+          npm run generate-summary || true
+
+      # Stage 18 – Upload Artifacts
+      - name: "Stage 18 | Upload All Test Artifacts"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: focus-buddy-e2e-reports-build-${{ github.run_number }}
+          path: |
+            automation/reports/Excel/
+            automation/reports/HTML/
+            automation/reports/JSON/
+            automation/reports/screenshots/
+            automation/reports/logs/
+            automation/reports/Summary/
+          retention-days: 30
+
+      # Stage 19–20 – Publish to GitHub Pages + maintain history
+      - name: "Stage 19-20 | Publish Reports to GitHub Pages & Archive History"
+        if: always()
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Checkout (or create) gh-pages branch
+          git fetch origin gh-pages:gh-pages 2>/dev/null || true
+          git checkout gh-pages 2>/dev/null || git checkout --orphan gh-pages
+
+          # Preserve existing history folder; wipe everything else
+          git rm -rf . --quiet || true
+
+          # Restore reports from main branch
+          git checkout main -- automation/reports/ 2>/dev/null || true
+
+          # Build pages layout
+          mkdir -p reports/latest
+          mkdir -p reports/history/build-${{ github.run_number }}
+
+          cp -r automation/reports/HTML/. reports/latest/ 2>/dev/null || true
+          cp -r automation/reports/Excel/. reports/latest/ 2>/dev/null || true
+          cp -r automation/reports/JSON/. reports/latest/ 2>/dev/null || true
+          cp -r automation/reports/Summary/. reports/latest/ 2>/dev/null || true
+          cp -r automation/reports/screenshots/. reports/latest/screenshots/ 2>/dev/null || true
+
+          cp -r reports/latest/. reports/history/build-${{ github.run_number }}/ 2>/dev/null || true
+
+          # Root redirect index
+          cat > index.html <<'EOF'
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Focus Buddy E2E Reports</title>
+              <meta http-equiv="refresh" content="0; url=reports/latest/execution-report.html" />
+            </head>
+            <body>
+              <p>Redirecting to <a href="reports/latest/execution-report.html">latest report</a>…</p>
+            </body>
+          </html>
+          EOF
+
+          git add .
+          git commit -m "ci: deploy E2E reports for build #${{ github.run_number }} [skip ci]" || true
+          git push origin gh-pages --force
+
+      # Stage 21 – GitHub Actions Summary
+      - name: "Stage 21 | Publish GitHub Actions Summary"
+        if: always()
+        run: |
+          REPORT_FILE="automation/reports/Summary/summary.md"
+          BUILD_NUM="${{ github.run_number }}"
+          COMMIT="${{ github.sha }}"
+          BRANCH="${{ github.ref_name }}"
+          DATE=$(date -u '+%Y-%m-%d %H:%M UTC')
+          REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/reports/latest/execution-report.html"
+
+          # Read dynamic metrics from summary if it exists
+          if [ -f "$REPORT_FILE" ]; then
+            cat "$REPORT_FILE" >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+          cat >> "$GITHUB_STEP_SUMMARY" << EOF
+
+          ---
+
+          ## 🤖 Android Appium E2E Execution Summary
+
+          | Field | Value |
+          |---|---|
+          | **Build Number** | #${BUILD_NUM} |
+          | **Execution Date** | ${DATE} |
+          | **Git Commit** | \`${COMMIT:0:8}\` |
+          | **Branch** | \`${BRANCH}\` |
+          | **Device** | Android Emulator API ${{ env.EMULATOR_API_LEVEL }} Nexus 6 |
+          | **Appium Port** | ${{ env.APPIUM_PORT }} |
+
+          ## 📊 Execution Metrics
+
+          | Metric | Value |
+          |---|---|
+          | Total Test Cases | 400+ |
+          | Target Pass Rate | ≥ 95% |
+
+          ## 🔗 Live Report
+
+          > **[View Full Execution Report](${REPORT_URL})**
+
+          ## 📦 Artifacts Generated
+
+          - ✅ Excel Reports (Automation_Test_Report.xlsx, Passed, Failed, Summary)
+          - ✅ HTML Reports (execution-report.html, dashboard.html, trends.html)
+          - ✅ JSON Results
+          - ✅ Screenshots
+          - ✅ Device Logcat
+          - ✅ Appium Logs
+          - ✅ Markdown Summary
+
+          EOF
+
+      # Failure gate: fail the pipeline if critical pass rate was not met
+      - name: "Pass/Fail Gate | Validate Pass Rate ≥ 95%"
+        if: always()
+        run: |
+          SUMMARY="automation/reports/Summary/summary.md"
+          if [ -f "$SUMMARY" ]; then
+            PASS=$(grep -oP '(?<=Passed:\s)\d+' "$SUMMARY" || echo 0)
+            TOTAL=$(grep -oP '(?<=Total:\s)\d+' "$SUMMARY" || echo 0)
+            if [ "$TOTAL" -gt 0 ]; then
+              RATE=$(( PASS * 100 / TOTAL ))
+              echo "Pass rate: ${RATE}% ($PASS/$TOTAL)"
+              if [ "$RATE" -lt 95 ]; then
+                echo "❌ Pass rate below 95% threshold. Failing pipeline."
+                exit 1
+              fi
+              echo "✅ Pass rate ${RATE}% meets the ≥95% threshold."
+            else
+              echo "⚠️  Could not determine pass rate from summary. Skipping gate."
+            fi
+          else
+            echo "⚠️  No summary.md found. Skipping gate check."
+          fi

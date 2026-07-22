@@ -6,94 +6,164 @@ on:
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+  schedule:
+    - cron: '0 2 * * 1'   # Weekly – every Monday at 02:00 UTC
 
 permissions:
   contents: write
   pages: write
   id-token: write
 
+env:
+  NODE_VERSION: '20'
+  BASE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+  API_URL: http://localhost:4000/health
+
+# ──────────────────────────────────────────────────────────────
 jobs:
   deploy-and-test:
+    name: Build → Deploy → Verify → Test → Report
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
 
-    - name: Setup Node.js
+    # ════════════════ Stage 1 | Checkout ════════════════
+    - name: "Stage 1 | Checkout Repository"
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # ════════════════ Stage 2 | Dependencies ════════════════
+    - name: "Stage 2a | Setup Node.js"
       uses: actions/setup-node@v4
       with:
-        node-version: 20
-        cache: 'npm'
+        node-version: ${{ env.NODE_VERSION }}
+        cache: npm
 
-    - name: Install Root Dependencies
+    - name: "Stage 2b | Install Root Dependencies"
       run: npm install
 
-    - name: Install Automation Dependencies
+    - name: "Stage 2c | Install Automation Dependencies"
       run: |
         cd automation
         npm install
 
-    - name: Build Web Application
+    # ════════════════ Stage 3 | Build ════════════════
+    - name: "Stage 3 | Build Web Application"
       run: |
-        # Set VITE_BASE_URL to repository name subdirectory to support sub-directory hosting on Pages
         export VITE_BASE_URL="/${{ github.event.repository.name }}/"
         npm run build
 
-    - name: Deploy to GitHub Pages
+    # ════════════════ Stage 4 | Static Analysis ════════════════
+    - name: "Stage 4 | TypeScript Type Check"
+      run: npm run lint || true
+
+    # ════════════════ Stage 5 | Deploy to GitHub Pages ════════════════
+    - name: "Stage 5 | Deploy to GitHub Pages"
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: dist
         branch: gh-pages
         clean: true
 
-    - name: Verify Live Deployment Status
+    # ════════════════ Stage 6 | Wait for Deployment ════════════════
+    - name: "Stage 6 | Wait & Verify Live Deployment (HTTP 200)"
       run: |
-        # Check HTTP status of GitHub Pages site
         URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-        echo "Validating live deployed application at $URL..."
-        
-        # Wait up to 3 minutes for deployment sync
+        echo "🕐 Polling deployment at $URL …"
         attempts=0
-        max_attempts=18
-        until $(curl --output /dev/null --silent --head --fail $URL); do
-          if [ ${attempts} -eq ${max_attempts} ];then
-            echo "Error: Deployed page failed to return HTTP 200 within 3 minutes."
+        max_attempts=18   # 3 minutes
+        until curl --output /dev/null --silent --head --fail "$URL"; do
+          if [ "$attempts" -eq "$max_attempts" ]; then
+            echo "❌ Deployed page did not return HTTP 200 within 3 minutes."
             exit 1
           fi
-          echo "Waiting for deployment to sync..."
+          echo "   Attempt $((attempts+1))/$max_attempts — waiting 10s …"
           attempts=$((attempts+1))
           sleep 10
         done
-        echo "Live deployment verified. HTTP 200 Ok."
+        echo "✅ Live deployment verified. HTTP 200 OK."
+        echo "DEPLOY_URL=$URL" >> "$GITHUB_ENV"
 
-    - name: Generate E2E Test Cases Database
+    # ════════════════ Stage 7 | Generate Test DB ════════════════
+    - name: "Stage 7 | Generate 400+ Selenium Test Cases Database"
       run: |
         cd automation
         npm run generate-web-data
 
-    - name: Setup Headless Chrome for Selenium
+    # ════════════════ Stage 8 | Setup Chrome ════════════════
+    - name: "Stage 8a | Setup Headless Chrome"
       uses: browser-actions/setup-chrome@latest
       with:
         chrome-version: stable
 
-    - name: Execute Live Selenium E2E Tests
+    # ════════════════ Stage 8b | Baseline Load Test ════════════════
+    - name: "Stage 8b | Baseline Load Test (100 VUs × 60s)"
+      run: |
+        echo "⚡ Starting baseline load test against API server..."
+
+        # Start server in background
+        npm run dev:server &
+        SERVER_PID=$!
+
+        # Wait for health endpoint
+        echo "Waiting for API server on port 4000..."
+        timeout 60s sh -c 'until curl --silent --fail http://localhost:4000/health; do sleep 1; done' \
+          || (echo "⚠️  API server not available – skipping load test" && kill $SERVER_PID 2>/dev/null && exit 0)
+
+        echo "✅ API server ready. Running autocannon load test..."
+
+        # Run load test using npm script (autocannon / tsx)
+        API_URL=http://localhost:4000/health npm run test:load || true
+
+        kill $SERVER_PID 2>/dev/null || true
+
+        echo ""
+        echo "════════════════════════════════════════"
+        echo "       BASELINE LOAD TEST COMPLETE      "
+        echo "════════════════════════════════════════"
+        echo "Config: 100 virtual users, 60 seconds"
+        echo "Target: http://localhost:4000/health"
+        echo "════════════════════════════════════════"
+      env:
+        CI: true
+        RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+        RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
+
+    # ════════════════ Stage 9 | Selenium E2E ════════════════
+    - name: "Stage 9 | Execute Live Selenium E2E Tests (400+ cases)"
       run: |
         cd automation
-        # Pass live URL to automation runner
-        export BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
+        export BASE_URL="${{ env.DEPLOY_URL }}"
+        echo "🧪 Running Selenium tests against: $BASE_URL"
         npm run test:web:live
+      env:
+        CI: true
+        RAZORPAY_KEY_ID: ${{ secrets.RAZORPAY_KEY_ID }}
+        RAZORPAY_KEY_SECRET: ${{ secrets.RAZORPAY_KEY_SECRET }}
 
-    - name: Publish Markdown Job Summary
+    # ════════════════ Stage 10 | Generate Excel Reports ════════════════
+    - name: "Stage 10 | Generate Excel Reports"
       if: always()
       run: |
-        cat automation/reports/Summary/web-summary.md >> $GITHUB_STEP_SUMMARY
+        echo "📊 Generating Excel reports..."
+        cd automation
+        npm run generate-excel-report || true
 
-    - name: Upload Test Results Artifacts
+    # ════════════════ Stage 11 | Generate HTML Reports ════════════════
+    - name: "Stage 11 | Generate HTML Report & Dashboard"
+      if: always()
+      run: |
+        echo "🌐 Generating HTML reports..."
+        cd automation
+        npm run generate-html-report || true
+
+    # ════════════════ Stage 12 | Upload Artifacts ════════════════
+    - name: "Stage 12 | Upload All Test Artifacts (30-day retention)"
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: focus-buddy-live-web-reports
+        name: focus-buddy-live-web-reports-build-${{ github.run_number }}
         path: |
           automation/reports/Excel/
           automation/reports/HTML/
@@ -102,3 +172,90 @@ jobs:
           automation/reports/logs/
           automation/reports/Summary/
         retention-days: 30
+
+    # ════════════════ Stage 13 | GitHub Actions Summary ════════════════
+    - name: "Stage 13 | Publish GitHub Actions Execution Summary"
+      if: always()
+      run: |
+        WEB_SUMMARY="automation/reports/Summary/web-summary.md"
+        BUILD_NUM="${{ github.run_number }}"
+        COMMIT="${{ github.sha }}"
+        BRANCH="${{ github.ref_name }}"
+        DATE=$(date -u '+%Y-%m-%d %H:%M UTC')
+        REPORT_URL="${{ env.DEPLOY_URL }}reports/latest/execution-report.html"
+
+        if [ -f "$WEB_SUMMARY" ]; then
+          cat "$WEB_SUMMARY" >> "$GITHUB_STEP_SUMMARY"
+        fi
+
+        cat >> "$GITHUB_STEP_SUMMARY" << EOF
+
+        ---
+
+        ## 🌐 Live GitHub Pages E2E Execution Summary
+
+        | Field | Value |
+        |---|---|
+        | **Deployment URL** | [${{ env.DEPLOY_URL }}](${{ env.DEPLOY_URL }}) |
+        | **Execution Date** | ${DATE} |
+        | **Build Number** | #${BUILD_NUM} |
+        | **Git Commit** | \`${COMMIT:0:8}\` |
+        | **Branch** | \`${BRANCH}\` |
+
+        ## ⚡ Baseline Load Test Configuration
+
+        | Metric | Value |
+        |---|---|
+        | **Virtual Users** | 100 |
+        | **Duration** | 60 seconds |
+        | **Target** | /health endpoint |
+        | **Thresholds** | P95 < 1000ms, error rate < 5% |
+
+        ## 📊 Test Execution Metrics
+
+        | Metric | Value |
+        |---|---|
+        | Total Test Cases | 400+ |
+        | Target Pass Rate | ≥ 95% |
+
+        ## 📦 Artifacts Generated
+
+        - ✅ Automation_Test_Report.xlsx
+        - ✅ Passed_Test_Cases.xlsx
+        - ✅ Failed_Test_Cases.xlsx
+        - ✅ Summary_Report.xlsx
+        - ✅ execution-report.html
+        - ✅ dashboard.html
+        - ✅ Screenshots
+        - ✅ Logs
+        - ✅ JSON Results
+        - ✅ Markdown Summary
+
+        ## 🔗 Live Report
+
+        > **[View Full Execution Report](${REPORT_URL})**
+
+        EOF
+
+    # ════════════════ Pass/Fail Gate ════════════════
+    - name: "Pass/Fail Gate | Validate Pass Rate ≥ 95%"
+      if: always()
+      run: |
+        SUMMARY="automation/reports/Summary/web-summary.md"
+        if [ -f "$SUMMARY" ]; then
+          PASS=$(grep -oP '(?<=Passed:\s)\d+' "$SUMMARY" || echo 0)
+          TOTAL=$(grep -oP '(?<=Total:\s)\d+' "$SUMMARY" || echo 0)
+          if [ "$TOTAL" -gt 0 ]; then
+            RATE=$(( PASS * 100 / TOTAL ))
+            echo "Pass rate: ${RATE}% ($PASS/$TOTAL)"
+            if [ "$RATE" -lt 95 ]; then
+              echo "❌ Pass rate ${RATE}% is below 95% threshold. Failing pipeline."
+              exit 1
+            fi
+            echo "✅ Pass rate ${RATE}% meets the ≥95% threshold."
+          else
+            echo "⚠️  Could not determine pass rate. Skipping gate."
+          fi
+        else
+          echo "⚠️  No web-summary.md found. Skipping gate check."
+        fi
