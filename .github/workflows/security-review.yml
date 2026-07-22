@@ -25,7 +25,7 @@ jobs:
 # JOB 1 ▸ Detect Technology Stack   (runs first, no deps)
 # ──────────────────────────────────────────────────────────────
   detect-tech-stack:
-    name: Detect Technology Stack
+    name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
     outputs:
       framework: ${{ steps.detect.outputs.framework }}
@@ -99,7 +99,7 @@ jobs:
 # JOB 2 ▸ Secret Detection - Gitleaks   (parallel with Job 1)
 # ──────────────────────────────────────────────────────────────
   secret-detection:
-    name: Secret Detection - Gitleaks
+    name: 🔑 Secret Detection - Gitleaks
     runs-on: ubuntu-latest
 
     steps:
@@ -146,7 +146,7 @@ jobs:
 # JOB 3 ▸ SAST - Semgrep   (needs: detect-tech-stack)
 # ──────────────────────────────────────────────────────────────
   sast:
-    name: SAST - Semgrep
+    name: 🛡️ SAST - Semgrep
     needs: detect-tech-stack
     runs-on: ubuntu-latest
 
@@ -239,7 +239,7 @@ jobs:
 # JOB 4 ▸ Dependency Vulnerability Scan   (needs: detect-tech-stack, parallel with SAST)
 # ──────────────────────────────────────────────────────────────
   dependency-scan:
-    name: Dependency Vulnerability Scan
+    name: 📦 Dependency Vulnerability Scan
     needs: detect-tech-stack
     runs-on: ubuntu-latest
     env:
@@ -383,7 +383,7 @@ jobs:
 # JOB 5 ▸ Generate Security Reports   (needs: sast + dependency-scan + secret-detection)
 # ──────────────────────────────────────────────────────────────
   generate-reports:
-    name: Generate Security Reports
+    name: 📄 Generate Security Reports
     needs: [ sast, dependency-scan, secret-detection ]
     if: always()
     runs-on: ubuntu-latest

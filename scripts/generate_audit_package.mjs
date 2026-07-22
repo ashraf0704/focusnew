@@ -332,7 +332,7 @@ permissions:
 
 jobs:
   detect-tech-stack:
-    name: Detect Technology Stack
+    name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
     outputs:
       framework: \${{ steps.detect.outputs.framework }}
@@ -347,7 +347,7 @@ jobs:
           echo "Detected backend framework: $framework" >> "$GITHUB_STEP_SUMMARY"
 
   secret-detection:
-    name: Secret Detection - Gitleaks
+    name: 🔑 Secret Detection - Gitleaks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -360,7 +360,7 @@ jobs:
         continue-on-error: true
 
   sast:
-    name: SAST - Semgrep
+    name: 🛡️ SAST - Semgrep
     needs: detect-tech-stack
     runs-on: ubuntu-latest
     steps:
@@ -386,7 +386,7 @@ jobs:
         continue-on-error: true
 
   dependency-scan:
-    name: Dependency Vulnerability Scan
+    name: 📦 Dependency Vulnerability Scan
     needs: detect-tech-stack
     runs-on: ubuntu-latest
     env:
@@ -426,7 +426,7 @@ jobs:
             Vulnerability Test Results/npm-audit.json
 
   generate-reports:
-    name: Generate Security Reports
+    name: 📄 Generate Security Reports
     needs: [detect-tech-stack, sast, dependency-scan, secret-detection]
     if: always()
     runs-on: ubuntu-latest
