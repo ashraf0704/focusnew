@@ -9,10 +9,10 @@
     "generate-web-data": "tsx scripts/generateWebData.ts",
     "test:e2e": "tsx runners/testRunner.ts",
     "test:web:live": "tsx runners/webTestRunner.ts",
-    "generate-excel-report": "tsx runners/webTestRunner.ts",
-    "generate-html-report": "tsx runners/webTestRunner.ts",
-    "generate-json-report": "tsx runners/webTestRunner.ts",
-    "generate-summary": "tsx runners/webTestRunner.ts"
+    "generate-excel-report": "tsx runners/testRunner.ts",
+    "generate-html-report": "tsx runners/testRunner.ts",
+    "generate-json-report": "tsx runners/testRunner.ts",
+    "generate-summary": "tsx runners/testRunner.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

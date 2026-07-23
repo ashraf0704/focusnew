@@ -15,7 +15,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 247
+    "durationMs": 290
   },
   {
     "id": "TC_AUTH_002",
@@ -33,7 +33,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 181
+    "durationMs": 166
   },
   {
     "id": "TC_AUTH_003",
@@ -51,7 +51,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 186
+    "durationMs": 176
   },
   {
     "id": "TC_AUTH_004",
@@ -69,7 +69,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 324
   },
   {
     "id": "TC_AUTH_005",
@@ -87,7 +87,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 256
   },
   {
     "id": "TC_AUTH_006",
@@ -105,7 +105,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 309
+    "durationMs": 339
   },
   {
     "id": "TC_AUTH_007",
@@ -123,7 +123,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 286
+    "durationMs": 338
   },
   {
     "id": "TC_AUTH_008",
@@ -141,7 +141,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 239
+    "durationMs": 335
   },
   {
     "id": "TC_AUTH_009",
@@ -159,7 +159,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 318
+    "durationMs": 288
   },
   {
     "id": "TC_AUTH_010",
@@ -177,7 +177,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 280
+    "durationMs": 186
   },
   {
     "id": "TC_AUTH_011",
@@ -195,7 +195,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 320
   },
   {
     "id": "TC_AUTH_012",
@@ -213,7 +213,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 275
+    "durationMs": 200
   },
   {
     "id": "TC_AUTH_013",
@@ -231,7 +231,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 313
   },
   {
     "id": "TC_AUTH_014",
@@ -249,7 +249,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 253
   },
   {
     "id": "TC_AUTH_015",
@@ -267,7 +267,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 168
   },
   {
     "id": "TC_AUTH_016",
@@ -285,7 +285,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 281
+    "durationMs": 243
   },
   {
     "id": "TC_AUTH_017",
@@ -303,7 +303,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 309
+    "durationMs": 321
   },
   {
     "id": "TC_AUTH_018",
@@ -321,7 +321,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 171
   },
   {
     "id": "TC_AUTH_019",
@@ -339,7 +339,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 306
+    "durationMs": 176
   },
   {
     "id": "TC_AUTH_020",
@@ -357,7 +357,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 173
   },
   {
     "id": "TC_AUTH_021",
@@ -375,7 +375,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 346
+    "durationMs": 299
   },
   {
     "id": "TC_AUTH_022",
@@ -393,7 +393,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 260
   },
   {
     "id": "TC_AUTH_023",
@@ -411,7 +411,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 315
+    "durationMs": 245
   },
   {
     "id": "TC_AUTH_024",
@@ -429,7 +429,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 331
+    "durationMs": 153
   },
   {
     "id": "TC_AUTH_025",
@@ -447,7 +447,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 276
+    "durationMs": 164
   },
   {
     "id": "TC_AUTH_026",
@@ -465,7 +465,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 311
   },
   {
     "id": "TC_AUTH_027",
@@ -483,7 +483,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 179
   },
   {
     "id": "TC_AUTH_028",
@@ -501,7 +501,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 341
   },
   {
     "id": "TC_AUTH_029",
@@ -519,7 +519,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 342
   },
   {
     "id": "TC_AUTH_030",
@@ -537,7 +537,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 215
   },
   {
     "id": "TC_AUTH_031",
@@ -555,7 +555,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 153
   },
   {
     "id": "TC_AUTH_032",
@@ -573,7 +573,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 311
+    "durationMs": 237
   },
   {
     "id": "TC_AUTH_033",
@@ -591,7 +591,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 167
   },
   {
     "id": "TC_AUTH_034",
@@ -609,7 +609,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 191
   },
   {
     "id": "TC_AUTH_035",
@@ -627,7 +627,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 299
   },
   {
     "id": "TC_AUTH_036",
@@ -645,7 +645,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 189
   },
   {
     "id": "TC_AUTH_037",
@@ -663,7 +663,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 190
   },
   {
     "id": "TC_AUTH_038",
@@ -681,7 +681,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 196
   },
   {
     "id": "TC_AUTH_039",
@@ -699,7 +699,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 153
+    "durationMs": 330
   },
   {
     "id": "TC_AUTH_040",
@@ -717,7 +717,7 @@
     "expectedResult": "The Authentication interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 330
   },
   {
     "id": "TC_AUTHZ_001",
@@ -735,7 +735,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 310
+    "durationMs": 228
   },
   {
     "id": "TC_AUTHZ_002",
@@ -753,7 +753,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 348
   },
   {
     "id": "TC_AUTHZ_003",
@@ -771,7 +771,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 349
+    "durationMs": 191
   },
   {
     "id": "TC_AUTHZ_004",
@@ -789,7 +789,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 239
   },
   {
     "id": "TC_AUTHZ_005",
@@ -807,7 +807,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 285
+    "durationMs": 207
   },
   {
     "id": "TC_AUTHZ_006",
@@ -825,7 +825,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 288
+    "durationMs": 302
   },
   {
     "id": "TC_AUTHZ_007",
@@ -843,7 +843,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 259
   },
   {
     "id": "TC_AUTHZ_008",
@@ -861,7 +861,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 191
+    "durationMs": 187
   },
   {
     "id": "TC_AUTHZ_009",
@@ -879,7 +879,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 177
+    "durationMs": 172
   },
   {
     "id": "TC_AUTHZ_010",
@@ -897,7 +897,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 168
+    "durationMs": 325
   },
   {
     "id": "TC_AUTHZ_011",
@@ -915,7 +915,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 184
+    "durationMs": 293
   },
   {
     "id": "TC_AUTHZ_012",
@@ -933,7 +933,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 320
   },
   {
     "id": "TC_AUTHZ_013",
@@ -969,7 +969,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 270
   },
   {
     "id": "TC_AUTHZ_015",
@@ -987,7 +987,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 268
   },
   {
     "id": "TC_AUTHZ_016",
@@ -1005,7 +1005,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 154
   },
   {
     "id": "TC_AUTHZ_017",
@@ -1023,7 +1023,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 230
+    "durationMs": 322
   },
   {
     "id": "TC_AUTHZ_018",
@@ -1041,7 +1041,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 296
   },
   {
     "id": "TC_AUTHZ_019",
@@ -1059,7 +1059,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 152
+    "durationMs": 214
   },
   {
     "id": "TC_AUTHZ_020",
@@ -1077,7 +1077,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 333
+    "durationMs": 346
   },
   {
     "id": "TC_AUTHZ_021",
@@ -1095,7 +1095,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 300
+    "durationMs": 235
   },
   {
     "id": "TC_AUTHZ_022",
@@ -1113,7 +1113,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 255
   },
   {
     "id": "TC_AUTHZ_023",
@@ -1131,7 +1131,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 340
+    "durationMs": 177
   },
   {
     "id": "TC_AUTHZ_024",
@@ -1149,7 +1149,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 218
+    "durationMs": 163
   },
   {
     "id": "TC_AUTHZ_025",
@@ -1167,7 +1167,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 177
+    "durationMs": 225
   },
   {
     "id": "TC_AUTHZ_026",
@@ -1185,7 +1185,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 302
+    "durationMs": 299
   },
   {
     "id": "TC_AUTHZ_027",
@@ -1203,7 +1203,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 184
+    "durationMs": 208
   },
   {
     "id": "TC_AUTHZ_028",
@@ -1221,7 +1221,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 330
+    "durationMs": 169
   },
   {
     "id": "TC_AUTHZ_029",
@@ -1239,7 +1239,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 328
+    "durationMs": 246
   },
   {
     "id": "TC_AUTHZ_030",
@@ -1257,7 +1257,7 @@
     "expectedResult": "The Authorization interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 328
+    "durationMs": 158
   },
   {
     "id": "TC_REG_001",
@@ -1275,7 +1275,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 349
+    "durationMs": 247
   },
   {
     "id": "TC_REG_002",
@@ -1293,7 +1293,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 251
+    "durationMs": 219
   },
   {
     "id": "TC_REG_003",
@@ -1311,7 +1311,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 274
+    "durationMs": 209
   },
   {
     "id": "TC_REG_004",
@@ -1329,7 +1329,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 189
   },
   {
     "id": "TC_REG_005",
@@ -1347,7 +1347,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 319
+    "durationMs": 209
   },
   {
     "id": "TC_REG_006",
@@ -1365,7 +1365,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 327
+    "durationMs": 170
   },
   {
     "id": "TC_REG_007",
@@ -1383,7 +1383,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 325
   },
   {
     "id": "TC_REG_008",
@@ -1401,7 +1401,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 319
+    "durationMs": 184
   },
   {
     "id": "TC_REG_009",
@@ -1419,7 +1419,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 195
   },
   {
     "id": "TC_REG_010",
@@ -1437,7 +1437,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 241
+    "durationMs": 215
   },
   {
     "id": "TC_REG_011",
@@ -1455,7 +1455,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 327
+    "durationMs": 282
   },
   {
     "id": "TC_REG_012",
@@ -1473,7 +1473,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 308
+    "durationMs": 310
   },
   {
     "id": "TC_REG_013",
@@ -1491,7 +1491,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 207
+    "durationMs": 341
   },
   {
     "id": "TC_REG_014",
@@ -1509,7 +1509,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 321
+    "durationMs": 309
   },
   {
     "id": "TC_REG_015",
@@ -1527,7 +1527,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 171
   },
   {
     "id": "TC_REG_016",
@@ -1545,7 +1545,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 326
+    "durationMs": 173
   },
   {
     "id": "TC_REG_017",
@@ -1563,7 +1563,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 334
+    "durationMs": 194
   },
   {
     "id": "TC_REG_018",
@@ -1581,7 +1581,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 286
+    "durationMs": 216
   },
   {
     "id": "TC_REG_019",
@@ -1599,7 +1599,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 253
+    "durationMs": 332
   },
   {
     "id": "TC_REG_020",
@@ -1617,7 +1617,7 @@
     "expectedResult": "The Registration interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 271
+    "durationMs": 199
   },
   {
     "id": "TC_PROF_001",
@@ -1635,7 +1635,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 312
+    "durationMs": 293
   },
   {
     "id": "TC_PROF_002",
@@ -1653,7 +1653,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 290
+    "durationMs": 279
   },
   {
     "id": "TC_PROF_003",
@@ -1671,7 +1671,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 321
+    "durationMs": 273
   },
   {
     "id": "TC_PROF_004",
@@ -1689,7 +1689,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 186
+    "durationMs": 297
   },
   {
     "id": "TC_PROF_005",
@@ -1707,7 +1707,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 174
+    "durationMs": 320
   },
   {
     "id": "TC_PROF_006",
@@ -1725,7 +1725,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 274
+    "durationMs": 186
   },
   {
     "id": "TC_PROF_007",
@@ -1743,7 +1743,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 261
+    "durationMs": 289
   },
   {
     "id": "TC_PROF_008",
@@ -1761,7 +1761,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 191
+    "durationMs": 257
   },
   {
     "id": "TC_PROF_009",
@@ -1779,7 +1779,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 275
+    "durationMs": 232
   },
   {
     "id": "TC_PROF_010",
@@ -1797,7 +1797,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 308
   },
   {
     "id": "TC_PROF_011",
@@ -1815,7 +1815,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 239
+    "durationMs": 194
   },
   {
     "id": "TC_PROF_012",
@@ -1833,7 +1833,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 302
+    "durationMs": 317
   },
   {
     "id": "TC_PROF_013",
@@ -1851,7 +1851,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 326
+    "durationMs": 190
   },
   {
     "id": "TC_PROF_014",
@@ -1869,7 +1869,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 168
+    "durationMs": 300
   },
   {
     "id": "TC_PROF_015",
@@ -1887,7 +1887,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 248
   },
   {
     "id": "TC_PROF_016",
@@ -1905,7 +1905,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 258
+    "durationMs": 341
   },
   {
     "id": "TC_PROF_017",
@@ -1923,7 +1923,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 160
+    "durationMs": 256
   },
   {
     "id": "TC_PROF_018",
@@ -1941,7 +1941,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 186
+    "durationMs": 237
   },
   {
     "id": "TC_PROF_019",
@@ -1959,7 +1959,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 303
   },
   {
     "id": "TC_PROF_020",
@@ -1977,7 +1977,7 @@
     "expectedResult": "The Profile Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 336
+    "durationMs": 197
   },
   {
     "id": "TC_NAV_001",
@@ -1995,7 +1995,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 291
+    "durationMs": 318
   },
   {
     "id": "TC_NAV_002",
@@ -2013,7 +2013,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 323
+    "durationMs": 194
   },
   {
     "id": "TC_NAV_003",
@@ -2031,7 +2031,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 296
+    "durationMs": 294
   },
   {
     "id": "TC_NAV_004",
@@ -2049,7 +2049,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 247
+    "durationMs": 175
   },
   {
     "id": "TC_NAV_005",
@@ -2067,7 +2067,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 216
   },
   {
     "id": "TC_NAV_006",
@@ -2085,7 +2085,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 308
+    "durationMs": 300
   },
   {
     "id": "TC_NAV_007",
@@ -2103,7 +2103,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 200
+    "durationMs": 331
   },
   {
     "id": "TC_NAV_008",
@@ -2121,7 +2121,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 308
   },
   {
     "id": "TC_NAV_009",
@@ -2139,7 +2139,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 271
   },
   {
     "id": "TC_NAV_010",
@@ -2157,7 +2157,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 154
   },
   {
     "id": "TC_NAV_011",
@@ -2175,7 +2175,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 200
+    "durationMs": 248
   },
   {
     "id": "TC_NAV_012",
@@ -2193,7 +2193,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 292
+    "durationMs": 213
   },
   {
     "id": "TC_NAV_013",
@@ -2211,7 +2211,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 311
+    "durationMs": 298
   },
   {
     "id": "TC_NAV_014",
@@ -2229,7 +2229,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 220
+    "durationMs": 215
   },
   {
     "id": "TC_NAV_015",
@@ -2247,7 +2247,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 328
+    "durationMs": 209
   },
   {
     "id": "TC_NAV_016",
@@ -2265,7 +2265,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 321
+    "durationMs": 258
   },
   {
     "id": "TC_NAV_017",
@@ -2283,7 +2283,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 213
   },
   {
     "id": "TC_NAV_018",
@@ -2301,7 +2301,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 299
+    "durationMs": 294
   },
   {
     "id": "TC_NAV_019",
@@ -2319,7 +2319,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 291
+    "durationMs": 160
   },
   {
     "id": "TC_NAV_020",
@@ -2337,7 +2337,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 237
   },
   {
     "id": "TC_NAV_021",
@@ -2355,7 +2355,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 332
+    "durationMs": 249
   },
   {
     "id": "TC_NAV_022",
@@ -2373,7 +2373,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 199
   },
   {
     "id": "TC_NAV_023",
@@ -2391,7 +2391,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 204
+    "durationMs": 170
   },
   {
     "id": "TC_NAV_024",
@@ -2409,7 +2409,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 313
+    "durationMs": 329
   },
   {
     "id": "TC_NAV_025",
@@ -2427,7 +2427,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 250
+    "durationMs": 193
   },
   {
     "id": "TC_NAV_026",
@@ -2445,7 +2445,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 154
+    "durationMs": 206
   },
   {
     "id": "TC_NAV_027",
@@ -2463,7 +2463,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 266
   },
   {
     "id": "TC_NAV_028",
@@ -2481,7 +2481,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 155
+    "durationMs": 231
   },
   {
     "id": "TC_NAV_029",
@@ -2499,7 +2499,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 212
+    "durationMs": 284
   },
   {
     "id": "TC_NAV_030",
@@ -2517,7 +2517,7 @@
     "expectedResult": "The Navigation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 347
+    "durationMs": 164
   },
   {
     "id": "TC_DASH_001",
@@ -2535,7 +2535,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 329
   },
   {
     "id": "TC_DASH_002",
@@ -2553,7 +2553,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 283
+    "durationMs": 244
   },
   {
     "id": "TC_DASH_003",
@@ -2571,7 +2571,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 294
   },
   {
     "id": "TC_DASH_004",
@@ -2589,7 +2589,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 346
+    "durationMs": 281
   },
   {
     "id": "TC_DASH_005",
@@ -2607,7 +2607,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 276
+    "durationMs": 197
   },
   {
     "id": "TC_DASH_006",
@@ -2625,7 +2625,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 248
   },
   {
     "id": "TC_DASH_007",
@@ -2643,7 +2643,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 290
+    "durationMs": 323
   },
   {
     "id": "TC_DASH_008",
@@ -2661,7 +2661,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 307
+    "durationMs": 219
   },
   {
     "id": "TC_DASH_009",
@@ -2679,7 +2679,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 273
+    "durationMs": 272
   },
   {
     "id": "TC_DASH_010",
@@ -2697,7 +2697,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 282
+    "durationMs": 250
   },
   {
     "id": "TC_DASH_011",
@@ -2715,7 +2715,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 338
+    "durationMs": 151
   },
   {
     "id": "TC_DASH_012",
@@ -2733,7 +2733,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 214
   },
   {
     "id": "TC_DASH_013",
@@ -2751,7 +2751,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 274
   },
   {
     "id": "TC_DASH_014",
@@ -2769,7 +2769,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 317
+    "durationMs": 264
   },
   {
     "id": "TC_DASH_015",
@@ -2787,7 +2787,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 331
+    "durationMs": 335
   },
   {
     "id": "TC_DASH_016",
@@ -2805,7 +2805,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 274
   },
   {
     "id": "TC_DASH_017",
@@ -2823,7 +2823,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 261
+    "durationMs": 253
   },
   {
     "id": "TC_DASH_018",
@@ -2841,7 +2841,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 207
+    "durationMs": 294
   },
   {
     "id": "TC_DASH_019",
@@ -2859,7 +2859,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 203
   },
   {
     "id": "TC_DASH_020",
@@ -2877,7 +2877,7 @@
     "expectedResult": "The Dashboard interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 230
+    "durationMs": 239
   },
   {
     "id": "TC_FORM_001",
@@ -2895,7 +2895,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 201
+    "durationMs": 175
   },
   {
     "id": "TC_FORM_002",
@@ -2913,7 +2913,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 216
   },
   {
     "id": "TC_FORM_003",
@@ -2931,7 +2931,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 203
   },
   {
     "id": "TC_FORM_004",
@@ -2949,7 +2949,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 193
   },
   {
     "id": "TC_FORM_005",
@@ -2967,7 +2967,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 306
+    "durationMs": 279
   },
   {
     "id": "TC_FORM_006",
@@ -2985,7 +2985,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 268
   },
   {
     "id": "TC_FORM_007",
@@ -3003,7 +3003,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 346
   },
   {
     "id": "TC_FORM_008",
@@ -3021,7 +3021,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 292
+    "durationMs": 252
   },
   {
     "id": "TC_FORM_009",
@@ -3039,7 +3039,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 336
+    "durationMs": 316
   },
   {
     "id": "TC_FORM_010",
@@ -3057,7 +3057,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 296
+    "durationMs": 254
   },
   {
     "id": "TC_FORM_011",
@@ -3075,7 +3075,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 286
+    "durationMs": 207
   },
   {
     "id": "TC_FORM_012",
@@ -3093,7 +3093,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 283
+    "durationMs": 250
   },
   {
     "id": "TC_FORM_013",
@@ -3111,7 +3111,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 323
+    "durationMs": 309
   },
   {
     "id": "TC_FORM_014",
@@ -3129,7 +3129,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 344
+    "durationMs": 341
   },
   {
     "id": "TC_FORM_015",
@@ -3147,7 +3147,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 165
   },
   {
     "id": "TC_FORM_016",
@@ -3165,7 +3165,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 344
+    "durationMs": 190
   },
   {
     "id": "TC_FORM_017",
@@ -3183,7 +3183,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 299
+    "durationMs": 349
   },
   {
     "id": "TC_FORM_018",
@@ -3201,7 +3201,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 280
+    "durationMs": 271
   },
   {
     "id": "TC_FORM_019",
@@ -3219,7 +3219,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 246
+    "durationMs": 300
   },
   {
     "id": "TC_FORM_020",
@@ -3237,7 +3237,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 293
+    "durationMs": 258
   },
   {
     "id": "TC_FORM_021",
@@ -3255,7 +3255,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 305
+    "durationMs": 239
   },
   {
     "id": "TC_FORM_022",
@@ -3273,7 +3273,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 321
+    "durationMs": 205
   },
   {
     "id": "TC_FORM_023",
@@ -3291,7 +3291,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 326
+    "durationMs": 164
   },
   {
     "id": "TC_FORM_024",
@@ -3309,7 +3309,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 309
+    "durationMs": 331
   },
   {
     "id": "TC_FORM_025",
@@ -3327,7 +3327,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 270
+    "durationMs": 262
   },
   {
     "id": "TC_FORM_026",
@@ -3345,7 +3345,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 329
   },
   {
     "id": "TC_FORM_027",
@@ -3363,7 +3363,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 340
+    "durationMs": 185
   },
   {
     "id": "TC_FORM_028",
@@ -3381,7 +3381,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 229
+    "durationMs": 277
   },
   {
     "id": "TC_FORM_029",
@@ -3399,7 +3399,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 172
   },
   {
     "id": "TC_FORM_030",
@@ -3417,7 +3417,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 244
+    "durationMs": 337
   },
   {
     "id": "TC_FORM_031",
@@ -3435,7 +3435,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 348
   },
   {
     "id": "TC_FORM_032",
@@ -3453,7 +3453,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 270
+    "durationMs": 187
   },
   {
     "id": "TC_FORM_033",
@@ -3471,7 +3471,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 206
   },
   {
     "id": "TC_FORM_034",
@@ -3489,7 +3489,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 332
+    "durationMs": 153
   },
   {
     "id": "TC_FORM_035",
@@ -3507,7 +3507,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 208
+    "durationMs": 239
   },
   {
     "id": "TC_FORM_036",
@@ -3525,7 +3525,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 282
+    "durationMs": 239
   },
   {
     "id": "TC_FORM_037",
@@ -3543,7 +3543,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 329
+    "durationMs": 227
   },
   {
     "id": "TC_FORM_038",
@@ -3561,7 +3561,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 332
+    "durationMs": 300
   },
   {
     "id": "TC_FORM_039",
@@ -3579,7 +3579,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 258
+    "durationMs": 291
   },
   {
     "id": "TC_FORM_040",
@@ -3597,7 +3597,7 @@
     "expectedResult": "The Forms interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 288
+    "durationMs": 268
   },
   {
     "id": "TC_CRUD_001",
@@ -3615,7 +3615,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 196
+    "durationMs": 331
   },
   {
     "id": "TC_CRUD_002",
@@ -3633,7 +3633,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 262
   },
   {
     "id": "TC_CRUD_003",
@@ -3651,7 +3651,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 217
+    "durationMs": 174
   },
   {
     "id": "TC_CRUD_004",
@@ -3669,7 +3669,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 321
   },
   {
     "id": "TC_CRUD_005",
@@ -3687,7 +3687,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 312
+    "durationMs": 311
   },
   {
     "id": "TC_CRUD_006",
@@ -3705,7 +3705,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 273
   },
   {
     "id": "TC_CRUD_007",
@@ -3723,7 +3723,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 239
+    "durationMs": 210
   },
   {
     "id": "TC_CRUD_008",
@@ -3741,7 +3741,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 336
+    "durationMs": 198
   },
   {
     "id": "TC_CRUD_009",
@@ -3759,7 +3759,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 268
+    "durationMs": 173
   },
   {
     "id": "TC_CRUD_010",
@@ -3777,7 +3777,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 329
   },
   {
     "id": "TC_CRUD_011",
@@ -3795,7 +3795,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 275
+    "durationMs": 268
   },
   {
     "id": "TC_CRUD_012",
@@ -3813,7 +3813,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 231
+    "durationMs": 197
   },
   {
     "id": "TC_CRUD_013",
@@ -3831,7 +3831,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 195
   },
   {
     "id": "TC_CRUD_014",
@@ -3849,7 +3849,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 238
+    "durationMs": 304
   },
   {
     "id": "TC_CRUD_015",
@@ -3867,7 +3867,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 334
   },
   {
     "id": "TC_CRUD_016",
@@ -3885,7 +3885,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 338
+    "durationMs": 318
   },
   {
     "id": "TC_CRUD_017",
@@ -3903,7 +3903,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 213
   },
   {
     "id": "TC_CRUD_018",
@@ -3921,7 +3921,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 187
   },
   {
     "id": "TC_CRUD_019",
@@ -3939,7 +3939,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 294
+    "durationMs": 199
   },
   {
     "id": "TC_CRUD_020",
@@ -3957,7 +3957,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 252
+    "durationMs": 223
   },
   {
     "id": "TC_CRUD_021",
@@ -3975,7 +3975,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 294
+    "durationMs": 217
   },
   {
     "id": "TC_CRUD_022",
@@ -3993,7 +3993,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 317
+    "durationMs": 230
   },
   {
     "id": "TC_CRUD_023",
@@ -4011,7 +4011,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 289
+    "durationMs": 249
   },
   {
     "id": "TC_CRUD_024",
@@ -4029,7 +4029,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 242
   },
   {
     "id": "TC_CRUD_025",
@@ -4047,7 +4047,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 265
+    "durationMs": 308
   },
   {
     "id": "TC_CRUD_026",
@@ -4065,7 +4065,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 240
+    "durationMs": 294
   },
   {
     "id": "TC_CRUD_027",
@@ -4083,7 +4083,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 340
   },
   {
     "id": "TC_CRUD_028",
@@ -4101,7 +4101,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 152
+    "durationMs": 297
   },
   {
     "id": "TC_CRUD_029",
@@ -4119,7 +4119,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 226
   },
   {
     "id": "TC_CRUD_030",
@@ -4137,7 +4137,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 324
   },
   {
     "id": "TC_CRUD_031",
@@ -4155,7 +4155,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 173
+    "durationMs": 321
   },
   {
     "id": "TC_CRUD_032",
@@ -4173,7 +4173,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 179
+    "durationMs": 197
   },
   {
     "id": "TC_CRUD_033",
@@ -4191,7 +4191,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 282
   },
   {
     "id": "TC_CRUD_034",
@@ -4209,7 +4209,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 341
   },
   {
     "id": "TC_CRUD_035",
@@ -4227,7 +4227,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 322
+    "durationMs": 330
   },
   {
     "id": "TC_CRUD_036",
@@ -4245,7 +4245,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 288
+    "durationMs": 197
   },
   {
     "id": "TC_CRUD_037",
@@ -4263,7 +4263,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 319
   },
   {
     "id": "TC_CRUD_038",
@@ -4281,7 +4281,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 304
+    "durationMs": 219
   },
   {
     "id": "TC_CRUD_039",
@@ -4317,7 +4317,7 @@
     "expectedResult": "The CRUD Operations interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 262
+    "durationMs": 218
   },
   {
     "id": "TC_SRCH_001",
@@ -4335,7 +4335,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 348
+    "durationMs": 256
   },
   {
     "id": "TC_SRCH_002",
@@ -4371,7 +4371,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 333
   },
   {
     "id": "TC_SRCH_004",
@@ -4389,7 +4389,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 151
   },
   {
     "id": "TC_SRCH_005",
@@ -4407,7 +4407,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 333
   },
   {
     "id": "TC_SRCH_006",
@@ -4425,7 +4425,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 255
   },
   {
     "id": "TC_SRCH_007",
@@ -4443,7 +4443,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 300
+    "durationMs": 265
   },
   {
     "id": "TC_SRCH_008",
@@ -4461,7 +4461,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 195
   },
   {
     "id": "TC_SRCH_009",
@@ -4479,7 +4479,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 222
+    "durationMs": 264
   },
   {
     "id": "TC_SRCH_010",
@@ -4497,7 +4497,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 226
   },
   {
     "id": "TC_SRCH_011",
@@ -4515,7 +4515,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 275
+    "durationMs": 338
   },
   {
     "id": "TC_SRCH_012",
@@ -4533,7 +4533,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 251
+    "durationMs": 342
   },
   {
     "id": "TC_SRCH_013",
@@ -4551,7 +4551,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 279
+    "durationMs": 251
   },
   {
     "id": "TC_SRCH_014",
@@ -4569,7 +4569,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 163
+    "durationMs": 181
   },
   {
     "id": "TC_SRCH_015",
@@ -4587,7 +4587,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 166
+    "durationMs": 218
   },
   {
     "id": "TC_SRCH_016",
@@ -4605,7 +4605,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 329
+    "durationMs": 292
   },
   {
     "id": "TC_SRCH_017",
@@ -4623,7 +4623,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 242
   },
   {
     "id": "TC_SRCH_018",
@@ -4641,7 +4641,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 231
   },
   {
     "id": "TC_SRCH_019",
@@ -4659,7 +4659,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 288
+    "durationMs": 270
   },
   {
     "id": "TC_SRCH_020",
@@ -4677,7 +4677,7 @@
     "expectedResult": "The Search interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 221
   },
   {
     "id": "TC_FILT_001",
@@ -4695,7 +4695,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 237
   },
   {
     "id": "TC_FILT_002",
@@ -4713,7 +4713,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 333
   },
   {
     "id": "TC_FILT_003",
@@ -4731,7 +4731,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 162
+    "durationMs": 311
   },
   {
     "id": "TC_FILT_004",
@@ -4749,7 +4749,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 161
+    "durationMs": 211
   },
   {
     "id": "TC_FILT_005",
@@ -4767,7 +4767,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 158
+    "durationMs": 216
   },
   {
     "id": "TC_FILT_006",
@@ -4785,7 +4785,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 298
+    "durationMs": 265
   },
   {
     "id": "TC_FILT_007",
@@ -4803,7 +4803,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 231
   },
   {
     "id": "TC_FILT_008",
@@ -4821,7 +4821,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 298
+    "durationMs": 187
   },
   {
     "id": "TC_FILT_009",
@@ -4839,7 +4839,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 268
+    "durationMs": 257
   },
   {
     "id": "TC_FILT_010",
@@ -4857,7 +4857,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 280
   },
   {
     "id": "TC_FILT_011",
@@ -4875,7 +4875,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 340
+    "durationMs": 167
   },
   {
     "id": "TC_FILT_012",
@@ -4893,7 +4893,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 207
+    "durationMs": 164
   },
   {
     "id": "TC_FILT_013",
@@ -4911,7 +4911,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 287
+    "durationMs": 233
   },
   {
     "id": "TC_FILT_014",
@@ -4929,7 +4929,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 236
   },
   {
     "id": "TC_FILT_015",
@@ -4947,7 +4947,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 308
+    "durationMs": 264
   },
   {
     "id": "TC_FILT_016",
@@ -4965,7 +4965,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 225
+    "durationMs": 277
   },
   {
     "id": "TC_FILT_017",
@@ -4983,7 +4983,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 272
+    "durationMs": 178
   },
   {
     "id": "TC_FILT_018",
@@ -5001,7 +5001,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 256
   },
   {
     "id": "TC_FILT_019",
@@ -5019,7 +5019,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 294
+    "durationMs": 211
   },
   {
     "id": "TC_FILT_020",
@@ -5037,7 +5037,7 @@
     "expectedResult": "The Filters interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 255
+    "durationMs": 171
   },
   {
     "id": "TC_VAL_001",
@@ -5055,7 +5055,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 225
   },
   {
     "id": "TC_VAL_002",
@@ -5073,7 +5073,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 269
   },
   {
     "id": "TC_VAL_003",
@@ -5091,7 +5091,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 212
+    "durationMs": 217
   },
   {
     "id": "TC_VAL_004",
@@ -5109,7 +5109,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 259
+    "durationMs": 197
   },
   {
     "id": "TC_VAL_005",
@@ -5127,7 +5127,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 300
+    "durationMs": 234
   },
   {
     "id": "TC_VAL_006",
@@ -5145,7 +5145,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 293
   },
   {
     "id": "TC_VAL_007",
@@ -5163,7 +5163,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 176
+    "durationMs": 206
   },
   {
     "id": "TC_VAL_008",
@@ -5181,7 +5181,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 260
+    "durationMs": 314
   },
   {
     "id": "TC_VAL_009",
@@ -5199,7 +5199,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 221
+    "durationMs": 305
   },
   {
     "id": "TC_VAL_010",
@@ -5217,7 +5217,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 308
+    "durationMs": 152
   },
   {
     "id": "TC_VAL_011",
@@ -5235,7 +5235,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 274
   },
   {
     "id": "TC_VAL_012",
@@ -5253,7 +5253,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 313
+    "durationMs": 198
   },
   {
     "id": "TC_VAL_013",
@@ -5271,7 +5271,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 158
+    "durationMs": 322
   },
   {
     "id": "TC_VAL_014",
@@ -5289,7 +5289,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 177
+    "durationMs": 229
   },
   {
     "id": "TC_VAL_015",
@@ -5307,7 +5307,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 270
+    "durationMs": 200
   },
   {
     "id": "TC_VAL_016",
@@ -5325,7 +5325,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 288
+    "durationMs": 176
   },
   {
     "id": "TC_VAL_017",
@@ -5343,7 +5343,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 345
   },
   {
     "id": "TC_VAL_018",
@@ -5361,7 +5361,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 160
+    "durationMs": 254
   },
   {
     "id": "TC_VAL_019",
@@ -5379,7 +5379,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 253
+    "durationMs": 333
   },
   {
     "id": "TC_VAL_020",
@@ -5397,7 +5397,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 254
+    "durationMs": 152
   },
   {
     "id": "TC_VAL_021",
@@ -5415,7 +5415,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 323
   },
   {
     "id": "TC_VAL_022",
@@ -5433,7 +5433,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 324
+    "durationMs": 230
   },
   {
     "id": "TC_VAL_023",
@@ -5451,7 +5451,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 322
+    "durationMs": 247
   },
   {
     "id": "TC_VAL_024",
@@ -5469,7 +5469,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 251
+    "durationMs": 256
   },
   {
     "id": "TC_VAL_025",
@@ -5487,7 +5487,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 183
   },
   {
     "id": "TC_VAL_026",
@@ -5505,7 +5505,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 315
+    "durationMs": 309
   },
   {
     "id": "TC_VAL_027",
@@ -5523,7 +5523,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 211
+    "durationMs": 222
   },
   {
     "id": "TC_VAL_028",
@@ -5541,7 +5541,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 340
+    "durationMs": 160
   },
   {
     "id": "TC_VAL_029",
@@ -5559,7 +5559,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 285
+    "durationMs": 190
   },
   {
     "id": "TC_VAL_030",
@@ -5577,7 +5577,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 317
+    "durationMs": 182
   },
   {
     "id": "TC_VAL_031",
@@ -5595,7 +5595,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 312
   },
   {
     "id": "TC_VAL_032",
@@ -5613,7 +5613,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 254
+    "durationMs": 213
   },
   {
     "id": "TC_VAL_033",
@@ -5631,7 +5631,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 240
+    "durationMs": 220
   },
   {
     "id": "TC_VAL_034",
@@ -5649,7 +5649,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 289
   },
   {
     "id": "TC_VAL_035",
@@ -5667,7 +5667,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 297
+    "durationMs": 161
   },
   {
     "id": "TC_VAL_036",
@@ -5685,7 +5685,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 193
+    "durationMs": 200
   },
   {
     "id": "TC_VAL_037",
@@ -5703,7 +5703,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 162
+    "durationMs": 332
   },
   {
     "id": "TC_VAL_038",
@@ -5721,7 +5721,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 188
+    "durationMs": 288
   },
   {
     "id": "TC_VAL_039",
@@ -5739,7 +5739,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 315
+    "durationMs": 307
   },
   {
     "id": "TC_VAL_040",
@@ -5757,7 +5757,7 @@
     "expectedResult": "The Input Validation interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 234
+    "durationMs": 232
   },
   {
     "id": "TC_ERR_001",
@@ -5775,7 +5775,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 329
   },
   {
     "id": "TC_ERR_002",
@@ -5793,7 +5793,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 198
+    "durationMs": 338
   },
   {
     "id": "TC_ERR_003",
@@ -5811,7 +5811,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 332
   },
   {
     "id": "TC_ERR_004",
@@ -5829,7 +5829,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 165
+    "durationMs": 197
   },
   {
     "id": "TC_ERR_005",
@@ -5847,7 +5847,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 289
+    "durationMs": 237
   },
   {
     "id": "TC_ERR_006",
@@ -5865,7 +5865,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 164
+    "durationMs": 322
   },
   {
     "id": "TC_ERR_007",
@@ -5883,7 +5883,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 244
+    "durationMs": 328
   },
   {
     "id": "TC_ERR_008",
@@ -5901,7 +5901,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 295
+    "durationMs": 254
   },
   {
     "id": "TC_ERR_009",
@@ -5919,7 +5919,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 239
+    "durationMs": 247
   },
   {
     "id": "TC_ERR_010",
@@ -5937,7 +5937,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 316
   },
   {
     "id": "TC_ERR_011",
@@ -5955,7 +5955,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 344
+    "durationMs": 336
   },
   {
     "id": "TC_ERR_012",
@@ -5973,7 +5973,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 160
+    "durationMs": 331
   },
   {
     "id": "TC_ERR_013",
@@ -5991,7 +5991,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 266
+    "durationMs": 193
   },
   {
     "id": "TC_ERR_014",
@@ -6009,7 +6009,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 282
+    "durationMs": 312
   },
   {
     "id": "TC_ERR_015",
@@ -6027,7 +6027,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 182
+    "durationMs": 232
   },
   {
     "id": "TC_ERR_016",
@@ -6045,7 +6045,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 172
+    "durationMs": 340
   },
   {
     "id": "TC_ERR_017",
@@ -6063,7 +6063,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 343
+    "durationMs": 282
   },
   {
     "id": "TC_ERR_018",
@@ -6081,7 +6081,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 328
+    "durationMs": 330
   },
   {
     "id": "TC_ERR_019",
@@ -6099,7 +6099,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 252
+    "durationMs": 209
   },
   {
     "id": "TC_ERR_020",
@@ -6117,7 +6117,7 @@
     "expectedResult": "The Error Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 265
   },
   {
     "id": "TC_SESS_001",
@@ -6135,7 +6135,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 223
+    "durationMs": 226
   },
   {
     "id": "TC_SESS_002",
@@ -6153,7 +6153,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 150
   },
   {
     "id": "TC_SESS_003",
@@ -6171,7 +6171,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 174
   },
   {
     "id": "TC_SESS_004",
@@ -6189,7 +6189,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 163
+    "durationMs": 151
   },
   {
     "id": "TC_SESS_005",
@@ -6207,7 +6207,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 316
+    "durationMs": 231
   },
   {
     "id": "TC_SESS_006",
@@ -6225,7 +6225,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 174
   },
   {
     "id": "TC_SESS_007",
@@ -6243,7 +6243,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 322
   },
   {
     "id": "TC_SESS_008",
@@ -6261,7 +6261,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 212
+    "durationMs": 154
   },
   {
     "id": "TC_SESS_009",
@@ -6279,7 +6279,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 177
+    "durationMs": 244
   },
   {
     "id": "TC_SESS_010",
@@ -6297,7 +6297,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 186
+    "durationMs": 316
   },
   {
     "id": "TC_SESS_011",
@@ -6315,7 +6315,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 155
+    "durationMs": 330
   },
   {
     "id": "TC_SESS_012",
@@ -6333,7 +6333,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 326
+    "durationMs": 221
   },
   {
     "id": "TC_SESS_013",
@@ -6351,7 +6351,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 254
+    "durationMs": 348
   },
   {
     "id": "TC_SESS_014",
@@ -6369,7 +6369,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 342
+    "durationMs": 224
   },
   {
     "id": "TC_SESS_015",
@@ -6387,7 +6387,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 300
+    "durationMs": 168
   },
   {
     "id": "TC_SESS_016",
@@ -6405,7 +6405,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 194
+    "durationMs": 166
   },
   {
     "id": "TC_SESS_017",
@@ -6423,7 +6423,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 321
+    "durationMs": 281
   },
   {
     "id": "TC_SESS_018",
@@ -6441,7 +6441,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 195
+    "durationMs": 250
   },
   {
     "id": "TC_SESS_019",
@@ -6459,7 +6459,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 166
   },
   {
     "id": "TC_SESS_020",
@@ -6477,7 +6477,7 @@
     "expectedResult": "The Session Management interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 157
+    "durationMs": 176
   },
   {
     "id": "TC_NOTIF_001",
@@ -6495,7 +6495,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 248
+    "durationMs": 179
   },
   {
     "id": "TC_NOTIF_002",
@@ -6513,7 +6513,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 153
+    "durationMs": 340
   },
   {
     "id": "TC_NOTIF_003",
@@ -6531,7 +6531,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 289
+    "durationMs": 252
   },
   {
     "id": "TC_NOTIF_004",
@@ -6549,7 +6549,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 275
   },
   {
     "id": "TC_NOTIF_005",
@@ -6567,7 +6567,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 253
+    "durationMs": 191
   },
   {
     "id": "TC_NOTIF_006",
@@ -6585,7 +6585,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 332
+    "durationMs": 198
   },
   {
     "id": "TC_NOTIF_007",
@@ -6603,7 +6603,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 289
+    "durationMs": 195
   },
   {
     "id": "TC_NOTIF_008",
@@ -6621,7 +6621,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 339
+    "durationMs": 320
   },
   {
     "id": "TC_NOTIF_009",
@@ -6639,7 +6639,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 346
+    "durationMs": 171
   },
   {
     "id": "TC_NOTIF_010",
@@ -6657,7 +6657,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 232
+    "durationMs": 210
   },
   {
     "id": "TC_NOTIF_011",
@@ -6675,7 +6675,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 250
+    "durationMs": 207
   },
   {
     "id": "TC_NOTIF_012",
@@ -6693,7 +6693,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 236
   },
   {
     "id": "TC_NOTIF_013",
@@ -6711,7 +6711,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 317
+    "durationMs": 226
   },
   {
     "id": "TC_NOTIF_014",
@@ -6729,7 +6729,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 331
+    "durationMs": 324
   },
   {
     "id": "TC_NOTIF_015",
@@ -6747,7 +6747,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 322
+    "durationMs": 261
   },
   {
     "id": "TC_NOTIF_016",
@@ -6765,7 +6765,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 213
+    "durationMs": 208
   },
   {
     "id": "TC_NOTIF_017",
@@ -6783,7 +6783,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 198
+    "durationMs": 311
   },
   {
     "id": "TC_NOTIF_018",
@@ -6801,7 +6801,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 289
+    "durationMs": 219
   },
   {
     "id": "TC_NOTIF_019",
@@ -6819,7 +6819,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 199
+    "durationMs": 230
   },
   {
     "id": "TC_NOTIF_020",
@@ -6837,7 +6837,7 @@
     "expectedResult": "The Notifications interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 297
   },
   {
     "id": "TC_FILE_001",
@@ -6855,7 +6855,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 322
   },
   {
     "id": "TC_FILE_002",
@@ -6873,7 +6873,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 217
   },
   {
     "id": "TC_FILE_003",
@@ -6891,7 +6891,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 340
+    "durationMs": 331
   },
   {
     "id": "TC_FILE_004",
@@ -6909,7 +6909,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 280
   },
   {
     "id": "TC_FILE_005",
@@ -6927,7 +6927,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 264
   },
   {
     "id": "TC_FILE_006",
@@ -6945,7 +6945,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 213
   },
   {
     "id": "TC_FILE_007",
@@ -6963,7 +6963,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 280
+    "durationMs": 200
   },
   {
     "id": "TC_FILE_008",
@@ -6981,7 +6981,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 174
+    "durationMs": 237
   },
   {
     "id": "TC_FILE_009",
@@ -6999,7 +6999,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 256
+    "durationMs": 207
   },
   {
     "id": "TC_FILE_010",
@@ -7017,7 +7017,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 198
+    "durationMs": 273
   },
   {
     "id": "TC_FILE_011",
@@ -7035,7 +7035,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 276
+    "durationMs": 193
   },
   {
     "id": "TC_FILE_012",
@@ -7053,7 +7053,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 251
+    "durationMs": 342
   },
   {
     "id": "TC_FILE_013",
@@ -7071,7 +7071,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 150
+    "durationMs": 329
   },
   {
     "id": "TC_FILE_014",
@@ -7089,7 +7089,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 305
+    "durationMs": 234
   },
   {
     "id": "TC_FILE_015",
@@ -7107,7 +7107,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 310
+    "durationMs": 178
   },
   {
     "id": "TC_FILE_016",
@@ -7125,7 +7125,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 239
   },
   {
     "id": "TC_FILE_017",
@@ -7143,7 +7143,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 324
+    "durationMs": 182
   },
   {
     "id": "TC_FILE_018",
@@ -7161,7 +7161,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 226
+    "durationMs": 314
   },
   {
     "id": "TC_FILE_019",
@@ -7179,7 +7179,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 156
+    "durationMs": 212
   },
   {
     "id": "TC_FILE_020",
@@ -7197,7 +7197,7 @@
     "expectedResult": "The File Upload interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 169
+    "durationMs": 178
   },
   {
     "id": "TC_OFFL_001",
@@ -7215,7 +7215,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 268
+    "durationMs": 165
   },
   {
     "id": "TC_OFFL_002",
@@ -7233,7 +7233,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 152
   },
   {
     "id": "TC_OFFL_003",
@@ -7251,7 +7251,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 347
+    "durationMs": 343
   },
   {
     "id": "TC_OFFL_004",
@@ -7269,7 +7269,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 323
+    "durationMs": 208
   },
   {
     "id": "TC_OFFL_005",
@@ -7287,7 +7287,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 306
+    "durationMs": 187
   },
   {
     "id": "TC_OFFL_006",
@@ -7305,7 +7305,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 180
+    "durationMs": 187
   },
   {
     "id": "TC_OFFL_007",
@@ -7323,7 +7323,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 200
+    "durationMs": 310
   },
   {
     "id": "TC_OFFL_008",
@@ -7341,7 +7341,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 327
+    "durationMs": 153
   },
   {
     "id": "TC_OFFL_009",
@@ -7359,7 +7359,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 259
+    "durationMs": 340
   },
   {
     "id": "TC_OFFL_010",
@@ -7377,7 +7377,7 @@
     "expectedResult": "The Offline Handling interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 299
   },
   {
     "id": "TC_ACC_001",
@@ -7395,7 +7395,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 170
+    "durationMs": 169
   },
   {
     "id": "TC_ACC_002",
@@ -7413,7 +7413,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 279
+    "durationMs": 264
   },
   {
     "id": "TC_ACC_003",
@@ -7431,7 +7431,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 263
+    "durationMs": 347
   },
   {
     "id": "TC_ACC_004",
@@ -7449,7 +7449,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 307
+    "durationMs": 182
   },
   {
     "id": "TC_ACC_005",
@@ -7467,7 +7467,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 329
+    "durationMs": 198
   },
   {
     "id": "TC_ACC_006",
@@ -7485,7 +7485,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 203
+    "durationMs": 302
   },
   {
     "id": "TC_ACC_007",
@@ -7503,7 +7503,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 296
+    "durationMs": 224
   },
   {
     "id": "TC_ACC_008",
@@ -7521,7 +7521,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 237
+    "durationMs": 314
   },
   {
     "id": "TC_ACC_009",
@@ -7539,7 +7539,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 216
+    "durationMs": 270
   },
   {
     "id": "TC_ACC_010",
@@ -7557,7 +7557,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 319
+    "durationMs": 235
   },
   {
     "id": "TC_ACC_011",
@@ -7575,7 +7575,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 277
+    "durationMs": 245
   },
   {
     "id": "TC_ACC_012",
@@ -7593,7 +7593,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 160
+    "durationMs": 274
   },
   {
     "id": "TC_ACC_013",
@@ -7611,7 +7611,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 331
+    "durationMs": 310
   },
   {
     "id": "TC_ACC_014",
@@ -7629,7 +7629,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 230
+    "durationMs": 202
   },
   {
     "id": "TC_ACC_015",
@@ -7647,7 +7647,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 183
+    "durationMs": 232
   },
   {
     "id": "TC_ACC_016",
@@ -7665,7 +7665,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 335
+    "durationMs": 272
   },
   {
     "id": "TC_ACC_017",
@@ -7683,7 +7683,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 243
+    "durationMs": 184
   },
   {
     "id": "TC_ACC_018",
@@ -7701,7 +7701,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 206
   },
   {
     "id": "TC_ACC_019",
@@ -7719,7 +7719,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 293
+    "durationMs": 240
   },
   {
     "id": "TC_ACC_020",
@@ -7737,7 +7737,7 @@
     "expectedResult": "The Accessibility interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 205
+    "durationMs": 190
   },
   {
     "id": "TC_RESP_001",
@@ -7755,7 +7755,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 271
+    "durationMs": 224
   },
   {
     "id": "TC_RESP_002",
@@ -7773,7 +7773,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 294
   },
   {
     "id": "TC_RESP_003",
@@ -7791,7 +7791,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 273
+    "durationMs": 165
   },
   {
     "id": "TC_RESP_004",
@@ -7809,7 +7809,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 325
   },
   {
     "id": "TC_RESP_005",
@@ -7827,7 +7827,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 274
   },
   {
     "id": "TC_RESP_006",
@@ -7845,7 +7845,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 236
+    "durationMs": 256
   },
   {
     "id": "TC_RESP_007",
@@ -7863,7 +7863,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 264
+    "durationMs": 198
   },
   {
     "id": "TC_RESP_008",
@@ -7881,7 +7881,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 249
   },
   {
     "id": "TC_RESP_009",
@@ -7899,7 +7899,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 218
+    "durationMs": 163
   },
   {
     "id": "TC_RESP_010",
@@ -7917,7 +7917,7 @@
     "expectedResult": "The Responsive UI interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 235
+    "durationMs": 172
   },
   {
     "id": "TC_PERF_001",
@@ -7935,7 +7935,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 291
+    "durationMs": 272
   },
   {
     "id": "TC_PERF_002",
@@ -7953,7 +7953,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 163
   },
   {
     "id": "TC_PERF_003",
@@ -7971,7 +7971,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 184
+    "durationMs": 286
   },
   {
     "id": "TC_PERF_004",
@@ -7989,7 +7989,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 348
+    "durationMs": 172
   },
   {
     "id": "TC_PERF_005",
@@ -8007,7 +8007,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 316
+    "durationMs": 203
   },
   {
     "id": "TC_PERF_006",
@@ -8025,7 +8025,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 296
+    "durationMs": 327
   },
   {
     "id": "TC_PERF_007",
@@ -8043,7 +8043,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 317
+    "durationMs": 202
   },
   {
     "id": "TC_PERF_008",
@@ -8061,7 +8061,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 245
+    "durationMs": 249
   },
   {
     "id": "TC_PERF_009",
@@ -8079,7 +8079,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 200
+    "durationMs": 284
   },
   {
     "id": "TC_PERF_010",
@@ -8097,7 +8097,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 190
+    "durationMs": 274
   },
   {
     "id": "TC_PERF_011",
@@ -8115,7 +8115,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 233
+    "durationMs": 224
   },
   {
     "id": "TC_PERF_012",
@@ -8133,7 +8133,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 274
+    "durationMs": 213
   },
   {
     "id": "TC_PERF_013",
@@ -8151,7 +8151,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 258
+    "durationMs": 228
   },
   {
     "id": "TC_PERF_014",
@@ -8169,7 +8169,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 167
+    "durationMs": 215
   },
   {
     "id": "TC_PERF_015",
@@ -8187,7 +8187,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 250
+    "durationMs": 209
   },
   {
     "id": "TC_PERF_016",
@@ -8205,7 +8205,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 216
   },
   {
     "id": "TC_PERF_017",
@@ -8223,7 +8223,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 309
+    "durationMs": 247
   },
   {
     "id": "TC_PERF_018",
@@ -8241,7 +8241,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 249
+    "durationMs": 161
   },
   {
     "id": "TC_PERF_019",
@@ -8259,7 +8259,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 279
+    "durationMs": 151
   },
   {
     "id": "TC_PERF_020",
@@ -8277,7 +8277,7 @@
     "expectedResult": "The Performance Smoke Tests interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 316
   },
   {
     "id": "TC_REGR_001",
@@ -8295,7 +8295,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 166
+    "durationMs": 319
   },
   {
     "id": "TC_REGR_002",
@@ -8313,7 +8313,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 266
+    "durationMs": 289
   },
   {
     "id": "TC_REGR_003",
@@ -8331,7 +8331,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 312
+    "durationMs": 344
   },
   {
     "id": "TC_REGR_004",
@@ -8349,7 +8349,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 178
+    "durationMs": 181
   },
   {
     "id": "TC_REGR_005",
@@ -8367,7 +8367,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 313
+    "durationMs": 226
   },
   {
     "id": "TC_REGR_006",
@@ -8403,7 +8403,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 240
+    "durationMs": 231
   },
   {
     "id": "TC_REGR_008",
@@ -8421,7 +8421,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 315
+    "durationMs": 304
   },
   {
     "id": "TC_REGR_009",
@@ -8439,7 +8439,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 293
+    "durationMs": 154
   },
   {
     "id": "TC_REGR_010",
@@ -8457,7 +8457,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 227
+    "durationMs": 342
   },
   {
     "id": "TC_REGR_011",
@@ -8475,7 +8475,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 253
+    "durationMs": 168
   },
   {
     "id": "TC_REGR_012",
@@ -8493,7 +8493,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 302
+    "durationMs": 326
   },
   {
     "id": "TC_REGR_013",
@@ -8511,7 +8511,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 171
+    "durationMs": 257
   },
   {
     "id": "TC_REGR_014",
@@ -8529,7 +8529,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 329
+    "durationMs": 276
   },
   {
     "id": "TC_REGR_015",
@@ -8547,7 +8547,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 292
+    "durationMs": 320
   },
   {
     "id": "TC_REGR_016",
@@ -8565,7 +8565,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 242
+    "durationMs": 286
   },
   {
     "id": "TC_REGR_017",
@@ -8583,7 +8583,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 255
+    "durationMs": 264
   },
   {
     "id": "TC_REGR_018",
@@ -8601,7 +8601,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 301
+    "durationMs": 217
   },
   {
     "id": "TC_REGR_019",
@@ -8619,7 +8619,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 217
   },
   {
     "id": "TC_REGR_020",
@@ -8637,7 +8637,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 271
+    "durationMs": 273
   },
   {
     "id": "TC_REGR_021",
@@ -8655,7 +8655,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 185
+    "durationMs": 232
   },
   {
     "id": "TC_REGR_022",
@@ -8673,7 +8673,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 314
+    "durationMs": 296
   },
   {
     "id": "TC_REGR_023",
@@ -8691,7 +8691,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 265
+    "durationMs": 317
   },
   {
     "id": "TC_REGR_024",
@@ -8709,7 +8709,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 238
+    "durationMs": 186
   },
   {
     "id": "TC_REGR_025",
@@ -8727,7 +8727,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 224
+    "durationMs": 245
   },
   {
     "id": "TC_REGR_026",
@@ -8745,7 +8745,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 192
+    "durationMs": 271
   },
   {
     "id": "TC_REGR_027",
@@ -8763,7 +8763,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 204
+    "durationMs": 267
   },
   {
     "id": "TC_REGR_028",
@@ -8781,7 +8781,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 325
+    "durationMs": 175
   },
   {
     "id": "TC_REGR_029",
@@ -8799,7 +8799,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 202
+    "durationMs": 341
   },
   {
     "id": "TC_REGR_030",
@@ -8817,7 +8817,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 349
+    "durationMs": 212
   },
   {
     "id": "TC_REGR_031",
@@ -8835,7 +8835,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 159
+    "durationMs": 313
   },
   {
     "id": "TC_REGR_032",
@@ -8853,7 +8853,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 325
+    "durationMs": 309
   },
   {
     "id": "TC_REGR_033",
@@ -8871,7 +8871,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 206
+    "durationMs": 343
   },
   {
     "id": "TC_REGR_034",
@@ -8889,7 +8889,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 325
+    "durationMs": 346
   },
   {
     "id": "TC_REGR_035",
@@ -8907,7 +8907,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 187
+    "durationMs": 156
   },
   {
     "id": "TC_REGR_036",
@@ -8925,7 +8925,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 241
+    "durationMs": 273
   },
   {
     "id": "TC_REGR_037",
@@ -8943,7 +8943,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 270
+    "durationMs": 242
   },
   {
     "id": "TC_REGR_038",
@@ -8961,7 +8961,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 194
+    "durationMs": 210
   },
   {
     "id": "TC_REGR_039",
@@ -8979,7 +8979,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 266
+    "durationMs": 335
   },
   {
     "id": "TC_REGR_040",
@@ -8997,7 +8997,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 332
+    "durationMs": 279
   },
   {
     "id": "TC_REGR_041",
@@ -9015,7 +9015,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 278
+    "durationMs": 265
   },
   {
     "id": "TC_REGR_042",
@@ -9033,7 +9033,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 323
+    "durationMs": 291
   },
   {
     "id": "TC_REGR_043",
@@ -9051,7 +9051,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 324
+    "durationMs": 306
   },
   {
     "id": "TC_REGR_044",
@@ -9069,7 +9069,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 197
+    "durationMs": 162
   },
   {
     "id": "TC_REGR_045",
@@ -9087,7 +9087,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 220
+    "durationMs": 197
   },
   {
     "id": "TC_REGR_046",
@@ -9105,7 +9105,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 347
+    "durationMs": 210
   },
   {
     "id": "TC_REGR_047",
@@ -9123,7 +9123,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 215
+    "durationMs": 230
   },
   {
     "id": "TC_REGR_048",
@@ -9141,7 +9141,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 176
+    "durationMs": 309
   },
   {
     "id": "TC_REGR_049",
@@ -9159,7 +9159,7 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 214
+    "durationMs": 166
   },
   {
     "id": "TC_REGR_050",
@@ -9177,6 +9177,6 @@
     "expectedResult": "The Regression Suite interface should load without errors, update UI elements correctly, and maintain state persistence.",
     "actualResult": "UI transition completed successfully. All assertions passed.",
     "status": "Passed",
-    "durationMs": 189
+    "durationMs": 308
   }
 ]

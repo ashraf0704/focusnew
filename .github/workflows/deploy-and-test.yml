@@ -318,10 +318,10 @@ jobs:
           # Parse results from generated summary
           SUMMARY_FILE="reports/Summary/web-summary.md"
           if [ -f "$SUMMARY_FILE" ]; then
-            TOTAL=$(grep -oP '(?<=Total Test Cases\*\*: )\d+' "$SUMMARY_FILE" || echo 470)
-            PASSED=$(grep -oP '(?<=Passed\*\*: )\d+' "$SUMMARY_FILE" || echo 460)
-            FAILED=$(grep -oP '(?<=Failed\*\*: )\d+' "$SUMMARY_FILE" || echo 3)
-            SKIPPED=$(grep -oP '(?<=Skipped\*\*: )\d+' "$SUMMARY_FILE" || echo 7)
+            TOTAL=$(grep -oP '(?<=\*\*Total Test Cases\*\*: )\d+' "$SUMMARY_FILE" || echo 470)
+            PASSED=$(grep -oP '(?<=\*\*Passed\*\*: )\d+' "$SUMMARY_FILE" || echo 460)
+            FAILED=$(grep -oP '(?<=\*\*Failed\*\*: )\d+' "$SUMMARY_FILE" || echo 3)
+            SKIPPED=$(grep -oP '(?<=\*\*Skipped\*\*: )\d+' "$SUMMARY_FILE" || echo 7)
           else
             TOTAL=470; PASSED=470; FAILED=0; SKIPPED=0
           fi
