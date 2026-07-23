@@ -17,7 +17,7 @@ permissions:
 
 env:
   JAVA_VERSION: '17'
-  NODE_VERSION: '20'
+  NODE_VERSION: '22'
   APPIUM_PORT: 4723
   EMULATOR_API_LEVEL: 34
 
