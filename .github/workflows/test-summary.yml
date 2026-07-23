@@ -15,6 +15,7 @@ jobs:
   generate-summary:
     name: Generate & Publish Test Execution Summary
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       # ────────────────────────────────────────────

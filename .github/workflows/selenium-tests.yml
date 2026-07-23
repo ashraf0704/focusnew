@@ -26,6 +26,7 @@ jobs:
   detect-tech-stack:
     name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       node_version: ${{ steps.detect.outputs.node_version }}
 
@@ -82,6 +83,7 @@ jobs:
   web-e2e:
     name: 🧪 Web E2E Selenium Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: detect-tech-stack
 
     steps:
@@ -146,6 +148,7 @@ jobs:
   load-test:
     name: ⚡ Baseline Load Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: detect-tech-stack
 
     steps:
@@ -241,6 +244,7 @@ jobs:
   expo-app-e2e:
     name: 📱 Expo App E2E Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: detect-tech-stack
 
     steps:
@@ -305,6 +309,7 @@ jobs:
   generate-reports:
     name: 📊 Generate Test Reports
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [ web-e2e, load-test, expo-app-e2e ]
     if: always()
 
@@ -326,16 +331,11 @@ jobs:
           cd automation
           npm install
 
-      - name: Generate Web Test Cases DB
+      - name: Generate Web Test Cases DB & Reports
         run: |
           cd automation
           npm run generate-web-data || true
-
-      - name: Generate Reports
-        run: |
-          cd automation
-          BASE_URL="http://localhost:3000" npm run generate-html-report || true
-          BASE_URL="http://localhost:3000" npm run generate-excel-report || true
+          BASE_URL="http://localhost:3000" npm run generate-web-reports || true
 
       - name: Upload All Test Artifacts
         uses: actions/upload-artifact@v4

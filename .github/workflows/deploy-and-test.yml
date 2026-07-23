@@ -21,6 +21,7 @@ jobs:
   detect-tech-stack:
     name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       node-version: ${{ steps.detect.outputs.node_version }}
       react-version: ${{ steps.detect.outputs.react_version }}
@@ -88,6 +89,7 @@ jobs:
   build:
     name: 🏗️ Build React Application
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: detect-tech-stack
 
     steps:
@@ -167,6 +169,7 @@ jobs:
   deploy:
     name: 🚀 Deploy to GitHub Pages
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: build
 
     steps:
@@ -219,6 +222,7 @@ jobs:
   verify-deployment:
     name: ✅ Verify Deployment
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     needs: deploy
 
     steps:
@@ -277,6 +281,7 @@ jobs:
   selenium-e2e:
     name: 🧪 Selenium E2E Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: [ deploy, verify-deployment ]
     if: always()
 
@@ -424,6 +429,7 @@ jobs:
   load-test:
     name: ⚡ Baseline Load Test
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [ deploy, verify-deployment ]
     if: always()
 
@@ -544,6 +550,7 @@ jobs:
   generate-reports:
     name: 📊 Generate Test Reports
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: [ selenium-e2e, load-test ]
     if: always()
 
@@ -582,9 +589,7 @@ jobs:
         run: |
           cd automation
           BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" \
-          npm run generate-excel-report || true
-          BASE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" \
-          npm run generate-html-report || true
+          npm run generate-web-reports || true
 
       - name: Upload Final Consolidated Reports
         uses: actions/upload-artifact@v4

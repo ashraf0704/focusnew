@@ -7,17 +7,21 @@ import { generateHTMLReports } from '../utils/htmlReporter.js';
 import { captureScreenshot } from '../utils/screenshot.js';
 import { logger } from '../utils/logger.js';
 
+import { execSync } from 'child_process';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 async function runAutomationSuite() {
-  logger.info('Initializing E2E Eenterprise Automation Suite Run...');
+  logger.info('Initializing E2E Enterprise Automation Suite Run...');
 
-  // 1. Read generated test cases
+  // 1. Read generated test cases (auto-generate if missing)
   const dbPath = path.resolve(__dirname, '../data/testcases.json');
   if (!fs.existsSync(dbPath)) {
-    logger.error(`Test cases database not found at ${dbPath}. Please run generate-data first.`);
-    process.exit(1);
+    logger.info(`Test cases database not found at ${dbPath}. Auto-generating test cases dataset...`);
+    const dataDir = path.dirname(dbPath);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    execSync('npx tsx ' + path.resolve(__dirname, '../scripts/generateData.ts'), { stdio: 'inherit' });
   }
 
   const rawData = fs.readFileSync(dbPath, 'utf8');

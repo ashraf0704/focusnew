@@ -27,6 +27,7 @@ jobs:
   detect-tech-stack:
     name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       framework: ${{ steps.detect.outputs.framework }}
       node_version: ${{ steps.detect.outputs.node_version }}
@@ -101,6 +102,7 @@ jobs:
   secret-detection:
     name: 🔑 Secret Detection - Gitleaks
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout Repository (Full History)
@@ -149,6 +151,7 @@ jobs:
     name: 🛡️ SAST - Semgrep
     needs: detect-tech-stack
     runs-on: ubuntu-latest
+    timeout-minutes: 10
 
     steps:
       - name: Checkout Repository
@@ -249,6 +252,7 @@ jobs:
     name: 📦 Dependency Vulnerability Scan
     needs: detect-tech-stack
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     env:
       REPORT_DIR: vulnerability-reports
 
@@ -411,6 +415,7 @@ jobs:
     needs: [ sast, dependency-scan, secret-detection ]
     if: always()
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     env:
       REPORT_DIR: vulnerability-reports
 

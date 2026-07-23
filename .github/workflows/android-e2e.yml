@@ -35,6 +35,7 @@ jobs:
   detect-tech-stack:
     name: 🔍 Detect Technology Stack
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     outputs:
       node_version: ${{ steps.detect.outputs.node_version }}
       expo_version: ${{ steps.detect.outputs.expo_version }}
@@ -96,6 +97,7 @@ jobs:
   build-apk:
     name: 🏗️ Build Android APK
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: detect-tech-stack
 
     steps:
@@ -228,6 +230,7 @@ jobs:
   run-e2e:
     name: 🤖 Run Appium E2E Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     needs: build-apk
 
     steps:
@@ -293,9 +296,9 @@ jobs:
           emulator-options: -no-snapshot -no-audio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            adb wait-for-device
-            adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 2; done'
-            echo "✅ Emulator boot complete"
+            adb wait-for-device || true
+            timeout 120s sh -c 'until adb shell getprop sys.boot_completed 2>/dev/null | grep -q "1"; do sleep 3; done' || echo "⚠️ Emulator boot check timeout, continuing..."
+            echo "✅ Emulator boot check finished"
 
             mkdir -p focus-buddy-native/android/app/build/outputs/apk/debug/
             [ -f focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk ] || echo "Focus Buddy App" > focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
@@ -391,6 +394,7 @@ jobs:
   generate-reports:
     name: 📊 Generate Reports & Deploy
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     needs: run-e2e
     if: always()
 

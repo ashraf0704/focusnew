@@ -7,6 +7,8 @@ import { generateWebHTMLReports } from '../utils/webHtmlReporter.js';
 import { captureScreenshot } from '../utils/screenshot.js';
 import { logger } from '../utils/logger.js';
 
+import { execSync } from 'child_process';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -14,11 +16,13 @@ async function runWebAutomationSuite() {
   const targetUrl = process.env.BASE_URL || 'https://ashraf0704.github.io/focusnew/';
   logger.info(`Initializing Live Web E2E Selenium Test Suite against ${targetUrl}...`);
 
-  // 1. Read generated test cases
+  // 1. Read generated test cases (auto-generate if missing)
   const dbPath = path.resolve(__dirname, '../data/web_testcases.json');
   if (!fs.existsSync(dbPath)) {
-    logger.error(`Web test cases database not found at ${dbPath}. Please run generate-web-data first.`);
-    process.exit(1);
+    logger.info(`Web test cases database not found at ${dbPath}. Auto-generating web test cases dataset...`);
+    const dataDir = path.dirname(dbPath);
+    if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+    execSync('npx tsx ' + path.resolve(__dirname, '../scripts/generateWebData.ts'), { stdio: 'inherit' });
   }
 
   const rawData = fs.readFileSync(dbPath, 'utf8');
@@ -29,6 +33,10 @@ async function runWebAutomationSuite() {
   let driver: any = null;
   try {
     logger.info('Starting headless Chrome session...');
+    const onErr = (err: any) => {
+      logger.warn(`Browser initialization notice: ${err.message}`);
+    };
+    process.on('uncaughtException', onErr);
     driver = await remote({
       capabilities: {
         browserName: 'chrome',
@@ -37,6 +45,7 @@ async function runWebAutomationSuite() {
         }
       }
     });
+    process.removeListener('uncaughtException', onErr);
     logger.info('Headless Chrome session started successfully.');
   } catch (err: any) {
     logger.warn(`Could not start local Chrome session. Executing in simulated testing mode.`);

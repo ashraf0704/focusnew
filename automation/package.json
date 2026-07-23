@@ -9,6 +9,8 @@
     "generate-web-data": "tsx scripts/generateWebData.ts",
     "test:e2e": "tsx runners/testRunner.ts",
     "test:web:live": "tsx runners/webTestRunner.ts",
+    "generate-android-reports": "tsx runners/testRunner.ts",
+    "generate-web-reports": "tsx runners/webTestRunner.ts",
     "generate-excel-report": "tsx runners/testRunner.ts",
     "generate-html-report": "tsx runners/testRunner.ts",
     "generate-json-report": "tsx runners/testRunner.ts",
