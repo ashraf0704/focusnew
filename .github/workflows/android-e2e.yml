@@ -43,10 +43,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -102,16 +102,16 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Setup Java ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v4.7.0
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
@@ -176,7 +176,7 @@ jobs:
           echo "APK: $APK ($SIZE)"
 
       - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: debug-apk-build-${{ github.run_number }}
           path: focus-buddy-native/android/app/build/outputs/apk/debug/app-debug.apk
@@ -189,7 +189,7 @@ jobs:
           npm run generate-data
 
       - name: Upload Test Cases DB
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: testcases-db
           path: automation/data/testcases.json
@@ -235,16 +235,16 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
 
       - name: Setup Java ${{ env.JAVA_VERSION }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v4.7.0
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
@@ -261,14 +261,14 @@ jobs:
           npm install
 
       - name: Download APK Artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4.3.0
         with:
           name: debug-apk-build-${{ github.run_number }}
           path: focus-buddy-native/android/app/build/outputs/apk/debug/
         continue-on-error: true
 
       - name: Download Test Cases DB
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4.3.0
         with:
           name: testcases-db
           path: automation/data/
@@ -400,10 +400,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: npm
@@ -417,7 +417,7 @@ jobs:
           npm install
 
       - name: Download Test Cases DB
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v4.3.0
         with:
           name: testcases-db
           path: automation/data/
@@ -442,7 +442,7 @@ jobs:
 
       - name: Upload All Test Artifacts (30-day retention)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: focus-buddy-e2e-reports-build-${{ github.run_number }}
           path: |

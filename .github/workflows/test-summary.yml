@@ -22,13 +22,13 @@ jobs:
       # Step 1 – Checkout
       # ────────────────────────────────────────────
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       # ────────────────────────────────────────────
       # Step 2 – Node Setup
       # ────────────────────────────────────────────
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4.4.0
         with:
           node-version: 22
           cache: npm
@@ -135,7 +135,7 @@ jobs:
       # ────────────────────────────────────────────
       - name: Upload Test Report Artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.6.2
         with:
           name: test-execution-summary-build-${{ github.run_number }}
           path: |
