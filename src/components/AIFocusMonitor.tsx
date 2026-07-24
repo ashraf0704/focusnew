@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Camera, VideoOff, ShieldAlert, Zap, AlertTriangle, Play, Square, Activity, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Camera, VideoOff, ShieldAlert, Zap, AlertTriangle, Play, Pause, Square, Activity, Volume2, VolumeX, Sparkles } from 'lucide-react';
 
 export default function AIFocusMonitor() {
   const [isCamActive, setIsCamActive] = useState(false);
+  const [isCamPaused, setIsCamPaused] = useState(false); // Pause / Resume monitoring
   const [eyeState, setEyeState] = useState<'open' | 'closed'>('open');
   const [closedTimer, setClosedTimer] = useState(0); // consecutive seconds eyes closed
   const [alertState, setAlertState] = useState<'none' | 'eyes_closed_10s'>('none');
   const [isAlarmRinging, setIsAlarmRinging] = useState(false);
+  const [detectedRange, setDetectedRange] = useState<'NEAR' | 'MEDIUM' | 'FAR'>('MEDIUM');
   const [logMessages, setLogMessages] = useState<string[]>(['System standby. Ready to activate camera.']);
   const [muteSound, setMuteSound] = useState(false);
   const [camError, setCamError] = useState<string | null>(null);
@@ -89,6 +91,7 @@ export default function AIFocusMonitor() {
       videoRef.current.srcObject = null;
     }
     setIsCamActive(false);
+    setIsCamPaused(false);
     setCamError(null);
     stopAlarmSound();
     resetStates();
@@ -99,6 +102,7 @@ export default function AIFocusMonitor() {
     setEyeState('open');
     setClosedTimer(0);
     setAlertState('none');
+    setIsCamPaused(false);
   };
 
   // Real-time canvas scanning and optical eye tracking analysis!
@@ -109,6 +113,8 @@ export default function AIFocusMonitor() {
 
     const scanInterval = setInterval(() => {
       if (!canvasRef.current || !videoRef.current) return;
+      if (isCamPaused) return; // Skip detection when paused (⏸️)
+
       const canvas = canvasRef.current;
       const video = videoRef.current;
       const ctx = canvas.getContext('2d');
@@ -123,7 +129,7 @@ export default function AIFocusMonitor() {
         const imgData = ctx.getImageData(0, 0, w, h);
         const d = imgData.data;
 
-        // ── Non-Inverting Robust Eye State Detection ──────────────────────────
+        // ── Range-Adaptive Non-Inverting Eye State Detection ──────────────────
         // 1. Detect Face Bounds via Skin Filter or Fallback to Center Region
         let faceX1 = w, faceY1 = h, faceX2 = 0, faceY2 = 0;
         let skinPixels = 0;
@@ -145,33 +151,37 @@ export default function AIFocusMonitor() {
           }
         }
 
-        // If face is found by skin filter, use face bounds. Otherwise fallback to upper-middle center of frame.
         const isFaceTracked = skinPixels > 25 && (faceX2 - faceX1 > 40) && (faceY2 - faceY1 > 40);
         const fx1 = isFaceTracked ? faceX1 : Math.floor(w * 0.25);
         const fy1 = isFaceTracked ? faceY1 : Math.floor(h * 0.15);
         const fw = isFaceTracked ? (faceX2 - faceX1) : Math.floor(w * 0.50);
         const fh = isFaceTracked ? (faceY2 - faceY1) : Math.floor(h * 0.60);
 
-        // 2. Fixed relative bounding boxes for forehead skin ref and left/right eye regions
+        // Calculate Range Mode based on face distance/size
+        const faceAreaRatio = (fw * fh) / (w * h);
+        const rangeMode = faceAreaRatio > 0.35 ? 'NEAR' : faceAreaRatio > 0.10 ? 'MEDIUM' : 'FAR';
+        setDetectedRange(rangeMode);
+
+        // 2. Fixed relative bounding boxes adapted to face range
         const foreheadBox = {
           x: Math.floor(fx1 + fw * 0.35),
-          y: Math.floor(fy1 + fh * 0.12),
-          width: Math.floor(fw * 0.30),
-          height: Math.floor(fh * 0.12),
+          y: Math.floor(fy1 + fh * 0.10),
+          width: Math.max(10, Math.floor(fw * 0.30)),
+          height: Math.max(6, Math.floor(fh * 0.14)),
         };
 
         const leftEyeBox = {
-          x: Math.floor(fx1 + fw * 0.12),
-          y: Math.floor(fy1 + fh * 0.32),
-          width: Math.floor(fw * 0.32),
-          height: Math.floor(fh * 0.22),
+          x: Math.floor(fx1 + fw * 0.10),
+          y: Math.floor(fy1 + fh * 0.30),
+          width: Math.max(12, Math.floor(fw * 0.35)),
+          height: Math.max(8, Math.floor(fh * 0.25)),
         };
 
         const rightEyeBox = {
-          x: Math.floor(fx1 + fw * 0.56),
-          y: Math.floor(fy1 + fh * 0.32),
-          width: Math.floor(fw * 0.32),
-          height: Math.floor(fh * 0.22),
+          x: Math.floor(fx1 + fw * 0.55),
+          y: Math.floor(fy1 + fh * 0.30),
+          width: Math.max(12, Math.floor(fw * 0.35)),
+          height: Math.max(8, Math.floor(fh * 0.25)),
         };
 
         // Helper for average luminance in a box
@@ -219,16 +229,18 @@ export default function AIFocusMonitor() {
         const rightEyeLum = getBoxAverageLum(rightEyeBox);
         const avgEyeLum = (leftEyeLum + rightEyeLum) / 2;
 
-        // Dark pupil threshold is 75% of skin brightness
-        const darkThreshold = Math.min(120, Math.max(30, foreheadLum * 0.75));
+        // Dark pupil threshold adaptive to forehead brightness & range
+        const darkThreshold = Math.min(130, Math.max(25, foreheadLum * 0.72));
         const leftDarkRatio = getDarkPixelRatio(leftEyeBox, darkThreshold);
         const rightDarkRatio = getDarkPixelRatio(rightEyeBox, darkThreshold);
         const avgDarkRatio = (leftDarkRatio + rightDarkRatio) / 2;
 
-        // EYES CLOSED CRITERIA:
-        // Open eyes -> pupil exposed -> avgDarkRatio >= 0.08 & skin is noticeably brighter than eye area.
-        // Closed eyes -> eyelid covers pupil -> avgDarkRatio < 0.08 & eye area brightness is close to forehead skin.
-        const areEyesClosed = (avgDarkRatio < 0.08) && ((foreheadLum - avgEyeLum) < 14);
+        // Closed thresholds based on distance range
+        const ratioThreshold = rangeMode === 'NEAR' ? 0.10 : rangeMode === 'MEDIUM' ? 0.07 : 0.05;
+        const lumDeltaThreshold = rangeMode === 'NEAR' ? 16 : 12;
+
+        // EYES CLOSED: eyelid covers pupil -> dark pupil pixels disappear & eye box lum matches skin
+        const areEyesClosed = (avgDarkRatio < ratioThreshold) && ((foreheadLum - avgEyeLum) < lumDeltaThreshold);
 
         // Drowsiness Timer & Trigger Handling (10 seconds continuous closed eyes)
         if (areEyesClosed) {
@@ -270,7 +282,7 @@ export default function AIFocusMonitor() {
       clearInterval(scanInterval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [isCamActive]);
+  }, [isCamActive, isCamPaused]);
 
   // Produce Warning Sirens using high performance clean Web Audio API
   const triggerAlarmSound = () => {
@@ -423,18 +435,45 @@ export default function AIFocusMonitor() {
         </div>
 
         {isCamActive && (
-          <button
-            onClick={() => setMuteSound(!muteSound)}
-            className="p-1.5 rounded-lg border border-brand-outline hover:bg-brand-bg text-brand-muted ml-auto mr-1.5 transition active:scale-95"
-            title={muteSound ? 'Unmute Warning Sirens' : 'Mute Sirens'}
-          >
-            {muteSound ? <VolumeX size={13} /> : <Volume2 size={13} />}
-          </button>
+          <div className="flex items-center gap-1.5 ml-auto mr-1.5">
+            <button
+              onClick={() => setMuteSound(!muteSound)}
+              className="p-1.5 rounded-lg border border-brand-outline hover:bg-brand-bg text-brand-muted transition active:scale-95 cursor-pointer"
+              title={muteSound ? 'Unmute Warning Sirens' : 'Mute Sirens'}
+            >
+              {muteSound ? <VolumeX size={13} /> : <Volume2 size={13} />}
+            </button>
+
+            {/* Pause ⏸️ / Resume ▶️ Camera Control */}
+            <button
+              type="button"
+              onClick={() => setIsCamPaused(p => !p)}
+              className={`py-1.5 px-3 rounded-xl text-[11px] font-bold flex items-center gap-1.5 transition select-none pointer-events-auto shadow-sm cursor-pointer ${
+                isCamPaused 
+                  ? 'bg-amber-500 text-white hover:bg-amber-600' 
+                  : 'bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200'
+              }`}
+              title={isCamPaused ? 'Resume Eye Detection' : 'Pause Eye Detection'}
+              id="btn-pause-camrashield"
+            >
+              {isCamPaused ? (
+                <>
+                  <Play size={11} className="fill-current" />
+                  <span>Resume (▶️)</span>
+                </>
+              ) : (
+                <>
+                  <Pause size={11} className="fill-current" />
+                  <span>Pause (⏸️)</span>
+                </>
+              )}
+            </button>
+          </div>
         )}
 
         <button
           onClick={isCamActive ? stopCamera : startCamera}
-          className={`py-1.5 px-3 rounded-xl text-[11px] font-bold flex items-center gap-1.5 transition select-none pointer-events-auto shadow-sm ${
+          className={`py-1.5 px-3 rounded-xl text-[11px] font-bold flex items-center gap-1.5 transition select-none pointer-events-auto shadow-sm cursor-pointer ${
             isCamActive 
               ? 'bg-rose-50 border border-rose-200 text-rose-700 hover:bg-rose-100' 
               : 'bg-[#CCD5AE]/30 border border-[#5A5A40]/10 text-brand-primary hover:bg-[#CCD5AE]/50'
@@ -444,12 +483,12 @@ export default function AIFocusMonitor() {
           {isCamActive ? (
             <>
               <VideoOff size={11} />
-              Turn Off
+              <span>Turn Off (⏹️)</span>
             </>
           ) : (
             <>
               <Play size={11} className="fill-current" />
-              Activate Cam
+              <span>Activate Cam (▶️)</span>
             </>
           )}
         </button>
@@ -490,8 +529,25 @@ export default function AIFocusMonitor() {
               aria-hidden="true"
             />
 
+            {/* Overlay when Camera Monitoring is PAUSED (⏸️) */}
+            {isCamPaused && (
+              <div className="absolute inset-0 bg-slate-950/85 backdrop-blur-xs flex flex-col items-center justify-center text-center p-3 z-20">
+                <Pause size={36} className="text-amber-400 mb-2 animate-pulse" />
+                <span className="text-xs font-black tracking-widest text-white uppercase">MONITORING PAUSED (⏸️)</span>
+                <span className="text-[10px] text-amber-200 font-mono mt-1 mb-3">Camera is paused — Eye tracking is sleeping</span>
+                <button
+                  type="button"
+                  onClick={() => setIsCamPaused(false)}
+                  className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-white text-[11px] font-extrabold rounded-xl transition flex items-center gap-1.5 shadow-md cursor-pointer pointer-events-auto"
+                >
+                  <Play size={12} className="fill-current" />
+                  Resume Eye Detection (▶️)
+                </button>
+              </div>
+            )}
+
             {/* Simulated overlay for closed eyes */}
-            {eyeState === 'closed' && (
+            {eyeState === 'closed' && !isCamPaused && (
               <div className="absolute inset-0 bg-rose-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-center p-3 z-10 animate-pulse">
                 <ShieldAlert size={36} className="text-brand-vibrant mb-2" />
                 <span className="text-xs font-black tracking-widest text-[#FFF2E0] uppercase">EYES CLOSED DETECTED</span>
@@ -501,12 +557,12 @@ export default function AIFocusMonitor() {
 
             {/* Tracking overlay indicators */}
             <div className="absolute bottom-2.5 left-2.5 bg-black/60 border border-white/10 px-2 py-1 rounded-lg text-[9px] font-mono text-emerald-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-              FOCUS INDEX: {eyeState === 'closed' ? '0.00 (CRITICAL)' : '0.94 (HEALTHY)'}
+              <span className={`w-1.5 h-1.5 rounded-full ${isCamPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-ping'}`} />
+              RANGE: {detectedRange} | FOCUS INDEX: {isCamPaused ? 'PAUSED (⏸️)' : eyeState === 'closed' ? '0.00 (DROWSY)' : '0.96 (HEALTHY)'}
             </div>
 
             <div className="absolute top-2.5 right-2 rounded-full bg-black/60 px-2 py-0.5 text-[8px] uppercase tracking-wider text-white font-bold backdrop-blur-xs">
-              AI SCANNING ACTIVE
+              {isCamPaused ? '⏸️ PAUSED' : 'AI SCANNING ACTIVE'}
             </div>
           </div>
 
