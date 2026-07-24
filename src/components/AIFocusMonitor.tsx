@@ -123,24 +123,20 @@ export default function AIFocusMonitor() {
         const imgData = ctx.getImageData(0, 0, w, h);
         const d = imgData.data;
 
-        // 1. Dynamic Skin-based Face Tracker
+        // ── Non-Inverting Robust Eye State Detection ──────────────────────────
+        // 1. Detect Face Bounds via Skin Filter or Fallback to Center Region
         let faceX1 = w, faceY1 = h, faceX2 = 0, faceY2 = 0;
-        
-        // Downsample scan to keep CPU footprint < 1%
+        let skinPixels = 0;
+
         for (let y = 10; y < h - 10; y += 6) {
           for (let x = 10; x < w - 10; x += 6) {
             const idx = (y * w + x) * 4;
             const r = d[idx];
             const g = d[idx+1];
             const b = d[idx+2];
-            
-            // Standard skin-tone filter
-            const isSkin = r > 65 && g > 45 && b > 30 && 
-                           r > g && r > b && 
-                           (r - g > 12) && 
-                           (Math.max(r, g, b) - Math.min(r, g, b) > 12);
-            
+            const isSkin = r > 65 && g > 45 && b > 30 && r > g && r > b && (r - g > 12);
             if (isSkin) {
+              skinPixels++;
               if (x < faceX1) faceX1 = x;
               if (x > faceX2) faceX2 = x;
               if (y < faceY1) faceY1 = y;
@@ -149,116 +145,96 @@ export default function AIFocusMonitor() {
           }
         }
 
-        // Establish default fallback boxes in case no face is detected
-        let foreheadBox = { x: Math.floor(w * 0.45), y: Math.floor(h * 0.28), width: Math.floor(w * 0.1), height: Math.floor(h * 0.08) };
-        let leftEyeBox = { x: Math.floor(w * 0.35), y: Math.floor(h * 0.40), width: Math.floor(w * 0.12), height: Math.floor(h * 0.09) };
-        let rightEyeBox = { x: Math.floor(w * 0.53), y: Math.floor(h * 0.40), width: Math.floor(w * 0.12), height: Math.floor(h * 0.09) };
-        let isFaceTracked = false;
+        // If face is found by skin filter, use face bounds. Otherwise fallback to upper-middle center of frame.
+        const isFaceTracked = skinPixels > 25 && (faceX2 - faceX1 > 40) && (faceY2 - faceY1 > 40);
+        const fx1 = isFaceTracked ? faceX1 : Math.floor(w * 0.25);
+        const fy1 = isFaceTracked ? faceY1 : Math.floor(h * 0.15);
+        const fw = isFaceTracked ? (faceX2 - faceX1) : Math.floor(w * 0.50);
+        const fh = isFaceTracked ? (faceY2 - faceY1) : Math.floor(h * 0.60);
 
-        const faceW = faceX2 - faceX1;
-        const faceH = faceY2 - faceY1;
-
-        if (faceW > 45 && faceH > 45) {
-          isFaceTracked = true;
-          const findDarkestPoint = (startX: number, endX: number, startY: number, endY: number) => {
-            let minLum = 255;
-            let minX = startX + (endX - startX) / 2;
-            let minY = startY + (endY - startY) / 2;
-            
-            for (let y = startY; y < endY; y += 2) {
-              for (let x = startX; x < endX; x += 2) {
-                const idx = (y * w + x) * 4;
-                const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
-                if (lum < minLum) {
-                  minLum = lum;
-                  minX = x;
-                  minY = y;
-                }
-              }
-            }
-            return { x: minX, y: minY };
-          };
-
-          const eyeBandY1 = Math.floor(faceY1 + faceH * 0.32);
-          const eyeBandY2 = Math.floor(faceY1 + faceH * 0.47);
-
-          const leftEyeCenter = findDarkestPoint(
-            Math.floor(faceX1 + faceW * 0.12),
-            Math.floor(faceX1 + faceW * 0.48),
-            eyeBandY1,
-            eyeBandY2
-          );
-
-          const rightEyeCenter = findDarkestPoint(
-            Math.floor(faceX1 + faceW * 0.52),
-            Math.floor(faceX1 + faceW * 0.88),
-            eyeBandY1,
-            eyeBandY2
-          );
-
-          const boxW = Math.max(16, Math.floor(faceW * 0.14));
-          const boxH = Math.max(10, Math.floor(faceH * 0.08));
-
-          leftEyeBox = {
-            x: Math.min(w - boxW, Math.max(0, Math.floor(leftEyeCenter.x - boxW / 2))),
-            y: Math.min(h - boxH, Math.max(0, Math.floor(leftEyeCenter.y - boxH / 2))),
-            width: boxW,
-            height: boxH
-          };
-
-          rightEyeBox = {
-            x: Math.min(w - boxW, Math.max(0, Math.floor(rightEyeCenter.x - boxW / 2))),
-            y: Math.min(h - boxH, Math.max(0, Math.floor(rightEyeCenter.y - boxH / 2))),
-            width: boxW,
-            height: boxH
-          };
-
-          foreheadBox = {
-            x: Math.min(w - 15, Math.max(0, Math.floor((leftEyeCenter.x + rightEyeCenter.x) / 2 - 10))),
-            y: Math.min(h - 10, Math.max(0, Math.floor(faceY1 + faceH * 0.16))),
-            width: 20,
-            height: 10
-          };
-        }
-
-        const getBoxMetrics = (box: { x: number; y: number; width: number; height: number }) => {
-          const imgData = ctx.getImageData(box.x, box.y, box.width, box.height);
-          const data = imgData.data;
-          let sum = 0;
-          const pixelCount = data.length / 4;
-          
-          for (let i = 0; i < data.length; i += 4) {
-            const lum = 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
-            sum += lum;
-          }
-          const avg = sum / pixelCount;
-
-          let varianceSum = 0;
-          for (let i = 0; i < data.length; i += 4) {
-            const lum = 0.299 * data[i] + 0.587 * data[i+1] + 0.114 * data[i+2];
-            varianceSum += Math.pow(lum - avg, 2);
-          }
-          const variance = varianceSum / pixelCount;
-          
-          return { avg, variance };
+        // 2. Fixed relative bounding boxes for forehead skin ref and left/right eye regions
+        const foreheadBox = {
+          x: Math.floor(fx1 + fw * 0.35),
+          y: Math.floor(fy1 + fh * 0.12),
+          width: Math.floor(fw * 0.30),
+          height: Math.floor(fh * 0.12),
         };
 
-        const forehead = getBoxMetrics(foreheadBox);
-        const leftEye = getBoxMetrics(leftEyeBox);
-        const rightEye = getBoxMetrics(rightEyeBox);
+        const leftEyeBox = {
+          x: Math.floor(fx1 + fw * 0.12),
+          y: Math.floor(fy1 + fh * 0.32),
+          width: Math.floor(fw * 0.32),
+          height: Math.floor(fh * 0.22),
+        };
 
-        const refVar = Math.max(15, forehead.variance);
-        const leftContrast = leftEye.variance / refVar;
-        const rightContrast = rightEye.variance / refVar;
-        const avgContrast = (leftContrast + rightContrast) / 2;
+        const rightEyeBox = {
+          x: Math.floor(fx1 + fw * 0.56),
+          y: Math.floor(fy1 + fh * 0.32),
+          width: Math.floor(fw * 0.32),
+          height: Math.floor(fh * 0.22),
+        };
 
-        const areEyesClosed = isFaceTracked && avgContrast < 1.75;
+        // Helper for average luminance in a box
+        const getBoxAverageLum = (box: { x: number; y: number; width: number; height: number }) => {
+          let sum = 0;
+          let count = 0;
+          const bx2 = Math.min(w, box.x + box.width);
+          const by2 = Math.min(h, box.y + box.height);
+          const bx1 = Math.max(0, box.x);
+          const by1 = Math.max(0, box.y);
 
-        // Drowsiness Timer & Trigger Handling (10 to 15 seconds continuous closed eyes)
+          for (let y = by1; y < by2; y += 2) {
+            for (let x = bx1; x < bx2; x += 2) {
+              const idx = (y * w + x) * 4;
+              const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
+              sum += lum;
+              count++;
+            }
+          }
+          return count > 0 ? sum / count : 128;
+        };
+
+        // Helper for counting dark pupil/iris pixels in eye boxes
+        const getDarkPixelRatio = (box: { x: number; y: number; width: number; height: number }, threshold: number) => {
+          let darkCount = 0;
+          let total = 0;
+          const bx2 = Math.min(w, box.x + box.width);
+          const by2 = Math.min(h, box.y + box.height);
+          const bx1 = Math.max(0, box.x);
+          const by1 = Math.max(0, box.y);
+
+          for (let y = by1; y < by2; y += 2) {
+            for (let x = bx1; x < bx2; x += 2) {
+              const idx = (y * w + x) * 4;
+              const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
+              if (lum < threshold) darkCount++;
+              total++;
+            }
+          }
+          return total > 0 ? darkCount / total : 0;
+        };
+
+        const foreheadLum = getBoxAverageLum(foreheadBox);
+        const leftEyeLum = getBoxAverageLum(leftEyeBox);
+        const rightEyeLum = getBoxAverageLum(rightEyeBox);
+        const avgEyeLum = (leftEyeLum + rightEyeLum) / 2;
+
+        // Dark pupil threshold is 75% of skin brightness
+        const darkThreshold = Math.min(120, Math.max(30, foreheadLum * 0.75));
+        const leftDarkRatio = getDarkPixelRatio(leftEyeBox, darkThreshold);
+        const rightDarkRatio = getDarkPixelRatio(rightEyeBox, darkThreshold);
+        const avgDarkRatio = (leftDarkRatio + rightDarkRatio) / 2;
+
+        // EYES CLOSED CRITERIA:
+        // Open eyes -> pupil exposed -> avgDarkRatio >= 0.08 & skin is noticeably brighter than eye area.
+        // Closed eyes -> eyelid covers pupil -> avgDarkRatio < 0.08 & eye area brightness is close to forehead skin.
+        const areEyesClosed = (avgDarkRatio < 0.08) && ((foreheadLum - avgEyeLum) < 14);
+
+        // Drowsiness Timer & Trigger Handling (10 seconds continuous closed eyes)
         if (areEyesClosed) {
           eyeClosedFrames++;
           setEyeState('closed');
-          const secondsClosed = Math.floor(eyeClosedFrames / 10); // 10 frames = 1 second (at 100ms interval)
+          const secondsClosed = Math.floor(eyeClosedFrames / 10); // 10 frames = 1 second (100ms interval)
           setClosedTimer(secondsClosed);
 
           // Continuous eyes closed for 10 seconds (100 frames * 100ms)
