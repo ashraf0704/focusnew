@@ -204,66 +204,70 @@ export default function AIFocusMonitor() {
         const rangeMode = faceAreaRatio > 0.32 ? 'NEAR RANGE' : faceAreaRatio > 0.10 ? 'MEDIUM RANGE' : 'FAR RANGE';
         setDetectedRange(rangeMode);
 
-        // 2. Fixed relative bounding boxes adapted to captured face coordinates
+        // 2. Fixed relative bounding boxes adapted to captured face coordinates (excluding eyebrows)
         const foreheadBox = {
           x: Math.floor(fx1 + fw * 0.35),
           y: Math.floor(fy1 + fh * 0.10),
           width: Math.max(10, Math.floor(fw * 0.30)),
-          height: Math.max(6, Math.floor(fh * 0.14)),
+          height: Math.max(6, Math.floor(fh * 0.12)),
         };
 
         const leftEyeBox = {
-          x: Math.floor(fx1 + fw * 0.10),
-          y: Math.floor(fy1 + fh * 0.30),
-          width: Math.max(12, Math.floor(fw * 0.35)),
-          height: Math.max(8, Math.floor(fh * 0.25)),
+          x: Math.floor(fx1 + fw * 0.12),
+          y: Math.floor(fy1 + fh * 0.34),
+          width: Math.max(12, Math.floor(fw * 0.33)),
+          height: Math.max(8, Math.floor(fh * 0.18)),
         };
 
         const rightEyeBox = {
           x: Math.floor(fx1 + fw * 0.55),
-          y: Math.floor(fy1 + fh * 0.30),
-          width: Math.max(12, Math.floor(fw * 0.35)),
-          height: Math.max(8, Math.floor(fh * 0.25)),
+          y: Math.floor(fy1 + fh * 0.34),
+          width: Math.max(12, Math.floor(fw * 0.33)),
+          height: Math.max(8, Math.floor(fh * 0.18)),
         };
 
-        // Helper for min, max, avg luminance and contrast span in a box
-        const getBoxLumStats = (box: { x: number; y: number; width: number; height: number }) => {
+        // Helper for min, max, avg luminance, dark pupil ratio and contrast span in a box
+        const getBoxLumStats = (box: { x: number; y: number; width: number; height: number }, darkThreshold: number) => {
           let minLum = 255;
           let maxLum = 0;
           let sum = 0;
           let count = 0;
+          let darkCount = 0;
           const bx2 = Math.min(w, box.x + box.width);
           const by2 = Math.min(h, box.y + box.height);
           const bx1 = Math.max(0, box.x);
           const by1 = Math.max(0, box.y);
 
-          for (let y = by1; y < by2; y += 2) {
-            for (let x = bx1; x < bx2; x += 2) {
+          for (let y = by1; y < by2; y += 1) {
+            for (let x = bx1; x < bx2; x += 1) {
               const idx = (y * w + x) * 4;
               const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
               if (lum < minLum) minLum = lum;
               if (lum > maxLum) maxLum = lum;
+              if (lum < darkThreshold) darkCount++;
               sum += lum;
               count++;
             }
           }
           const avg = count > 0 ? sum / count : 128;
+          const darkRatio = count > 0 ? darkCount / count : 0;
           const contrastSpan = maxLum - minLum;
-          return { minLum, maxLum, avg, contrastSpan };
+          return { minLum, maxLum, avg, contrastSpan, darkRatio };
         };
 
-        const foreheadStats = getBoxLumStats(foreheadBox);
-        const leftEyeStats = getBoxLumStats(leftEyeBox);
-        const rightEyeStats = getBoxLumStats(rightEyeBox);
+        const foreheadStats = getBoxLumStats(foreheadBox, 255);
 
         // Dark pupil luminance cutoff (dark pupil is significantly darker than forehead skin)
-        const darkPupilCutoff = Math.min(110, Math.max(35, foreheadStats.avg * 0.65));
+        const darkPupilCutoff = Math.min(105, Math.max(40, foreheadStats.avg * 0.65));
+
+        const leftEyeStats = getBoxLumStats(leftEyeBox, darkPupilCutoff);
+        const rightEyeStats = getBoxLumStats(rightEyeBox, darkPupilCutoff);
 
         // OPEN EYE SIGNATURE:
-        // Exposed dark pupil -> minimum luminance in eye box is less than darkPupilCutoff
-        // AND contrast span (sclera/skin vs pupil) is >= 45 units
-        const isLeftEyeOpen = (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 45);
-        const isRightEyeOpen = (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 45);
+        // Exposed dark pupil must cover at least 5% of the eye box pixels
+        // AND have minimum luminance below darkPupilCutoff with contrast span >= 30
+        const isLeftEyeOpen = (leftEyeStats.darkRatio >= 0.05) && (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 30);
+        const isRightEyeOpen = (rightEyeStats.darkRatio >= 0.05) && (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 30);
 
         const isEyesOpen = isLeftEyeOpen || isRightEyeOpen;
         const areEyesClosed = !isEyesOpen;
