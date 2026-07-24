@@ -681,26 +681,14 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
                       <div className="flex items-center gap-1 shrink-0 select-none">
                         <button
                           onClick={(e) => handleStartEditFile(file, e)}
-                          className="p-1.5 hover:bg-indigo-50 text-indigo-600 rounded-lg opacity-0 group-hover:opacity-100 transition duration-150"
-                          title="Edit filename"
+                          className="p-1.5 hover:bg-indigo-50 text-indigo-600 rounded-lg opacity-0 group-hover:opacity-100 transition duration-150 cursor-pointer"
+                          title="Rename file"
                         >
                           <Pencil size={13} />
                         </button>
                         <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            if (file.textContent) {
-                              onSendToAI(file.textContent, file.name);
-                            }
-                          }}
-                          className="p-1.5 hover:bg-brand-primary/5 text-brand-primary hover:text-brand-dark rounded-lg transition duration-150 flex items-center gap-1"
-                          title="Ask AIs about this file"
-                        >
-                          <Sparkles size={13} className="text-brand-vibrant animate-pulse" />
-                        </button>
-                        <button
                           onClick={(e) => handleDeleteFile(file.id, e)}
-                          className="p-1.5 hover:bg-rose-50 text-rose-500 rounded-lg opacity-0 group-hover:opacity-100 transition duration-150"
+                          className="p-1.5 hover:bg-rose-50 text-rose-500 rounded-lg opacity-0 group-hover:opacity-100 transition duration-150 cursor-pointer"
                           title="Delete file"
                         >
                           <Trash2 size={13} />
@@ -793,36 +781,12 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
                   </div>
                 </div>
 
-                {/* Extracted file outline body contents */}
+                {/* Document contents body */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-black uppercase text-brand-muted tracking-wide block">Extracted Text Content / Code Framework:</label>
-                  <div className="bg-brand-bg/60 border border-brand-outline/80 rounded-xl p-3 max-h-56 overflow-y-auto text-xs font-mono text-brand-dark leading-relaxed whitespace-pre-wrap select-text selection:bg-brand-primary selection:text-white">
-                    {activeFilePreview.textContent}
+                  <label className="text-[10px] font-black uppercase text-brand-muted tracking-wide block">Document Reader &amp; Text Content:</label>
+                  <div className="bg-slate-50 border border-brand-outline rounded-2xl p-4 max-h-[380px] overflow-y-auto text-xs font-sans text-brand-dark leading-relaxed whitespace-pre-wrap select-text selection:bg-brand-primary selection:text-white font-mono shadow-inner">
+                    {activeFilePreview.textContent || 'No readable text extracted. Download original file below to view in full resolution.'}
                   </div>
-                </div>
-
-                {/* Ask AI Bridge box trigger */}
-                <div className="bg-brand-primary/5 border border-brand-primary/10 rounded-2xl p-4 space-y-2.5">
-                  <div className="flex items-center gap-1.5">
-                    <Sparkles size={14} className="text-brand-vibrant animate-pulse shrink-0" />
-                    <h5 className="font-heading font-black text-xs text-brand-dark">Resolve doubt with AI Experts</h5>
-                  </div>
-                  <p className="text-[10px] text-brand-muted leading-relaxed">
-                    Instantly load this file content into our Multi-Agent pop-up container. You can prompt <strong>ChatGPT-4o</strong>, <strong>Gemini</strong>, <strong>Claude</strong> or <strong>Perplexity</strong> to solve logic, verify math or draft notes.
-                  </p>
-                  
-                  <button
-                    onClick={() => {
-                      if (activeFilePreview.textContent) {
-                        onSendToAI(activeFilePreview.textContent, activeFilePreview.name);
-                      }
-                    }}
-                    type="button"
-                    className="w-full text-center py-2 bg-brand-primary hover:opacity-95 text-white text-xs font-black rounded-xl transition cursor-pointer flex items-center justify-center gap-1.5"
-                  >
-                    <Sparkles size={12} className="text-brand-vibrant" />
-                    <span>Ask ChatGPT, Gemini or Claude</span>
-                  </button>
                 </div>
 
               </div>
