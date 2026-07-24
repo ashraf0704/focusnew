@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Eye, EyeOff, Sparkles, GraduationCap, Github, Apple, Grid, Loader2, Plus, LogIn, ArrowLeft, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Eye, EyeOff, Sparkles, GraduationCap, Github, Apple, Grid, Loader2, Plus, LogIn, ArrowLeft, AlertCircle, CheckCircle2, Shield, X } from 'lucide-react';
 
 interface WelcomeScreenProps {
   onSignIn: (
@@ -25,13 +25,39 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [dailyGoal, setDailyGoal] = useState(25); // minutes
   const [showForgotModal, setShowForgotModal] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isGuestLoading, setIsGuestLoading] = useState(false);
+  const [lastLoginEmail, setLastLoginEmail] = useState<string | null>(null);
+  const [showLastLoginChip, setShowLastLoginChip] = useState(false);
+
+  // Load last login email on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('focus_buddy_last_email');
+    if (saved && saved.includes('@')) {
+      setLastLoginEmail(saved);
+      setShowLastLoginChip(true);
+    }
+  }, []);
+
+  // Password strength checker
+  const passwordRules = useMemo(() => [
+    { label: 'At least 8 characters', met: password.length >= 8 },
+    { label: 'Uppercase letter (A–Z)', met: /[A-Z]/.test(password) },
+    { label: 'Lowercase letter (a–z)', met: /[a-z]/.test(password) },
+    { label: 'Number (0–9)', met: /[0-9]/.test(password) },
+    { label: 'Special character (!@#$%)', met: /[^A-Za-z0-9]/.test(password) },
+  ], [password]);
+
+  const passwordScore = passwordRules.filter(r => r.met).length; // 0-5
+  const strengthLabel = passwordScore === 0 ? '' : passwordScore <= 2 ? 'Weak' : passwordScore <= 3 ? 'Fair' : passwordScore === 4 ? 'Strong' : 'Very Strong';
+  const strengthColor = passwordScore <= 2 ? '#ef4444' : passwordScore === 3 ? '#f97316' : passwordScore === 4 ? '#22c55e' : '#16a34a';
 
   // SSO selection states
   const [activeSSOProvider, setActiveSSOProvider] = useState<'google' | 'apple' | 'github' | 'microsoft' | null>(null);
@@ -63,36 +89,54 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
 
   const handleAuthSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password || (isSignUp && !fullName)) {
-      setErrorMsg('Please fill in all required fields.');
-      setSuccessMsg('');
-      return;
-    }
     setErrorMsg('');
     setSuccessMsg('');
+
+    if (!email || !password || (isSignUp && !fullName)) {
+      setErrorMsg('Please fill in all required fields.');
+      return;
+    }
+
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setErrorMsg('❌ Invalid email address. Please enter a valid email like user@example.com');
+      return;
+    }
+
+    // Sign-up specific validations
+    if (isSignUp) {
+      if (password !== confirmPassword) {
+        setErrorMsg('❌ Passwords do not match. Please re-enter your confirm password.');
+        return;
+      }
+      if (passwordScore < 3) {
+        setErrorMsg('❌ Password is too weak. Please follow the strength guidelines below.');
+        return;
+      }
+    }
+
     setIsLoading(true);
-    // Derive name from email if not registering (e.g. "john.doe@gmail.com" -> "John")
     const derivedName = email.split('@')[0].split('.')[0].replace(/^\w/, (c) => c.toUpperCase());
     try {
       await onSignIn(isSignUp ? fullName : (fullName || derivedName || 'Student'), email, dailyGoal, password, isSignUp ? 'signup' : 'signin');
-      // Show success message briefly before navigation occurs
       if (isSignUp) {
-        setSuccessMsg('🎉 Account created! Signing you in…');
+        setSuccessMsg('🎉 Account created successfully! Signing you in…');
       } else {
         setSuccessMsg('✅ Welcome back! Signing you in…');
       }
     } catch (error) {
       const rawMsg = error instanceof Error ? error.message : 'Authentication failed.';
-      // Make error messages user-friendly
       const lowerMsg = rawMsg.toLowerCase();
-      if (lowerMsg.includes('invalid') || lowerMsg.includes('not found') || lowerMsg.includes('no user') || lowerMsg.includes('user not')) {
-        setErrorMsg('No account found with this email. Please check or sign up.');
-      } else if (lowerMsg.includes('password') || lowerMsg.includes('credentials') || lowerMsg.includes('incorrect') || lowerMsg.includes('wrong')) {
-        setErrorMsg('Incorrect password. Please try again.');
-      } else if (lowerMsg.includes('email') && (lowerMsg.includes('exist') || lowerMsg.includes('taken') || lowerMsg.includes('already'))) {
-        setErrorMsg('This email is already registered. Try signing in instead.');
+      if (lowerMsg.includes('already registered') || (lowerMsg.includes('email') && lowerMsg.includes('exist'))) {
+        setErrorMsg('❌ This email is already registered. Try signing in instead.');
+      } else if (lowerMsg.includes('no account') || lowerMsg.includes('not found') || lowerMsg.includes('sign up first')) {
+        setErrorMsg('❌ No account found with this email. Please sign up first.');
+      } else if (lowerMsg.includes('incorrect password') || lowerMsg.includes('wrong password')) {
+        setErrorMsg('❌ Incorrect password. Please try again or use "Forgot Password".');
+      } else if (lowerMsg.includes('invalid') && lowerMsg.includes('email')) {
+        setErrorMsg('❌ Invalid email address. Please check and try again.');
       } else {
-        setErrorMsg(rawMsg);
+        setErrorMsg(`❌ ${rawMsg}`);
       }
     } finally {
       setIsLoading(false);
@@ -244,6 +288,38 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
           className="space-y-4"
           id="credentials-form"
         >
+          {/* Last login email chip (sign-in mode) */}
+          <AnimatePresence>
+            {!isSignUp && showLastLoginChip && lastLoginEmail && (
+              <motion.button
+                type="button"
+                key="last-login-chip"
+                initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                onClick={() => { setEmail(lastLoginEmail); setShowLastLoginChip(false); }}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-brand-accent/40 border border-brand-primary/20 hover:bg-brand-accent/60 transition-all group text-left"
+                id="last-login-chip"
+              >
+                <div className="w-8 h-8 rounded-full bg-brand-primary flex items-center justify-center text-white text-xs font-black shrink-0">
+                  {lastLoginEmail.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] font-bold text-brand-muted uppercase tracking-wider">Last Login</p>
+                  <p className="text-sm font-semibold text-brand-dark truncate">{lastLoginEmail}</p>
+                </div>
+                <span className="text-[10px] font-bold text-brand-primary group-hover:text-brand-vibrant transition-colors">Use →</span>
+                <button
+                  type="button"
+                  onClick={(ev) => { ev.stopPropagation(); setShowLastLoginChip(false); localStorage.removeItem('focus_buddy_last_email'); setLastLoginEmail(null); }}
+                  className="p-1 rounded-full hover:bg-brand-primary/10 text-brand-muted transition-colors shrink-0"
+                >
+                  <X size={12} />
+                </button>
+              </motion.button>
+            )}
+          </AnimatePresence>
+
           {isSignUp && (
             <div className="relative group">
               <input
@@ -291,6 +367,94 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
               </button>
             </div>
           </div>
+
+          {/* Confirm Password (Sign-up only) */}
+          <AnimatePresence>
+            {isSignUp && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="overflow-hidden"
+              >
+                <div className="relative group">
+                  <div className="flex items-center">
+                    <input
+                      id="sign-up-confirm-password"
+                      type={showConfirmPassword ? 'text' : 'password'}
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      placeholder="Confirm Password"
+                      className={`w-full px-4 py-4 rounded-xl border bg-white/80 backdrop-blur-sm shadow-sm text-sm pr-12 outline-none transition-all duration-300 ${
+                        confirmPassword && password !== confirmPassword
+                          ? 'border-red-400 focus:ring-1 focus:ring-red-300'
+                          : confirmPassword && password === confirmPassword
+                          ? 'border-emerald-400 focus:ring-1 focus:ring-emerald-300'
+                          : 'border-brand-soft-border focus:border-brand-primary focus:ring-1 focus:ring-brand-primary'
+                      }`}
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                      className="absolute right-4 p-1 text-brand-muted hover:text-brand-dark transition-colors focus:outline-none"
+                      id="confirm-password-visibility-toggle"
+                    >
+                      {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                    </button>
+                  </div>
+                  {confirmPassword && password !== confirmPassword && (
+                    <p className="text-[11px] text-red-500 font-semibold mt-1.5 pl-1">Passwords do not match</p>
+                  )}
+                  {confirmPassword && password === confirmPassword && (
+                    <p className="text-[11px] text-emerald-600 font-semibold mt-1.5 pl-1 flex items-center gap-1"><CheckCircle2 size={11} /> Passwords match</p>
+                  )}
+                </div>
+
+                {/* Password Strength Meter */}
+                {password.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mt-3 p-3.5 bg-white/70 border border-brand-soft-border rounded-xl space-y-2.5"
+                    id="password-strength-meter"
+                  >
+                    {/* Strength bar */}
+                    <div className="flex items-center gap-2">
+                      <div className="flex-1 h-1.5 bg-brand-soft-border rounded-full overflow-hidden">
+                        <motion.div
+                          animate={{ width: `${(passwordScore / 5) * 100}%`, backgroundColor: strengthColor }}
+                          transition={{ duration: 0.3 }}
+                          className="h-full rounded-full"
+                        />
+                      </div>
+                      {strengthLabel && (
+                        <span className="text-[10px] font-black uppercase tracking-wider shrink-0" style={{ color: strengthColor }}>
+                          {strengthLabel}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Rules checklist */}
+                    <div className="space-y-1">
+                      {passwordRules.map((rule, i) => (
+                        <div key={i} className="flex items-center gap-2">
+                          <div className={`w-3.5 h-3.5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+                            rule.met ? 'bg-emerald-500' : 'bg-brand-soft-border'
+                          }`}>
+                            {rule.met && <CheckCircle2 size={9} className="text-white" strokeWidth={3} />}
+                          </div>
+                          <span className={`text-[11px] transition-colors duration-300 ${
+                            rule.met ? 'text-emerald-700 font-semibold' : 'text-brand-muted'
+                          }`}>{rule.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           <AnimatePresence mode="wait">
             {errorMsg && (
@@ -444,7 +608,7 @@ export default function WelcomeScreen({ onSignIn }: WelcomeScreenProps) {
             {isSignUp ? 'Already have an account? ' : "Don't have an account? "}
           </span>
           <button
-            onClick={() => { setIsSignUp(!isSignUp); setErrorMsg(''); setSuccessMsg(''); }}
+            onClick={() => { setIsSignUp(!isSignUp); setErrorMsg(''); setSuccessMsg(''); setConfirmPassword(''); setShowLastLoginChip(!isSignUp && !!lastLoginEmail); }}
             className="text-brand-vibrant hover:text-brand-primary font-bold transition-all ml-1 duration-200 focus:outline-none"
             id="auth-mode-toggle"
           >

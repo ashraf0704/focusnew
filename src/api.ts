@@ -20,6 +20,8 @@ const STORAGE_KEYS = {
   BADGES: 'focus_buddy_sim_badges',
   FOLDERS: 'focus_buddy_sim_folders',
   FILES: 'focus_buddy_sim_files',
+  ACCOUNTS: 'focus_buddy_sim_accounts', // registry of {email, pwHash, profileKey}
+  LAST_EMAIL: 'focus_buddy_last_email', // last successfully signed-in email
 };
 
 function getLocalItem<T>(key: string, defaultValue: T): T {
@@ -51,9 +53,24 @@ async function handleSimulatedOfflineRequest<T>(path: string, options: ApiOption
   const method = options.method || 'GET';
   const body = options.body ? (typeof options.body === 'string' ? JSON.parse(options.body) : options.body) : {};
 
+  // ── Accounts registry helpers ────────────────────────────────────────────
+  type AccountEntry = { email: string; pwHash: string; profileKey: string };
+  const getAccounts = (): AccountEntry[] => getLocalItem<AccountEntry[]>(STORAGE_KEYS.ACCOUNTS, []);
+  const saveAccounts = (accounts: AccountEntry[]) => setLocalItem(STORAGE_KEYS.ACCOUNTS, accounts);
+  // Simple reversible hash for demo — NOT secure, only for offline simulation
+  const simpleHash = (s: string) => btoa(encodeURIComponent(s));
+
   // Sign Up
   if (path === '/api/auth/signup' && method === 'POST') {
-    const { email, fullName, dailyGoal } = body;
+    const { email, fullName, dailyGoal, password } = body;
+
+    // Check duplicate email
+    const accounts = getAccounts();
+    if (accounts.some(a => a.email.toLowerCase() === email.toLowerCase())) {
+      throw new Error('Email already registered. Please sign in instead.');
+    }
+
+    const profileKey = `focus_buddy_profile_${email}`;
     const profile: UserProfile = {
       email,
       fullName: fullName || email.split('@')[0],
@@ -64,31 +81,65 @@ async function handleSimulatedOfflineRequest<T>(path: string, options: ApiOption
       buddyPoints: 250,
       buddySpecies: 'fox',
     };
+
+    // Save to account-specific profile key
+    setLocalItem(profileKey, profile);
+    // Also update active profile
     setLocalItem(STORAGE_KEYS.PROFILE, profile);
+    // Initialize data stores
     getLocalItem(STORAGE_KEYS.SUBJECTS, INITIAL_SUBJECTS);
     getLocalItem(STORAGE_KEYS.TASKS, INITIAL_TASKS);
     getLocalItem(STORAGE_KEYS.DECKS, INITIAL_DECKS);
     getLocalItem(STORAGE_KEYS.BADGES, INITIAL_BADGES);
+
+    // Register in accounts registry
+    accounts.push({ email, pwHash: simpleHash(password || ''), profileKey });
+    saveAccounts(accounts);
+
+    // Remember last email
+    localStorage.setItem(STORAGE_KEYS.LAST_EMAIL, email);
+
     return { jwt: 'simulated-offline-jwt-token', profile } as unknown as T;
   }
 
   // Sign In
   if (path === '/api/auth/signin' && method === 'POST') {
-    const { email } = body;
-    let profile: UserProfile = getLocalItem(STORAGE_KEYS.PROFILE, null as any);
-    if (!profile || profile.email !== email) {
-      profile = {
-        email,
-        fullName: email.split('@')[0],
-        streak: 1,
-        totalFocusMinutes: 0,
-        sessionsCount: 0,
-        dailyGoalMinutes: 25,
-        buddyPoints: 250,
-        buddySpecies: 'fox',
-      };
-      setLocalItem(STORAGE_KEYS.PROFILE, profile);
+    const { email, password } = body;
+    const accounts = getAccounts();
+    const account = accounts.find(a => a.email.toLowerCase() === email.toLowerCase());
+
+    if (!account) {
+      // No registered account — check if an older-style profile exists
+      const legacyProfile: UserProfile = getLocalItem(STORAGE_KEYS.PROFILE, null as any);
+      if (legacyProfile && legacyProfile.email.toLowerCase() === email.toLowerCase()) {
+        // Migrate legacy profile into accounts registry
+        const pwHash = simpleHash(password || '');
+        accounts.push({ email: legacyProfile.email, pwHash, profileKey: STORAGE_KEYS.PROFILE });
+        saveAccounts(accounts);
+        localStorage.setItem(STORAGE_KEYS.LAST_EMAIL, email);
+        return { jwt: 'simulated-offline-jwt-token', profile: legacyProfile } as unknown as T;
+      }
+      throw new Error('No account found with this email. Please sign up first.');
     }
+
+    if (account.pwHash !== simpleHash(password || '')) {
+      throw new Error('Incorrect password. Please try again.');
+    }
+
+    // Load this account's profile
+    let profile: UserProfile = getLocalItem(account.profileKey, null as any);
+    if (!profile) {
+      profile = getLocalItem(STORAGE_KEYS.PROFILE, null as any);
+    }
+    if (!profile) {
+      throw new Error('No account found with this email. Please sign up first.');
+    }
+
+    // Set active profile
+    setLocalItem(STORAGE_KEYS.PROFILE, profile);
+    // Remember last email
+    localStorage.setItem(STORAGE_KEYS.LAST_EMAIL, email);
+
     return { jwt: 'simulated-offline-jwt-token', profile } as unknown as T;
   }
 

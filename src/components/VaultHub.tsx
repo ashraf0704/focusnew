@@ -105,6 +105,7 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [uploadingCount, setUploadingCount] = useState(0); // track multi-file upload progress
 
   useEffect(() => {
     let isActive = true;
@@ -264,18 +265,29 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
   const handleManualFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const list = e.target.files;
     if (list && list.length > 0) {
-      const rawFile = list[0];
-      const name = rawFile.name;
-      try {
-        await uploadVaultFile(rawFile, selectedFolderId || undefined);
-        triggerNotice(`Successfully imported local document "${name}"!`);
-      } catch (error) {
-        console.error(error);
-        triggerNotice(`Could not upload "${name}".`);
-      } finally {
-        e.target.value = '';
+      const files = Array.from(list);
+      setUploadingCount(files.length);
+      let successCount = 0;
+      let failCount = 0;
+      for (const rawFile of files) {
+        try {
+          await uploadVaultFile(rawFile, selectedFolderId || undefined);
+          successCount++;
+        } catch (error) {
+          console.error(error);
+          failCount++;
+        } finally {
+          setUploadingCount(prev => Math.max(0, prev - 1));
+        }
+      }
+      if (successCount > 0) {
+        triggerNotice(`✅ ${successCount} file${successCount > 1 ? 's' : ''} uploaded to Vault!`);
+      }
+      if (failCount > 0) {
+        triggerNotice(`⚠️ ${failCount} file${failCount > 1 ? 's' : ''} could not be uploaded.`);
       }
     }
+    e.target.value = '';
   };
 
   const getFileIcon = (type: string) => {
@@ -373,6 +385,30 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {/* Hidden system file picker — all file types, multiple selection */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              multiple
+              accept="*"
+              className="hidden"
+              id="vault-file-input"
+              onChange={handleManualFileSelected}
+            />
+            <button
+              type="button"
+              onClick={triggerManualFileInput}
+              className="py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition shadow-sm relative"
+              id="vault-browse-files-btn"
+            >
+              <Upload size={15} />
+              <span>📂 Browse System Files</span>
+              {uploadingCount > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-orange-500 text-white text-[9px] font-black rounded-full w-4 h-4 flex items-center justify-center">
+                  {uploadingCount}
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setShowFolderModal(true)}
               className="py-2.5 px-4 bg-white hover:bg-slate-50 border border-brand-outline text-brand-dark rounded-xl text-xs font-bold flex items-center gap-2 transition"
@@ -388,7 +424,7 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
               className="py-2.5 px-4 bg-brand-primary hover:opacity-95 text-white rounded-xl text-xs font-bold flex items-center gap-2 transition"
             >
               <Plus size={15} />
-              <span>Upload Document</span>
+              <span>New Text File</span>
             </button>
           </div>
         </div>

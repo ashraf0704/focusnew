@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Play, Pause, Square, Sparkles, Volume2, VolumeX, Check, AlertCircle, Wind, FastForward, CheckSquare } from 'lucide-react';
+import { Play, Pause, Square, Sparkles, Volume2, VolumeX, Check, AlertCircle, Wind, FastForward, CheckSquare, Bell, BellOff, AlarmClock } from 'lucide-react';
 import { Subject, Task } from '../types';
 
 interface FocusModeProps {
@@ -8,6 +8,8 @@ interface FocusModeProps {
   selectedSound: string;
   subject: Subject;
   tasks: Task[];
+  alarmTone?: string;
+  alarmVolume?: number; // 0-100
   onToggleTask: (id: string) => void;
   onFinishSession: (totalMinutes: number, completed: boolean, focusScore?: number) => void;
   onCancelSession: () => void;
@@ -18,6 +20,8 @@ export default function FocusMode({
   selectedSound,
   subject,
   tasks,
+  alarmTone = 'singing-bowl',
+  alarmVolume = 80,
   onToggleTask,
   onFinishSession,
   onCancelSession,
@@ -32,6 +36,13 @@ export default function FocusMode({
 
   const [focusScore, setFocusScore] = useState<number>(100);
 
+  // Alarm state – fires when timer reaches 0
+  const [alarmActive, setAlarmActive] = useState(false);
+  const [alarmMuted, setAlarmMuted] = useState(false);
+  const [liveAlarmVolume, setLiveAlarmVolume] = useState(alarmVolume);
+  const alarmAudioCtxRef = useRef<AudioContext | null>(null);
+  const alarmStopRef = useRef<(() => void) | null>(null);
+
   // Time editing states
   const [isEditing, setIsEditing] = useState(false);
   const [editHours, setEditHours] = useState(0);
@@ -42,6 +53,166 @@ export default function FocusMode({
   const audioCtxRef = useRef<AudioContext | null>(null);
   const noiseNodeRef = useRef<AudioNode | null>(null);
   const gainNodeRef = useRef<GainNode | null>(null);
+
+  // ── Alarm Audio Engine ──────────────────────────────────────────────────────
+  const playTimerAlarm = useCallback(() => {
+    if (alarmMuted) return;
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+
+      if (!alarmAudioCtxRef.current || alarmAudioCtxRef.current.state === 'closed') {
+        alarmAudioCtxRef.current = new AudioCtx();
+      }
+      const ctx = alarmAudioCtxRef.current;
+      if (ctx.state === 'suspended') ctx.resume();
+
+      let stopped = false;
+      const scheduledOscs: AudioNode[] = [];
+      const vol = Math.max(0.05, liveAlarmVolume / 100);
+
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(vol, ctx.currentTime);
+      masterGain.connect(ctx.destination);
+
+      const scheduleLoop = (startTime: number) => {
+        if (stopped) return;
+
+        if (alarmTone === 'classic-bell') {
+          // Sharp ascending bell tones
+          [880, 1108, 1318, 1760, 1318, 1108, 880].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const env = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, startTime + i * 0.16);
+            env.gain.setValueAtTime(0, startTime + i * 0.16);
+            env.gain.linearRampToValueAtTime(1.0, startTime + i * 0.16 + 0.04);
+            env.gain.exponentialRampToValueAtTime(0.001, startTime + i * 0.16 + 0.38);
+            osc.connect(env); env.connect(masterGain);
+            osc.start(startTime + i * 0.16); osc.stop(startTime + i * 0.16 + 0.4);
+            scheduledOscs.push(osc, env);
+          });
+          // Buzzer undertone
+          const buzz = ctx.createOscillator();
+          const buzzGain = ctx.createGain();
+          buzz.type = 'sawtooth'; buzz.frequency.setValueAtTime(160, startTime);
+          buzz.frequency.linearRampToValueAtTime(440, startTime + 1.0);
+          buzzGain.gain.setValueAtTime(0.4, startTime);
+          buzzGain.gain.linearRampToValueAtTime(0, startTime + 1.1);
+          buzz.connect(buzzGain); buzzGain.connect(masterGain);
+          buzz.start(startTime); buzz.stop(startTime + 1.1);
+          scheduledOscs.push(buzz, buzzGain);
+
+        } else if (alarmTone === 'singing-bowl') {
+          const osc = ctx.createOscillator();
+          const env = ctx.createGain();
+          osc.type = 'sine'; osc.frequency.setValueAtTime(220, startTime);
+          env.gain.setValueAtTime(0.95, startTime);
+          env.gain.exponentialRampToValueAtTime(0.001, startTime + 2.0);
+          osc.connect(env); env.connect(masterGain);
+          osc.start(startTime); osc.stop(startTime + 2.2);
+          const osc2 = ctx.createOscillator();
+          const env2 = ctx.createGain();
+          osc2.type = 'sine'; osc2.frequency.setValueAtTime(440, startTime);
+          env2.gain.setValueAtTime(0.45, startTime);
+          env2.gain.exponentialRampToValueAtTime(0.001, startTime + 1.8);
+          osc2.connect(env2); env2.connect(masterGain);
+          osc2.start(startTime); osc2.stop(startTime + 2);
+          scheduledOscs.push(osc, env, osc2, env2);
+
+        } else if (alarmTone === 'digital-chime') {
+          [1046, 1318, 1568, 2093, 1568, 1318, 1046].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const env = ctx.createGain();
+            osc.type = 'square'; osc.frequency.setValueAtTime(freq, startTime + i * 0.13);
+            env.gain.setValueAtTime(0, startTime + i * 0.13);
+            env.gain.linearRampToValueAtTime(0.55, startTime + i * 0.13 + 0.02);
+            env.gain.exponentialRampToValueAtTime(0.001, startTime + i * 0.13 + 0.28);
+            osc.connect(env); env.connect(masterGain);
+            osc.start(startTime + i * 0.13); osc.stop(startTime + i * 0.13 + 0.3);
+            scheduledOscs.push(osc, env);
+          });
+
+        } else if (alarmTone === 'birdsong') {
+          [0, 0.28, 0.52, 0.78].forEach((offset) => {
+            const osc = ctx.createOscillator();
+            const env = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200, startTime + offset);
+            osc.frequency.exponentialRampToValueAtTime(2400, startTime + offset + 0.14);
+            osc.frequency.exponentialRampToValueAtTime(1800, startTime + offset + 0.24);
+            env.gain.setValueAtTime(0, startTime + offset);
+            env.gain.linearRampToValueAtTime(0.7, startTime + offset + 0.03);
+            env.gain.exponentialRampToValueAtTime(0.001, startTime + offset + 0.25);
+            osc.connect(env); env.connect(masterGain);
+            osc.start(startTime + offset); osc.stop(startTime + offset + 0.28);
+            scheduledOscs.push(osc, env);
+          });
+
+        } else if (alarmTone === 'ocean-wave') {
+          const bufferSize = ctx.sampleRate * 2;
+          const buf = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+          const data = buf.getChannelData(0);
+          let last = 0;
+          for (let i = 0; i < bufferSize; i++) {
+            const white = Math.random() * 2 - 1;
+            data[i] = (last + 0.015 * white) / 1.015; last = data[i]; data[i] *= 4;
+          }
+          const src = ctx.createBufferSource(); src.buffer = buf;
+          const filter = ctx.createBiquadFilter();
+          filter.type = 'lowpass'; filter.frequency.value = 600;
+          const env = ctx.createGain();
+          env.gain.setValueAtTime(0, startTime);
+          env.gain.linearRampToValueAtTime(0.9, startTime + 0.4);
+          env.gain.exponentialRampToValueAtTime(0.001, startTime + 1.8);
+          src.connect(filter); filter.connect(env); env.connect(masterGain);
+          src.start(startTime); src.stop(startTime + 2);
+          scheduledOscs.push(src, env);
+
+        } else {
+          // Fallback: default ascending chime
+          [880, 1108, 1318, 1760, 1318, 1108, 880].forEach((freq, i) => {
+            const osc = ctx.createOscillator();
+            const env = ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(freq, startTime + i * 0.16);
+            env.gain.setValueAtTime(0, startTime + i * 0.16);
+            env.gain.linearRampToValueAtTime(1.0, startTime + i * 0.16 + 0.04);
+            env.gain.exponentialRampToValueAtTime(0.001, startTime + i * 0.16 + 0.38);
+            osc.connect(env); env.connect(masterGain);
+            osc.start(startTime + i * 0.16); osc.stop(startTime + i * 0.16 + 0.4);
+            scheduledOscs.push(osc, env);
+          });
+        }
+      };
+
+      let iter = 0;
+      const loop = () => {
+        if (stopped) return;
+        scheduleLoop(ctx.currentTime + 0.05);
+        iter++;
+        const interval = alarmTone === 'singing-bowl' || alarmTone === 'ocean-wave' ? 2400 : 1400;
+        if (iter < 25) setTimeout(loop, interval);
+      };
+      loop();
+
+      alarmStopRef.current = () => {
+        stopped = true;
+        scheduledOscs.forEach(node => { try { (node as any).stop?.(); } catch {} try { node.disconnect(); } catch {} });
+        try { masterGain.disconnect(); } catch {}
+      };
+    } catch (e) {
+      console.warn('Timer alarm error:', e);
+    }
+  }, [alarmMuted, alarmTone, liveAlarmVolume]);
+
+  const stopTimerAlarm = useCallback(() => {
+    if (alarmStopRef.current) {
+      alarmStopRef.current();
+      alarmStopRef.current = null;
+    }
+    setAlarmActive(false);
+  }, []);
 
   // Filter tasks specific to this session subjectId
   const sessionTasks = tasks.filter(t => t.subjectId === subject.id);
@@ -58,7 +229,9 @@ export default function FocusMode({
       timer = setInterval(() => {
         setTimeLeft(prev => {
           if (prev <= 1) {
-            handleSessionEnd(true);
+            // Timer completed – show alarm overlay FIRST, then finish session
+            setIsPlaying(false);
+            setAlarmActive(true);
             return 0;
           }
           return prev - 1;
@@ -69,6 +242,20 @@ export default function FocusMode({
       if (timer) clearInterval(timer);
     };
   }, [isPlaying, timeLeft]);
+
+  // Fire alarm sound whenever alarm becomes active
+  useEffect(() => {
+    if (alarmActive) {
+      playTimerAlarm();
+      // Trigger device vibration if supported
+      if ('vibrate' in navigator) {
+        navigator.vibrate([400, 200, 400, 200, 400]);
+      }
+    }
+    return () => {
+      if (!alarmActive) stopTimerAlarm();
+    };
+  }, [alarmActive]);
 
   // Breathing message generator cycle (6-second frequency)
   useEffect(() => {
@@ -207,10 +394,18 @@ export default function FocusMode({
 
   const handleSessionEnd = (completed: boolean) => {
     stopProceduralSound();
+    stopTimerAlarm();
+    setAlarmActive(false);
     const elapsedSeconds = sessionTotalSeconds - timeLeft;
     const maxMinutes = Math.ceil(sessionTotalSeconds / 60);
     const elapsedMinutes = Math.min(maxMinutes, Math.ceil(elapsedSeconds / 60));
     onFinishSession(elapsedMinutes, completed, focusScore);
+  };
+
+  const handleDismissAlarm = () => {
+    stopTimerAlarm();
+    // After dismissing, complete the session
+    handleSessionEnd(true);
   };
 
   const formatTime = (secs: number) => {
@@ -249,6 +444,145 @@ export default function FocusMode({
 
   return (
     <div className="fixed inset-0 bg-brand-bg z-50 overflow-y-auto px-6 py-12 flex flex-col justify-between select-none">
+
+      {/* ── TIMER COMPLETE ALARM OVERLAY ──────────────────────────────────── */}
+      <AnimatePresence>
+        {alarmActive && (
+          <motion.div
+            className="fixed inset-0 z-[200] flex flex-col items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            {/* Pulsing red-orange backdrop */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-[#1a0a00] via-[#2d1000] to-[#0d0015]"
+              animate={{ opacity: [0.92, 1, 0.92] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+            />
+
+            {/* Radial alarm glow */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              animate={{ opacity: [0.3, 0.7, 0.3] }}
+              transition={{ duration: 0.6, repeat: Infinity }}
+              style={{
+                background: 'radial-gradient(circle at 50% 45%, rgba(255,80,0,0.45) 0%, transparent 65%)'
+              }}
+            />
+
+            {/* Alarm content */}
+            <div className="relative z-10 flex flex-col items-center gap-6 text-center px-8">
+              {/* Pulsing bell icon */}
+              <motion.div
+                animate={{ scale: [1, 1.18, 1], rotate: [-12, 12, -12, 12, 0] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="w-28 h-28 rounded-full bg-orange-500/20 border-4 border-orange-500/60 flex items-center justify-center shadow-2xl"
+                style={{ boxShadow: '0 0 60px rgba(255,120,0,0.6), 0 0 120px rgba(255,80,0,0.3)' }}
+              >
+                <AlarmClock size={52} className="text-orange-400" strokeWidth={1.8} />
+              </motion.div>
+
+              {/* Title */}
+              <motion.div
+                animate={{ opacity: [1, 0.75, 1] }}
+                transition={{ duration: 0.5, repeat: Infinity }}
+                className="space-y-2"
+              >
+                <h2 className="text-4xl sm:text-5xl font-black tracking-tight text-white">
+                  ⏰ Time's Up!
+                </h2>
+                <p className="text-orange-300 font-bold text-base sm:text-lg">
+                  Your focus session for <span className="text-white">{subject.name}</span> is complete!
+                </p>
+              </motion.div>
+
+              {/* Stats row */}
+              <div className="flex items-center gap-4 bg-white/10 border border-white/20 rounded-2xl px-6 py-3">
+                <div className="text-center">
+                  <div className="text-2xl font-mono font-black text-white">
+                    {Math.ceil(sessionTotalSeconds / 60)}
+                  </div>
+                  <div className="text-[10px] uppercase tracking-wider text-orange-300 font-bold">Minutes</div>
+                </div>
+                <div className="w-px h-8 bg-white/20" />
+                <div className="text-center">
+                  <div className="text-2xl font-mono font-black text-white">{focusScore}%</div>
+                  <div className="text-[10px] uppercase tracking-wider text-orange-300 font-bold">Focus Score</div>
+                </div>
+                <div className="w-px h-8 bg-white/20" />
+                <div className="text-center">
+                  <div className="text-2xl font-mono font-black text-emerald-400">
+                    +{Math.max(5, Math.round(Math.ceil(sessionTotalSeconds / 60) * 10 * (focusScore / 100)))}
+                  </div>
+                  <div className="text-[10px] uppercase tracking-wider text-orange-300 font-bold">Points</div>
+                </div>
+              </div>
+
+              {/* Action buttons */}
+              <div className="flex items-center gap-3 flex-wrap justify-center">
+                <motion.button
+                  onClick={handleDismissAlarm}
+                  whileTap={{ scale: 0.96 }}
+                  className="px-8 py-3.5 bg-orange-500 hover:bg-orange-400 text-white font-black text-sm rounded-2xl shadow-xl transition flex items-center gap-2"
+                  style={{ boxShadow: '0 0 30px rgba(255,120,0,0.5)' }}
+                  id="alarm-dismiss-btn"
+                >
+                  <Bell size={16} />
+                  Dismiss & Save Session
+                </motion.button>
+
+                <button
+                  onClick={() => {
+                    setAlarmMuted(m => !m);
+                    if (!alarmMuted && alarmStopRef.current) {
+                      alarmStopRef.current();
+                      alarmStopRef.current = null;
+                    } else if (alarmMuted) {
+                      playTimerAlarm();
+                    }
+                  }}
+                  className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white/70 hover:text-white transition"
+                  title={alarmMuted ? 'Unmute alarm' : 'Mute alarm'}
+                  id="alarm-mute-btn"
+                >
+                  {alarmMuted ? <BellOff size={18} /> : <Bell size={18} />}
+                </button>
+              </div>
+
+              {/* Live volume slider */}
+              <div className="w-full max-w-xs space-y-1.5">
+                <div className="flex justify-between text-[10px] font-bold text-white/60 uppercase tracking-wider">
+                  <span className="flex items-center gap-1"><Volume2 size={11} /> Alarm Volume</span>
+                  <span className="font-mono text-orange-300">{liveAlarmVolume}%</span>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={liveAlarmVolume}
+                  onChange={(e) => {
+                    const v = Number(e.target.value);
+                    setLiveAlarmVolume(v);
+                    // Restart alarm at new volume
+                    if (!alarmMuted) {
+                      if (alarmStopRef.current) { alarmStopRef.current(); alarmStopRef.current = null; }
+                      playTimerAlarm();
+                    }
+                  }}
+                  className="w-full h-1.5 bg-white/20 rounded-full appearance-none cursor-pointer accent-orange-400"
+                  id="alarm-volume-slider"
+                />
+              </div>
+
+              <p className="text-xs text-white/40 font-medium">
+                🎉 Excellent work! Keep building that focus streak.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {/* Immersive radial glow centering the clock coordinates */}
       <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[500px] h-[380px] sm:h-[500px] rounded-full bg-[#CCD5AE]/20 blur-[120px] pointer-events-none" />
 

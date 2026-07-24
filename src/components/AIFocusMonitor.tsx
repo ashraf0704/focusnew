@@ -33,20 +33,34 @@ export default function AIFocusMonitor() {
     let stream: MediaStream | null = null;
 
     try {
-      // Stage 1: Try structured user-facing camera profile
+      // Stage 1: Try HD 720p at 30fps for best quality and speed
       try {
         stream = await navigator.mediaDevices.getUserMedia({
-          video: { width: 320, height: 240, facingMode: 'user' }
+          video: {
+            width: { ideal: 1280, min: 640 },
+            height: { ideal: 720, min: 480 },
+            frameRate: { ideal: 30, min: 15 },
+            facingMode: 'user',
+          }
         });
       } catch (err) {
-        console.warn("FocusMonitor: structured facing user constraints failed, retrying generic video track...", err);
+        console.warn("FocusMonitor: HD constraints failed, retrying at standard quality...", err);
       }
 
-      // Stage 2: Fall back to wide open general camera access
+      // Stage 2: Fall back to 640×480 if HD not available
       if (!stream) {
-        stream = await navigator.mediaDevices.getUserMedia({
-          video: true
-        });
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: { width: 640, height: 480, facingMode: 'user' }
+          });
+        } catch (err) {
+          console.warn("FocusMonitor: 640x480 failed, retrying generic...", err);
+        }
+      }
+
+      // Stage 3: Last resort — any video track
+      if (!stream) {
+        stream = await navigator.mediaDevices.getUserMedia({ video: true });
       }
 
       streamRef.current = stream;
@@ -251,103 +265,7 @@ export default function AIFocusMonitor() {
         const eyesClosedConfidence = isFaceTracked ? Math.min(100, Math.max(0, Math.round((2.5 - avgContrast) * 80))) : 0;
         const areEyesClosed = isFaceTracked && avgContrast < 1.75;
 
-        // Clear canvas to draw custom cybersecurity styled overlay
-        ctx.clearRect(0, 0, w, h);
-        ctx.drawImage(video, 0, 0, w, h);
-
-        // HUD: Draw Face bounding box and scanner if tracked
-        if (isFaceTracked) {
-          ctx.strokeStyle = 'rgba(16, 185, 129, 0.4)'; // glowing emerald
-          ctx.lineWidth = 1.5;
-          ctx.strokeRect(faceX1, faceY1, faceW, faceH);
-          
-          // Draw high-tech aesthetic corner brackets
-          const len = 12;
-          ctx.strokeStyle = 'rgba(16, 185, 129, 0.8)';
-          ctx.lineWidth = 2.5;
-          // Top-Left corner
-          ctx.beginPath(); ctx.moveTo(faceX1, faceY1 + len); ctx.lineTo(faceX1, faceY1); ctx.lineTo(faceX1 + len, faceY1); ctx.stroke();
-          // Top-Right corner
-          ctx.beginPath(); ctx.moveTo(faceX1 + faceW - len, faceY1); ctx.lineTo(faceX1 + faceW, faceY1); ctx.lineTo(faceX1 + faceW, faceY1 + len); ctx.stroke();
-          // Bottom-Left corner
-          ctx.beginPath(); ctx.moveTo(faceX1, faceY1 + faceH - len); ctx.lineTo(faceX1, faceY1 + faceH); ctx.lineTo(faceX1 + len, faceY1 + faceH); ctx.stroke();
-          // Bottom-Right corner
-          ctx.beginPath(); ctx.moveTo(faceX1 + faceW - len, faceY1 + faceH); ctx.lineTo(faceX1 + faceW, faceY1 + faceH); ctx.lineTo(faceX1 + faceW, faceY1 + faceH - len); ctx.stroke();
-
-          ctx.fillStyle = 'rgba(16, 185, 129, 0.8)';
-          ctx.font = 'bold 7px sans-serif';
-          ctx.fillText('BIOMETRIC EYE SCANNER: LOCK ACTIVE', faceX1 + 5, faceY1 + 10);
-        }
-
-        // Draw reticle scanning indicators
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
-        ctx.lineWidth = 1;
-        ctx.strokeRect(w * 0.2, h * 0.15, w * 0.6, h * 0.7);
-
-        if (!isFaceTracked) {
-          ctx.strokeStyle = 'rgba(245, 158, 11, 0.4)';
-          ctx.lineWidth = 1.5;
-          ctx.strokeRect(w * 0.25, h * 0.2, w * 0.5, h * 0.6);
-          ctx.fillStyle = 'rgba(245, 158, 11, 0.9)';
-          ctx.font = 'bold 9px monospace';
-          ctx.fillText('SEARCHING FOR FACE...', w * 0.28, h * 0.5);
-        }
-
-        // Forehead Box
-        ctx.strokeStyle = 'rgba(59, 130, 246, 0.7)';
-        ctx.strokeRect(foreheadBox.x, foreheadBox.y, foreheadBox.width, foreheadBox.height);
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.9)';
-        ctx.font = '8px monospace';
-        ctx.fillText('SKIN REF', foreheadBox.x, foreheadBox.y - 2);
-
-        // Eye Zones Bounding Boxes
-        const eyeColor = areEyesClosed ? 'rgba(239, 68, 68, 0.9)' : 'rgba(16, 185, 129, 0.9)';
-        
-        // Left Eye
-        ctx.strokeStyle = eyeColor;
-        ctx.strokeRect(leftEyeBox.x, leftEyeBox.y, leftEyeBox.width, leftEyeBox.height);
-        ctx.fillStyle = eyeColor;
-        ctx.fillText('L-EYE', leftEyeBox.x, leftEyeBox.y - 2);
-
-        // Right Eye
-        ctx.strokeStyle = eyeColor;
-        ctx.strokeRect(rightEyeBox.x, rightEyeBox.y, rightEyeBox.width, rightEyeBox.height);
-        ctx.fillStyle = eyeColor;
-        ctx.fillText('R-EYE', rightEyeBox.x, rightEyeBox.y - 2);
-
-        // Draw crosshairs inside eye tracker boxes to indicate pupil locking
-        ctx.strokeStyle = eyeColor;
-        ctx.lineWidth = 1;
-        
-        ctx.beginPath();
-        ctx.moveTo(leftEyeBox.x + leftEyeBox.width / 2 - 4, leftEyeBox.y + leftEyeBox.height / 2);
-        ctx.lineTo(leftEyeBox.x + leftEyeBox.width / 2 + 4, leftEyeBox.y + leftEyeBox.height / 2);
-        ctx.moveTo(leftEyeBox.x + leftEyeBox.width / 2, leftEyeBox.y + leftEyeBox.height / 2 - 4);
-        ctx.lineTo(leftEyeBox.x + leftEyeBox.width / 2, leftEyeBox.y + leftEyeBox.height / 2 + 4);
-        ctx.stroke();
-
-        ctx.beginPath();
-        ctx.moveTo(rightEyeBox.x + rightEyeBox.width / 2 - 4, rightEyeBox.y + rightEyeBox.height / 2);
-        ctx.lineTo(rightEyeBox.x + rightEyeBox.width / 2 + 4, rightEyeBox.y + rightEyeBox.height / 2);
-        ctx.moveTo(rightEyeBox.x + rightEyeBox.width / 2, rightEyeBox.y + rightEyeBox.height / 2 - 4);
-        ctx.lineTo(rightEyeBox.x + rightEyeBox.width / 2, rightEyeBox.y + rightEyeBox.height / 2 + 4);
-        ctx.stroke();
-
-        // Telemetry readout
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-        ctx.fillRect(5, h - 30, w - 10, 25);
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
-        ctx.strokeRect(5, h - 30, w - 10, 25);
-
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 8px monospace';
-        if (isFaceTracked) {
-          ctx.fillText(`EYES: ${areEyesClosed ? '💤 CLOSED' : '👁️ OPEN'} (FATIGUE: ${eyesClosedConfidence}%)`, 10, h - 18);
-          ctx.fillText(`LUMINANCE CONTRAST: ${avgContrast.toFixed(2)}x`, 10, h - 8);
-        } else {
-          ctx.fillText(`EYES: 🔍 SCANNING... (FACE NOT IN VIEW)`, 10, h - 18);
-          ctx.fillText(`LUMINANCE CONTRAST: --`, 10, h - 8);
-        }
+        // Eye state detection complete — canvas is hidden, no overlays drawn on the live video.
 
         // Drowsiness Timer & Trigger Handling
         if (areEyesClosed) {
@@ -391,7 +309,7 @@ export default function AIFocusMonitor() {
       } catch (err) {
         // Handle sandbox canvas blocks gracefully
       }
-    }, 300);
+    }, 100); // 10fps scan — fast enough for blink detection, low CPU overhead
 
     const handleVisibilityChange = () => {
       if (document.hidden) {
@@ -416,47 +334,71 @@ export default function AIFocusMonitor() {
   const triggerAlarmSound = () => {
     if (muteSound) return;
     try {
-      if (!audioCtxRef.current) {
+      if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
       }
       const ctx = audioCtxRef.current;
-      if (ctx.state === 'suspended') {
-        ctx.resume();
-      }
+      if (ctx.state === 'suspended') ctx.resume();
 
       // Stop existing oscillator if any
       stopAlarmSound();
 
-      // Create a rapid alarm beep pattern
-      const osc = ctx.createOscillator();
-      const gainNode = ctx.createGain();
-      
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(880, ctx.currentTime); // high frequency alert pitch
-      
-      // LFO styled alarm oscillation
-      osc.frequency.linearRampToValueAtTime(1200, ctx.currentTime + 0.15);
-      osc.frequency.linearRampToValueAtTime(880, ctx.currentTime + 0.3);
+      // Master gain at MAXIMUM volume
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(1.0, ctx.currentTime);
+      masterGain.connect(ctx.destination);
 
-      gainNode.gain.setValueAtTime(0.4, ctx.currentTime);
-      
-      osc.connect(gainNode);
-      gainNode.connect(ctx.destination);
-      
-      osc.start();
-      oscillatorRef.current = osc;
-      setIsAlarmRinging(true);
+      // Layer 1: High-pitched square wave siren (primary alert)
+      const siren = ctx.createOscillator();
+      siren.type = 'square';
+      siren.frequency.setValueAtTime(1400, ctx.currentTime);
 
-      // Automatically beep repeatedly
+      // Layer 2: Mid sawtooth for urgency
+      const sawOsc = ctx.createOscillator();
+      sawOsc.type = 'sawtooth';
+      sawOsc.frequency.setValueAtTime(700, ctx.currentTime);
+
+      // Layer 3: Low sine bass kick
+      const bassOsc = ctx.createOscillator();
+      bassOsc.type = 'sine';
+      bassOsc.frequency.setValueAtTime(110, ctx.currentTime);
+
+      const sirenGain = ctx.createGain();
+      sirenGain.gain.setValueAtTime(0.55, ctx.currentTime);
+      const sawGain = ctx.createGain();
+      sawGain.gain.setValueAtTime(0.3, ctx.currentTime);
+      const bassGain = ctx.createGain();
+      bassGain.gain.setValueAtTime(0.15, ctx.currentTime);
+
+      siren.connect(sirenGain);
+      sawOsc.connect(sawGain);
+      bassOsc.connect(bassGain);
+      sirenGain.connect(masterGain);
+      sawGain.connect(masterGain);
+      bassGain.connect(masterGain);
+
+      siren.start();
+      sawOsc.start();
+      bassOsc.start();
+
+      // Rapidly oscillate siren frequency for alarm effect
+      let beepIter = 0;
       const beepInterval = setInterval(() => {
-        if (oscillatorRef.current && ctx.state === 'running') {
-          osc.frequency.setValueAtTime(880, ctx.currentTime);
-          osc.frequency.linearRampToValueAtTime(1200, ctx.currentTime + 0.15);
-          osc.frequency.linearRampToValueAtTime(880, ctx.currentTime + 0.3);
-        } else {
-          clearInterval(beepInterval);
-        }
-      }, 400);
+        if (ctx.state !== 'running') { clearInterval(beepInterval); return; }
+        const t = ctx.currentTime;
+        const high = beepIter % 2 === 0;
+        siren.frequency.setValueAtTime(high ? 1400 : 900, t);
+        siren.frequency.linearRampToValueAtTime(high ? 900 : 1400, t + 0.18);
+        sawOsc.frequency.setValueAtTime(high ? 700 : 450, t);
+        beepIter++;
+      }, 220);
+
+      // Store the primary osc so we can stop it
+      oscillatorRef.current = siren;
+      // Also stop the extras when alarm is dismissed
+      (oscillatorRef as any)._extras = [sawOsc, bassOsc, masterGain, beepInterval];
+
+      setIsAlarmRinging(true);
 
     } catch (e) {
       console.log('Audio synthesis error:', e);
@@ -464,12 +406,24 @@ export default function AIFocusMonitor() {
   };
 
   const stopAlarmSound = () => {
-    if (oscillatorRef.current) {
-      try {
+    try {
+      if (oscillatorRef.current) {
         oscillatorRef.current.stop();
-      } catch (e) {}
-      oscillatorRef.current = null;
-    }
+        oscillatorRef.current = null;
+      }
+      // Stop extras (saw, bass, masterGain, interval)
+      const extras = (oscillatorRef as any)?._extras;
+      if (extras) {
+        extras.forEach((item: any) => {
+          if (typeof item === 'number') clearInterval(item);
+          else {
+            try { item.stop?.(); } catch {}
+            try { item.disconnect?.(); } catch {}
+          }
+        });
+        (oscillatorRef as any)._extras = null;
+      }
+    } catch (e) {}
     setIsAlarmRinging(false);
   };
 
@@ -600,12 +554,13 @@ export default function AIFocusMonitor() {
             {/* Scanner line overlay effect removed as requested */}
             <div className="absolute top-0 bottom-0 left-0 right-0 bg-brand-primary/5 pointer-events-none" />
 
-            {/* Real-time optical eye scanning overlay canvas */}
+            {/* Hidden analysis canvas — used only for pixel computations, never shown to user */}
             <canvas
               ref={canvasRef}
               width="320"
-              height="180"
-              className="absolute inset-0 w-full h-full object-cover z-10 pointer-events-none scale-x-[-1]"
+              height="240"
+              style={{ visibility: 'hidden', position: 'absolute', pointerEvents: 'none', width: 0, height: 0, overflow: 'hidden' }}
+              aria-hidden="true"
             />
 
             {/* Simulated overlay for closed eyes */}
@@ -637,25 +592,90 @@ export default function AIFocusMonitor() {
             </div>
           </div>
 
-          {/* WARNING BANNERS */}
+          {/* WARNING BANNERS + FULL-SCREEN OVERLAY */}
           {isAlarmRinging && (
-            <div className="p-4 bg-rose-50 border-2 border-rose-500 rounded-2xl flex flex-col items-center justify-center space-y-3 animate-pulse shadow-md">
-              <div className="flex items-center gap-2 text-rose-700 font-bold text-sm">
-                <Volume2 className="w-5 h-5 animate-bounce" />
-                <span>⚠️ FOCUS BUDDY ALARM ACTIVE! ⚠️</span>
-              </div>
-              <p className="text-[10px] text-center text-rose-800 leading-relaxed font-semibold">
-                Optical sensor indicates high drowsiness or eye closure. Click below to stop this alarm.
-              </p>
-              <button
-                type="button"
-                onClick={dismissAlarm}
-                className="w-full py-2.5 px-4 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-xs font-bold transition-all active:scale-95 shadow-md flex items-center justify-center gap-2 cursor-pointer pointer-events-auto"
+            <>
+              {/* Full-screen pulsing alarm overlay */}
+              <div className="fixed inset-0 z-[300] flex flex-col items-center justify-center pointer-events-auto"
+                style={{ background: 'rgba(80,0,0,0.92)' }}
               >
-                <VolumeX className="w-4 h-4" />
-                Stop & Dismiss Alarm
-              </button>
-            </div>
+                {/* Animated radial glow */}
+                <div className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'radial-gradient(circle at 50% 45%, rgba(255,0,0,0.5) 0%, transparent 65%)',
+                    animation: 'pulse 0.6s ease-in-out infinite alternate'
+                  }}
+                />
+
+                <div className="relative z-10 flex flex-col items-center gap-5 px-8 text-center">
+                  {/* Pulsing shield icon */}
+                  <div
+                    className="w-24 h-24 rounded-full flex items-center justify-center"
+                    style={{
+                      background: 'rgba(255,50,50,0.2)',
+                      border: '4px solid rgba(255,80,80,0.7)',
+                      boxShadow: '0 0 60px rgba(255,0,0,0.7), 0 0 120px rgba(255,0,0,0.3)',
+                      animation: 'pulse 0.5s ease-in-out infinite alternate'
+                    }}
+                  >
+                    <ShieldAlert size={44} className="text-red-400" strokeWidth={1.8} />
+                  </div>
+
+                  <div style={{ animation: 'pulse 0.5s ease-in-out infinite alternate' }}>
+                    <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
+                      👁️ WAKE UP!
+                    </h2>
+                    <p className="text-red-300 font-bold text-base mt-2">
+                      {alertState === 'rapid_blinking'
+                        ? 'Rapid eye blinking detected — take a break!'
+                        : 'Eyes closed too long — drowsiness detected!'}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-2xl px-6 py-3">
+                    <div className="text-center">
+                      <div className="text-xl font-mono font-black text-white">
+                        {alertState === 'rapid_blinking' ? 'RAPID' : `${closedTimer}s`}
+                      </div>
+                      <div className="text-[10px] uppercase tracking-wider text-red-300 font-bold">
+                        {alertState === 'rapid_blinking' ? 'Blink Rate' : 'Eyes Closed'}
+                      </div>
+                    </div>
+                    <div className="w-px h-8 bg-white/20" />
+                    <div className="text-center">
+                      <div className="text-xl font-mono font-black text-red-400">⚠️</div>
+                      <div className="text-[10px] uppercase tracking-wider text-red-300 font-bold">Alert</div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 flex-wrap justify-center">
+                    <button
+                      type="button"
+                      onClick={dismissAlarm}
+                      className="px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white font-black text-sm rounded-2xl shadow-xl transition flex items-center gap-2 pointer-events-auto"
+                      style={{ boxShadow: '0 0 30px rgba(255,0,0,0.5)' }}
+                      id="eye-alarm-dismiss-btn"
+                    >
+                      <VolumeX size={16} />
+                      I'm Awake — Dismiss Alarm
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setMuteSound(m => !m)}
+                      className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white/70 hover:text-white transition pointer-events-auto"
+                      title={muteSound ? 'Unmute' : 'Mute alarm'}
+                    >
+                      {muteSound ? <Volume2 size={18} /> : <VolumeX size={18} />}
+                    </button>
+                  </div>
+
+                  <p className="text-xs text-white/40">
+                    KameraShield AI detected a focus lapse. Stay alert!
+                  </p>
+                </div>
+              </div>
+            </>
           )}
 
           {alertState === 'eyes_closed_3s' && !isAlarmRinging && (

@@ -179,10 +179,101 @@ export default function Settings({
 
   const testTriggerSound = () => {
     setSoundTested(true);
-    // Simulate real sound feedback visual cues
-    setTimeout(() => {
-      setSoundTested(false);
-    }, 1200);
+    setTimeout(() => setSoundTested(false), 2500);
+
+    try {
+      const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const vol = soundVolume / 100;
+      const masterGain = ctx.createGain();
+      masterGain.gain.setValueAtTime(Math.max(0.05, vol * 0.9), ctx.currentTime);
+      masterGain.connect(ctx.destination);
+
+      const t = ctx.currentTime + 0.05;
+
+      if (alarmTone === 'classic-bell') {
+        // Sharp single-strike bell
+        [880, 1108, 1318].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const env = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq, t + i * 0.12);
+          env.gain.setValueAtTime(0, t + i * 0.12);
+          env.gain.linearRampToValueAtTime(1, t + i * 0.12 + 0.02);
+          env.gain.exponentialRampToValueAtTime(0.001, t + i * 0.12 + 0.6);
+          osc.connect(env); env.connect(masterGain);
+          osc.start(t + i * 0.12); osc.stop(t + i * 0.12 + 0.65);
+        });
+      } else if (alarmTone === 'singing-bowl') {
+        // Slow resonant Tibetan bowl – long sine decay
+        const osc = ctx.createOscillator();
+        const env = ctx.createGain();
+        osc.type = 'sine'; osc.frequency.setValueAtTime(220, t);
+        env.gain.setValueAtTime(0.9, t);
+        env.gain.exponentialRampToValueAtTime(0.001, t + 2.2);
+        osc.connect(env); env.connect(masterGain);
+        osc.start(t); osc.stop(t + 2.5);
+        // Harmonic overtone
+        const osc2 = ctx.createOscillator();
+        const env2 = ctx.createGain();
+        osc2.type = 'sine'; osc2.frequency.setValueAtTime(440, t);
+        env2.gain.setValueAtTime(0.4, t);
+        env2.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+        osc2.connect(env2); env2.connect(masterGain);
+        osc2.start(t); osc2.stop(t + 2);
+      } else if (alarmTone === 'digital-chime') {
+        // Retro arcade square-wave chime
+        [1046, 1318, 1568, 2093].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          const env = ctx.createGain();
+          osc.type = 'square'; osc.frequency.setValueAtTime(freq, t + i * 0.14);
+          env.gain.setValueAtTime(0, t + i * 0.14);
+          env.gain.linearRampToValueAtTime(0.5, t + i * 0.14 + 0.01);
+          env.gain.exponentialRampToValueAtTime(0.001, t + i * 0.14 + 0.28);
+          osc.connect(env); env.connect(masterGain);
+          osc.start(t + i * 0.14); osc.stop(t + i * 0.14 + 0.32);
+        });
+      } else if (alarmTone === 'birdsong') {
+        // Ascending bird chirp sweeps
+        [0, 0.3, 0.55].forEach((offset) => {
+          const osc = ctx.createOscillator();
+          const env = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(1200, t + offset);
+          osc.frequency.exponentialRampToValueAtTime(2400, t + offset + 0.15);
+          osc.frequency.exponentialRampToValueAtTime(1800, t + offset + 0.25);
+          env.gain.setValueAtTime(0, t + offset);
+          env.gain.linearRampToValueAtTime(0.6, t + offset + 0.04);
+          env.gain.exponentialRampToValueAtTime(0.001, t + offset + 0.26);
+          osc.connect(env); env.connect(masterGain);
+          osc.start(t + offset); osc.stop(t + offset + 0.3);
+        });
+      } else if (alarmTone === 'ocean-wave') {
+        // Filtered noise burst like a wave crest
+        const bufferSize = ctx.sampleRate * 2;
+        const buf = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          data[i] = (last + 0.015 * white) / 1.015; last = data[i]; data[i] *= 4;
+        }
+        const src = ctx.createBufferSource(); src.buffer = buf;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass'; filter.frequency.value = 600;
+        const env = ctx.createGain();
+        env.gain.setValueAtTime(0, t);
+        env.gain.linearRampToValueAtTime(0.8, t + 0.4);
+        env.gain.exponentialRampToValueAtTime(0.001, t + 1.8);
+        src.connect(filter); filter.connect(env); env.connect(masterGain);
+        src.start(t); src.stop(t + 2);
+      }
+
+      setTimeout(() => { try { ctx.close(); } catch {} }, 3000);
+    } catch (e) {
+      console.warn('Preview sound error:', e);
+    }
   };
 
   const selectedBuddy = buddies.find(b => b.id === buddySpecies) || buddies[0];

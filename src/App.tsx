@@ -771,11 +771,13 @@ export default function App() {
 
       {/* Immersive Focus overlay room */}
       {activeSession && (
-        <FocusMode
+      <FocusMode
           totalSeconds={activeSession.totalSeconds}
           selectedSound={activeSession.sound}
           subject={activeSubject}
           tasks={tasks}
+          alarmTone={profile.alarmTone || 'singing-bowl'}
+          alarmVolume={profile.soundVolume ?? 80}
           onToggleTask={handleToggleTask}
           onFinishSession={handleFinishSession}
           onCancelSession={handleCancelSession}
