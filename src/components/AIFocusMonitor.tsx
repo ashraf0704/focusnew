@@ -4,9 +4,8 @@ import { Camera, VideoOff, ShieldAlert, Zap, AlertTriangle, Play, Square, Activi
 export default function AIFocusMonitor() {
   const [isCamActive, setIsCamActive] = useState(false);
   const [eyeState, setEyeState] = useState<'open' | 'closed'>('open');
-  const [isBlinkingRapidly, setIsBlinkingRapidly] = useState(false);
   const [closedTimer, setClosedTimer] = useState(0); // consecutive seconds eyes closed
-  const [alertState, setAlertState] = useState<'none' | 'eyes_closed_3s' | 'rapid_blinking'>('none');
+  const [alertState, setAlertState] = useState<'none' | 'eyes_closed_10s'>('none');
   const [isAlarmRinging, setIsAlarmRinging] = useState(false);
   const [logMessages, setLogMessages] = useState<string[]>(['System standby. Ready to activate camera.']);
   const [muteSound, setMuteSound] = useState(false);
@@ -98,7 +97,6 @@ export default function AIFocusMonitor() {
 
   const resetStates = () => {
     setEyeState('open');
-    setIsBlinkingRapidly(false);
     setClosedTimer(0);
     setAlertState('none');
   };
@@ -107,7 +105,6 @@ export default function AIFocusMonitor() {
   useEffect(() => {
     if (!isCamActive) return;
 
-    let blinkHistory: number[] = [];
     let eyeClosedFrames = 0;
 
     const scanInterval = setInterval(() => {
@@ -137,7 +134,7 @@ export default function AIFocusMonitor() {
             const g = d[idx+1];
             const b = d[idx+2];
             
-            // Standard skin-tone filter (robust across a wide variety of skin complexions)
+            // Standard skin-tone filter
             const isSkin = r > 65 && g > 45 && b > 30 && 
                            r > g && r > b && 
                            (r - g > 12) && 
@@ -163,7 +160,6 @@ export default function AIFocusMonitor() {
 
         if (faceW > 45 && faceH > 45) {
           isFaceTracked = true;
-          // Find pupils/iris dynamically as the darkest regions within the left/right eye bands
           const findDarkestPoint = (startX: number, endX: number, startY: number, endY: number) => {
             let minLum = 255;
             let minX = startX + (endX - startX) / 2;
@@ -186,7 +182,6 @@ export default function AIFocusMonitor() {
           const eyeBandY1 = Math.floor(faceY1 + faceH * 0.32);
           const eyeBandY2 = Math.floor(faceY1 + faceH * 0.47);
 
-          // Left side of face (Left Eye)
           const leftEyeCenter = findDarkestPoint(
             Math.floor(faceX1 + faceW * 0.12),
             Math.floor(faceX1 + faceW * 0.48),
@@ -194,7 +189,6 @@ export default function AIFocusMonitor() {
             eyeBandY2
           );
 
-          // Right side of face (Right Eye)
           const rightEyeCenter = findDarkestPoint(
             Math.floor(faceX1 + faceW * 0.52),
             Math.floor(faceX1 + faceW * 0.88),
@@ -202,7 +196,6 @@ export default function AIFocusMonitor() {
             eyeBandY2
           );
 
-          // Define eye and forehead boxes around these dynamic coordinates
           const boxW = Math.max(16, Math.floor(faceW * 0.14));
           const boxH = Math.max(10, Math.floor(faceH * 0.08));
 
@@ -228,7 +221,6 @@ export default function AIFocusMonitor() {
           };
         }
 
-        // Helper to get average luminance and variance inside any target bounding box
         const getBoxMetrics = (box: { x: number; y: number; width: number; height: number }) => {
           const imgData = ctx.getImageData(box.x, box.y, box.width, box.height);
           const data = imgData.data;
@@ -251,59 +243,33 @@ export default function AIFocusMonitor() {
           return { avg, variance };
         };
 
-        // Extract optical analytics
         const forehead = getBoxMetrics(foreheadBox);
         const leftEye = getBoxMetrics(leftEyeBox);
         const rightEye = getBoxMetrics(rightEyeBox);
 
-        // Calculate contrast ratio against reference skin variance
         const refVar = Math.max(15, forehead.variance);
         const leftContrast = leftEye.variance / refVar;
         const rightContrast = rightEye.variance / refVar;
         const avgContrast = (leftContrast + rightContrast) / 2;
 
-        const eyesClosedConfidence = isFaceTracked ? Math.min(100, Math.max(0, Math.round((2.5 - avgContrast) * 80))) : 0;
         const areEyesClosed = isFaceTracked && avgContrast < 1.75;
 
-        // Eye state detection complete — canvas is hidden, no overlays drawn on the live video.
-
-        // Drowsiness Timer & Trigger Handling
+        // Drowsiness Timer & Trigger Handling (10 to 15 seconds continuous closed eyes)
         if (areEyesClosed) {
           eyeClosedFrames++;
           setEyeState('closed');
-          setClosedTimer(Math.floor(eyeClosedFrames * 0.3));
+          const secondsClosed = Math.floor(eyeClosedFrames / 10); // 10 frames = 1 second (at 100ms interval)
+          setClosedTimer(secondsClosed);
 
-          if (eyeClosedFrames >= 10) { // ~3 seconds
-            setAlertState('eyes_closed_3s');
+          // Continuous eyes closed for 10 seconds (100 frames * 100ms)
+          if (eyeClosedFrames >= 100) {
+            setAlertState('eyes_closed_10s');
             triggerAlarmSound();
           }
         } else {
-          // Check for a brief completed blink transition (1 to 3 frames closed)
-          if (eyeClosedFrames >= 1 && eyeClosedFrames <= 3) {
-            const now = Date.now();
-            blinkHistory.push(now);
-            addLog(`KameraShield AI: Optical blink signature detected!`);
-
-            // Retain blinks from last 4 seconds
-            blinkHistory = blinkHistory.filter(time => now - time < 4000);
-
-            // If user blinks 4 times in 4 seconds, sound the alarm!
-            if (blinkHistory.length >= 4) {
-              setIsBlinkingRapidly(true);
-              setAlertState('rapid_blinking');
-              triggerAlarmSound();
-              addLog('KameraShield AI: Continuous rapid blinking loop identified! Alarm triggered!');
-              triggerVibration();
-            }
-          }
-
           eyeClosedFrames = 0;
           setEyeState('open');
           setClosedTimer(0);
-
-          if (!oscillatorRef.current) {
-            setIsBlinkingRapidly(false);
-          }
         }
 
       } catch (err) {
@@ -432,41 +398,26 @@ export default function AIFocusMonitor() {
     setIsAlarmRinging(false);
     setAlertState('none');
     setClosedTimer(0);
-    setIsBlinkingRapidly(false);
     setEyeState('open');
     addLog('KameraShield: Alarm dismissed by user.');
   };
 
-  // Laptop/device physical vibration trigger check
-  const triggerVibration = () => {
-    if ('vibrate' in navigator) {
-      // Vibrate in an intense double pattern for continuous blinking
-      navigator.vibrate([200, 100, 200]);
-      addLog('STRESS REFLEX: Laptop hardware vibration signal transmitted.');
-    } else {
-      addLog('INFO: navigator.vibrate is mocked (not supported by browser sandbox / iframe).');
-    }
-    setAlertState('rapid_blinking');
-  };
+
 
   // Manual State Simulator Triggers
   const toggleEyeSimulation = () => {
     if (eyeState === 'open') {
       setEyeState('closed');
-      addLog('MANUAL OVERRIDE: Simulating eye closure...');
+      setClosedTimer(10);
+      setAlertState('eyes_closed_10s');
+      triggerAlarmSound();
+      addLog('MANUAL OVERRIDE: Simulating 10s eyes closed...');
     } else {
       setEyeState('open');
+      setClosedTimer(0);
       addLog('MANUAL OVERRIDE: Simulating eye opening...');
       dismissAlarm();
     }
-  };
-
-  const triggerContinuousBlinkSimulation = () => {
-    setIsBlinkingRapidly(true);
-    setAlertState('rapid_blinking');
-    triggerAlarmSound();
-    addLog('MANUAL OVERRIDE: Simulating continuous blinking pattern. Alarm triggered!');
-    triggerVibration();
   };
 
   // Clean-up on component unmount
@@ -492,7 +443,7 @@ export default function AIFocusMonitor() {
             <Camera className={`w-5 h-5 ${isCamActive ? 'text-brand-vibrant animate-pulse' : 'text-brand-muted'}`} />
             KameraShield AI Focus Cam
           </h3>
-          <p className="text-xs text-brand-muted mt-0.5">Observe cognitive lapses & blinking rate in real-time</p>
+          <p className="text-xs text-brand-muted mt-0.5">Observe cognitive lapses &amp; drowsiness in real-time</p>
         </div>
 
         {isCamActive && (
@@ -568,16 +519,7 @@ export default function AIFocusMonitor() {
               <div className="absolute inset-0 bg-rose-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-center p-3 z-10 animate-pulse">
                 <ShieldAlert size={36} className="text-brand-vibrant mb-2" />
                 <span className="text-xs font-black tracking-widest text-[#FFF2E0] uppercase">EYES CLOSED DETECTED</span>
-                <span className="text-[10px] text-rose-300 font-mono mt-1">Consequences Active: {closedTimer}s / 3s</span>
-              </div>
-            )}
-
-            {/* Simulated overlay for rapid blinking */}
-            {isBlinkingRapidly && (
-              <div className="absolute inset-0 bg-amber-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-center p-3 z-10">
-                <AlertTriangle size={36} className="text-brand-accent mb-2 animate-bounce" />
-                <span className="text-xs font-black tracking-widest text-amber-100 uppercase">RAPID EYE BLINKS DETECTED</span>
-                <span className="text-[10px] text-amber-300 font-mono mt-1">Device Vibre Reflex Sent</span>
+                <span className="text-[10px] text-rose-300 font-mono mt-1">Closed Duration: {closedTimer}s / 10s</span>
               </div>
             )}
 
@@ -626,19 +568,17 @@ export default function AIFocusMonitor() {
                       👁️ WAKE UP!
                     </h2>
                     <p className="text-red-300 font-bold text-base mt-2">
-                      {alertState === 'rapid_blinking'
-                        ? 'Rapid eye blinking detected — take a break!'
-                        : 'Eyes closed too long — drowsiness detected!'}
+                      Eyes closed continuously for {closedTimer || 10}s — drowsiness detected!
                     </p>
                   </div>
 
                   <div className="flex items-center gap-3 bg-white/10 border border-white/20 rounded-2xl px-6 py-3">
                     <div className="text-center">
                       <div className="text-xl font-mono font-black text-white">
-                        {alertState === 'rapid_blinking' ? 'RAPID' : `${closedTimer}s`}
+                        {closedTimer || 10}s
                       </div>
                       <div className="text-[10px] uppercase tracking-wider text-red-300 font-bold">
-                        {alertState === 'rapid_blinking' ? 'Blink Rate' : 'Eyes Closed'}
+                        Eyes Closed
                       </div>
                     </div>
                     <div className="w-px h-8 bg-white/20" />
@@ -652,7 +592,7 @@ export default function AIFocusMonitor() {
                     <button
                       type="button"
                       onClick={dismissAlarm}
-                      className="px-8 py-3.5 bg-red-600 hover:bg-red-500 text-white font-black text-sm rounded-2xl shadow-xl transition flex items-center gap-2 pointer-events-auto"
+                      className="px-6 py-3.5 bg-red-600 hover:bg-red-500 text-white font-black text-sm rounded-2xl shadow-xl transition flex items-center gap-2 pointer-events-auto cursor-pointer"
                       style={{ boxShadow: '0 0 30px rgba(255,0,0,0.5)' }}
                       id="eye-alarm-dismiss-btn"
                     >
@@ -662,8 +602,18 @@ export default function AIFocusMonitor() {
 
                     <button
                       type="button"
+                      onClick={stopCamera}
+                      className="px-6 py-3.5 bg-slate-800 hover:bg-slate-700 border border-white/25 text-white font-black text-sm rounded-2xl shadow-xl transition flex items-center gap-2 pointer-events-auto cursor-pointer"
+                      id="eye-alarm-turn-off-cam-btn"
+                    >
+                      <VideoOff size={16} />
+                      Turn Off Camera
+                    </button>
+
+                    <button
+                      type="button"
                       onClick={() => setMuteSound(m => !m)}
-                      className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white/70 hover:text-white transition pointer-events-auto"
+                      className="w-12 h-12 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white/70 hover:text-white transition pointer-events-auto cursor-pointer"
                       title={muteSound ? 'Unmute' : 'Mute alarm'}
                     >
                       {muteSound ? <Volume2 size={18} /> : <VolumeX size={18} />}
@@ -678,26 +628,14 @@ export default function AIFocusMonitor() {
             </>
           )}
 
-          {alertState === 'eyes_closed_3s' && !isAlarmRinging && (
+          {alertState === 'eyes_closed_10s' && !isAlarmRinging && (
             <div className="p-3 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl space-y-1 animate-bounce">
               <div className="flex items-center gap-2 font-black text-xs">
                 <AlertTriangle size={15} />
                 CRITICAL WARNING: SLEEP STATE WARNING
               </div>
               <p className="text-[10px] leading-relaxed text-rose-800">
-                You have closed your eyes for over 3 seconds! A loud alarm is sounding to wake you up. Sit up straight and inhale deeply!
-              </p>
-            </div>
-          )}
-
-          {alertState === 'rapid_blinking' && !isAlarmRinging && (
-            <div className="p-3 bg-amber-50 border border-amber-200 text-amber-700 rounded-xl space-y-1">
-              <div className="flex items-center gap-2 font-black text-xs">
-                <Zap size={14} className="fill-current" />
-                WARNING: CONTINUOUS EYE BLINK REFLEX
-              </div>
-              <p className="text-[10px] leading-relaxed text-amber-800">
-                A rapid eye-blink loop was detected, suggesting optical strain or high cognitive fatigue. Laptop vibration trigger sent. Take a 2-minute break!
+                You closed your eyes continuously for over 10 seconds! A loud alarm is sounding to wake you up.
               </p>
             </div>
           )}
@@ -705,34 +643,21 @@ export default function AIFocusMonitor() {
           {/* Real-time audit manual simulation triggers */}
           <div className="p-3 bg-slate-50 border border-brand-outline rounded-xl space-y-2.5">
             <span className="text-[10px] font-black uppercase tracking-wider text-brand-muted block">
-              🔧 Manual Auditing & Verification Suite
+              🔧 Manual Auditing &amp; Verification Suite
             </span>
             
-            <div className="grid grid-cols-2 gap-2">
+            <div>
               <button
                 type="button"
                 onClick={toggleEyeSimulation}
-                className={`py-1.5 px-2 rounded-lg text-[10px] font-bold border transition pointer-events-auto ${
+                className={`w-full py-2 px-3 rounded-lg text-xs font-bold border transition pointer-events-auto ${
                   eyeState === 'closed'
                     ? 'bg-rose-600 border-rose-600 text-white'
                     : 'bg-white border-brand-outline text-brand-dark hover:bg-brand-bg'
                 }`}
-                title="Trigger closed eyes mode. Stay active for 3s to trigger ring alarm."
+                title="Trigger closed eyes mode for 10s to trigger ring alarm."
               >
-                {eyeState === 'closed' ? '🛑 Wake Up Eyes' : '💤 Close Eyes (3s)'}
-              </button>
-
-              <button
-                type="button"
-                onClick={triggerContinuousBlinkSimulation}
-                className={`py-1.5 px-2 rounded-lg text-[10px] font-bold border transition pointer-events-auto ${
-                  isBlinkingRapidly
-                    ? 'bg-amber-600 border-amber-600 text-white'
-                    : 'bg-white border-brand-outline text-brand-dark hover:bg-brand-bg'
-                }`}
-                title="Simulate rapid, continuous blinking to trigger device vibration call."
-              >
-                ⚡ Blink Rapidly
+                {eyeState === 'closed' ? '🛑 Wake Up Eyes' : '💤 Simulate Eyes Closed (10s)'}
               </button>
             </div>
           </div>
