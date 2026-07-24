@@ -20,6 +20,19 @@ export default function AIFocusMonitor() {
   const streamRef = useRef<MediaStream | null>(null);
   const intervalRef = useRef<number | null>(null);
 
+  // ── Refs for values used inside the scan interval (avoids stale closures) ──
+  const muteSoundRef = useRef(false);
+  const isAlarmRingingRef = useRef(false);
+  const alertStateRef = useRef<'none' | 'eyes_closed_10s' | 'no_person_10s'>('none');
+  const isCamPausedRef = useRef(false);
+  const resetFramesRef = useRef(false); // set to true by dismissAlarm so the interval resets eyeClosedFrames
+
+  // Keep refs in sync with state
+  useEffect(() => { muteSoundRef.current = muteSound; }, [muteSound]);
+  useEffect(() => { isAlarmRingingRef.current = isAlarmRinging; }, [isAlarmRinging]);
+  useEffect(() => { alertStateRef.current = alertState; }, [alertState]);
+  useEffect(() => { isCamPausedRef.current = isCamPaused; }, [isCamPaused]);
+
   // Add warning log helpers
   const addLog = (msg: string) => {
     const timestamp = new Date().toLocaleTimeString();
@@ -102,7 +115,9 @@ export default function AIFocusMonitor() {
     setEyeState('open');
     setClosedTimer(0);
     setAlertState('none');
+    alertStateRef.current = 'none';
     setIsCamPaused(false);
+    resetFramesRef.current = true; // signal interval to reset its local frame counter
   };
 
   // Real-time canvas scanning and optical eye tracking analysis!
@@ -113,7 +128,14 @@ export default function AIFocusMonitor() {
 
     const scanInterval = setInterval(() => {
       if (!canvasRef.current || !videoRef.current) return;
-      if (isCamPaused) return; // Skip detection when paused (⏸️)
+      if (isCamPausedRef.current) return; // Skip detection when paused (⏸️)
+
+      // If dismissAlarm / resetStates was called, reset local frame counter
+      if (resetFramesRef.current) {
+        eyeClosedFrames = 0;
+        resetFramesRef.current = false;
+        return;
+      }
 
       const canvas = canvasRef.current;
       const video = videoRef.current;
@@ -163,8 +185,10 @@ export default function AIFocusMonitor() {
           setClosedTimer(secondsBlocked);
 
           // Ring alarm after 10 seconds of no person / object blocking camera
-          if (eyeClosedFrames >= 100) {
+          // Only trigger if alarm not already ringing
+          if (eyeClosedFrames >= 100 && !isAlarmRingingRef.current) {
             setAlertState('no_person_10s');
+            alertStateRef.current = 'no_person_10s';
             triggerAlarmSound();
           }
           return;
@@ -252,8 +276,10 @@ export default function AIFocusMonitor() {
           setClosedTimer(secondsClosed);
 
           // Continuous eyes closed for 10 seconds (100 frames * 100ms)
-          if (eyeClosedFrames >= 100) {
+          // Only trigger alarm if not already ringing to avoid repeated calls
+          if (eyeClosedFrames >= 100 && !isAlarmRingingRef.current) {
             setAlertState('eyes_closed_10s');
+            alertStateRef.current = 'eyes_closed_10s';
             triggerAlarmSound();
           }
         } else {
@@ -261,6 +287,13 @@ export default function AIFocusMonitor() {
           eyeClosedFrames = 0;
           setEyeState('open');
           setClosedTimer(0);
+          // If alarm was ringing due to closed eyes, dismiss it
+          if (alertStateRef.current === 'eyes_closed_10s' && isAlarmRingingRef.current) {
+            setAlertState('none');
+            alertStateRef.current = 'none';
+            stopAlarmSound();
+            addLog('KameraShield: Eyes opened — alarm auto-dismissed!');
+          }
         }
 
       } catch (err) {
@@ -285,11 +318,11 @@ export default function AIFocusMonitor() {
       clearInterval(scanInterval);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [isCamActive, isCamPaused]);
+  }, [isCamActive]); // Note: removed isCamPaused from deps — using isCamPausedRef instead
 
   // Produce Warning Sirens using high performance clean Web Audio API
   const triggerAlarmSound = () => {
-    if (muteSound) return;
+    if (muteSoundRef.current) return;
     try {
       if (!audioCtxRef.current || audioCtxRef.current.state === 'closed') {
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
@@ -355,6 +388,7 @@ export default function AIFocusMonitor() {
       // Also stop the extras when alarm is dismissed
       (oscillatorRef as any)._extras = [sawOsc, bassOsc, masterGain, beepInterval];
 
+      isAlarmRingingRef.current = true;
       setIsAlarmRinging(true);
 
     } catch (e) {
@@ -381,15 +415,19 @@ export default function AIFocusMonitor() {
         (oscillatorRef as any)._extras = null;
       }
     } catch (e) {}
+    isAlarmRingingRef.current = false;
     setIsAlarmRinging(false);
   };
 
   const dismissAlarm = () => {
     stopAlarmSound();
     setIsAlarmRinging(false);
+    isAlarmRingingRef.current = false;
     setAlertState('none');
+    alertStateRef.current = 'none';
     setClosedTimer(0);
     setEyeState('open');
+    resetFramesRef.current = true; // Signal the scan interval to reset eyeClosedFrames
     addLog('KameraShield: Alarm dismissed by user.');
   };
 
