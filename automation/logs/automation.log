@@ -1,0 +1,7 @@
+[2026-07-24T04:07:33.925Z] [INFO] : Initializing E2E Enterprise Automation Suite Run...
+[2026-07-24T04:07:33.927Z] [INFO] : Loaded 510 total test cases for evaluation.
+[2026-07-24T04:07:33.927Z] [INFO] : Attempting connection to Appium server on http://127.0.0.1:4723...
+[2026-07-24T04:07:35.535Z] [WARN] : Could not connect to live Appium server. Executing tests using high-fidelity programmatic simulation mode.
+[2026-07-24T04:07:35.535Z] [WARN] : Details: Unable to connect to "http://127.0.0.1:4723/", make sure browser driver is running on that address.
+It seems like the service failed to start or is rejecting any connections.
+[2026-07-24T04:07:35.764Z] [INFO] : Automation E2E suite execution finished successfully.
