@@ -21,7 +21,7 @@ interface Message {
   attachmentType?: string;
 }
 
-type AIModel = 'groq-llama' | 'gemini' | 'claude' | 'gemini-flash' | 'deepseek-coder' | 'qwen-coder' | 'gemini-coder' | 'frontend-expert' | 'database-guru' | 'funny-buddy';
+type AIModel = 'gpt-4o' | 'gemini-2' | 'claude-35' | 'deepseek-r1' | 'qwen-coder' | 'groq-llama' | 'frontend-expert' | 'database-guru' | 'funny-buddy';
 
 const VERIFIED_YOUTUBE_IDS = new Set([
   'WUvTyaaNkzM', // Calculus
@@ -289,28 +289,25 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
   // Print system switch notice on model change
   useEffect(() => {
     let welcomeText = '';
-    if (selectedModel === 'deepseek-coder') {
-      welcomeText = "Hello! I am your Coding & Computer Science mentor. Send me programming questions, code files, or algorithm doubts and I'll write clean, efficient, and well-documented solutions.";
+    if (selectedModel === 'gpt-4o') {
+      welcomeText = "Hello! I am OpenAI GPT-4o, your omni flagship assistant. Ask me complex math, logic puzzles, essay outlines, or multi-step problem solving!";
+    } else if (selectedModel === 'gemini-2') {
+      welcomeText = "Hi! I am Gemini 2.0 Pro. I specialize in multimodal reasoning, structured breakdown tables, and deep conceptual explanations.";
+    } else if (selectedModel === 'claude-35') {
+      welcomeText = "Greetings! I am Claude 3.5 Sonnet, your analytical reasoning & creative tutor. I write high-quality code, break down dense academic texts, and offer step-by-step guidance.";
+    } else if (selectedModel === 'deepseek-r1') {
+      welcomeText = "Hello! I am DeepSeek R1 Reasoning AI. I display explicit Chain-of-Thought reasoning steps for algorithms, math proofs, and hard logic questions.";
     } else if (selectedModel === 'qwen-coder') {
-      welcomeText = "Greetings! I am Qwen3 Coder, a specialized multi-lingual syntax and code efficiency expert. Ask me to translate code, explain syntax, or optimize performance!";
-    } else if (selectedModel === 'gemini-coder') {
-      welcomeText = "Welcome! I am your Gemini Code Architect. I specialize in system design, software architecture patterns, refactoring, and code review. Let's design something robust.";
+      welcomeText = "Greetings! I am Qwen 2.5-Coder 32B. I specialize in multi-lingual code generation, syntax optimization, and bug debugging across C++, Python, Java, and TypeScript.";
     } else if (selectedModel === 'frontend-expert') {
-      welcomeText = "Hey there! I am your Frontend & UI Specialist. Ask me anything about React 19, TypeScript, CSS layout, Vite configurations, or performance tuning!";
+      welcomeText = "Hey there! I am your Frontend & UI Specialist. Ask me anything about React 19, TypeScript, Tailwind, CSS glassmorphism, or web performance!";
     } else if (selectedModel === 'database-guru') {
       welcomeText = "Hello! I am your Database & SQL Guru. I can help you design database schemas, write optimized SQL queries, handle database normalizations, or advise on storage strategies.";
     } else if (selectedModel === 'funny-buddy') {
       welcomeText = "Yo! 🤡 I am your Sarcastic Meme-Lord Study Buddy. Ask me anything, but expect a light roasting, bad memes, and absolute exhaustion. Let's fail together! 🚀";
-    } else if (selectedModel === 'gemini') {
-      welcomeText = "Hi, I am Gemini 2.0. I can help with multimodal reasoning, detailed structural breakdowns, and explain complex academic topics in a clear, organized format.";
-    } else if (selectedModel === 'claude') {
-      welcomeText = "Hello! I am Claude, your analytical reasoning and deep tutoring assistant. Ask me to break down complex literature, write detailed code, or analyze difficult academic problems step-by-step.";
-    } else if (selectedModel === 'gemini-flash') {
-      welcomeText = "Hi, I am Gemini Flash. I am built for speed, concise study reviews, quick question guidance, and active recall practice. How can I help you study efficiently today?";
     } else {
-      welcomeText = "Hi, I am your general Llama ChatGPT study assistant. Ask a doubt, attach study notes, or snap a question to get started.";
+      welcomeText = "Hi, I am your general Llama 3.3 ChatGPT study mentor. Ask a doubt, attach study notes, or snap a question to get started.";
     }
-    // Prevent adding duplicate welcome message during initialization
     if (messages.length > 1 || messages[0]?.text !== welcomeText) {
       setMessages(prev => [
         ...prev,
@@ -386,28 +383,43 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
   }, []);
 
   const getSuggestions = () => {
-    if (selectedModel === 'deepseek-coder') {
+    if (selectedModel === 'gpt-4o') {
       return [
-        'Write a quicksort code snippet',
-        'Explain Big-O time/space complexity',
-        'Help me debug a syntax/runtime error',
-        'Optimize this algorithm for memory usage',
+        'Solve this complex calculus problem step-by-step',
+        'Draft an essay outline with counterarguments',
+        'Explain machine learning regression formulas',
+        'Verify logic for this physics proof',
+      ];
+    }
+    if (selectedModel === 'deepseek-r1') {
+      return [
+        'Show chain-of-thought proof for quicksort',
+        'Analyze Big-O time and space complexity',
+        'Debug dynamic programming recurrence relation',
+        'Optimize memory cache performance algorithm',
+      ];
+    }
+    if (selectedModel === 'claude-35') {
+      return [
+        'Analyze the main theme of this literature text',
+        'Refactor this function for maximum readability',
+        'Explain quantum mechanics wave-particle duality',
+        'Draft a structured study guide for finals',
+      ];
+    }
+    if (selectedModel === 'gemini-2') {
+      return [
+        `Structural breakdown table of ${activeSubject.name}`,
+        'Create a 4-step study summary for my exam',
+        'Compare key theories in a comparison matrix',
       ];
     }
     if (selectedModel === 'qwen-coder') {
       return [
-        'Translate code from Python to TypeScript',
-        'Explain the dynamic imports feature in ES15',
-        'Write a thread-safe singleton in Java',
-        'Review this code for runtime syntax bugs',
-      ];
-    }
-    if (selectedModel === 'gemini-coder') {
-      return [
-        'What is MVC vs Clean Architecture?',
-        'How to apply SOLID principles to a project',
-        'Draw a system design for a chat application',
-        'Design a robust error handling middleware',
+        'Translate Python script into TypeScript',
+        'Write thread-safe singleton in Java',
+        'Explain asynchronous event loops in Node.js',
+        'Review code for memory leaks and syntax bugs',
       ];
     }
     if (selectedModel === 'frontend-expert') {
@@ -432,27 +444,6 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
         'Roast my study schedule',
         'Help me study while procrastinating',
         'Explain recursion using memes',
-      ];
-    }
-    if (selectedModel === 'gemini') {
-      return [
-        `Structural breakdown of ${activeSubject.name}`,
-        'Solve a mock practice question step-by-step',
-        'Summarize this subject into core bullet points',
-      ];
-    }
-    if (selectedModel === 'claude') {
-      return [
-        'Analyze this logical reasoning question',
-        'Help me structure this essay outline',
-        'Explain this mathematical concept step-by-step',
-      ];
-    }
-    if (selectedModel === 'gemini-flash') {
-      return [
-        `Quick summary of ${activeSubject.name}`,
-        'Create a quick 3-question quiz for me',
-        'Clarify this concept in two sentences',
       ];
     }
     return [
@@ -583,25 +574,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                 <span className="text-[9px] bg-brand-vibrant text-white font-black px-2 py-0.5 rounded-full uppercase tracking-wider">AI EXTENSION NODE</span>
               </div>
               <h3 className="font-sans font-black text-sm uppercase tracking-wide mt-0.5">
-                {selectedModel === 'deepseek-coder' 
-                  ? 'DeepSeek Coder (CS & Algorithms)' 
-                  : selectedModel === 'qwen-coder'
-                    ? 'Qwen3 Coder (Multi-Language)'
-                    : selectedModel === 'gemini-coder'
-                      ? 'Gemini Code Architect'
-                      : selectedModel === 'frontend-expert'
-                        ? 'Frontend Specialist'
-                        : selectedModel === 'database-guru'
-                          ? 'Database & SQL Guru'
-                          : selectedModel === 'funny-buddy'
-                            ? 'Sarcastic Meme-Lord'
-                            : selectedModel === 'gemini' 
-                              ? 'Gemini 2.0 AI' 
-                              : selectedModel === 'claude'
-                                ? 'Claude AI Assistant'
-                                : selectedModel === 'gemini-flash'
-                                  ? 'Gemini Flash AI'
-                                  : 'Llama 3.3 ChatGPT Assistant'}
+                {selectedModel === 'gpt-4o'
+                  ? 'OpenAI GPT-4o Flagship'
+                  : selectedModel === 'gemini-2'
+                    ? 'Google Gemini 2.0 Pro'
+                    : selectedModel === 'claude-35'
+                      ? 'Anthropic Claude 3.5 Sonnet'
+                      : selectedModel === 'deepseek-r1'
+                        ? 'DeepSeek R1 Chain-of-Thought'
+                        : selectedModel === 'qwen-coder'
+                          ? 'Qwen 2.5-Coder 32B'
+                          : selectedModel === 'frontend-expert'
+                            ? 'Frontend & UI Specialist'
+                            : selectedModel === 'database-guru'
+                              ? 'Database & SQL Guru'
+                              : selectedModel === 'funny-buddy'
+                                ? 'Sarcastic Meme-Lord'
+                                : 'Meta Llama 3.3 70B (ChatGPT)'}
               </h3>
             </div>
           </div>
@@ -613,15 +602,14 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
             <select 
               value={selectedModel} 
               onChange={e => setSelectedModel(e.target.value as AIModel)}
-              className="bg-white border border-brand-outline rounded-lg px-2.5 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-xs cursor-pointer max-w-[240px]"
+              className="bg-white border border-brand-outline rounded-lg px-2.5 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-xs cursor-pointer max-w-[260px]"
             >
-              <option value="groq-llama">💬 ChatGPT Mode (Llama 3.3)</option>
-              <option value="gemini">✨ Gemini AI Mode (Gemini 2.0)</option>
-              <option value="claude">🧡 Claude AI Mode</option>
-              <option value="gemini-flash">⚡ Gemini Flash AI</option>
-              <option value="deepseek-coder">💻 DeepSeek CS/Algorithms</option>
-              <option value="qwen-coder">🚀 Qwen3 Syntax Coder</option>
-              <option value="gemini-coder">📐 Gemini Code Architect</option>
+              <option value="gpt-4o">🤖 OpenAI GPT-4o Flagship</option>
+              <option value="gemini-2">✨ Google Gemini 2.0 Pro</option>
+              <option value="claude-35">🧡 Anthropic Claude 3.5 Sonnet</option>
+              <option value="deepseek-r1">🧬 DeepSeek R1 Reasoning</option>
+              <option value="qwen-coder">🚀 Qwen 2.5-Coder 32B</option>
+              <option value="groq-llama">💬 Llama 3.3 ChatGPT Mode</option>
               <option value="frontend-expert">🎨 Frontend & UI Specialist</option>
               <option value="database-guru">🗄️ Database & SQL Guru</option>
               <option value="funny-buddy">🤡 Sarcastic Meme-Lord</option>
@@ -725,46 +713,42 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   <div className="p-1.5 bg-white/10 rounded-lg"><Sparkles size={16} className="text-brand-vibrant" /></div>
                   <div>
                     <h4 className="font-sans font-black text-sm uppercase tracking-wide">
-                      {selectedModel === 'deepseek-coder' 
-                        ? 'DeepSeek Coder (CS/Algorithms)' 
-                        : selectedModel === 'qwen-coder'
-                          ? 'Qwen3 Coder (Languages)'
-                          : selectedModel === 'gemini-coder'
-                            ? 'Gemini Code Architect'
-                            : selectedModel === 'frontend-expert'
-                              ? 'Frontend Specialist'
-                              : selectedModel === 'database-guru'
-                                ? 'Database & SQL Guru'
-                                : selectedModel === 'funny-buddy'
-                                  ? 'Sarcastic Meme-Lord'
-                                  : selectedModel === 'gemini' 
-                                    ? 'Gemini 2.0 AI' 
-                                    : selectedModel === 'claude'
-                                      ? 'Claude AI Assistant'
-                                      : selectedModel === 'gemini-flash'
-                                        ? 'Gemini Flash AI'
-                                        : 'Llama 3.3 ChatGPT Assistant'}
+                      {selectedModel === 'gpt-4o'
+                        ? 'OpenAI GPT-4o Flagship'
+                        : selectedModel === 'gemini-2'
+                          ? 'Google Gemini 2.0 Pro'
+                          : selectedModel === 'claude-35'
+                            ? 'Anthropic Claude 3.5 Sonnet'
+                            : selectedModel === 'deepseek-r1'
+                              ? 'DeepSeek R1 Chain-of-Thought'
+                              : selectedModel === 'qwen-coder'
+                                ? 'Qwen 2.5-Coder 32B'
+                                : selectedModel === 'frontend-expert'
+                                  ? 'Frontend Specialist'
+                                  : selectedModel === 'database-guru'
+                                    ? 'Database & SQL Guru'
+                                    : selectedModel === 'funny-buddy'
+                                      ? 'Sarcastic Meme-Lord'
+                                      : 'Meta Llama 3.3 70B (ChatGPT)'}
                     </h4>
                     <p className="text-[10px] text-brand-bg/75">
-                      {selectedModel === 'deepseek-coder' 
-                        ? 'Specialized software engineering & algorithm mentor' 
-                        : selectedModel === 'qwen-coder'
-                          ? 'Boilerplate-free syntax and multi-lingual expert'
-                          : selectedModel === 'gemini-coder'
-                            ? 'System design patterns and clean architecture architect'
-                            : selectedModel === 'frontend-expert'
-                              ? 'React 19, TypeScript, CSS, and performance specialist'
-                              : selectedModel === 'database-guru'
-                                ? 'Relational design, indexing, and SQL optimization guru'
-                                : selectedModel === 'funny-buddy'
-                                  ? 'Study companion that roasts you and tells jokes'
-                                  : selectedModel === 'gemini' 
-                                    ? 'Google intelligent reasoning and multimodal chatbot' 
-                                    : selectedModel === 'claude'
-                                      ? 'Anthropic high-reasoning and creative assistant'
-                                      : selectedModel === 'gemini-flash'
-                                        ? 'Google high-speed study & reasoning tutor'
-                                        : 'High-speed general purpose conversational assistant'}
+                      {selectedModel === 'gpt-4o'
+                        ? 'OpenAI flagship reasoning & multimodal model'
+                        : selectedModel === 'gemini-2'
+                          ? 'Google Gemini 2.0 Pro multimodal reasoning model'
+                          : selectedModel === 'claude-35'
+                            ? 'Anthropic Claude 3.5 Sonnet deep tutoring AI'
+                            : selectedModel === 'deepseek-r1'
+                              ? 'DeepSeek R1 chain-of-thought math & logic AI'
+                              : selectedModel === 'qwen-coder'
+                                ? 'Qwen 2.5-Coder multi-language programming AI'
+                                : selectedModel === 'frontend-expert'
+                                  ? 'React 19, TypeScript, CSS, and UI specialist'
+                                  : selectedModel === 'database-guru'
+                                    ? 'PostgreSQL, SQL queries, and DB schema architect'
+                                    : selectedModel === 'funny-buddy'
+                                      ? 'Study companion that roasts you and tells jokes'
+                                      : 'Meta Llama 3.3 high-speed conversational mentor'}
                     </p>
                   </div>
                 </div>
@@ -780,15 +764,14 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                   <select 
                     value={selectedModel} 
                     onChange={e => setSelectedModel(e.target.value as AIModel)}
-                    className="bg-white border border-brand-outline rounded-lg px-2 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-[10px] cursor-pointer max-w-[220px]"
+                    className="bg-white border border-brand-outline rounded-lg px-2 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-[10px] cursor-pointer max-w-[240px]"
                   >
-                    <option value="groq-llama">💬 ChatGPT Mode (Llama 3.3)</option>
-                    <option value="gemini">✨ Gemini AI Mode (Gemini 2.0)</option>
-                    <option value="claude">🧡 Claude AI Mode</option>
-                    <option value="gemini-flash">⚡ Gemini Flash AI</option>
-                    <option value="deepseek-coder">💻 DeepSeek CS/Algorithms</option>
-                    <option value="qwen-coder">🚀 Qwen3 Syntax Coder</option>
-                    <option value="gemini-coder">📐 Gemini Code Architect</option>
+                    <option value="gpt-4o">🤖 OpenAI GPT-4o Flagship</option>
+                    <option value="gemini-2">✨ Google Gemini 2.0 Pro</option>
+                    <option value="claude-35">🧡 Anthropic Claude 3.5 Sonnet</option>
+                    <option value="deepseek-r1">🧬 DeepSeek R1 Reasoning</option>
+                    <option value="qwen-coder">🚀 Qwen 2.5-Coder 32B</option>
+                    <option value="groq-llama">💬 Llama 3.3 ChatGPT Mode</option>
                     <option value="frontend-expert">🎨 Frontend & UI Specialist</option>
                     <option value="database-guru">🗄️ Database & SQL Guru</option>
                     <option value="funny-buddy">🤡 Sarcastic Meme-Lord</option>
@@ -845,25 +828,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                     <div className="w-8 h-8 rounded-full flex items-center justify-center text-sm shrink-0 border shadow-xs border-brand-primary bg-[#E9EDC9]/60">🧠</div>
                     <div className="bg-white border border-brand-outline text-brand-dark rounded-2xl rounded-tl-none p-3.5 text-xs shadow-xxs">
                       <span className="text-[10px] text-brand-muted italic">
-                        {selectedModel === 'deepseek-coder' 
-                          ? 'Coding AI is writing code...' 
-                          : selectedModel === 'qwen-coder'
-                            ? 'Qwen3 Coder is typing syntax...'
-                            : selectedModel === 'gemini-coder'
-                              ? 'Gemini Architect is refactoring...'
-                              : selectedModel === 'frontend-expert'
-                                ? 'Frontend Specialist is designing UI...'
-                                : selectedModel === 'database-guru'
-                                  ? 'Database Guru is querying schemas...'
-                                  : selectedModel === 'funny-buddy'
-                                    ? 'Sarcastic Buddy is crying in emojis...'
-                                    : selectedModel === 'gemini' 
-                                      ? 'Gemini AI is analyzing...' 
-                                      : selectedModel === 'claude'
-                                        ? 'Claude AI is reasoning...'
-                                        : selectedModel === 'gemini-flash'
-                                          ? 'Gemini Flash is summarizing...'
-                                          : 'Llama ChatGPT is responding...'}
+                        {selectedModel === 'gpt-4o'
+                          ? 'OpenAI GPT-4o is computing reasoning...'
+                          : selectedModel === 'gemini-2'
+                            ? 'Gemini 2.0 Pro is analyzing multimodal data...'
+                            : selectedModel === 'claude-35'
+                              ? 'Claude 3.5 Sonnet is thinking...'
+                              : selectedModel === 'deepseek-r1'
+                                ? 'DeepSeek R1 is generating chain-of-thought proof...'
+                                : selectedModel === 'qwen-coder'
+                                  ? 'Qwen 2.5-Coder is generating syntax...'
+                                  : selectedModel === 'frontend-expert'
+                                    ? 'Frontend Specialist is designing UI...'
+                                    : selectedModel === 'database-guru'
+                                      ? 'Database Guru is querying schemas...'
+                                      : selectedModel === 'funny-buddy'
+                                        ? 'Sarcastic Buddy is typing emojis...'
+                                        : 'Llama 3.3 ChatGPT is responding...'}
                       </span>
                     </div>
                   </div>
@@ -919,25 +900,23 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
                     placeholder={
                       isRecording 
                         ? '🎙 Listening… speak now' 
-                        : selectedModel === 'deepseek-coder' 
-                          ? 'Ask DeepSeek Coding AI...' 
-                          : selectedModel === 'qwen-coder'
-                            ? 'Ask Qwen3 Coder AI...'
-                            : selectedModel === 'gemini-coder'
-                              ? 'Ask Gemini Code Architect...'
-                              : selectedModel === 'frontend-expert'
-                                ? 'Ask Frontend Specialist...'
-                                : selectedModel === 'database-guru'
-                                  ? 'Ask Database Guru...'
-                                  : selectedModel === 'funny-buddy'
-                                    ? 'Distract the Meme-Lord AI...'
-                                    : selectedModel === 'gemini' 
-                                      ? 'Ask Gemini AI...' 
-                                      : selectedModel === 'claude'
-                                        ? 'Ask Claude AI...'
-                                        : selectedModel === 'gemini-flash'
-                                          ? 'Ask Gemini Flash AI...'
-                                          : 'Ask Llama ChatGPT...'
+                        : selectedModel === 'gpt-4o'
+                          ? 'Ask OpenAI GPT-4o Flagship...'
+                          : selectedModel === 'gemini-2'
+                            ? 'Ask Google Gemini 2.0 Pro...'
+                            : selectedModel === 'claude-35'
+                              ? 'Ask Anthropic Claude 3.5 Sonnet...'
+                              : selectedModel === 'deepseek-r1'
+                                ? 'Ask DeepSeek R1 Reasoning AI...'
+                                : selectedModel === 'qwen-coder'
+                                  ? 'Ask Qwen 2.5-Coder 32B...'
+                                  : selectedModel === 'frontend-expert'
+                                    ? 'Ask Frontend Specialist...'
+                                    : selectedModel === 'database-guru'
+                                      ? 'Ask Database Guru...'
+                                      : selectedModel === 'funny-buddy'
+                                        ? 'Distract Meme-Lord AI...'
+                                        : 'Ask Llama 3.3 ChatGPT...'
                     } 
                     className={`flex-1 border text-xs px-4 py-2.5 rounded-2xl focus:outline-none focus:ring-1 placeholder:text-brand-muted/75 bg-slate-50/50 transition-colors ${
                       isRecording 
