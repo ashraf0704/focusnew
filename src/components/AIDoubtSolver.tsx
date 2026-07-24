@@ -569,36 +569,7 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
 
   return (
     <>
-      <div className={`fixed bottom-5 right-5 sm:bottom-6 sm:right-6 flex flex-col items-end gap-2.5 ${isOpen ? 'z-[60]' : 'z-40'}`}>
-        <AnimatePresence>
-          {!isOpen && (
-            <motion.div
-              initial={{opacity: 0, scale: 0.8, y: 10}}
-              animate={{opacity: 1, scale: 1, y: 0}}
-              exit={{opacity: 0, scale: 0.8, y: 10}}
-              className="bg-brand-primary p-3 rounded-2xl shadow-xl border border-white/10 text-white flex items-center gap-3 select-none text-xs max-w-[280px]"
-            >
-              <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0" />
-              <p className="font-semibold leading-snug">Ask <strong className="text-brand-vibrant">Focus Buddy AI</strong> here.</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          type="button"
-          className="w-14 h-14 rounded-full bg-brand-primary text-white shadow-2xl flex items-center justify-center hover:scale-105 active:scale-95 transition-transform duration-300 relative pointer-events-auto cursor-pointer"
-          id="ai-floating-assistant-hub-trigger"
-          title="Clarify doubts with multi-agent AI"
-        >
-          {isOpen ? <X size={24} /> : (
-            <div className="relative">
-              <Brain size={26} className="animate-pulse" />
-              <span className="absolute -top-2.5 -right-2.5 text-[10px] bg-rose-500 font-extrabold text-white px-1.5 py-0.5 rounded-full ring-2 ring-white">AI</span>
-            </div>
-          )}
-        </button>
-      </div>
+      {/* Floating AI corner icon removed to avoid visual disturbance */}
 
       <AnimatePresence>
         {isOpen && (
