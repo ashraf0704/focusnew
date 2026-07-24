@@ -4,9 +4,9 @@ import { Camera, VideoOff, ShieldAlert, Zap, AlertTriangle, Play, Pause, Square,
 export default function AIFocusMonitor() {
   const [isCamActive, setIsCamActive] = useState(false);
   const [isCamPaused, setIsCamPaused] = useState(false); // Pause / Resume monitoring
-  const [eyeState, setEyeState] = useState<'open' | 'closed'>('open');
-  const [closedTimer, setClosedTimer] = useState(0); // consecutive seconds eyes closed
-  const [alertState, setAlertState] = useState<'none' | 'eyes_closed_10s'>('none');
+  const [eyeState, setEyeState] = useState<'open' | 'closed' | 'no_person'>('open');
+  const [closedTimer, setClosedTimer] = useState(0); // consecutive seconds eyes closed or no person
+  const [alertState, setAlertState] = useState<'none' | 'eyes_closed_10s' | 'no_person_10s'>('none');
   const [isAlarmRinging, setIsAlarmRinging] = useState(false);
   const [detectedRange, setDetectedRange] = useState<string>('🔍 CAPTURING FACE...');
   const [logMessages, setLogMessages] = useState<string[]>(['System standby. Ready to activate camera.']);
@@ -154,12 +154,19 @@ export default function AIFocusMonitor() {
         const faceH = faceY2 - faceY1;
         const isFaceCaptured = skinPixels > 20 && faceW > 35 && faceH > 35;
 
-        // Until the camera captures a face, report capturing status and hold standby
+        // ── IF NO PERSON / CAMERA BLOCKED BY OBJECT / TAPE / HAND / TOY ────────
         if (!isFaceCaptured) {
-          setDetectedRange('🔍 CAPTURING FACE...');
-          eyeClosedFrames = 0;
-          setEyeState('open');
-          setClosedTimer(0);
+          setDetectedRange('⚠️ NO PERSON DETECTED');
+          setEyeState('no_person');
+          eyeClosedFrames++;
+          const secondsBlocked = Math.floor(eyeClosedFrames / 10); // 100ms interval -> 10 frames = 1s
+          setClosedTimer(secondsBlocked);
+
+          // Ring alarm after 10 seconds of no person / object blocking camera
+          if (eyeClosedFrames >= 100) {
+            setAlertState('no_person_10s');
+            triggerAlarmSound();
+          }
           return;
         }
 
@@ -266,6 +273,7 @@ export default function AIFocusMonitor() {
             triggerAlarmSound();
           }
         } else {
+          // EYES OPEN AGAIN! Immediately reset timer back to 0!
           eyeClosedFrames = 0;
           setEyeState('open');
           setClosedTimer(0);
@@ -405,7 +413,7 @@ export default function AIFocusMonitor() {
 
   // Manual State Simulator Triggers
   const toggleEyeSimulation = () => {
-    if (eyeState === 'open') {
+    if (eyeState !== 'closed') {
       setEyeState('closed');
       setClosedTimer(10);
       setAlertState('eyes_closed_10s');
@@ -415,6 +423,21 @@ export default function AIFocusMonitor() {
       setEyeState('open');
       setClosedTimer(0);
       addLog('MANUAL OVERRIDE: Simulating eye opening...');
+      dismissAlarm();
+    }
+  };
+
+  const toggleNoPersonSimulation = () => {
+    if (eyeState !== 'no_person') {
+      setEyeState('no_person');
+      setClosedTimer(10);
+      setAlertState('no_person_10s');
+      triggerAlarmSound();
+      addLog('MANUAL OVERRIDE: Simulating 10s camera blocked / no person...');
+    } else {
+      setEyeState('open');
+      setClosedTimer(0);
+      addLog('MANUAL OVERRIDE: Resuming person detection...');
       dismissAlarm();
     }
   };
@@ -566,10 +589,19 @@ export default function AIFocusMonitor() {
               </div>
             )}
 
+            {/* Overlay for No Person / Object Blocking Camera */}
+            {eyeState === 'no_person' && !isCamPaused && (
+              <div className="absolute inset-0 bg-amber-950/85 backdrop-blur-xs flex flex-col items-center justify-center text-center p-3 z-10 animate-pulse">
+                <AlertTriangle size={36} className="text-amber-400 mb-2" />
+                <span className="text-xs font-black tracking-widest text-amber-100 uppercase">NO PERSON / CAMERA BLOCKED</span>
+                <span className="text-[10px] text-amber-300 font-mono mt-1">Timer Active: {closedTimer}s / 10s</span>
+              </div>
+            )}
+
             {/* Tracking overlay indicators */}
             <div className="absolute bottom-2.5 left-2.5 bg-black/60 border border-white/10 px-2 py-1 rounded-lg text-[9px] font-mono text-emerald-400 flex items-center gap-1.5">
-              <span className={`w-1.5 h-1.5 rounded-full ${isCamPaused ? 'bg-amber-400' : 'bg-emerald-400 animate-ping'}`} />
-              RANGE: {detectedRange} | FOCUS INDEX: {isCamPaused ? 'PAUSED (⏸️)' : eyeState === 'closed' ? '0.00 (DROWSY)' : '0.96 (HEALTHY)'}
+              <span className={`w-1.5 h-1.5 rounded-full ${isCamPaused ? 'bg-amber-400' : eyeState === 'no_person' ? 'bg-amber-500 animate-ping' : 'bg-emerald-400 animate-ping'}`} />
+              RANGE: {detectedRange} | FOCUS INDEX: {isCamPaused ? 'PAUSED (⏸️)' : eyeState === 'no_person' ? '0.00 (CAM BLOCKED)' : eyeState === 'closed' ? '0.00 (DROWSY)' : '0.96 (HEALTHY)'}
             </div>
 
             <div className="absolute top-2.5 right-2 rounded-full bg-black/60 px-2 py-0.5 text-[8px] uppercase tracking-wider text-white font-bold backdrop-blur-xs">
@@ -608,10 +640,12 @@ export default function AIFocusMonitor() {
 
                   <div style={{ animation: 'pulse 0.5s ease-in-out infinite alternate' }}>
                     <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
-                      👁️ WAKE UP!
+                      {alertState === 'no_person_10s' ? '📷 CAMERA BLOCKED!' : '👁️ WAKE UP!'}
                     </h2>
                     <p className="text-red-300 font-bold text-base mt-2">
-                      Eyes closed continuously for {closedTimer || 10}s — drowsiness detected!
+                      {alertState === 'no_person_10s'
+                        ? 'Camera blocked or no person detected for 10+ seconds!'
+                        : 'Eyes closed continuously for 10+ seconds — drowsiness detected!'}
                     </p>
                   </div>
 
@@ -621,7 +655,7 @@ export default function AIFocusMonitor() {
                         {closedTimer || 10}s
                       </div>
                       <div className="text-[10px] uppercase tracking-wider text-red-300 font-bold">
-                        Eyes Closed
+                        {alertState === 'no_person_10s' ? 'Cam Blocked' : 'Eyes Closed'}
                       </div>
                     </div>
                     <div className="w-px h-8 bg-white/20" />
@@ -689,18 +723,31 @@ export default function AIFocusMonitor() {
               🔧 Manual Auditing &amp; Verification Suite
             </span>
             
-            <div>
+            <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={toggleEyeSimulation}
-                className={`w-full py-2 px-3 rounded-lg text-xs font-bold border transition pointer-events-auto ${
+                className={`py-2 px-3 rounded-lg text-xs font-bold border transition pointer-events-auto cursor-pointer ${
                   eyeState === 'closed'
                     ? 'bg-rose-600 border-rose-600 text-white'
                     : 'bg-white border-brand-outline text-brand-dark hover:bg-brand-bg'
                 }`}
                 title="Trigger closed eyes mode for 10s to trigger ring alarm."
               >
-                {eyeState === 'closed' ? '🛑 Wake Up Eyes' : '💤 Simulate Eyes Closed (10s)'}
+                {eyeState === 'closed' ? '🛑 Reset Eyes' : '💤 Simulate Eyes Closed (10s)'}
+              </button>
+
+              <button
+                type="button"
+                onClick={toggleNoPersonSimulation}
+                className={`py-2 px-3 rounded-lg text-xs font-bold border transition pointer-events-auto cursor-pointer ${
+                  eyeState === 'no_person'
+                    ? 'bg-amber-600 border-amber-600 text-white'
+                    : 'bg-white border-brand-outline text-brand-dark hover:bg-brand-bg'
+                }`}
+                title="Simulate object blocking camera / no person for 10s to trigger ring alarm."
+              >
+                {eyeState === 'no_person' ? '🛑 Reset Cam Block' : '⚠️ Simulate Cam Blocked (10s)'}
               </button>
             </div>
           </div>
