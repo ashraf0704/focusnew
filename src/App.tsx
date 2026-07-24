@@ -4,9 +4,8 @@ import WelcomeScreen from './components/WelcomeScreen';
 import Dashboard from './components/Dashboard';
 import FocusTimer from './components/FocusTimer';
 import FocusMode from './components/FocusMode';
-import Flashcards from './components/Flashcards';
+import ActiveSubjects from './components/ActiveSubjects';
 import Insights from './components/Insights';
-import AIDoubtSolver from './components/AIDoubtSolver';
 import VaultHub from './components/VaultHub';
 import Settings from './components/Settings';
 import SubjectOnboardingModal from './components/SubjectOnboardingModal';
@@ -25,7 +24,7 @@ export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   // Layout routing views
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'decks' | 'insights' | 'vault' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'subjects' | 'insights' | 'vault' | 'settings'>('dashboard');
 
   const [presetAIFile, setPresetAIFile] = useState<{ content: string; name: string } | null>(null);
 
@@ -454,15 +453,15 @@ export default function App() {
             </button>
 
             <button
-              onClick={() => setActiveTab('decks')}
+              onClick={() => setActiveTab('subjects')}
               className={`w-full py-3 px-4 rounded-xl text-xs font-bold flex items-center gap-3 transition-all duration-200 pointer-events-auto ${
-                activeTab === 'decks'
+                activeTab === 'subjects'
                   ? 'bg-white/15 text-white shadow-sm font-black'
                   : 'text-brand-bg/70 hover:text-white hover:bg-white/5'
               }`}
             >
-              <BookOpen size={16} />
-              Study Decks
+              <BookMarked size={16} />
+              Active Subjects
             </button>
 
             <button
@@ -635,12 +634,21 @@ export default function App() {
               />
             )}
 
-            {activeTab === 'decks' && (
-              <Flashcards
+            {activeTab === 'subjects' && (
+              <ActiveSubjects
                 subjects={subjects}
-                decks={decks}
-                onAddDeck={handleAddDeck}
-                onUnlockBadge={handleUnlockBadge}
+                tasks={tasks}
+                sessionLogs={sessionLogs}
+                onAddSubject={handleAddSubject}
+                onDeleteSubject={handleDeleteSubject}
+                deletedSubjectsHistory={deletedSubjectsHistory}
+                onRestoreSubject={handleRestoreSubject}
+                onClearDeletedSubjectsHistory={handleClearDeletedSubjectsHistory}
+                onSelectSubjectForTimer={(subjId) => {
+                  setSelectedSubjectId(subjId);
+                  setActiveTab('timer');
+                }}
+                onOpenSubjectModal={() => setShowSubjectOnboarding(true)}
               />
             )}
 
@@ -712,14 +720,14 @@ export default function App() {
         </button>
 
         <button
-          onClick={() => setActiveTab('decks')}
+          onClick={() => setActiveTab('subjects')}
           className={`flex flex-col items-center justify-center p-2 text-[10px] font-bold transition-all relative pointer-events-auto ${
-            activeTab === 'decks' ? 'text-brand-vibrant' : 'text-brand-bg/60'
+            activeTab === 'subjects' ? 'text-brand-vibrant' : 'text-brand-bg/60'
           }`}
         >
-          <BookOpen size={18} />
-          <span className="mt-1">Decks</span>
-          {activeTab === 'decks' && (
+          <BookMarked size={18} />
+          <span className="mt-1">Subjects</span>
+          {activeTab === 'subjects' && (
             <span className="absolute bottom-1 w-1 h-1 rounded-full bg-brand-vibrant" />
           )}
         </button>
