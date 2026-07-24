@@ -204,26 +204,26 @@ export default function AIFocusMonitor() {
         const rangeMode = faceAreaRatio > 0.32 ? 'NEAR RANGE' : faceAreaRatio > 0.10 ? 'MEDIUM RANGE' : 'FAR RANGE';
         setDetectedRange(rangeMode);
 
-        // 2. Fixed relative bounding boxes adapted to captured face coordinates (excluding eyebrows)
+        // 2. Precise relative eye bounding boxes strictly targeting upper eye row (fh * 0.26 to fh * 0.42)
         const foreheadBox = {
           x: Math.floor(fx1 + fw * 0.35),
-          y: Math.floor(fy1 + fh * 0.10),
-          width: Math.max(10, Math.floor(fw * 0.30)),
-          height: Math.max(6, Math.floor(fh * 0.12)),
+          y: Math.floor(fy1 + fh * 0.08),
+          width: Math.max(8, Math.floor(fw * 0.30)),
+          height: Math.max(5, Math.floor(fh * 0.10)),
         };
 
         const leftEyeBox = {
-          x: Math.floor(fx1 + fw * 0.12),
-          y: Math.floor(fy1 + fh * 0.34),
-          width: Math.max(12, Math.floor(fw * 0.33)),
-          height: Math.max(8, Math.floor(fh * 0.18)),
+          x: Math.floor(fx1 + fw * 0.14),
+          y: Math.floor(fy1 + fh * 0.26),
+          width: Math.max(10, Math.floor(fw * 0.32)),
+          height: Math.max(6, Math.floor(fh * 0.16)),
         };
 
         const rightEyeBox = {
-          x: Math.floor(fx1 + fw * 0.55),
-          y: Math.floor(fy1 + fh * 0.34),
-          width: Math.max(12, Math.floor(fw * 0.33)),
-          height: Math.max(8, Math.floor(fh * 0.18)),
+          x: Math.floor(fx1 + fw * 0.54),
+          y: Math.floor(fy1 + fh * 0.26),
+          width: Math.max(10, Math.floor(fw * 0.32)),
+          height: Math.max(6, Math.floor(fh * 0.16)),
         };
 
         // Helper for min, max, avg luminance, dark pupil ratio and contrast span in a box
@@ -258,18 +258,19 @@ export default function AIFocusMonitor() {
         const foreheadStats = getBoxLumStats(foreheadBox, 255);
 
         // Dark pupil luminance cutoff (dark pupil is significantly darker than forehead skin)
-        const darkPupilCutoff = Math.min(105, Math.max(40, foreheadStats.avg * 0.65));
+        const darkPupilCutoff = Math.min(110, Math.max(30, foreheadStats.avg * 0.60));
 
         const leftEyeStats = getBoxLumStats(leftEyeBox, darkPupilCutoff);
         const rightEyeStats = getBoxLumStats(rightEyeBox, darkPupilCutoff);
 
         // OPEN EYE SIGNATURE:
-        // Exposed dark pupil must cover at least 5% of the eye box pixels
-        // AND have minimum luminance below darkPupilCutoff with contrast span >= 30
-        const isLeftEyeOpen = (leftEyeStats.darkRatio >= 0.05) && (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 30);
-        const isRightEyeOpen = (rightEyeStats.darkRatio >= 0.05) && (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 30);
+        // Exposed dark pupil must cover at least 6% of the eye box pixels
+        // AND have minimum luminance below darkPupilCutoff with sclera contrast span >= 40
+        const isLeftEyeOpen = (leftEyeStats.darkRatio >= 0.06) && (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 40);
+        const isRightEyeOpen = (rightEyeStats.darkRatio >= 0.06) && (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 40);
 
-        const isEyesOpen = isLeftEyeOpen || isRightEyeOpen;
+        // When sleeping, closed eyelids cover pupil & sclera -> both eyes must show open eye signature to count as awake!
+        const isEyesOpen = isLeftEyeOpen && isRightEyeOpen;
         const areEyesClosed = !isEyesOpen;
 
         // Drowsiness Timer & Trigger Handling (10 seconds continuous closed eyes)
