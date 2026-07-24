@@ -452,7 +452,7 @@ export default function Dashboard({
         )}
 
         {/* Grid display list of active subject items */}
-        <div className="grid grid-cols-1 sm:grid-cols-5 gap-3" id="main-subjects-grid-list">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3.5" id="main-subjects-grid-list">
           {subjects.map((sub) => {
             const courseTasks = tasks.filter((t) => t.subjectId === sub.id);
             const activeCount = courseTasks.filter((t) => !t.completed).length;
@@ -550,7 +550,7 @@ export default function Dashboard({
       </div>
 
       {/* 4. Active Tasks Workspace segment (Filters, Inputs, List tables) */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         {/* Core items column: 2 grids wide */}
         <div className="lg:col-span-2 space-y-4" id="tasks-table-cohort">
           <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-3">
@@ -692,7 +692,7 @@ export default function Dashboard({
           </div>
 
           {/* List layout of tasks */}
-          <div className="space-y-2.5 max-h-[380px] overflow-y-auto pr-1" id="rendered-tasks-cohort">
+          <div className="space-y-2.5" id="rendered-tasks-cohort">
             {filteredTasks.length === 0 ? (
               <div className="text-center p-8 bg-white border border-brand-outline rounded-3xl text-sm text-brand-muted italic">
                 No active target tasks defined matching your chosen courses or statuses. Add new ones to organize focus!
