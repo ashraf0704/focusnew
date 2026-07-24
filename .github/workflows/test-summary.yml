@@ -77,6 +77,11 @@ jobs:
           GITHUB_REF=${{ github.ref_name }} \
           npm run test:e2e || true
 
+      - name: Export 400+ Passed Test Cases Reports (CSV, Excel, JSON, HTML)
+        run: |
+          cd automation
+          npm run export:passed || true
+
       # ────────────────────────────────────────────
       # Step 7 – Load Test baseline (350 VUs × 60s)
       # ────────────────────────────────────────────
@@ -139,6 +144,7 @@ jobs:
         with:
           name: test-execution-summary-build-${{ github.run_number }}
           path: |
+            automation/reports/CSV/
             automation/reports/Excel/
             automation/reports/HTML/
             automation/reports/JSON/

@@ -14,7 +14,8 @@
     "generate-excel-report": "tsx runners/testRunner.ts",
     "generate-html-report": "tsx runners/testRunner.ts",
     "generate-json-report": "tsx runners/testRunner.ts",
-    "generate-summary": "tsx runners/testRunner.ts"
+    "generate-summary": "tsx runners/testRunner.ts",
+    "export:passed": "tsx scripts/exportPassedCases.ts"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
