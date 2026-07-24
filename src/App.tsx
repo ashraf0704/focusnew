@@ -9,14 +9,13 @@ import Insights from './components/Insights';
 import VaultHub from './components/VaultHub';
 import Settings from './components/Settings';
 import SubjectOnboardingModal from './components/SubjectOnboardingModal';
-import LiveBackground, { ThemeSelectorModal, LiveThemeId } from './components/LiveBackground';
 
 import { Subject, Task, FlashcardDeck, Badge, UserProfile, StudySessionLog, Priority } from './types';
 import { INITIAL_SUBJECTS, INITIAL_TASKS, INITIAL_DECKS, INITIAL_BADGES } from './data';
 import { api, clearJwt, getJwt, setJwt } from './api';
 import { 
   LayoutGrid, Clock, BookOpen, Award, 
-  LogOut, Flame, Sparkles, BookMarked, Palette,
+  LogOut, Flame, Sparkles, BookMarked,
   Eye, ShieldCheck, FolderOpen, Settings as SettingsIcon
 } from 'lucide-react';
 
@@ -26,12 +25,6 @@ export default function App() {
 
   // Layout routing views
   const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'subjects' | 'insights' | 'vault' | 'settings'>('dashboard');
-
-  // Live Background theme state
-  const [liveTheme, setLiveTheme] = useState<LiveThemeId>(() => {
-    return (localStorage.getItem('focus_buddy_live_theme') as LiveThemeId) || 'zen-forest';
-  });
-  const [showThemeModal, setShowThemeModal] = useState(false);
 
   const [presetAIFile, setPresetAIFile] = useState<{ content: string; name: string } | null>(null);
 
@@ -404,10 +397,7 @@ export default function App() {
   const activeSubject = subjects.find(s => s.id === selectedSubjectId) || subjects[0];
 
   return (
-    <div className="min-h-screen bg-brand-bg flex flex-col md:flex-row font-sans text-brand-dark relative">
-      
-      {/* Animated Live Background Layer */}
-      <LiveBackground currentTheme={liveTheme} onThemeChange={setLiveTheme} />
+    <div className="min-h-screen bg-brand-bg flex flex-col md:flex-row font-sans text-brand-dark">
       <aside className="hidden md:flex flex-col justify-between w-64 bg-brand-primary border-r border-[#5A5A40]/15 shrink-0 sticky top-0 h-screen p-5 select-none z-30 text-brand-bg" id="desktop-sidebar-frame">
         <div className="space-y-8">
           {/* Main Title branding icon on top leftmost corner */}
@@ -531,16 +521,6 @@ export default function App() {
             </button>
           )}
 
-          {/* Live Background Themes shortcut */}
-          <button
-            onClick={() => setShowThemeModal(true)}
-            className="w-full py-3 px-4 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-200 border border-emerald-400/30 rounded-xl text-xs font-black flex items-center gap-3 transition pointer-events-auto cursor-pointer"
-            id="desktop-live-themes-button"
-          >
-            <Palette size={15} className="text-emerald-300" />
-            <span>Live Themes 🌿</span>
-          </button>
-
           {/* Change Subjects shortcut */}
           <button
             onClick={() => setShowSubjectOnboarding(true)}
@@ -574,13 +554,6 @@ export default function App() {
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            onClick={() => setShowThemeModal(true)}
-            className="px-2.5 py-1.5 bg-emerald-600/30 border border-emerald-400/40 text-emerald-200 rounded-lg text-[10px] font-black flex items-center gap-1 cursor-pointer"
-          >
-            <Palette size={12} />
-            <span>Themes</span>
-          </button>
           {installPrompt && (
             <button
               onClick={handleInstallApp}
@@ -822,17 +795,6 @@ export default function App() {
         existingSubjects={subjects}
         onClose={() => setShowSubjectOnboarding(false)}
         onSaveSubjects={handleSaveOnboardingSubjects}
-      />
-
-      {/* Live Peaceful Background Theme Selector Modal */}
-      <ThemeSelectorModal
-        isOpen={showThemeModal}
-        currentTheme={liveTheme}
-        onClose={() => setShowThemeModal(false)}
-        onSelectTheme={(theme) => {
-          setLiveTheme(theme);
-          localStorage.setItem('focus_buddy_live_theme', theme);
-        }}
       />
     </div>
   );
