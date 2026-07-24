@@ -577,12 +577,8 @@ export default function App() {
 
       {/* 4. MAIN CENTRAL INTERFACE PORT CO-ORDINATOR */}
       <main className="flex-1 max-w-[1240px] mx-auto w-full px-4 py-6 sm:px-8 sm:py-8 pb-24 md:pb-8">
+        {/* Show offline mode notice ONLY when the device is disconnected from Internet / Wi-Fi */}
         {isOffline && (
-          <div className="mb-4 rounded-2xl border border-amber-300 bg-amber-50 px-4 py-3 text-xs font-bold text-amber-800">
-            You are offline. Cached screens remain available, and session/task writes will replay when the network returns.
-          </div>
-        )}
-        {localStorage.getItem('focus_buddy_is_simulated') === 'true' && (
           <div className="mb-6 rounded-2xl border border-[#D4A373]/30 bg-[#FAEDCD]/40 backdrop-blur-md px-5 py-3.5 text-xs text-[#5A5A40] flex items-center justify-between shadow-sm">
             <div className="flex items-center gap-2.5">
               <div className="relative flex h-2 w-2 shrink-0">
@@ -590,8 +586,8 @@ export default function App() {
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4A373]"></span>
               </div>
               <span className="font-sans leading-relaxed">
-                <strong className="font-extrabold uppercase tracking-wider mr-1 text-[#B87D4B]">Offline Simulation Active</strong> 
-                The database server is offline. Focus Buddy is running locally, storing all tasks, decks, and achievements securely in this browser.
+                <strong className="font-extrabold uppercase tracking-wider mr-1 text-[#B87D4B]">Offline Mode Active</strong> 
+                Your device is currently disconnected from Wi-Fi / Internet. Focus Buddy is running locally, storing all tasks, decks, and achievements securely in this browser.
               </span>
             </div>
           </div>
