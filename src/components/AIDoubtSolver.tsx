@@ -6,9 +6,10 @@ import {Subject} from '../types';
 
 interface AIDoubtSolverProps {
   subjects: Subject[];
-  activeSubjectId?: string;
+  activeSubjectId: string;
   presetContext?: {content: string; name: string} | null;
   onClearPresetContext?: () => void;
+  isEmbedded?: boolean;
 }
 
 interface Message {
@@ -260,7 +261,7 @@ function YoutubeEmbed({ videoId, watchUrl }: { videoId: string; watchUrl: string
   );
 }
 
-export default function AIDoubtSolver({subjects, activeSubjectId, presetContext, onClearPresetContext}: AIDoubtSolverProps) {
+export default function AIDoubtSolver({subjects, activeSubjectId, presetContext, onClearPresetContext, isEmbedded = false}: AIDoubtSolverProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedModel, setSelectedModel] = useState<AIModel>('groq-llama');
   const [inputMessage, setInputMessage] = useState('');
@@ -566,6 +567,142 @@ export default function AIDoubtSolver({subjects, activeSubjectId, presetContext,
       setIsTyping(false);
     }
   };
+
+  // Render as Embedded Extension Page View if isEmbedded is true
+  if (isEmbedded) {
+    return (
+      <div className="bg-white w-full max-w-4xl mx-auto h-[680px] sm:h-[720px] rounded-3xl border border-brand-outline shadow-sm overflow-hidden flex flex-col" id="ai-extension-workspace-view">
+        {/* Header */}
+        <div className="p-4 bg-brand-primary text-white flex items-center justify-between shrink-0">
+          <div className="flex items-center gap-2.5">
+            <div className="p-2 bg-white/10 rounded-xl">
+              <Sparkles size={18} className="text-brand-vibrant" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[9px] bg-brand-vibrant text-white font-black px-2 py-0.5 rounded-full uppercase tracking-wider">AI EXTENSION NODE</span>
+              </div>
+              <h3 className="font-sans font-black text-sm uppercase tracking-wide mt-0.5">
+                {selectedModel === 'deepseek-coder' 
+                  ? 'DeepSeek Coder (CS & Algorithms)' 
+                  : selectedModel === 'qwen-coder'
+                    ? 'Qwen3 Coder (Multi-Language)'
+                    : selectedModel === 'gemini-coder'
+                      ? 'Gemini Code Architect'
+                      : selectedModel === 'frontend-expert'
+                        ? 'Frontend Specialist'
+                        : selectedModel === 'database-guru'
+                          ? 'Database & SQL Guru'
+                          : selectedModel === 'funny-buddy'
+                            ? 'Sarcastic Meme-Lord'
+                            : selectedModel === 'gemini' 
+                              ? 'Gemini 2.0 AI' 
+                              : selectedModel === 'claude'
+                                ? 'Claude AI Assistant'
+                                : selectedModel === 'gemini-flash'
+                                  ? 'Gemini Flash AI'
+                                  : 'Llama 3.3 ChatGPT Assistant'}
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        <div className="px-4 py-2 bg-brand-bg border-b border-brand-outline flex items-center justify-between text-[11px] text-brand-muted shrink-0 select-none flex-wrap gap-2">
+          <div className="flex items-center gap-2">
+            <strong className="text-brand-dark font-bold">Select AI Model:</strong>
+            <select 
+              value={selectedModel} 
+              onChange={e => setSelectedModel(e.target.value as AIModel)}
+              className="bg-white border border-brand-outline rounded-lg px-2.5 py-1 text-brand-dark font-semibold outline-none focus:ring-1 focus:ring-brand-primary text-xs cursor-pointer max-w-[240px]"
+            >
+              <option value="groq-llama">💬 ChatGPT Mode (Llama 3.3)</option>
+              <option value="gemini">✨ Gemini AI Mode (Gemini 2.0)</option>
+              <option value="claude">🧡 Claude AI Mode</option>
+              <option value="gemini-flash">⚡ Gemini Flash AI</option>
+              <option value="deepseek-coder">💻 DeepSeek CS/Algorithms</option>
+              <option value="qwen-coder">🚀 Qwen3 Syntax Coder</option>
+              <option value="gemini-coder">📐 Gemini Code Architect</option>
+              <option value="frontend-expert">🎨 Frontend & UI Specialist</option>
+              <option value="database-guru">🗄️ Database & SQL Guru</option>
+              <option value="funny-buddy">🤡 Sarcastic Meme-Lord</option>
+            </select>
+          </div>
+          <span className="flex items-center gap-1 text-brand-primary bg-[#E9EDC9]/30 px-2.5 py-1 rounded-full font-bold text-xs truncate">
+            <BookOpen size={12} />
+            Target Subject: {activeSubject.name}
+          </span>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#E9EDC9]/10 scrollbar-thin">
+          {messages.map(message => {
+            const isUser = message.sender === 'user';
+            return (
+              <div key={message.id} className={`flex gap-2.5 items-start max-w-[85%] ${isUser ? 'ml-auto flex-row-reverse' : 'mr-auto'}`}>
+                <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-bold ${isUser ? 'bg-brand-primary text-white' : 'bg-brand-vibrant text-white'}`}>
+                  {isUser ? 'YOU' : 'AI'}
+                </div>
+                <div className={`p-3.5 rounded-2xl text-xs space-y-2 leading-relaxed ${isUser ? 'bg-brand-primary text-white rounded-tr-none' : 'bg-white border border-brand-outline text-brand-dark rounded-tl-none shadow-xxs'}`}>
+                  {message.attachmentName && (
+                    <div className="text-[10px] font-mono bg-black/10 px-2 py-1 rounded mb-1 border border-black/10">
+                      📄 Attached context: <strong>{message.attachmentName}</strong>
+                    </div>
+                  )}
+                  <div>{renderMarkdown(message.text)}</div>
+                  <span className="text-[9px] opacity-60 block font-mono text-right">{message.timestamp.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}</span>
+                </div>
+              </div>
+            );
+          })}
+          {isTyping && (
+            <div className="flex gap-2 items-center text-xs text-brand-muted font-mono italic">
+              <Sparkles size={14} className="animate-spin text-brand-vibrant" />
+              AI is computing response...
+            </div>
+          )}
+          <div ref={chatEndRef} />
+        </div>
+
+        <form onSubmit={(e) => { e.preventDefault(); handleSendMessage(); }} className="p-3 bg-white border-t border-brand-outline space-y-2 shrink-0">
+          {attachedAttachment && (
+            <div className="flex items-center justify-between bg-slate-50 border border-brand-outline px-3 py-1.5 rounded-xl text-xs font-mono">
+              <span className="truncate">Attached: <strong>{attachedAttachment.name}</strong></span>
+              <button type="button" onClick={() => setAttachedAttachment(null)} className="text-rose-500 hover:text-rose-700">
+                <X size={14} />
+              </button>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              value={inputMessage}
+              onChange={e => setInputMessage(e.target.value)}
+              placeholder="Ask AI extension any doubt, math logic, code syntax, or study topic..."
+              className="flex-1 text-xs px-4 py-2.5 border border-brand-outline rounded-xl focus:ring-1 focus:ring-brand-primary focus:outline-none bg-slate-50"
+            />
+
+            <button
+              type="button"
+              onClick={handleToggleVoice}
+              className={`p-2.5 rounded-xl border transition ${isRecording ? 'bg-rose-500 text-white border-rose-500 animate-pulse' : 'bg-slate-50 border-brand-outline text-brand-dark hover:bg-slate-100'}`}
+              title="Voice Input"
+            >
+              {isRecording ? <MicOff size={16} /> : <Mic size={16} />}
+            </button>
+
+            <button
+              type="submit"
+              disabled={!inputMessage.trim() && !attachedAttachment}
+              className="px-4 py-2.5 bg-brand-primary hover:opacity-95 text-white rounded-xl text-xs font-bold flex items-center gap-1.5 transition disabled:opacity-40 cursor-pointer"
+            >
+              <Send size={14} />
+              <span>Send</span>
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
 
   return (
     <>
