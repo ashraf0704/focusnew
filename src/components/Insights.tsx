@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Award, CheckCircle2, Flame, TrendingUp, Cpu, LayoutGrid, PenTool, Percent, Calendar, Heart, Globe, Sparkles } from 'lucide-react';
 import { Badge, Subject, StudySessionLog, UserProfile } from '../types';
-import SubscriptionHub from './SubscriptionHub';
+import FocusRewardsStore from './FocusRewardsStore';
 
 interface InsightsProps {
   badges: Badge[];
@@ -11,6 +11,7 @@ interface InsightsProps {
   totalFocusMinutes: number;
   dailyGoal: number;
   buddyPoints: number;
+  profile: UserProfile;
   onRedeemBuddyPoints: (profile: UserProfile) => void;
 }
 
@@ -21,6 +22,7 @@ export default function Insights({
   totalFocusMinutes,
   dailyGoal,
   buddyPoints,
+  profile,
   onRedeemBuddyPoints,
 }: InsightsProps) {
   const [hoveredBar, setHoveredBar] = useState<number | null>(null);
@@ -305,9 +307,9 @@ export default function Insights({
         </div>
       </div>
 
-      {/* INDIAN SUBSCRIPTION OPTION BELOW INSIGHTS & GROWTH */}
+      {/* FOCUS REWARDS MARKETPLACE */}
       <div className="pt-6 border-t border-brand-outline">
-        <SubscriptionHub buddyPoints={buddyPoints} onRedeemBuddyPoints={onRedeemBuddyPoints} />
+        <FocusRewardsStore profile={profile} onProfileUpdated={onRedeemBuddyPoints} />
       </div>
     </div>
   );

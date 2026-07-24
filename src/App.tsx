@@ -660,6 +660,7 @@ export default function App() {
                 totalFocusMinutes={profile.totalFocusMinutes}
                 dailyGoal={profile.dailyGoalMinutes}
                 buddyPoints={profile.buddyPoints ?? 250}
+                profile={profile}
                 onRedeemBuddyPoints={handleProfileUpdated}
               />
             )}

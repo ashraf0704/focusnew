@@ -66,6 +66,8 @@ export interface UserProfile {
   soundVolume?: number;
   notificationsEnabled?: boolean;
   language?: string;
+  unlockedRewards?: string[];
+  rankTitle?: string;
 }
 
 export interface VaultFolder {
