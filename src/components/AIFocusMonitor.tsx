@@ -8,7 +8,7 @@ export default function AIFocusMonitor() {
   const [closedTimer, setClosedTimer] = useState(0); // consecutive seconds eyes closed
   const [alertState, setAlertState] = useState<'none' | 'eyes_closed_10s'>('none');
   const [isAlarmRinging, setIsAlarmRinging] = useState(false);
-  const [detectedRange, setDetectedRange] = useState<'NEAR' | 'MEDIUM' | 'FAR'>('MEDIUM');
+  const [detectedRange, setDetectedRange] = useState<string>('🔍 CAPTURING FACE...');
   const [logMessages, setLogMessages] = useState<string[]>(['System standby. Ready to activate camera.']);
   const [muteSound, setMuteSound] = useState(false);
   const [camError, setCamError] = useState<string | null>(null);
@@ -129,8 +129,7 @@ export default function AIFocusMonitor() {
         const imgData = ctx.getImageData(0, 0, w, h);
         const d = imgData.data;
 
-        // ── Range-Adaptive Non-Inverting Eye State Detection ──────────────────
-        // 1. Detect Face Bounds via Skin Filter or Fallback to Center Region
+        // ── Real-time Live Camera Face Capture & Range Assessment ───────────────
         let faceX1 = w, faceY1 = h, faceX2 = 0, faceY2 = 0;
         let skinPixels = 0;
 
@@ -151,18 +150,30 @@ export default function AIFocusMonitor() {
           }
         }
 
-        const isFaceTracked = skinPixels > 25 && (faceX2 - faceX1 > 40) && (faceY2 - faceY1 > 40);
-        const fx1 = isFaceTracked ? faceX1 : Math.floor(w * 0.25);
-        const fy1 = isFaceTracked ? faceY1 : Math.floor(h * 0.15);
-        const fw = isFaceTracked ? (faceX2 - faceX1) : Math.floor(w * 0.50);
-        const fh = isFaceTracked ? (faceY2 - faceY1) : Math.floor(h * 0.60);
+        const faceW = faceX2 - faceX1;
+        const faceH = faceY2 - faceY1;
+        const isFaceCaptured = skinPixels > 20 && faceW > 35 && faceH > 35;
 
-        // Calculate Range Mode based on face distance/size
+        // Until the camera captures a face, report capturing status and hold standby
+        if (!isFaceCaptured) {
+          setDetectedRange('🔍 CAPTURING FACE...');
+          eyeClosedFrames = 0;
+          setEyeState('open');
+          setClosedTimer(0);
+          return;
+        }
+
+        // Live camera successfully captured a face! Calculate distance range from live camera stream
+        const fx1 = faceX1;
+        const fy1 = faceY1;
+        const fw = faceW;
+        const fh = faceH;
+
         const faceAreaRatio = (fw * fh) / (w * h);
-        const rangeMode = faceAreaRatio > 0.35 ? 'NEAR' : faceAreaRatio > 0.10 ? 'MEDIUM' : 'FAR';
+        const rangeMode = faceAreaRatio > 0.32 ? 'NEAR RANGE' : faceAreaRatio > 0.10 ? 'MEDIUM RANGE' : 'FAR RANGE';
         setDetectedRange(rangeMode);
 
-        // 2. Fixed relative bounding boxes adapted to face range
+        // 2. Fixed relative bounding boxes adapted to captured face coordinates
         const foreheadBox = {
           x: Math.floor(fx1 + fw * 0.35),
           y: Math.floor(fy1 + fh * 0.10),
@@ -235,9 +246,9 @@ export default function AIFocusMonitor() {
         const rightDarkRatio = getDarkPixelRatio(rightEyeBox, darkThreshold);
         const avgDarkRatio = (leftDarkRatio + rightDarkRatio) / 2;
 
-        // Closed thresholds based on distance range
-        const ratioThreshold = rangeMode === 'NEAR' ? 0.10 : rangeMode === 'MEDIUM' ? 0.07 : 0.05;
-        const lumDeltaThreshold = rangeMode === 'NEAR' ? 16 : 12;
+        // Closed thresholds based on camera face capture range
+        const ratioThreshold = rangeMode === 'NEAR RANGE' ? 0.10 : rangeMode === 'MEDIUM RANGE' ? 0.07 : 0.05;
+        const lumDeltaThreshold = rangeMode === 'NEAR RANGE' ? 16 : 12;
 
         // EYES CLOSED: eyelid covers pupil -> dark pupil pixels disappear & eye box lum matches skin
         const areEyesClosed = (avgDarkRatio < ratioThreshold) && ((foreheadLum - avgEyeLum) < lumDeltaThreshold);
