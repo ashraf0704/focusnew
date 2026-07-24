@@ -406,18 +406,68 @@ async function handleSimulatedOfflineRequest<T>(path: string, options: ApiOption
       return files as unknown as T;
     }
     if (path.includes('/upload') && method === 'POST') {
+      let fileName = 'Document.pdf';
+      let fileType: 'pdf' | 'doc' | 'image' | 'code' | 'zip' = 'pdf';
+      let fileSize = '1.0 MB';
+      let folderId: string | undefined = undefined;
+      let textContent: string | undefined = undefined;
+
+      if (options.body instanceof FormData) {
+        const fileObj = options.body.get('file');
+        const folderIdVal = options.body.get('folderId');
+        const textContentVal = options.body.get('textContent');
+
+        if (folderIdVal && typeof folderIdVal === 'string') folderId = folderIdVal;
+        if (textContentVal && typeof textContentVal === 'string') textContent = textContentVal;
+
+        if (fileObj && fileObj instanceof File) {
+          fileName = fileObj.name;
+          const ext = fileName.split('.').pop()?.toLowerCase() || 'pdf';
+          fileType = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'webp', 'bmp', 'ico'].includes(ext)
+            ? 'image'
+            : ['cpp', 'py', 'java', 'js', 'ts', 'html', 'css', 'c', 'h', 'cs', 'php', 'rb', 'go', 'rs', 'json', 'sql'].includes(ext)
+              ? 'code'
+              : ['zip', 'rar', '7z', 'tar', 'gz'].includes(ext)
+                ? 'zip'
+                : ['doc', 'docx', 'txt', 'rtf', 'md', 'ppt', 'pptx', 'xls', 'xlsx', 'csv'].includes(ext)
+                  ? 'doc'
+                  : 'pdf';
+
+          fileSize = fileObj.size > 1024 * 1024
+            ? `${(fileObj.size / (1024 * 1024)).toFixed(1)} MB`
+            : `${Math.max(1, Math.round(fileObj.size / 1024))} KB`;
+        }
+      }
+
       const newFile: CollegeFile = {
-        id: `file-sim-${Date.now()}`,
-        name: 'Simulated File.pdf',
-        type: 'pdf',
-        size: '1.2 MB',
-        createdAt: new Date().toISOString(),
+        id: `file-sim-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`,
+        name: fileName,
+        type: fileType,
+        size: fileSize,
+        folderId,
+        textContent: textContent || `System file deposited in Vault: "${fileName}". Ready for AI doubts & study deck flashcards.`,
+        createdAt: new Date().toISOString().split('T')[0],
         url: '#',
       };
       files.unshift(newFile);
       setLocalItem(STORAGE_KEYS.FILES, files);
       return newFile as unknown as T;
     }
+  }
+
+  if (path.match(/^\/api\/vault\/files\/[^/]+$/) && method === 'PATCH') {
+    const fileId = path.split('/')[4];
+    const files = getLocalItem<CollegeFile[]>(STORAGE_KEYS.FILES, []);
+    let updatedFile: CollegeFile | null = null;
+    const updatedFiles = files.map(f => {
+      if (f.id === fileId) {
+        updatedFile = { ...f, ...body };
+        return updatedFile;
+      }
+      return f;
+    });
+    setLocalItem(STORAGE_KEYS.FILES, updatedFiles);
+    return updatedFile as unknown as T;
   }
 
   if (path.match(/^\/api\/vault\/files\/[^/]+$/) && method === 'DELETE') {
@@ -536,6 +586,8 @@ export const api = {
     request<CollegeFile[]>(`/api/vault/files${folderId ? `?folderId=${encodeURIComponent(folderId)}` : ''}`),
   uploadVaultFile: (formData: FormData) =>
     request<CollegeFile>('/api/vault/files/upload', {method: 'POST', body: formData}),
+  updateVaultFile: (id: string, body: Partial<CollegeFile>) =>
+    request<CollegeFile>(`/api/vault/files/${id}`, {method: 'PATCH', body: JSON.stringify(body)}),
   deleteVaultFile: (id: string) => request<void>(`/api/vault/files/${id}`, {method: 'DELETE'}),
   createPaymentOrder: (body: {planId: 'pro' | 'guru'; billingCycle: 'monthly' | 'yearly'; applyPoints: boolean}) =>
     request<{orderId?: string; amount: number; currency: 'INR'; keyId: string; pointsApplied: number; profile?: UserProfile}>(

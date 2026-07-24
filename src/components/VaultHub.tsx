@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   FolderPlus, FilePlus2, Trash2, Folder, FileText, FileCode, FileImage, 
   Archive, FileSpreadsheet, Eye, ArrowLeft, Search, Plus, Filter, Sparkles, 
-  CornerDownRight, Check, AlertCircle, RefreshCw, Upload, Download, X
+  CornerDownRight, Check, AlertCircle, RefreshCw, Upload, Download, X, Pencil
 } from 'lucide-react';
 import { VaultFolder, CollegeFile } from '../types';
 import { api } from '../api';
@@ -101,6 +101,9 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
   const [newFileText, setNewFileText] = useState('');
   const [targetFolderSelection, setTargetFolderSelection] = useState<string>('');
 
+  const [editingFileId, setEditingFileId] = useState<string | null>(null);
+  const [editingFileName, setEditingFileName] = useState('');
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [actionNotice, setActionNotice] = useState<string | null>(null);
@@ -183,6 +186,31 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
     } catch (error) {
       console.error(error);
       triggerNotice('Could not upload file.');
+    }
+  };
+
+  const handleStartEditFile = (file: CollegeFile, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    setEditingFileId(file.id);
+    setEditingFileName(file.name);
+  };
+
+  const handleSaveFileName = async (fileId: string, e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!editingFileName.trim()) return;
+
+    const updatedName = editingFileName.trim();
+    try {
+      await api.updateVaultFile(fileId, { name: updatedName });
+      setFiles(prev => prev.map(f => f.id === fileId ? { ...f, name: updatedName } : f));
+      if (activeFilePreview?.id === fileId) {
+        setActiveFilePreview(prev => prev ? { ...prev, name: updatedName } : null);
+      }
+      setEditingFileId(null);
+      triggerNotice(`File renamed to "${updatedName}"!`);
+    } catch (error) {
+      console.error(error);
+      triggerNotice('Could not update file name.');
     }
   };
 
@@ -596,28 +624,68 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
                           {getFileIcon(file.type)}
                         </div>
                         
-                        <div className="min-w-0">
-                          <h4 className="font-sans font-bold text-xs text-brand-dark truncate">
-                            {file.name}
-                          </h4>
-                          <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
-                            <span className="text-[9px] text-brand-muted font-mono">{file.size}</span>
-                            <span className="text-[9px] text-brand-muted">•</span>
-                            <span className="text-[9px] text-brand-muted font-mono">{file.createdAt}</span>
-                            {parentFolder && (
-                              <>
+                        <div className="min-w-0 flex-1">
+                          {editingFileId === file.id ? (
+                            <form
+                              onSubmit={(e) => handleSaveFileName(file.id, e)}
+                              onClick={(e) => e.stopPropagation()}
+                              className="flex items-center gap-1.5"
+                            >
+                              <input
+                                type="text"
+                                value={editingFileName}
+                                onChange={(e) => setEditingFileName(e.target.value)}
+                                className="text-xs px-2 py-1 border border-brand-primary rounded-lg focus:outline-none w-full font-bold text-brand-dark bg-white"
+                                autoFocus
+                              />
+                              <button
+                                type="submit"
+                                className="p-1 bg-emerald-600 text-white rounded-md hover:bg-emerald-500 transition cursor-pointer shrink-0"
+                                title="Save name"
+                              >
+                                <Check size={12} />
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => setEditingFileId(null)}
+                                className="p-1 bg-slate-200 text-slate-600 rounded-md hover:bg-slate-300 transition cursor-pointer shrink-0"
+                                title="Cancel"
+                              >
+                                <X size={12} />
+                              </button>
+                            </form>
+                          ) : (
+                            <>
+                              <h4 className="font-sans font-bold text-xs text-brand-dark truncate flex items-center gap-1.5 group-hover:text-brand-primary">
+                                <span>{file.name}</span>
+                              </h4>
+                              <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
+                                <span className="text-[9px] text-brand-muted font-mono">{file.size}</span>
                                 <span className="text-[9px] text-brand-muted">•</span>
-                                <span className="text-[9px] font-black text-indigo-700 bg-indigo-50 px-1 rounded-sm">
-                                  {parentFolder.name.replace(/[^A-Za-z0-9\s-]/g, '').trim()}
-                                </span>
-                              </>
-                            )}
-                          </div>
+                                <span className="text-[9px] text-brand-muted font-mono">{file.createdAt}</span>
+                                {parentFolder && (
+                                  <>
+                                    <span className="text-[9px] text-brand-muted">•</span>
+                                    <span className="text-[9px] font-black text-indigo-700 bg-indigo-50 px-1 rounded-sm">
+                                      {parentFolder.name.replace(/[^A-Za-z0-9\s-]/g, '').trim()}
+                                    </span>
+                                  </>
+                                )}
+                              </div>
+                            </>
+                          )}
                         </div>
                       </div>
 
                       {/* File interactive utilities */}
                       <div className="flex items-center gap-1 shrink-0 select-none">
+                        <button
+                          onClick={(e) => handleStartEditFile(file, e)}
+                          className="p-1.5 hover:bg-indigo-50 text-indigo-600 rounded-lg opacity-0 group-hover:opacity-100 transition duration-150"
+                          title="Edit filename"
+                        >
+                          <Pencil size={13} />
+                        </button>
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -678,7 +746,46 @@ export default function VaultHub({ onSendToAI }: VaultHubProps) {
                     {getFileIcon(activeFilePreview.type)}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <h4 className="font-sans font-black text-xs text-brand-dark truncate">{activeFilePreview.name}</h4>
+                    {editingFileId === activeFilePreview.id ? (
+                      <form
+                        onSubmit={(e) => handleSaveFileName(activeFilePreview.id, e)}
+                        className="flex items-center gap-1.5 mb-1"
+                      >
+                        <input
+                          type="text"
+                          value={editingFileName}
+                          onChange={(e) => setEditingFileName(e.target.value)}
+                          className="text-xs px-2 py-1 border border-brand-primary rounded-lg focus:outline-none w-full font-bold text-brand-dark bg-white"
+                          autoFocus
+                        />
+                        <button
+                          type="submit"
+                          className="p-1 bg-emerald-600 text-white rounded-md hover:bg-emerald-500 transition cursor-pointer shrink-0"
+                          title="Save name"
+                        >
+                          <Check size={12} />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setEditingFileId(null)}
+                          className="p-1 bg-slate-200 text-slate-600 rounded-md hover:bg-slate-300 transition cursor-pointer shrink-0"
+                          title="Cancel"
+                        >
+                          <X size={12} />
+                        </button>
+                      </form>
+                    ) : (
+                      <div className="flex items-center justify-between gap-1">
+                        <h4 className="font-sans font-black text-xs text-brand-dark truncate">{activeFilePreview.name}</h4>
+                        <button
+                          onClick={() => handleStartEditFile(activeFilePreview)}
+                          className="p-1 text-indigo-600 hover:bg-indigo-50 rounded transition shrink-0 cursor-pointer"
+                          title="Rename file"
+                        >
+                          <Pencil size={12} />
+                        </button>
+                      </div>
+                    )}
                     <span className="block text-[10px] text-brand-muted mt-0.5">Size: {activeFilePreview.size} | Added: {activeFilePreview.createdAt}</span>
                     <span className="inline-block mt-1.5 text-[9px] bg-slate-200/60 font-mono text-slate-800 px-1.5 py-0.5 rounded uppercase">
                       {activeFilePreview.type} Format
