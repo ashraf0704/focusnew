@@ -25,7 +25,7 @@ export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   // Layout routing views
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'decks' | 'insights' | 'vault' | 'ai-extension' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'decks' | 'insights' | 'vault' | 'settings'>('dashboard');
 
   const [presetAIFile, setPresetAIFile] = useState<{ content: string; name: string } | null>(null);
 
@@ -490,19 +490,6 @@ export default function App() {
             </button>
 
             <button
-              onClick={() => setActiveTab('ai-extension')}
-              className={`w-full py-3 px-4 rounded-xl text-xs font-bold flex items-center gap-3 transition-all duration-200 pointer-events-auto ${
-                activeTab === 'ai-extension'
-                  ? 'bg-white/15 text-white shadow-sm font-black'
-                  : 'text-brand-bg/70 hover:text-white hover:bg-white/5'
-              }`}
-              id="desktop-ai-extension-nav-button"
-            >
-              <Sparkles size={16} className="text-brand-vibrant" />
-              <span>AI Extension ✨</span>
-            </button>
-
-            <button
               onClick={() => setActiveTab('settings')}
               className={`w-full py-3 px-4 rounded-xl text-xs font-bold flex items-center gap-3 transition-all duration-200 pointer-events-auto ${
                 activeTab === 'settings'
@@ -677,18 +664,7 @@ export default function App() {
               <VaultHub
                 onSendToAI={(content, name) => {
                   setPresetAIFile({ content, name });
-                  setActiveTab('ai-extension');
                 }}
-              />
-            )}
-
-            {activeTab === 'ai-extension' && (
-              <AIDoubtSolver
-                subjects={subjects}
-                activeSubjectId={selectedSubjectId}
-                presetContext={presetAIFile}
-                onClearPresetContext={() => setPresetAIFile(null)}
-                isEmbedded={true}
               />
             )}
 
@@ -779,20 +755,6 @@ export default function App() {
         </button>
 
         <button
-          onClick={() => setActiveTab('ai-extension')}
-          className={`flex flex-col items-center justify-center p-2 text-[10px] font-bold transition-all relative pointer-events-auto ${
-            activeTab === 'ai-extension' ? 'text-brand-vibrant' : 'text-brand-bg/60'
-          }`}
-          id="mobile-ai-extension-nav-button"
-        >
-          <Sparkles size={18} />
-          <span className="mt-1">AI Extension</span>
-          {activeTab === 'ai-extension' && (
-            <span className="absolute bottom-1 w-1 h-1 rounded-full bg-brand-vibrant" />
-          )}
-        </button>
-
-        <button
           onClick={() => setActiveTab('settings')}
           className={`flex flex-col items-center justify-center p-2 text-[10px] font-bold transition-all relative pointer-events-auto ${
             activeTab === 'settings' ? 'text-brand-vibrant' : 'text-brand-bg/60'
@@ -822,13 +784,7 @@ export default function App() {
         />
       )}
 
-      {/* Floating Multi-Agent AI Doubt Solver Hub */}
-      <AIDoubtSolver 
-        subjects={subjects} 
-        activeSubjectId={selectedSubjectId} 
-        presetContext={presetAIFile}
-        onClearPresetContext={() => setPresetAIFile(null)}
-      />
+
 
       {/* Subject Onboarding / Edit Modal */}
       <SubjectOnboardingModal
