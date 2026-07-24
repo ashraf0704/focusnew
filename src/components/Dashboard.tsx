@@ -763,6 +763,29 @@ export default function Dashboard({
                 );
               })
             )}
+          {/* Quick instructions panel details moved under Task Checklist to balance heights */}
+          <div className="p-6 bg-white border border-brand-outline rounded-3xl space-y-3 shadow-none mt-4">
+            <h4 className="font-sans font-black text-xs text-brand-dark uppercase tracking-wider flex items-center gap-1.5">
+              <Sparkles size={14} className="text-brand-vibrant" /> Focus Buddy Directions
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-brand-muted leading-relaxed">
+              <div className="flex gap-2 p-3 bg-slate-50 border border-brand-outline rounded-2xl">
+                <span className="text-brand-vibrant font-black font-mono text-sm">1.</span>
+                <p>Add study goals &amp; target tasks for active subject folders in the checklist above.</p>
+              </div>
+              <div className="flex gap-2 p-3 bg-slate-50 border border-brand-outline rounded-2xl">
+                <span className="text-brand-vibrant font-black font-mono text-sm">2.</span>
+                <p>Launch Pomodoro Sessions using the <strong>Focus Timer</strong> tab in the navigation suite.</p>
+              </div>
+              <div className="flex gap-2 p-3 bg-slate-50 border border-brand-outline rounded-2xl">
+                <span className="text-brand-vibrant font-black font-mono text-sm">3.</span>
+                <p>Customize focus background sounds and alarm sirens in <strong>App Settings</strong>.</p>
+              </div>
+              <div className="flex gap-2 p-3 bg-slate-50 border border-brand-outline rounded-2xl">
+                <span className="text-brand-vibrant font-black font-mono text-sm">4.</span>
+                <p>Redeem earned Focus Points for companion avatars in <strong>Insights &amp; Growth</strong>.</p>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -818,29 +841,6 @@ export default function Dashboard({
             </div>
           </div>
 
-          {/* Quick instructions panel details */}
-          <div className="p-6 bg-white border border-brand-outline rounded-3xl space-y-3 shadow-none">
-            <h4 className="font-sans font-black text-xs text-brand-dark uppercase tracking-wider">
-              Focus Buddy Directions
-            </h4>
-            <div className="space-y-2 text-xs text-brand-muted leading-5">
-              <div className="flex gap-2">
-                <span className="text-brand-vibrant font-bold font-mono">1.</span>
-                <p>Add study goals / target tasks for subjects in the left panel.</p>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-brand-vibrant font-bold font-mono">2.</span>
-                <p>Launch Pomodoro Sessions using the <strong>Focus Timer</strong> tab in the navigation suite.</p>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-brand-vibrant font-bold font-mono">3.</span>
-                <p>Customize environmental background music with our <strong>Ambient Soundboard</strong>.</p>
-              </div>
-              <div className="flex gap-2">
-                <span className="text-brand-vibrant font-bold font-mono">4.</span>
-                <p>Revise memory cues at scheduled times with interactive <strong>Study Decks</strong>.</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
