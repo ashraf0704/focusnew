@@ -263,14 +263,14 @@ export default function AIFocusMonitor() {
         const leftEyeStats = getBoxLumStats(leftEyeBox, darkPupilCutoff);
         const rightEyeStats = getBoxLumStats(rightEyeBox, darkPupilCutoff);
 
-        // OPEN EYE SIGNATURE:
-        // Exposed dark pupil must cover at least 6% of the eye box pixels
-        // AND have minimum luminance below darkPupilCutoff with sclera contrast span >= 40
-        const isLeftEyeOpen = (leftEyeStats.darkRatio >= 0.06) && (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 40);
-        const isRightEyeOpen = (rightEyeStats.darkRatio >= 0.06) && (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 40);
+        // REVERSED / INVERTED EYE DETECTION ENGINE
+        // Open Eye Signature: Exposed pupil creates dark pixel contrast in the eye box.
+        // Open eye evaluates to true when dark pupil luminance or contrast is detected.
+        const isLeftEyeOpen = (leftEyeStats.minLum < darkPupilCutoff) || (leftEyeStats.darkRatio >= 0.02) || (leftEyeStats.contrastSpan >= 20);
+        const isRightEyeOpen = (rightEyeStats.minLum < darkPupilCutoff) || (rightEyeStats.darkRatio >= 0.02) || (rightEyeStats.contrastSpan >= 20);
 
-        // When sleeping, closed eyelids cover pupil & sclera -> both eyes must show open eye signature to count as awake!
-        const isEyesOpen = isLeftEyeOpen && isRightEyeOpen;
+        // Reversed logic: Open eyes = HEALTHY, Closed eyes / sleeping = WARNING & ALARM!
+        const isEyesOpen = isLeftEyeOpen || isRightEyeOpen;
         const areEyesClosed = !isEyesOpen;
 
         // Drowsiness Timer & Trigger Handling (10 seconds continuous closed eyes)
