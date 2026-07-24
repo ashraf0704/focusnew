@@ -202,8 +202,10 @@ export default function AIFocusMonitor() {
           height: Math.max(8, Math.floor(fh * 0.25)),
         };
 
-        // Helper for average luminance in a box
-        const getBoxAverageLum = (box: { x: number; y: number; width: number; height: number }) => {
+        // Helper for min, max, avg luminance and contrast span in a box
+        const getBoxLumStats = (box: { x: number; y: number; width: number; height: number }) => {
+          let minLum = 255;
+          let maxLum = 0;
           let sum = 0;
           let count = 0;
           const bx2 = Math.min(w, box.x + box.width);
@@ -215,50 +217,32 @@ export default function AIFocusMonitor() {
             for (let x = bx1; x < bx2; x += 2) {
               const idx = (y * w + x) * 4;
               const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
+              if (lum < minLum) minLum = lum;
+              if (lum > maxLum) maxLum = lum;
               sum += lum;
               count++;
             }
           }
-          return count > 0 ? sum / count : 128;
+          const avg = count > 0 ? sum / count : 128;
+          const contrastSpan = maxLum - minLum;
+          return { minLum, maxLum, avg, contrastSpan };
         };
 
-        // Helper for counting dark pupil/iris pixels in eye boxes
-        const getDarkPixelRatio = (box: { x: number; y: number; width: number; height: number }, threshold: number) => {
-          let darkCount = 0;
-          let total = 0;
-          const bx2 = Math.min(w, box.x + box.width);
-          const by2 = Math.min(h, box.y + box.height);
-          const bx1 = Math.max(0, box.x);
-          const by1 = Math.max(0, box.y);
+        const foreheadStats = getBoxLumStats(foreheadBox);
+        const leftEyeStats = getBoxLumStats(leftEyeBox);
+        const rightEyeStats = getBoxLumStats(rightEyeBox);
 
-          for (let y = by1; y < by2; y += 2) {
-            for (let x = bx1; x < bx2; x += 2) {
-              const idx = (y * w + x) * 4;
-              const lum = 0.299 * d[idx] + 0.587 * d[idx+1] + 0.114 * d[idx+2];
-              if (lum < threshold) darkCount++;
-              total++;
-            }
-          }
-          return total > 0 ? darkCount / total : 0;
-        };
+        // Dark pupil luminance cutoff (dark pupil is significantly darker than forehead skin)
+        const darkPupilCutoff = Math.min(110, Math.max(35, foreheadStats.avg * 0.65));
 
-        const foreheadLum = getBoxAverageLum(foreheadBox);
-        const leftEyeLum = getBoxAverageLum(leftEyeBox);
-        const rightEyeLum = getBoxAverageLum(rightEyeBox);
-        const avgEyeLum = (leftEyeLum + rightEyeLum) / 2;
+        // OPEN EYE SIGNATURE:
+        // Exposed dark pupil -> minimum luminance in eye box is less than darkPupilCutoff
+        // AND contrast span (sclera/skin vs pupil) is >= 45 units
+        const isLeftEyeOpen = (leftEyeStats.minLum < darkPupilCutoff) && (leftEyeStats.contrastSpan >= 45);
+        const isRightEyeOpen = (rightEyeStats.minLum < darkPupilCutoff) && (rightEyeStats.contrastSpan >= 45);
 
-        // Dark pupil threshold adaptive to forehead brightness & range
-        const darkThreshold = Math.min(130, Math.max(25, foreheadLum * 0.72));
-        const leftDarkRatio = getDarkPixelRatio(leftEyeBox, darkThreshold);
-        const rightDarkRatio = getDarkPixelRatio(rightEyeBox, darkThreshold);
-        const avgDarkRatio = (leftDarkRatio + rightDarkRatio) / 2;
-
-        // Closed thresholds based on camera face capture range
-        const ratioThreshold = rangeMode === 'NEAR RANGE' ? 0.10 : rangeMode === 'MEDIUM RANGE' ? 0.07 : 0.05;
-        const lumDeltaThreshold = rangeMode === 'NEAR RANGE' ? 16 : 12;
-
-        // EYES CLOSED: eyelid covers pupil -> dark pupil pixels disappear & eye box lum matches skin
-        const areEyesClosed = (avgDarkRatio < ratioThreshold) && ((foreheadLum - avgEyeLum) < lumDeltaThreshold);
+        const isEyesOpen = isLeftEyeOpen || isRightEyeOpen;
+        const areEyesClosed = !isEyesOpen;
 
         // Drowsiness Timer & Trigger Handling (10 seconds continuous closed eyes)
         if (areEyesClosed) {
