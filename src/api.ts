@@ -1,4 +1,4 @@
-import {Badge, CollegeFile, FlashcardDeck, StudySessionLog, Subject, Task, UserProfile, VaultFolder} from './types';
+import {Badge, CollegeFile, FlashcardDeck, StudySessionLog, Subject, Task, UserProfile, VaultFolder, AdminStats, AdminUserItem} from './types';
 import { INITIAL_SUBJECTS, INITIAL_TASKS, INITIAL_DECKS, INITIAL_BADGES } from './data';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4000';
@@ -496,6 +496,80 @@ async function handleSimulatedOfflineRequest<T>(path: string, options: ApiOption
     return profile as unknown as T;
   }
 
+  // Admin simulated API handlers
+  if (path === '/api/admin/stats' && method === 'GET') {
+    const profile = getLocalItem<UserProfile>(STORAGE_KEYS.PROFILE, {} as UserProfile);
+    const tasks = getLocalItem<Task[]>(STORAGE_KEYS.TASKS, INITIAL_TASKS);
+    const decks = getLocalItem<FlashcardDeck[]>(STORAGE_KEYS.DECKS, INITIAL_DECKS);
+    const sessionLogs = getLocalItem<StudySessionLog[]>(STORAGE_KEYS.LOGS, []);
+    
+    return {
+      totalUsers: 1,
+      adminCount: profile.role === 'admin' ? 1 : 0,
+      studentCount: profile.role === 'admin' ? 0 : 1,
+      totalFocusMinutes: profile.totalFocusMinutes || 0,
+      totalFocusHours: Math.round(((profile.totalFocusMinutes || 0) / 60) * 10) / 10,
+      totalSessions: profile.sessionsCount || sessionLogs.length || 0,
+      totalTasks: tasks.length,
+      completedTasks: tasks.filter(t => t.completed).length,
+      totalDecks: decks.length,
+      planCounts: {
+        free: profile.subscriptionPlan === 'free' || !profile.subscriptionPlan ? 1 : 0,
+        pro: profile.subscriptionPlan === 'pro' ? 1 : 0,
+        guru: profile.subscriptionPlan === 'guru' ? 1 : 0,
+      },
+      activeToday: 1,
+    } as unknown as T;
+  }
+
+  if (path.startsWith('/api/admin/users') && method === 'GET') {
+    const profile = getLocalItem<UserProfile>(STORAGE_KEYS.PROFILE, {} as UserProfile);
+    const simUsers: (UserProfile & { id: string; createdAt: string })[] = [
+      {
+        id: 'simulated-user-1',
+        ...profile,
+        createdAt: new Date().toISOString(),
+      }
+    ];
+    return simUsers as unknown as T;
+  }
+
+  if (path === '/api/admin/users' && method === 'POST') {
+    const newSimUser = {
+      id: `user-sim-${Date.now()}`,
+      email: body.email,
+      fullName: body.fullName || body.email.split('@')[0],
+      role: body.role || 'user',
+      subscriptionPlan: body.subscriptionPlan || 'free',
+      streak: 0,
+      totalFocusMinutes: 0,
+      sessionsCount: 0,
+      dailyGoalMinutes: body.dailyGoal || 25,
+      buddyPoints: 250,
+      createdAt: new Date().toISOString(),
+    };
+    return newSimUser as unknown as T;
+  }
+
+  if (path.match(/^\/api\/admin\/users\/[^/]+$/) && method === 'PATCH') {
+    const profile = getLocalItem<UserProfile>(STORAGE_KEYS.PROFILE, {} as UserProfile);
+    const updated = { ...profile, ...body };
+    setLocalItem(STORAGE_KEYS.PROFILE, updated);
+    return { id: path.split('/')[4], ...updated, createdAt: new Date().toISOString() } as unknown as T;
+  }
+
+  if (path.match(/^\/api\/admin\/users\/[^/]+\/reset-password$/) && method === 'POST') {
+    return { ok: true, message: 'Password updated successfully' } as unknown as T;
+  }
+
+  if (path.match(/^\/api\/admin\/users\/[^/]+$/) && method === 'DELETE') {
+    return { ok: true, message: 'User deleted' } as unknown as T;
+  }
+
+  if (path === '/api/admin/broadcast' && method === 'POST') {
+    return { ok: true, broadcast: { id: `bcast-${Date.now()}`, ...body, sentAt: new Date().toISOString() } } as unknown as T;
+  }
+
   return {} as T;
 }
 
@@ -596,6 +670,25 @@ export const api = {
     ),
   verifyPayment: (body: Record<string, unknown>) =>
     request<UserProfile>('/api/payments/verify', {method: 'POST', body: JSON.stringify(body)}),
+  getAdminStats: () => request<AdminStats>('/api/admin/stats'),
+  getAdminUsers: (params?: { query?: string; role?: string; plan?: string }) => {
+    const searchParams = new URLSearchParams();
+    if (params?.query) searchParams.set('query', params.query);
+    if (params?.role) searchParams.set('role', params.role);
+    if (params?.plan) searchParams.set('plan', params.plan);
+    const queryStr = searchParams.toString();
+    return request<AdminUserItem[]>(`/api/admin/users${queryStr ? `?${queryStr}` : ''}`);
+  },
+  createAdminUser: (body: { email: string; password?: string; fullName?: string; role?: 'admin' | 'user'; subscriptionPlan?: 'free' | 'pro' | 'guru'; dailyGoal?: number }) =>
+    request<AdminUserItem>('/api/admin/users', { method: 'POST', body: JSON.stringify(body) }),
+  updateAdminUser: (id: string, body: Partial<AdminUserItem>) =>
+    request<AdminUserItem>(`/api/admin/users/${id}`, { method: 'PATCH', body: JSON.stringify(body) }),
+  resetAdminUserPassword: (id: string, newPassword: string) =>
+    request<{ ok: boolean; message: string }>(`/api/admin/users/${id}/reset-password`, { method: 'POST', body: JSON.stringify({ newPassword }) }),
+  deleteAdminUser: (id: string) =>
+    request<{ ok: boolean; message: string }>(`/api/admin/users/${id}`, { method: 'DELETE' }),
+  sendAdminBroadcast: (body: { title: string; message: string; priority?: 'normal' | 'high' }) =>
+    request<{ ok: boolean; broadcast: Record<string, unknown> }>('/api/admin/broadcast', { method: 'POST', body: JSON.stringify(body) }),
 };
 
 function generateFallbackAIResponse(model: string, query: string, subjectName?: string, attachmentContent?: string | null): string {

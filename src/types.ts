@@ -66,6 +66,8 @@ export interface UserProfile {
   soundVolume?: number;
   notificationsEnabled?: boolean;
   language?: string;
+  role?: 'admin' | 'user';
+  subscriptionPlan?: 'free' | 'pro' | 'guru';
   unlockedRewards?: string[];
   rankTitle?: string;
 }
@@ -86,4 +88,27 @@ export interface CollegeFile {
   url?: string;
   createdAt: string;
   textContent?: string;
+}
+
+export interface AdminStats {
+  totalUsers: number;
+  adminCount: number;
+  studentCount: number;
+  totalFocusMinutes: number;
+  totalFocusHours: number;
+  totalSessions: number;
+  totalTasks: number;
+  completedTasks: number;
+  totalDecks: number;
+  planCounts: {
+    free: number;
+    pro: number;
+    guru: number;
+  };
+  activeToday: number;
+}
+
+export interface AdminUserItem extends UserProfile {
+  id: string;
+  createdAt: string;
 }

@@ -2,8 +2,10 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import {authMiddleware} from './middleware/authMiddleware.js';
+import {adminMiddleware} from './middleware/adminMiddleware.js';
 import {errorHandler} from './middleware/errorHandler.js';
 import {aiLimiter, paymentLimiter, authLimiter} from './middleware/rateLimiter.js';
+import {adminRouter} from './routes/admin.js';
 import {aiRouter} from './routes/ai.js';
 import {authRouter} from './routes/auth.js';
 import {badgesRouter} from './routes/badges.js';
@@ -43,6 +45,7 @@ app.get('/download', (_req, res) => {
 app.get('/health', (_req, res) => res.json({ok: true}));
 app.use('/api/auth', authLimiter, authRouter);
 app.use('/api', authMiddleware);
+app.use('/api/admin', adminMiddleware, adminRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/subjects', subjectsRouter);
 app.use('/api/tasks', tasksRouter);

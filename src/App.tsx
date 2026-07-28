@@ -8,6 +8,7 @@ import ActiveSubjects from './components/ActiveSubjects';
 import Insights from './components/Insights';
 import VaultHub from './components/VaultHub';
 import Settings from './components/Settings';
+import AdminDashboard from './components/admin';
 import SubjectOnboardingModal from './components/SubjectOnboardingModal';
 
 import { Subject, Task, FlashcardDeck, Badge, UserProfile, StudySessionLog, Priority } from './types';
@@ -24,7 +25,7 @@ export default function App() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
 
   // Layout routing views
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'subjects' | 'insights' | 'vault' | 'settings'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'timer' | 'subjects' | 'insights' | 'vault' | 'settings' | 'admin'>('dashboard');
 
   const [presetAIFile, setPresetAIFile] = useState<{ content: string; name: string } | null>(null);
 
@@ -498,6 +499,21 @@ export default function App() {
               <SettingsIcon size={16} />
               App Settings
             </button>
+
+            {profile?.role === 'admin' && (
+              <button
+                onClick={() => setActiveTab('admin')}
+                className={`w-full py-3 px-4 rounded-xl text-xs font-black flex items-center gap-3 transition-all duration-200 pointer-events-auto ${
+                  activeTab === 'admin'
+                    ? 'bg-purple-600 text-white shadow-md'
+                    : 'text-purple-300 hover:text-white hover:bg-purple-500/20'
+                }`}
+                id="desktop-admin-nav-button"
+              >
+                <ShieldCheck size={16} />
+                Admin Portal
+              </button>
+            )}
           </nav>
         </div>
 
@@ -686,6 +702,28 @@ export default function App() {
                 onInstallApp={handleInstallApp}
               />
             )}
+
+            {activeTab === 'admin' && (
+              profile?.role === 'admin' ? (
+                <AdminDashboard currentProfile={profile} />
+              ) : (
+                <div className="p-8 bg-white rounded-3xl border border-rose-200 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <h2 className="text-xl font-extrabold text-brand-dark">Access Denied</h2>
+                  <p className="text-xs text-brand-muted max-w-md mx-auto">
+                    Only authorized platform administrators have access to the Admin Portal.
+                  </p>
+                  <button
+                    onClick={() => setActiveTab('dashboard')}
+                    className="px-5 py-2.5 bg-brand-primary text-white text-xs font-extrabold rounded-xl cursor-pointer"
+                  >
+                    Return to Dashboard
+                  </button>
+                </div>
+              )
+            )}
           </motion.div>
         </AnimatePresence>
       </main>
@@ -770,6 +808,22 @@ export default function App() {
             <span className="absolute bottom-1 w-1 h-1 rounded-full bg-[#D4A373]" />
           )}
         </button>
+
+        {profile?.role === 'admin' && (
+          <button
+            onClick={() => setActiveTab('admin')}
+            className={`flex flex-col items-center justify-center p-2 text-[10px] font-bold transition-all relative pointer-events-auto ${
+              activeTab === 'admin' ? 'text-purple-400 font-extrabold' : 'text-purple-300/70'
+            }`}
+            id="mobile-admin-nav-button"
+          >
+            <ShieldCheck size={18} />
+            <span className="mt-1">Admin</span>
+            {activeTab === 'admin' && (
+              <span className="absolute bottom-1 w-1 h-1 rounded-full bg-purple-400" />
+            )}
+          </button>
+        )}
       </nav>
 
       {/* Immersive Focus overlay room */}

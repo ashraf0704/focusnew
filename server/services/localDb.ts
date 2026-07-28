@@ -69,14 +69,17 @@ function generateUuid() {
 
 // Seed helper for simulated guest/normal users
 export function seedUserDefaults(userId: string, email: string, db: any) {
-  // 1. Seed user_profile if missing
   const profileExists = db.user_profiles.some((p: any) => p.id === userId);
   if (!profileExists) {
+    const adminEmail = (process.env.ADMIN_EMAIL || 'admin@focusbuddy.local').toLowerCase();
+    const role = email.toLowerCase() === adminEmail ? 'admin' : 'user';
+
     db.user_profiles.push({
       id: userId,
       email,
       full_name: email.split('@')[0],
       avatar_url: null,
+      role,
       streak: 1,
       total_focus_minutes: 0,
       sessions_count: 0,
@@ -498,6 +501,14 @@ export const mockAuth = {
       };
       writeDb(db);
       return { data: { user: db.users[userIndex] }, error: null };
+    },
+
+    deleteUser: async (id: string) => {
+      const db = readDb();
+      db.users = db.users.filter((u: any) => u.id !== id);
+      db.user_profiles = db.user_profiles.filter((p: any) => p.id !== id);
+      writeDb(db);
+      return { data: { user: null }, error: null };
     }
   },
 

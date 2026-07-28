@@ -1,6 +1,10 @@
 import {Badge, CollegeFile, FlashcardDeck, StudySessionLog, Subject, Task, UserProfile, VaultFolder} from '../../src/types.js';
 
 export function profileFromRow(row: any): UserProfile {
+  const adminEmail = (process.env.ADMIN_EMAIL || 'admin@focusbuddy.local').toLowerCase();
+  const isEmailAdmin = row.email && row.email.toLowerCase() === adminEmail;
+  const role = row.role || (isEmailAdmin ? 'admin' : 'user');
+
   return {
     email: row.email,
     fullName: row.full_name || row.email?.split('@')[0] || 'Student',
@@ -15,6 +19,8 @@ export function profileFromRow(row: any): UserProfile {
     soundVolume: row.sound_volume ?? 75,
     notificationsEnabled: row.notifications_enabled ?? true,
     language: row.language || 'en',
+    role: role as 'admin' | 'user',
+    subscriptionPlan: row.subscription_plan || 'free',
   };
 }
 
